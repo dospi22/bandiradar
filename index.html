@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BandiRadar — Monitoraggio Bandi e Agevolazioni</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --blue-light: #dbeafe;
+      --green: #059669;
+      --green-light: #d1fae5;
+      --orange: #d97706;
+      --orange-light: #fef3c7;
+      --red: #dc2626;
+      --red-light: #fee2e2;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --cyan: #0891b2;
+      --cyan-light: #cffafe;
+      --gray: #6b7280;
+      --gray-light: #f3f4f6;
+      --border: #e5e7eb;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    .header { background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%); color: white; }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo { display: flex; align-items: center; gap: 14px; }
+
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .logo-text h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+    .logo-text p  { font-size: 12px; opacity: 0.75; margin-top: 1px; }
+
+    .header-meta { font-size: 12px; opacity: 0.7; text-align: right; line-height: 1.7; }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.18);
+    }
+
+    .stat-card {
+      padding: 18px 24px;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      text-align: center;
+    }
+    .stat-card:last-child { border-right: none; }
+
+    .stat-value { font-size: 26px; font-weight: 700; display: block; }
+    .stat-label { font-size: 11px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.6px; margin-top: 3px; }
+
+    /* ── MAIN ── */
+    .main { max-width: 1440px; margin: 0 auto; padding: 24px 28px 56px; }
+
+    /* ── CONTROLS ── */
+    .controls {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .controls-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .controls-row + .controls-row { margin-top: 10px; }
+
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
+
+    .search-input {
+      width: 100%;
+      padding: 9px 12px 9px 34px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      color: var(--text);
+    }
+    .search-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+
+    select {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+      background: white;
+      color: var(--text);
+      transition: border-color 0.15s;
+      max-width: 200px;
+    }
+    select:focus { border-color: var(--blue); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.15s;
+      background: white;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .btn:hover { background: var(--gray-light); }
+    .btn-primary { background: var(--blue); color: white; border-color: var(--blue); }
+    .btn-primary:hover { background: var(--blue-dark); }
+    .btn-danger { background: var(--red-light); color: var(--red); border-color: #fca5a5; }
+    .btn-danger:hover { background: #fecaca; }
+    .btn-sm { padding: 6px 10px; font-size: 12px; }
+
+    /* ── ADVANCED FILTERS ── */
+    .advanced-filters {
+      display: none;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .advanced-filters.open { display: grid; }
+
+    .filter-group { display: flex; flex-direction: column; gap: 5px; }
+    .filter-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; }
+
+    /* ── RESULTS BAR ── */
+    .results-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .results-count { font-size: 14px; color: var(--text-muted); }
+    .results-count strong { color: var(--text); }
+
+    .archive-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle {
+      width: 38px; height: 22px;
+      background: #d1d5db;
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .toggle.on { background: var(--blue); }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      background: white;
+      border-radius: 50%;
+      top: 2px; left: 2px;
+      transition: left 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .toggle.on::after { left: 18px; }
+
+    /* ── GRID ── */
+    .bandi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── CARD ── */
+    .bando-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .bando-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+
+    .bando-card.urgente { border-left: 4px solid var(--red); }
+    .bando-card.presto  { border-left: 4px solid var(--orange); }
+    .bando-card.archivio { opacity: 0.65; }
+
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .card-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.2px;
+    }
+
+    .badge-eu        { background: #dbeafe; color: #1e40af; }
+    .badge-nazionale { background: #dcfce7; color: #166534; }
+    .badge-er        { background: #fef9c3; color: #713f12; }
+
+    .badge-aperto   { background: var(--green-light); color: #065f46; }
+    .badge-urgente  { background: var(--red-light);   color: #991b1b; }
+    .badge-presto   { background: var(--orange-light); color: #92400e; }
+    .badge-arrivo   { background: var(--purple-light); color: #5b21b6; }
+    .badge-scaduto  { background: var(--gray-light);  color: #374151; }
+    .badge-sospeso  { background: #fce7f3; color: #9d174d; }
+    .badge-prorogato{ background: var(--cyan-light);  color: #164e63; }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    .card-ente { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+    .priority-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .priority-alta  { background: var(--red); box-shadow: 0 0 0 3px rgba(220,38,38,0.15); }
+    .priority-media { background: var(--orange); box-shadow: 0 0 0 3px rgba(217,119,6,0.15); }
+    .priority-bassa { background: var(--green); box-shadow: 0 0 0 3px rgba(5,150,105,0.15); }
+
+    /* ── CARD INFO GRID ── */
+    .card-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: #f8fafc;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .info-item { display: flex; flex-direction: column; gap: 2px; }
+    .info-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); font-weight: 600; }
+    .info-value { font-size: 13px; font-weight: 600; color: var(--text); }
+    .info-value.urgente { color: var(--red); }
+    .info-value.presto  { color: var(--orange); }
+    .info-value.small   { font-size: 12px; font-weight: 500; }
+
+    /* ── TAGS ── */
+    .card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 3px 9px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* ── CARD FOOTER ── */
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .card-link:hover { color: var(--blue-dark); text-decoration: underline; }
+
+    .card-id { font-size: 11px; color: #94a3b8; font-family: monospace; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 72px 24px;
+      color: var(--text-muted);
+    }
+    .empty-icon  { font-size: 52px; margin-bottom: 16px; }
+    .empty-state h3 { font-size: 20px; color: var(--text); margin-bottom: 8px; }
+    .empty-state p  { margin-bottom: 20px; }
+
+    /* ── LOADING ── */
+    .loading-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 64px;
+      color: var(--text-muted);
+    }
+
+    /* ── SEPARATOR ── */
+    .archive-separator {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0 4px;
+    }
+    .archive-separator span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      white-space: nowrap;
+    }
+    .archive-separator::before,
+    .archive-separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat-card:nth-child(2) { border-right: none; }
+      .stat-card:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.12); }
+      .main { padding: 16px; }
+    }
+    @media (max-width: 600px) {
+      .bandi-grid { grid-template-columns: 1fr; }
+      .header-top { padding: 14px 16px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat-value { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">📡</div>
+      <div class="logo-text">
+        <h1>BandiRadar</h1>
+        <p>Monitoraggio bandi · Emilia-Romagna, Italia, Europa</p>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div>📍 Rimini, Emilia-Romagna</div>
+      <div id="last-update">Aggiornato: —</div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-value" id="stat-aperti">—</span>
+      <div class="stat-label">Bandi aperti</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="stat-scadenza">—</span>
+      <div class="stat-label">⚠️ In scadenza 30gg</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="stat-dotazione">—</span>
+      <div class="stat-label">Dotazione disponibile</div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="stat-nuovi">—</span>
+      <div class="stat-label">Nuovi nel mese</div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main class="main">
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="controls-row">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="search" placeholder="Cerca bando o ente erogatore...">
+      </div>
+      <select id="filter-livello">
+        <option value="">🌐 Tutti i livelli</option>
+        <option value="Europeo">🌍 Europeo</option>
+        <option value="Nazionale">🇮🇹 Nazionale</option>
+        <option value="Regionale ER">🏛️ Regionale ER</option>
+      </select>
+      <select id="filter-categoria">
+        <option value="">📂 Tutte le categorie</option>
+        <option value="Digitalizzazione">💻 Digitalizzazione</option>
+        <option value="R&S">🔬 R&amp;S</option>
+        <option value="Internazionalizzazione">🌐 Internazionalizzazione</option>
+        <option value="Sostenibilità">🌿 Sostenibilità</option>
+        <option value="Startup">🚀 Startup</option>
+        <option value="Lavoro">👷 Lavoro</option>
+        <option value="Formazione">📚 Formazione</option>
+        <option value="Infrastrutture">🏗️ Infrastrutture</option>
+      </select>
+      <select id="filter-stato">
+        <option value="">📋 Tutti gli stati</option>
+        <option value="aperto">✅ Aperto</option>
+        <option value="urgente">🚨 Scadenza 30gg</option>
+        <option value="arrivo">🔜 In arrivo</option>
+        <option value="prorogato">🔄 Prorogato</option>
+      </select>
+      <button class="btn" id="btn-advanced" onclick="toggleAdvanced()">⚙️ Filtri avanzati</button>
+      <button class="btn btn-danger btn-sm" id="btn-clear" onclick="clearFilters()" style="display:none">✕ Cancella filtri</button>
+    </div>
+
+    <!-- Advanced filters -->
+    <div class="advanced-filters" id="advanced-filters">
+      <div class="filter-group">
+        <label class="filter-label">Beneficiari</label>
+        <select id="filter-beneficiari">
+          <option value="">Tutti</option>
+          <option value="PMI">PMI</option>
+          <option value="Microimprese">Microimprese</option>
+          <option value="Startup">Startup</option>
+          <option value="Grandi imprese">Grandi imprese</option>
+          <option value="PA">PA</option>
+          <option value="Liberi professionisti">Liberi professionisti</option>
+          <option value="Enti del Terzo Settore">Terzo Settore</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Tipo agevolazione</label>
+        <select id="filter-tipo-agev">
+          <option value="">Tutti</option>
+          <option value="Contributo a fondo perduto">Fondo perduto</option>
+          <option value="Finanziamento agevolato">Fin. agevolato</option>
+          <option value="Credito d'imposta">Credito d'imposta</option>
+          <option value="Garanzia">Garanzia</option>
+          <option value="Voucher">Voucher</option>
+          <option value="Misto">Misto</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Regime aiuto</label>
+        <select id="filter-regime">
+          <option value="">Tutti</option>
+          <option value="De minimis">De minimis</option>
+          <option value="GBER esenzione">GBER esenzione</option>
+          <option value="Notificato">Notificato</option>
+          <option value="Non aiuto di Stato">Non aiuto di Stato</option>
+          <option value="Misto">Misto</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Ambito geografico</label>
+        <select id="filter-ambito">
+          <option value="">Tutti</option>
+          <option value="UE">UE</option>
+          <option value="Italia intera">Italia intera</option>
+          <option value="Mezzogiorno">Mezzogiorno</option>
+          <option value="Solo ER">Solo ER</option>
+          <option value="Aree di crisi">Aree di crisi</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Tipo scadenza</label>
+        <select id="filter-tipo-scad">
+          <option value="">Tutti</option>
+          <option value="Data fissa">Data fissa</option>
+          <option value="Sportello (fino a esaurimento fondi)">Sportello</option>
+          <option value="Misura strutturale">Misura strutturale</option>
+          <option value="Anno fiscale">Anno fiscale</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Priorità</label>
+        <select id="filter-priorita">
+          <option value="">Tutte</option>
+          <option value="Alta">🔴 Alta</option>
+          <option value="Media">🟠 Media</option>
+          <option value="Bassa">🟢 Bassa</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Ordina per</label>
+        <select id="sort-by">
+          <option value="scadenza">Scadenza</option>
+          <option value="importo">Importo max</option>
+          <option value="inserimento">Data inserimento</option>
+          <option value="priorita">Priorità</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results bar -->
+  <div class="results-bar">
+    <div class="results-count" id="results-count">Caricamento...</div>
+    <label class="archive-toggle" onclick="toggleArchive()">
+      <div class="toggle" id="archive-toggle-btn"></div>
+      Mostra archivio (bandi scaduti)
+    </label>
+  </div>
+
+  <!-- Grid -->
+  <div class="bandi-grid" id="bandi-grid">
+    <div class="loading-state">
+      <div style="font-size:40px;margin-bottom:12px">⏳</div>
+      <p>Caricamento bandi in corso...</p>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════════ SCRIPT ══════════════ -->
+<script>
+// ─────────────────────────────────────────────
+// DATI CAMPIONE (usati se il CSV non è trovato)
+// ─────────────────────────────────────────────
+const SAMPLE_DATA = [
+  { id:'EU-2026-001', nome:'EIC Accelerator — Fase Open', ente:'Commissione UE — European Innovation Council', livello:'Europeo', categoria:'R&S|Startup', categoriaPrincipale:'R&S', beneficiari:'Startup|PMI', tipoAgev:'Contributo a fondo perduto', regime:'Notificato', ambito:'UE', ateco:'tutti', dotazione:1000000000, importoMax:2500000, percContributo:70, dataApertura:'2026-01-15', scadenza:'2026-10-01', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Alta', link:'https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en', dataInserimento:'2026-01-16', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'EU-2026-002', nome:'LIFE Programme 2026 — Natura e Biodiversità', ente:'Commissione UE — CINEA', livello:'Europeo', categoria:'Sostenibilità', categoriaPrincipale:'Sostenibilità', beneficiari:'PMI|Grandi imprese|PA|Enti del Terzo Settore', tipoAgev:'Contributo a fondo perduto', regime:'Non aiuto di Stato', ambito:'UE', ateco:'tutti', dotazione:600000000, importoMax:5000000, percContributo:60, dataApertura:'2026-02-01', scadenza:'2026-09-19', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Media', link:'https://cinea.ec.europa.eu/programmes/life_en', dataInserimento:'2026-02-03', inseritoDa:'ML', fileCSV:'Attivo' },
+  { id:'EU-2026-003', nome:'Interreg Italy-Croatia 2026', ente:'Interreg — Regione Emilia-Romagna', livello:'Europeo', categoria:'Internazionalizzazione', categoriaPrincipale:'Internazionalizzazione', beneficiari:'PMI|PA|Enti del Terzo Settore', tipoAgev:'Contributo a fondo perduto', regime:'Non aiuto di Stato', ambito:'UE', ateco:'tutti', dotazione:224000000, importoMax:500000, percContributo:85, dataApertura:'2026-03-01', scadenza:'2026-07-15', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Media', link:'https://www.italy-croatia.eu', dataInserimento:'2026-03-02', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'EU-2025-001', nome:'Horizon Europe — EIC Pathfinder', ente:'Commissione UE — EISMEA', livello:'Europeo', categoria:'R&S', categoriaPrincipale:'R&S', beneficiari:'Startup|Enti del Terzo Settore', tipoAgev:'Contributo a fondo perduto', regime:'Non aiuto di Stato', ambito:'UE', ateco:'tutti', dotazione:144000000, importoMax:4000000, percContributo:100, dataApertura:'2026-01-01', scadenza:'2026-09-05', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Media', link:'https://eic.ec.europa.eu/eic-funding-opportunities/eic-pathfinder_en', dataInserimento:'2026-01-05', inseritoDa:'ML', fileCSV:'Attivo' },
+  { id:'IT-2026-001', nome:'Nuova Sabatini — Beni strumentali 4.0', ente:'MIMIT — CDP', livello:'Nazionale', categoria:'Digitalizzazione', categoriaPrincipale:'Digitalizzazione', beneficiari:'PMI|Microimprese', tipoAgev:'Finanziamento agevolato', regime:'De minimis', ambito:'Italia intera', ateco:'tutti', dotazione:900000000, importoMax:4000000, percContributo:null, dataApertura:'2023-01-01', scadenza:'', tipoScadenza:'Misura strutturale', stato:'Aperto', priorita:'Alta', link:'https://www.mimit.gov.it/it/incentivi/impresa/beni-strumentali-nuova-sabatini', dataInserimento:'2026-01-10', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'IT-2026-002', nome:"Credito d'imposta Transizione 5.0", ente:'Agenzia delle Entrate — GSE', livello:'Nazionale', categoria:'Digitalizzazione|Sostenibilità', categoriaPrincipale:'Digitalizzazione', beneficiari:'PMI|Grandi imprese|Microimprese', tipoAgev:"Credito d'imposta", regime:'Non aiuto di Stato', ambito:'Italia intera', ateco:'tutti', dotazione:6300000000, importoMax:null, percContributo:35, dataApertura:'2024-01-01', scadenza:'2025-12-31', tipoScadenza:'Anno fiscale', stato:'Aperto', priorita:'Alta', link:'https://www.gse.it/servizi-per-te/transizione-5-0', dataInserimento:'2026-01-12', inseritoDa:'ML', fileCSV:'Attivo' },
+  { id:'IT-2026-003', nome:'SIMEST — Fondo 394 Internazionalizzazione PMI', ente:'SIMEST — ICE', livello:'Nazionale', categoria:'Internazionalizzazione', categoriaPrincipale:'Internazionalizzazione', beneficiari:'PMI|Microimprese', tipoAgev:'Finanziamento agevolato', regime:'De minimis', ambito:'Italia intera', ateco:'tutti', dotazione:500000000, importoMax:300000, percContributo:null, dataApertura:'2026-01-10', scadenza:'2026-05-15', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Alta', link:'https://www.simest.it/prodotti/finanziamenti-agevolati', dataInserimento:'2026-01-11', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'IT-2026-004', nome:'Voucher 3I — Brevetti+ (Investire in Innovazione)', ente:'MIMIT', livello:'Nazionale', categoria:'R&S', categoriaPrincipale:'R&S', beneficiari:'Startup|PMI|Microimprese', tipoAgev:'Voucher', regime:'De minimis', ambito:'Italia intera', ateco:'tutti', dotazione:15000000, importoMax:8000, percContributo:80, dataApertura:'2026-03-15', scadenza:'2026-05-31', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Alta', link:'https://www.mimit.gov.it/it/incentivi/voucher-3i', dataInserimento:'2026-03-16', inseritoDa:'ML', fileCSV:'Attivo' },
+  { id:'IT-2026-005', nome:'Contratti di Sviluppo — PNRR Missione 4', ente:'Invitalia — MIMIT', livello:'Nazionale', categoria:'R&S', categoriaPrincipale:'R&S', beneficiari:'Grandi imprese|PMI', tipoAgev:'Contributo a fondo perduto|Finanziamento agevolato', regime:'GBER esenzione', ambito:'Italia intera', ateco:'tutti', dotazione:2000000000, importoMax:50000000, percContributo:50, dataApertura:'2026-01-20', scadenza:'2026-05-20', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Alta', link:'https://www.invitalia.it/cosa-facciamo/rafforziamo-le-imprese/contratti-di-sviluppo', dataInserimento:'2026-01-22', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'IT-2026-006', nome:"Credito d'imposta Ricerca, Sviluppo e Innovazione", ente:'Agenzia delle Entrate', livello:'Nazionale', categoria:'R&S', categoriaPrincipale:'R&S', beneficiari:'PMI|Grandi imprese|Microimprese', tipoAgev:"Credito d'imposta", regime:'Non aiuto di Stato', ambito:'Italia intera', ateco:'tutti', dotazione:null, importoMax:null, percContributo:10, dataApertura:'2020-01-01', scadenza:'', tipoScadenza:'Misura strutturale', stato:'Aperto', priorita:'Media', link:'https://www.agenziaentrate.gov.it/portale/web/guest/schede/agevolazioni/credito-imposta-ricerca-sviluppo', dataInserimento:'2026-01-10', inseritoDa:'ML', fileCSV:'Attivo' },
+  { id:'IT-2025-001', nome:'Resto al Sud 2.0', ente:'Invitalia', livello:'Nazionale', categoria:'Startup', categoriaPrincipale:'Startup', beneficiari:'Startup|Liberi professionisti', tipoAgev:'Contributo a fondo perduto|Finanziamento agevolato', regime:'De minimis', ambito:'Mezzogiorno', ateco:'tutti', dotazione:1250000000, importoMax:120000, percContributo:50, dataApertura:'2023-06-01', scadenza:'', tipoScadenza:'Sportello (fino a esaurimento fondi)', stato:'Aperto', priorita:'Bassa', link:'https://www.invitalia.it/cosa-facciamo/creiamo-nuove-aziende/resto-al-sud', dataInserimento:'2025-06-05', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'ER-2026-001', nome:'POR-FESR ER — Digitalizzazione e innovazione PMI 2026', ente:'Regione Emilia-Romagna', livello:'Regionale ER', categoria:'Digitalizzazione', categoriaPrincipale:'Digitalizzazione', beneficiari:'PMI|Microimprese', tipoAgev:'Contributo a fondo perduto', regime:'GBER esenzione', ambito:'Solo ER', ateco:'tutti', dotazione:40000000, importoMax:200000, percContributo:50, dataApertura:'2026-02-15', scadenza:'2026-06-30', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Alta', link:'https://imprese.regione.emilia-romagna.it/digital-innovation', dataInserimento:'2026-02-17', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'ER-2026-002', nome:'FSE+ ER — Formazione continua per le imprese', ente:'Regione Emilia-Romagna', livello:'Regionale ER', categoria:'Formazione', categoriaPrincipale:'Formazione', beneficiari:'PMI|Microimprese|Grandi imprese', tipoAgev:'Contributo a fondo perduto', regime:'Non aiuto di Stato', ambito:'Solo ER', ateco:'tutti', dotazione:18000000, importoMax:50000, percContributo:70, dataApertura:'2026-01-10', scadenza:'', tipoScadenza:'Sportello (fino a esaurimento fondi)', stato:'Aperto', priorita:'Media', link:'https://formazionelavoro.regione.emilia-romagna.it/', dataInserimento:'2026-01-12', inseritoDa:'ML', fileCSV:'Attivo' },
+  { id:'ER-2026-003', nome:'Bando internazionalizzazione ART-ER 2026', ente:'ART-ER — Regione Emilia-Romagna', livello:'Regionale ER', categoria:'Internazionalizzazione', categoriaPrincipale:'Internazionalizzazione', beneficiari:'PMI|Microimprese', tipoAgev:'Voucher', regime:'De minimis', ambito:'Solo ER', ateco:'tutti', dotazione:5000000, importoMax:15000, percContributo:80, dataApertura:'', scadenza:'', tipoScadenza:'Data fissa', stato:'In arrivo', priorita:'Alta', link:'https://www.art-er.it/internazionalizzazione/', dataInserimento:'2026-04-20', inseritoDa:'AR', fileCSV:'Attivo' },
+  { id:'ER-2026-004', nome:'POR-FESR ER — Sostenibilità energetica imprese 2026', ente:'Regione Emilia-Romagna', livello:'Regionale ER', categoria:'Sostenibilità', categoriaPrincipale:'Sostenibilità', beneficiari:'PMI|Microimprese|Grandi imprese', tipoAgev:'Contributo a fondo perduto', regime:'GBER esenzione', ambito:'Solo ER', ateco:'35|43|46|47|62', dotazione:25000000, importoMax:300000, percContributo:40, dataApertura:'', scadenza:'', tipoScadenza:'Data fissa', stato:'In arrivo', priorita:'Media', link:'https://imprese.regione.emilia-romagna.it/sostenibilita', dataInserimento:'2026-04-10', inseritoDa:'ML', fileCSV:'Attivo' },
+  { id:'ER-2025-001', nome:'POR-FESR ER — Sostenibilità energetica 2025', ente:'Regione Emilia-Romagna', livello:'Regionale ER', categoria:'Sostenibilità', categoriaPrincipale:'Sostenibilità', beneficiari:'PMI|Microimprese', tipoAgev:'Contributo a fondo perduto', regime:'GBER esenzione', ambito:'Solo ER', ateco:'tutti', dotazione:20000000, importoMax:200000, percContributo:40, dataApertura:'2025-03-01', scadenza:'2025-12-15', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Alta', link:'https://imprese.regione.emilia-romagna.it/sostenibilita-2025', dataInserimento:'2025-03-05', inseritoDa:'AR', fileCSV:'Archivio' },
+  { id:'IT-2025-002', nome:"PNRR — Ecosistemi dell'Innovazione", ente:"MUR — Ministero dell'Università", livello:'Nazionale', categoria:'R&S', categoriaPrincipale:'R&S', beneficiari:'Enti del Terzo Settore|PA', tipoAgev:'Contributo a fondo perduto', regime:'Non aiuto di Stato', ambito:'Italia intera', ateco:'tutti', dotazione:1600000000, importoMax:110000000, percContributo:100, dataApertura:'2025-01-01', scadenza:'2026-03-31', tipoScadenza:'Data fissa', stato:'Aperto', priorita:'Bassa', link:'https://www.mur.gov.it/it/pnrr/ecosistemi-innovazione', dataInserimento:'2025-01-10', inseritoDa:'ML', fileCSV:'Archivio' }
+];
+
+// ─────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────
+const CSV_URL = './data/bandi.csv';
+const TODAY   = (() => { const d = new Date(); d.setHours(0,0,0,0); return d; })();
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let allBandi    = [];
+let showArchive = false;
+let advOpen     = false;
+
+// ─────────────────────────────────────────────
+// UTILS
+// ─────────────────────────────────────────────
+const parseDate = s => { if (!s) return null; const d = new Date(s); return isNaN(d) ? null : d; };
+const diffDays  = d  => d ? Math.ceil((d - TODAY) / 86400000) : null;
+
+function formatDate(s) {
+  const d = parseDate(s);
+  if (!d) return '—';
+  return d.toLocaleDateString('it-IT', { day:'2-digit', month:'short', year:'numeric' });
+}
+
+function formatEuro(n) {
+  if (n == null || n === '') return '—';
+  n = Number(n); if (isNaN(n) || n === 0) return '—';
+  if (n >= 1e9) return '€ ' + (n/1e9).toFixed(1).replace('.0','') + ' Mld';
+  if (n >= 1e6) return '€ ' + Math.round(n/1e6) + ' Mln';
+  if (n >= 1e3) return '€ ' + Math.round(n/1e3) + 'K';
+  return '€ ' + n.toLocaleString('it-IT');
+}
+
+function urgency(b) {
+  if (b.fileCSV === 'Archivio') return 'scaduto';
+  if (b.stato === 'In arrivo')  return 'arrivo';
+  if (b.stato === 'Sospeso')    return 'sospeso';
+  if (b.stato === 'Prorogato')  return 'prorogato';
+  if (b.scadenza) {
+    const d = parseDate(b.scadenza);
+    if (d && d < TODAY)             return 'scaduto';
+    const dd = diffDays(d);
+    if (dd !== null && dd <= 30)    return 'urgente';
+    if (dd !== null && dd <= 60)    return 'presto';
+  }
+  return 'aperto';
+}
+
+const STATUS_BADGE = {
+  aperto:   '<span class="badge badge-aperto">✅ Aperto</span>',
+  urgente:  '<span class="badge badge-urgente">🚨 Scadenza imminente</span>',
+  presto:   '<span class="badge badge-presto">⚠️ Scadenza prossima</span>',
+  arrivo:   '<span class="badge badge-arrivo">🔜 In arrivo</span>',
+  scaduto:  '<span class="badge badge-scaduto">📁 Scaduto</span>',
+  sospeso:  '<span class="badge badge-sospeso">⏸️ Sospeso</span>',
+  prorogato:'<span class="badge badge-prorogato">🔄 Prorogato</span>',
+};
+
+const LEVEL_BADGE = {
+  'Europeo':      '<span class="badge badge-eu">🌍 UE</span>',
+  'Nazionale':    '<span class="badge badge-nazionale">🇮🇹 Nazionale</span>',
+  'Regionale ER': '<span class="badge badge-er">🏛️ ER</span>',
+};
+
+const PRIORITY_CLASS = { Alta:'priority-alta', Media:'priority-media', Bassa:'priority-bassa' };
+
+function scadDisplay(b, u) {
+  if (b.tipoScadenza === 'Misura strutturale')               return { label:'Misura strutturale', cls:'' };
+  if (b.tipoScadenza === 'Anno fiscale')                     return { label:'Anno fiscale', cls:'' };
+  if (b.tipoScadenza === 'Sportello (fino a esaurimento fondi)') return { label:'Sportello aperto', cls:'' };
+  if (!b.scadenza && u === 'arrivo')                         return { label:'Data da definire', cls:'' };
+  if (!b.scadenza)                                           return { label:'—', cls:'' };
+  const dd = diffDays(parseDate(b.scadenza));
+  if (u === 'urgente') return { label: dd + ' giorni · ' + formatDate(b.scadenza), cls:'urgente' };
+  if (u === 'presto')  return { label: dd + ' giorni · ' + formatDate(b.scadenza), cls:'presto'  };
+  return { label: formatDate(b.scadenza), cls:'' };
+}
+
+// ─────────────────────────────────────────────
+// RENDER CARD
+// ─────────────────────────────────────────────
+function renderCard(b) {
+  const u    = urgency(b);
+  const isAr = u === 'scaduto';
+  if (isAr && !showArchive) return '';
+
+  const scad  = scadDisplay(b, u);
+  const cats  = b.categoria.split('|').slice(0,2).map(s => s.trim());
+  const bens  = b.beneficiari.split('|').slice(0,2).map(s => s.trim());
+  const extra = b.ambito !== 'UE' && b.ambito !== 'Italia intera' ? [b.ambito] : [];
+
+  let cls = 'bando-card';
+  if (u === 'urgente') cls += ' urgente';
+  if (u === 'presto')  cls += ' presto';
+  if (isAr)            cls += ' archivio';
+
+  return `
+<div class="${cls}">
+  <div class="card-top">
+    <div style="flex:1">
+      <div class="card-badges">
+        ${LEVEL_BADGE[b.livello] || ''}
+        ${STATUS_BADGE[u] || ''}
+      </div>
+      <div class="card-title">${b.nome}</div>
+      <div class="card-ente">${b.ente}</div>
+    </div>
+    <div class="priority-dot ${PRIORITY_CLASS[b.priorita] || ''}" title="Priorità: ${b.priorita}"></div>
+  </div>
+
+  <div class="card-info">
+    <div class="info-item">
+      <div class="info-label">Scadenza</div>
+      <div class="info-value ${scad.cls}">${scad.label}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Importo max</div>
+      <div class="info-value">${formatEuro(b.importoMax)}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Agevolazione</div>
+      <div class="info-value small">${b.tipoAgev.split('|')[0].trim()}</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Regime aiuto</div>
+      <div class="info-value small">${b.regime}</div>
+    </div>
+  </div>
+
+  <div class="card-tags">
+    ${[...cats, ...bens, ...extra].map(t => `<span class="tag">${t}</span>`).join('')}
+  </div>
+
+  <div class="card-footer">
+    <a class="card-link" href="${b.link}" target="_blank" rel="noopener">🔗 Pagina ufficiale →</a>
+    <span class="card-id">${b.id}</span>
+  </div>
+</div>`;
+}
+
+// ─────────────────────────────────────────────
+// FILTER + SORT
+// ─────────────────────────────────────────────
+function getFilters() {
+  return {
+    q:       document.getElementById('search').value.toLowerCase().trim(),
+    livello: document.getElementById('filter-livello').value,
+    cat:     document.getElementById('filter-categoria').value,
+    stato:   document.getElementById('filter-stato').value,
+    ben:     document.getElementById('filter-beneficiari').value,
+    agev:    document.getElementById('filter-tipo-agev').value,
+    regime:  document.getElementById('filter-regime').value,
+    ambito:  document.getElementById('filter-ambito').value,
+    scad:    document.getElementById('filter-tipo-scad').value,
+    pri:     document.getElementById('filter-priorita').value,
+    sort:    document.getElementById('sort-by').value,
+  };
+}
+
+function applyFilters(bandi, f) {
+  return bandi.filter(b => {
+    const u  = urgency(b);
+    const ar = u === 'scaduto';
+    if (ar && !showArchive) return false;
+    if (f.q && !(b.nome + ' ' + b.ente).toLowerCase().includes(f.q)) return false;
+    if (f.livello && b.livello !== f.livello) return false;
+    if (f.cat    && b.categoriaPrincipale !== f.cat)  return false;
+    if (f.stato  && u !== f.stato) return false;
+    if (f.ben    && !b.beneficiari.includes(f.ben))   return false;
+    if (f.agev   && !b.tipoAgev.includes(f.agev))     return false;
+    if (f.regime && b.regime !== f.regime)             return false;
+    if (f.ambito && b.ambito !== f.ambito)             return false;
+    if (f.scad   && b.tipoScadenza !== f.scad)        return false;
+    if (f.pri    && b.priorita !== f.pri)              return false;
+    return true;
+  });
+}
+
+function sortBandi(bandi, by) {
+  const uOrd = { urgente:0, presto:1, aperto:2, prorogato:3, arrivo:4, scaduto:5, sospeso:6 };
+  const pOrd = { Alta:0, Media:1, Bassa:2 };
+  return [...bandi].sort((a, b) => {
+    const ua = uOrd[urgency(a)] ?? 5, ub = uOrd[urgency(b)] ?? 5;
+    if (by === 'priorita') return (pOrd[a.priorita]??2)-(pOrd[b.priorita]??2) || ua-ub;
+    if (by === 'importo')  return (Number(b.importoMax)||0)-(Number(a.importoMax)||0);
+    if (by === 'inserimento') return (parseDate(b.dataInserimento)||0)-(parseDate(a.dataInserimento)||0);
+    // default: scadenza
+    if (ua !== ub) return ua - ub;
+    const sa = parseDate(a.scadenza), sb = parseDate(b.scadenza);
+    if (!sa && !sb) return 0;
+    if (!sa) return 1; if (!sb) return -1;
+    return sa - sb;
+  });
+}
+
+function hasActive(f) {
+  return f.q || f.livello || f.cat || f.stato || f.ben || f.agev || f.regime || f.ambito || f.scad || f.pri;
+}
+
+// ─────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────
+function render() {
+  const f        = getFilters();
+  const visible  = applyFilters(allBandi, f);
+  const sorted   = sortBandi(visible, f.sort);
+  const total    = allBandi.filter(b => showArchive || urgency(b) !== 'scaduto').length;
+
+  document.getElementById('btn-clear').style.display = hasActive(f) ? 'flex' : 'none';
+  document.getElementById('results-count').innerHTML =
+    `<strong>${sorted.length}</strong> bandi su <strong>${total}</strong> totali`;
+
+  const grid = document.getElementById('bandi-grid');
+
+  if (sorted.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>Nessun bando trovato</h3>
+        <p>Prova a modificare i filtri di ricerca.</p>
+        <button class="btn btn-primary" onclick="clearFilters()">Cancella tutti i filtri</button>
+      </div>`;
+    return;
+  }
+
+  const attivi   = sorted.filter(b => urgency(b) !== 'scaduto');
+  const archiviati = sorted.filter(b => urgency(b) === 'scaduto');
+
+  let html = attivi.map(renderCard).join('');
+  if (showArchive && archiviati.length > 0) {
+    html += `<div class="archive-separator"><span>📁 Archivio (${archiviati.length} bandi scaduti)</span></div>`;
+    html += archiviati.map(renderCard).join('');
+  }
+  grid.innerHTML = html;
+
+  updateURLHash(f);
+}
+
+// ─────────────────────────────────────────────
+// STATS
+// ─────────────────────────────────────────────
+function updateStats() {
+  const ago30 = new Date(TODAY); ago30.setDate(ago30.getDate() - 30);
+  const aperti  = allBandi.filter(b => ['aperto','urgente','presto','prorogato'].includes(urgency(b)));
+  const urgenti = allBandi.filter(b => urgency(b) === 'urgente');
+  const dotaz   = aperti.reduce((s,b) => s + (Number(b.dotazione)||0), 0);
+  const nuovi   = allBandi.filter(b => { const d = parseDate(b.dataInserimento); return d && d >= ago30; });
+
+  document.getElementById('stat-aperti').textContent    = aperti.length;
+  document.getElementById('stat-scadenza').textContent  = urgenti.length;
+  document.getElementById('stat-dotazione').textContent = formatEuro(dotaz);
+  document.getElementById('stat-nuovi').textContent     = nuovi.length;
+  document.getElementById('last-update').textContent    =
+    'Aggiornato: ' + TODAY.toLocaleDateString('it-IT', {day:'2-digit',month:'long',year:'numeric'});
+}
+
+// ─────────────────────────────────────────────
+// URL HASH
+// ─────────────────────────────────────────────
+function updateURLHash(f) {
+  const p = new URLSearchParams();
+  const map = { q:'q', livello:'livello', cat:'cat', stato:'stato', ben:'ben',
+                agev:'agev', regime:'regime', ambito:'ambito', scad:'scad', pri:'pri' };
+  for (const [k,v] of Object.entries(map)) if (f[k]) p.set(v, f[k]);
+  history.replaceState(null, '', p.toString() ? '#' + p : location.pathname);
+}
+
+function loadFromHash() {
+  if (!location.hash) return;
+  const p = new URLSearchParams(location.hash.slice(1));
+  const map = {
+    q:'search', livello:'filter-livello', cat:'filter-categoria', stato:'filter-stato',
+    ben:'filter-beneficiari', agev:'filter-tipo-agev', regime:'filter-regime',
+    ambito:'filter-ambito', scad:'filter-tipo-scad', pri:'filter-priorita'
+  };
+  for (const [k,id] of Object.entries(map)) if (p.has(k)) document.getElementById(id).value = p.get(k);
+}
+
+// ─────────────────────────────────────────────
+// CONTROLS
+// ─────────────────────────────────────────────
+function toggleAdvanced() {
+  advOpen = !advOpen;
+  document.getElementById('advanced-filters').classList.toggle('open', advOpen);
+  document.getElementById('btn-advanced').textContent = advOpen ? '⚙️ Nascondi filtri' : '⚙️ Filtri avanzati';
+}
+
+function toggleArchive() {
+  showArchive = !showArchive;
+  document.getElementById('archive-toggle-btn').classList.toggle('on', showArchive);
+  render();
+}
+
+function clearFilters() {
+  ['search','filter-livello','filter-categoria','filter-stato','filter-beneficiari',
+   'filter-tipo-agev','filter-regime','filter-ambito','filter-tipo-scad','filter-priorita']
+  .forEach(id => document.getElementById(id).value = '');
+  render();
+}
+
+// ─────────────────────────────────────────────
+// CSV PARSING
+// ─────────────────────────────────────────────
+function csvRowToBando(row) {
+  return {
+    id:                row['ID']                      || '',
+    nome:              row['Nome bando']               || '',
+    ente:              row['Ente erogatore']           || '',
+    livello:           row['Livello']                  || '',
+    categoria:         row['Categoria']                || '',
+    categoriaPrincipale: row['Categoria principale']  || '',
+    beneficiari:       row['Beneficiari']              || '',
+    tipoAgev:          row['Tipo agevolazione']        || '',
+    regime:            row['Regime aiuto']             || '',
+    ambito:            row['Ambito geografico']        || '',
+    ateco:             row['ATECO ammessi']            || '',
+    dotazione:         row['Dotazione totale']         || null,
+    importoMax:        row['Importo max beneficiario'] || null,
+    percContributo:    row['Percentuale contributo']   || null,
+    dataApertura:      row['Data apertura']            || '',
+    scadenza:          row['Scadenza']                 || '',
+    tipoScadenza:      row['Tipo scadenza']            || '',
+    stato:             row['Stato']                    || '',
+    priorita:          row['Priorità']                 || '',
+    link:              row['Link ufficiale']           || '#',
+    dataInserimento:   row['Data inserimento']         || '',
+    inseritoDa:        row['Inserito da']              || '',
+    fileCSV:           row['File CSV']                 || 'Attivo',
+  };
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+function init(data) {
+  allBandi = data;
+  updateStats();
+  loadFromHash();
+  render();
+}
+
+async function loadData() {
+  try {
+    const resp = await fetch(CSV_URL, { cache: 'no-cache' });
+    if (!resp.ok) throw new Error('CSV non trovato');
+    const text = await resp.text();
+    const result = Papa.parse(text, { header: true, skipEmptyLines: true });
+    init(result.data.map(csvRowToBando));
+  } catch (e) {
+    console.info('📋 Uso dati campione (CSV non trovato in locale)');
+    init(SAMPLE_DATA);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  ['search','filter-livello','filter-categoria','filter-stato','filter-beneficiari',
+   'filter-tipo-agev','filter-regime','filter-ambito','filter-tipo-scad','filter-priorita','sort-by']
+  .forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input',  render);
+    el.addEventListener('change', render);
+  });
+  loadData();
+});
+</script>
+
+</body>
+</html>

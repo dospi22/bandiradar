@@ -1,0 +1,197 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# BandiRadar — Email digest settimanale (ogni lunedì mattina alle 07:00)
+#
+# SETUP RICHIESTO (una tantum):
+#   Aggiungi questi secrets in Settings → Secrets and variables → Actions:
+#      DIGEST_EMAILS   → lista email destinatari separati da virgola
+#                        es: "mario@azienda.it,lucia@azienda.it"
+#      SMTP_USER       → email Gmail mittente
+#      SMTP_PASS       → App Password Gmail
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Digest Settimanale Email
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # ogni lunedì alle 07:00 ora italiana (06:00 UTC)
+  workflow_dispatch:        # avvio manuale per testare
+
+jobs:
+  digest:
+    name: Invia digest bandi in scadenza
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installa dipendenze
+        run: pip install requests
+
+      - name: Genera contenuto email digest
+        id: digest
+        run: |
+          python << 'EOF'
+          import csv, os
+          from datetime import date, timedelta
+
+          today    = date.today()
+          in_30    = today + timedelta(days=30)
+          in_60    = today + timedelta(days=60)
+
+          def parse_date(s):
+              if not s: return None
+              try: return date.fromisoformat(s.strip())
+              except: return None
+
+          def fmt_euro(s):
+              try:
+                  n = float(s)
+                  if n >= 1e9: return f"€ {n/1e9:.1f} Mld".replace('.0 ', ' ')
+                  if n >= 1e6: return f"€ {int(n/1e6)} Mln"
+                  if n >= 1e3: return f"€ {int(n/1e3)}K"
+                  return f"€ {int(n):,}"
+              except: return "—"
+
+          try:
+              with open('data/bandi.csv', encoding='utf-8') as f:
+                  rows = list(csv.DictReader(f))
+          except FileNotFoundError:
+              print("⚠️  data/bandi.csv non trovato")
+              rows = []
+
+          # Categorizza bandi
+          urgenti  = []   # scadenza entro 30gg
+          prossimi = []   # scadenza entro 60gg
+          in_arrivo = []  # stato "In arrivo"
+
+          for row in rows:
+              stato = row.get('Stato','').strip()
+              scad  = parse_date(row.get('Scadenza',''))
+
+              if stato == 'In arrivo':
+                  in_arrivo.append(row)
+                  continue
+              if scad and today <= scad <= in_30:
+                  urgenti.append((scad, row))
+              elif scad and in_30 < scad <= in_60:
+                  prossimi.append((scad, row))
+
+          urgenti.sort(key=lambda x: x[0])
+          prossimi.sort(key=lambda x: x[0])
+
+          # Componi HTML email
+          html = f"""<!DOCTYPE html>
+          <html><head><meta charset="UTF-8">
+          <style>
+            body{{font-family:Arial,sans-serif;max-width:650px;margin:0 auto;color:#111}}
+            h1{{background:#2563eb;color:white;padding:20px;margin:0;border-radius:8px 8px 0 0}}
+            .section{{padding:16px 20px;border-bottom:1px solid #e5e7eb}}
+            .section h2{{color:#374151;font-size:16px;margin:0 0 12px}}
+            .bando{{background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:12px;margin-bottom:10px}}
+            .bando-nome{{font-weight:bold;font-size:14px;color:#111}}
+            .bando-ente{{color:#6b7280;font-size:12px;margin:2px 0 8px}}
+            .badge{{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold}}
+            .urgente{{background:#fee2e2;color:#991b1b}}
+            .presto{{background:#fef3c7;color:#92400e}}
+            .arrivo{{background:#ede9fe;color:#5b21b6}}
+            .meta{{font-size:12px;color:#374151;margin-top:6px}}
+            .btn{{display:inline-block;background:#2563eb;color:white;padding:6px 14px;border-radius:5px;text-decoration:none;font-size:12px;font-weight:bold}}
+            .footer{{padding:16px 20px;font-size:11px;color:#9ca3af;background:#f3f4f6;border-radius:0 0 8px 8px}}
+          </style></head><body>
+          <h1>📡 BandiRadar — Digest del {today.strftime("%-d %B %Y")}</h1>
+          """
+
+          if not urgenti and not prossimi and not in_arrivo:
+              html += '<div class="section"><p>✅ Nessun bando in scadenza imminente questa settimana.</p></div>'
+          else:
+              # Sezione urgenti (entro 30gg)
+              if urgenti:
+                  html += f'<div class="section"><h2>🚨 In scadenza entro 30 giorni ({len(urgenti)} bandi)</h2>'
+                  for scad, row in urgenti:
+                      giorni = (scad - today).days
+                      html += f"""
+                      <div class="bando">
+                        <div class="bando-nome">{row.get('Nome bando','')}</div>
+                        <div class="bando-ente">{row.get('Ente erogatore','')}</div>
+                        <span class="badge urgente">🚨 Scade in {giorni} giorni — {scad.strftime("%-d %b %Y")}</span>
+                        <div class="meta">
+                          💰 Importo max: {fmt_euro(row.get('Importo max beneficiario',''))} &nbsp;|&nbsp;
+                          🏛️ {row.get('Livello','')} &nbsp;|&nbsp;
+                          📂 {row.get('Categoria principale','')} &nbsp;|&nbsp;
+                          👥 {row.get('Beneficiari','').replace('|', ', ')}
+                        </div>
+                        <div style="margin-top:8px"><a class="btn" href="{row.get('Link ufficiale','#')}">Vai al bando →</a></div>
+                      </div>"""
+                  html += '</div>'
+
+              # Sezione prossimi (31-60gg)
+              if prossimi:
+                  html += f'<div class="section"><h2>⚠️ In scadenza entro 60 giorni ({len(prossimi)} bandi)</h2>'
+                  for scad, row in prossimi:
+                      giorni = (scad - today).days
+                      html += f"""
+                      <div class="bando">
+                        <div class="bando-nome">{row.get('Nome bando','')}</div>
+                        <div class="bando-ente">{row.get('Ente erogatore','')}</div>
+                        <span class="badge presto">⚠️ Scade in {giorni} giorni — {scad.strftime("%-d %b %Y")}</span>
+                        <div class="meta">
+                          💰 {fmt_euro(row.get('Importo max beneficiario',''))} &nbsp;|&nbsp;
+                          🏛️ {row.get('Livello','')} &nbsp;|&nbsp;
+                          📂 {row.get('Categoria principale','')}
+                        </div>
+                        <div style="margin-top:8px"><a class="btn" href="{row.get('Link ufficiale','#')}">Vai al bando →</a></div>
+                      </div>"""
+                  html += '</div>'
+
+              # Sezione in arrivo
+              if in_arrivo:
+                  html += f'<div class="section"><h2>🔜 Bandi in arrivo ({len(in_arrivo)})</h2>'
+                  for row in in_arrivo[:5]:
+                      html += f"""
+                      <div class="bando">
+                        <div class="bando-nome">{row.get('Nome bando','')}</div>
+                        <div class="bando-ente">{row.get('Ente erogatore','')}</div>
+                        <span class="badge arrivo">🔜 In arrivo</span>
+                        <div class="meta">💰 {fmt_euro(row.get('Importo max beneficiario',''))} &nbsp;|&nbsp; 📂 {row.get('Categoria principale','')}</div>
+                      </div>"""
+                  html += '</div>'
+
+          html += f"""
+          <div class="footer">
+            BandiRadar — Sistema automatico di monitoraggio bandi<br>
+            Generato automaticamente il {today.strftime("%-d %B %Y")} — Non rispondere a questa email
+          </div>
+          </body></html>"""
+
+          subject = f"📡 BandiRadar {today.strftime('%d/%m/%Y')}"
+          if urgenti:
+              subject += f" — 🚨 {len(urgenti)} bandi in scadenza urgente"
+          elif prossimi:
+              subject += f" — ⚠️ {len(prossimi)} bandi in scadenza"
+          else:
+              subject += " — Riepilogo settimanale"
+
+          with open('/tmp/email_subject.txt', 'w') as f: f.write(subject)
+          with open('/tmp/email_body.html',   'w') as f: f.write(html)
+
+          print(f"✅ Digest generato: {len(urgenti)} urgenti, {len(prossimi)} prossimi, {len(in_arrivo)} in arrivo")
+          print(f"📧 Oggetto: {subject}")
+          EOF
+
+      - name: Invia email digest
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          to: ${{ secrets.DIGEST_EMAILS }}
+          from: BandiRadar <${{ secrets.SMTP_USER }}>
+          subject_filepath: /tmp/email_subject.txt
+          html_body_filepath: /tmp/email_body.html

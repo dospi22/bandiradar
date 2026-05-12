@@ -177,8 +177,14 @@ jobs:
           else:
               subject += " — Riepilogo settimanale"
 
-          with open('/tmp/email_subject.txt', 'w') as f: f.write(subject)
-          with open('/tmp/email_body.html',   'w') as f: f.write(html)
+          with open('/tmp/email_body.html', 'w') as f: f.write(html)
+
+          # Scrivi soggetto in GITHUB_ENV (sintassi multiline per supportare emoji)
+          import os
+          github_env = os.environ.get('GITHUB_ENV', '')
+          if github_env:
+              with open(github_env, 'a') as f:
+                  f.write(f'EMAIL_SUBJECT<<ENDOFSUBJECT\n{subject}\nENDOFSUBJECT\n')
 
           print(f"✅ Digest generato: {len(urgenti)} urgenti, {len(prossimi)} prossimi, {len(in_arrivo)} in arrivo")
           print(f"📧 Oggetto: {subject}")
@@ -193,5 +199,5 @@ jobs:
           password: ${{ secrets.SMTP_PASS }}
           to: ${{ secrets.DIGEST_EMAILS }}
           from: BandiRadar <${{ secrets.SMTP_USER }}>
-          subject_filepath: /tmp/email_subject.txt
-          html_body_filepath: /tmp/email_body.html
+          subject: ${{ env.EMAIL_SUBJECT }}
+          html_body: file:///tmp/email_body.html

@@ -1,0 +1,157 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# BandiRadar — Sync notturno Google Sheets → CSV
+# Si attiva ogni notte alle 02:00 (ora italiana = 01:00 UTC) e manualmente.
+#
+# SETUP RICHIESTO (una tantum):
+#   1. Vai su Settings → Secrets and variables → Actions nel tuo repository
+#   2. Aggiungi i seguenti secrets:
+#      SHEET_ID        → ID del tuo Google Sheet (dalla URL)
+#      NOTIFY_EMAIL    → email destinataria degli alert di errore
+#      SMTP_USER       → email Gmail mittente (es. bandiradar@gmail.com)
+#      SMTP_PASS       → App Password Gmail (NON la password normale)
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Sync Notturno Google Sheets
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # ogni notte alle 02:00 ora italiana (01:00 UTC)
+  workflow_dispatch:        # avvio manuale dalla tab Actions
+
+permissions:
+  contents: write           # necessario per fare commit sul repository
+
+jobs:
+  sync:
+    name: Scarica CSV da Google Sheets e aggiorna repository
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Installa dipendenze
+      - name: Installa dipendenze
+        run: pip install requests
+
+      # 4. Scarica e processa il CSV da Google Sheets
+      - name: Scarica e processa CSV
+        env:
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+        run: |
+          python << 'EOF'
+          import os, requests, csv, io, sys
+          from datetime import date
+
+          sheet_id = os.environ.get('SHEET_ID', '')
+          if not sheet_id:
+              print("❌ SHEET_ID non configurato nei secrets")
+              sys.exit(1)
+
+          # URL export CSV pubblico (il foglio deve essere condiviso pubblicamente in sola lettura)
+          # Foglio 1 = "Bandi" (dati pubblici)
+          url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid=0"
+
+          print(f"📥 Scaricamento CSV da Google Sheets...")
+          try:
+              resp = requests.get(url, timeout=30)
+              resp.raise_for_status()
+          except Exception as e:
+              print(f"❌ Errore download: {e}")
+              sys.exit(1)
+
+          content = resp.content.decode('utf-8-sig')  # gestisce BOM UTF-8
+          reader  = csv.DictReader(io.StringIO(content))
+          rows    = list(reader)
+          print(f"✅ {len(rows)} righe scaricate")
+
+          # Validazione campi obbligatori
+          required = ['ID', 'Nome bando', 'Livello', 'Stato', 'File CSV']
+          errors   = []
+          ids_seen = set()
+          for i, row in enumerate(rows, 2):
+              for f in required:
+                  if not row.get(f, '').strip():
+                      errors.append(f"Riga {i}: campo '{f}' vuoto")
+              rid = row.get('ID', '').strip()
+              if rid in ids_seen:
+                  errors.append(f"Riga {i}: ID duplicato '{rid}'")
+              ids_seen.add(rid)
+
+          if errors:
+              print(f"⚠️  {len(errors)} problemi trovati:")
+              for e in errors[:20]: print(f"   {e}")
+              # Continua comunque (non bloccare il sync per errori minori)
+
+          # Separa bandi attivi da archivio
+          attivi   = [r for r in rows if r.get('File CSV','').strip() == 'Attivo']
+          archivio = [r for r in rows if r.get('File CSV','').strip() == 'Archivio']
+
+          print(f"📊 Bandi attivi: {len(attivi)} | Archivio: {len(archivio)}")
+
+          # Scrivi i due file CSV
+          os.makedirs('data', exist_ok=True)
+
+          def write_csv(filepath, data, fieldnames):
+              with open(filepath, 'w', newline='', encoding='utf-8') as f:
+                  writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
+                  writer.writeheader()
+                  writer.writerows(data)
+
+          if rows:
+              fields = list(rows[0].keys())
+              write_csv('data/bandi.csv',    attivi,   fields)
+              write_csv('data/archivio.csv', archivio, fields)
+              print("✅ File CSV scritti: data/bandi.csv, data/archivio.csv")
+
+          # Scrivi log di sincronizzazione
+          with open('data/last_sync.txt', 'w') as f:
+              f.write(f"{date.today().isoformat()} — {len(attivi)} attivi, {len(archivio)} archivio")
+          print("✅ Log aggiornato: data/last_sync.txt")
+
+          if errors:
+              with open('data/sync_errors.txt', 'w') as f:
+                  f.write('\n'.join(errors))
+              print(f"⚠️  Errori salvati in data/sync_errors.txt")
+          EOF
+
+      # 5. Commit e push se ci sono modifiche
+      - name: Commit e push aggiornamenti
+        run: |
+          git config user.name  "BandiRadar Bot"
+          git config user.email "actions@github.com"
+          git add data/bandi.csv data/archivio.csv data/last_sync.txt data/sync_errors.txt 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "ℹ️  Nessuna modifica — niente da committare"
+          else
+            git commit -m "🔄 Sync automatico $(date '+%Y-%m-%d %H:%M') — dati aggiornati"
+            git push
+            echo "✅ Push completato"
+          fi
+
+      # 6. (Opzionale) Notifica email in caso di errori nel sync
+      - name: Notifica email in caso di errori
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: BandiRadar <${{ secrets.SMTP_USER }}>
+          subject: "⚠️ BandiRadar — Errore sync notturno del ${{ github.run_id }}"
+          body: |
+            Il sync notturno di BandiRadar ha incontrato un errore.
+
+            Controlla i log su GitHub Actions:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Data: ${{ github.event.repository.updated_at }}

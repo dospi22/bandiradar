@@ -479,6 +479,8 @@
         <option value="urgente">🚨 Scadenza 30gg</option>
         <option value="arrivo">🔜 In arrivo</option>
         <option value="prorogato">🔄 Prorogato</option>
+        <option value="sospeso">⏸️ Sospeso</option>
+        <option value="scaduto">📁 Scaduto / Archivio</option>
       </select>
       <button class="btn" id="btn-advanced" onclick="toggleAdvanced()">⚙️ Filtri avanzati</button>
       <button class="btn btn-danger btn-sm" id="btn-clear" onclick="clearFilters()" style="display:none">✕ Cancella filtri</button>
@@ -802,7 +804,7 @@ function applyFilters(bandi, f) {
   return bandi.filter(b => {
     const u  = urgency(b);
     const ar = u === 'scaduto';
-    if (ar && !showArchive) return false;
+    if (ar && !showArchive && f.stato !== 'scaduto') return false;
     if (f.q && !(b.nome + ' ' + b.ente).toLowerCase().includes(f.q)) return false;
     if (f.livello && b.livello !== f.livello) return false;
     if (f.cat    && b.categoriaPrincipale !== f.cat)  return false;

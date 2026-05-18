@@ -513,6 +513,16 @@
       border-radius: 0 0 var(--radius) var(--radius);
     }
 
+    /* ── BADGE SETTORE (nuove categorie Livello 2) ── */
+    .badge-turismo      { background: #ccfbf1; color: #0f766e; font-weight: 700; border: 1px solid #99f6e4; }
+    .badge-commercio    { background: #ffedd5; color: #9a3412; font-weight: 700; border: 1px solid #fed7aa; }
+    .badge-artigianato  { background: #fef9c3; color: #854d0e; font-weight: 700; border: 1px solid #fde68a; }
+    .badge-agroalim     { background: #dcfce7; color: #166534; font-weight: 700; border: 1px solid #86efac; }
+    .tag-turismo        { background: #ccfbf1 !important; color: #0f766e !important; border: 1px solid #99f6e4; font-weight: 600; }
+    .tag-commercio      { background: #ffedd5 !important; color: #9a3412 !important; border: 1px solid #fed7aa; font-weight: 600; }
+    .tag-artigianato    { background: #fef9c3 !important; color: #854d0e !important; border: 1px solid #fde68a; font-weight: 600; }
+    .tag-agroalim       { background: #dcfce7 !important; color: #166534 !important; border: 1px solid #86efac; font-weight: 600; }
+
     /* ── CARD CLICKABLE ── */
     .bando-card { cursor: pointer; }
 
@@ -566,7 +576,7 @@
     </div>
     <div class="stat-card">
       <span class="stat-value" id="stat-nuovi">—</span>
-      <div class="stat-label">Nuovi nel mese</div>
+      <div class="stat-label">Nuovi (ultimi 30gg)</div>
     </div>
   </div>
 </header>
@@ -589,16 +599,28 @@
       </select>
       <select id="filter-categoria">
         <option value="">📂 Tutte le categorie</option>
-        <option value="Digitalizzazione">💻 Digitalizzazione</option>
-        <option value="R&S">🔬 R&amp;S</option>
-        <option value="Internazionalizzazione">🌐 Internazionalizzazione</option>
-        <option value="Sostenibilità">🌿 Sostenibilità</option>
+        <optgroup label="─── Innovazione &amp; Crescita">
         <option value="Startup">🚀 Startup</option>
-        <option value="Lavoro">👷 Lavoro</option>
-        <option value="Formazione">📚 Formazione</option>
-        <option value="Infrastrutture">🏗️ Infrastrutture</option>
+        <option value="R&S">🔬 R&amp;S</option>
+        <option value="Digitalizzazione">💻 Digitalizzazione</option>
+        <option value="Internazionalizzazione">🌐 Internazionalizzazione</option>
+        </optgroup>
+        <optgroup label="─── Sostenibilità &amp; Impatto">
+        <option value="Sostenibilità">🌿 Sostenibilità</option>
         <option value="Benefit">🌱 Benefit &amp; ESG</option>
         <option value="Competizioni">🏆 Competizioni &amp; Premi</option>
+        </optgroup>
+        <optgroup label="─── Settori (Livello 2)">
+        <option value="Turismo">🏨 Turismo / HORECA</option>
+        <option value="Commercio">🛍️ Commercio</option>
+        <option value="Artigianato">🔨 Artigianato</option>
+        <option value="Agroalimentare">🌾 Agroalimentare</option>
+        </optgroup>
+        <optgroup label="─── Altro">
+        <option value="Formazione">📚 Formazione</option>
+        <option value="Infrastrutture">🏗️ Infrastrutture</option>
+        <option value="Lavoro">👷 Lavoro</option>
+        </optgroup>
       </select>
       <select id="filter-stato">
         <option value="">📋 Tutti gli stati</option>
@@ -752,7 +774,7 @@ const SAMPLE_DATA = [
   { id:"ER-2026-004", nome:"POR-FESR ER \u2014 Sostenibilit\u00e0 energetica imprese 2026", ente:"Regione Emilia-Romagna", livello:"Regionale ER", categoria:"Sostenibilit\u00e0", categoriaPrincipale:"Sostenibilit\u00e0", beneficiari:"PMI|Microimprese|Grandi imprese", tipoAgev:"Contributo a fondo perduto", regime:"GBER esenzione", ambito:"Solo ER", ateco:"35|43|46|47|62", dotazione:25000000, importoMax:300000, percContributo:40, dataApertura:"", scadenza:"", tipoScadenza:"Data fissa", stato:"In arrivo", priorita:"Media", link:"https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento", dataInserimento:"2026-04-10", inseritoDa:"ML", fileCSV:"Attivo" },
   { id:"EU-2026-004", nome:"EIC Transition 2026", ente:"Commissione UE \u2014 EISMEA", livello:"Europeo", categoria:"R&S", categoriaPrincipale:"R&S", beneficiari:"PMI|Startup|Enti del Terzo Settore", tipoAgev:"Contributo a fondo perduto", regime:"Non aiuto di Stato", ambito:"UE", ateco:"tutti", dotazione:100000000, importoMax:2500000, percContributo:70, dataApertura:"2026-01-15", scadenza:"2026-09-16", tipoScadenza:"Data fissa", stato:"Aperto", priorita:"Media", link:"https://eic.ec.europa.eu/eic-funding-opportunities/eic-transition_en", dataInserimento:"2026-05-12", inseritoDa:"BandiRadar-Bot", fileCSV:"Attivo" },
   { id:"IT-2026-007", nome:"Voucher Cloud & Cybersecurity", ente:"MIMIT \u2014 Invitalia", livello:"Nazionale", categoria:"Digitalizzazione", categoriaPrincipale:"Digitalizzazione", beneficiari:"PMI|Microimprese|Liberi professionisti", tipoAgev:"Voucher", regime:"De minimis", ambito:"Italia intera", ateco:"tutti", dotazione:150000000, importoMax:20000, percContributo:50, dataApertura:"", scadenza:"", tipoScadenza:"Sportello (fino a esaurimento fondi)", stato:"In arrivo", priorita:"Alta", link:"https://www.mimit.gov.it/it/incentivi/sostegno-alla-domanda-di-servizi-di-cloud-computing-e-cyber-security", dataInserimento:"2026-05-12", inseritoDa:"BandiRadar-Bot", fileCSV:"Attivo" },
-  { id:"ER-2026-005", nome:"Fondo EuReCa \u2014 Investimenti offerta turistica ricettiva ER", ente:"Regione Emilia-Romagna \u2014 Artigiancredito", livello:"Regionale ER", categoria:"Infrastrutture", categoriaPrincipale:"Infrastrutture", beneficiari:"PMI", tipoAgev:"Finanziamento agevolato", regime:"De minimis", ambito:"Solo ER", ateco:"55", dotazione:null, importoMax:150000, percContributo:null, dataApertura:"2026-02-16", scadenza:"2026-10-30", tipoScadenza:"Data fissa", stato:"Aperto", priorita:"Media", link:"https://imprese.regione.emilia-romagna.it/Finanziamenti/finanza/fondo-eureka-investimenti-per-la-qualificazione-il-potenziamento-e-la-diversificazione-dellofferta-turistica-ricettiva", dataInserimento:"2026-05-12", inseritoDa:"BandiRadar-Bot", fileCSV:"Attivo" },
+  { id:"ER-2026-005", nome:"Fondo EuReCa \u2014 Investimenti offerta turistica ricettiva ER", ente:"Regione Emilia-Romagna \u2014 Artigiancredito", livello:"Regionale ER", categoria:"Turismo|Infrastrutture", categoriaPrincipale:"Turismo", beneficiari:"PMI", tipoAgev:"Finanziamento agevolato", regime:"De minimis", ambito:"Solo ER", ateco:"55", dotazione:null, importoMax:150000, percContributo:null, dataApertura:"2026-02-16", scadenza:"2026-10-30", tipoScadenza:"Data fissa", stato:"Aperto", priorita:"Media", link:"https://imprese.regione.emilia-romagna.it/Finanziamenti/finanza/fondo-eureka-investimenti-per-la-qualificazione-il-potenziamento-e-la-diversificazione-dellofferta-turistica-ricettiva", dataInserimento:"2026-05-12", inseritoDa:"BandiRadar-Bot", fileCSV:"Attivo" },
   { id:"ER-2026-006", nome:"Fondo Multiscopo ER \u2014 Sezione Energia 2026", ente:"Regione Emilia-Romagna \u2014 Artigiancredito \u2014 BNL", livello:"Regionale ER", categoria:"Sostenibilit\u00e0", categoriaPrincipale:"Sostenibilit\u00e0", beneficiari:"PMI|Microimprese|Grandi imprese", tipoAgev:"Finanziamento agevolato", regime:"GBER esenzione", ambito:"Solo ER", ateco:"tutti", dotazione:20000000, importoMax:1000000, percContributo:null, dataApertura:"2026-04-15", scadenza:"2026-05-29", tipoScadenza:"Sportello (fino a esaurimento fondi)", stato:"Aperto", priorita:"Alta", link:"https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/2023/fondo-energia", dataInserimento:"2026-05-12", inseritoDa:"BandiRadar-Bot", fileCSV:"Attivo" },
   { id:"ER-2026-007", nome:"Fondo Multiscopo ER \u2014 Sezione Starter 2026", ente:"Regione Emilia-Romagna \u2014 Artigiancredito \u2014 BNL", livello:"Regionale ER", categoria:"Startup", categoriaPrincipale:"Startup", beneficiari:"Startup|Microimprese", tipoAgev:"Finanziamento agevolato", regime:"De minimis", ambito:"Solo ER", ateco:"tutti", dotazione:4000000, importoMax:500000, percContributo:null, dataApertura:"2026-04-15", scadenza:"2026-05-29", tipoScadenza:"Sportello (fino a esaurimento fondi)", stato:"Aperto", priorita:"Alta", link:"https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/2023/fondo-starter", dataInserimento:"2026-05-12", inseritoDa:"BandiRadar-Bot", fileCSV:"Attivo" },
   { id:"ER-2026-008", nome:"FESR ER \u2014 Contributi R&S mediante inserimento di nuovi talenti qualificati", ente:"Regione Emilia-Romagna \u2014 FESR 2021-2027", livello:"Regionale ER", categoria:"R&S", categoriaPrincipale:"R&S", beneficiari:"PMI|Grandi imprese|Microimprese", tipoAgev:"Contributo a fondo perduto", regime:"GBER esenzione", ambito:"Solo ER", ateco:"tutti", dotazione:4000000, importoMax:300000, percContributo:70, dataApertura:"2026-04-15", scadenza:"2026-05-18", tipoScadenza:"Data fissa", stato:"Aperto", priorita:"Alta", link:"https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/2026/avviso-per-la-concessione-di-contributi-a-favore-delle-imprese-per-progetti-di-ricerca-e-sviluppo-mediante-inserimento-di-nuovi-talenti", dataInserimento:"2026-05-12", inseritoDa:"BandiRadar-Bot", fileCSV:"Attivo" },
@@ -818,10 +840,11 @@ function formatEuro(n) {
 }
 
 function urgency(b) {
-  if (b.fileCSV === 'Archivio') return 'scaduto';
-  if (b.stato === 'In arrivo')  return 'arrivo';
-  if (b.stato === 'Sospeso')    return 'sospeso';
-  if (b.stato === 'Prorogato')  return 'prorogato';
+  if (b.fileCSV === 'Archivio')  return 'scaduto';
+  if (b.stato === 'In arrivo')   return 'arrivo';
+  if (b.stato === 'In apertura') return 'arrivo';  // sinonimo — stesso badge 🔜
+  if (b.stato === 'Sospeso')     return 'sospeso';
+  if (b.stato === 'Prorogato')   return 'prorogato';
   if (b.scadenza) {
     const d = parseDate(b.scadenza);
     if (d && d < TODAY)             return 'scaduto';
@@ -851,11 +874,20 @@ const LEVEL_BADGE = {
 const PRIORITY_CLASS = { Alta:'priority-alta', Media:'priority-media', Bassa:'priority-bassa' };
 
 function scadDisplay(b, u) {
-  if (b.tipoScadenza === 'Misura strutturale')               return { label:'Misura strutturale', cls:'' };
-  if (b.tipoScadenza === 'Anno fiscale')                     return { label:'Anno fiscale', cls:'' };
-  if (b.tipoScadenza === 'Sportello (fino a esaurimento fondi)') return { label:'Sportello aperto', cls:'' };
-  if (!b.scadenza && u === 'arrivo')                         return { label:'Data da definire', cls:'' };
-  if (!b.scadenza)                                           return { label:'—', cls:'' };
+  if (b.tipoScadenza === 'Misura strutturale') return { label:'Misura strutturale', cls:'' };
+  if (b.tipoScadenza === 'Anno fiscale')       return { label:'Anno fiscale', cls:'' };
+  // Sportello: mostra "Sportello aperto" SOLO se non ha scadenza imminente
+  // Se ha una data di chiusura e sta per scadere → mostra la data (priorità all'urgenza)
+  if (b.tipoScadenza === 'Sportello (fino a esaurimento fondi)') {
+    if (b.scadenza && (u === 'urgente' || u === 'presto')) {
+      const dd = diffDays(parseDate(b.scadenza));
+      const cls = u === 'urgente' ? 'urgente' : 'presto';
+      return { label: dd + ' giorni · ' + formatDate(b.scadenza) + ' (sportello)', cls };
+    }
+    return { label:'Sportello aperto', cls:'' };
+  }
+  if (!b.scadenza && u === 'arrivo') return { label:'Data da definire', cls:'' };
+  if (!b.scadenza)                   return { label:'—', cls:'' };
   const dd = diffDays(parseDate(b.scadenza));
   if (u === 'urgente') return { label: dd + ' giorni · ' + formatDate(b.scadenza), cls:'urgente' };
   if (u === 'presto')  return { label: dd + ' giorni · ' + formatDate(b.scadenza), cls:'presto'  };
@@ -875,6 +907,10 @@ function renderCard(b) {
   const extra = b.ambito !== 'UE' && b.ambito !== 'Italia intera' ? [b.ambito] : [];
   const isBenefit      = b.categoria.includes('Benefit') || b.beneficiari.includes('Impresa Benefit');
   const isCompetizione = b.categoria.includes('Competizioni');
+  const isTurismo      = b.categoriaPrincipale === 'Turismo';
+  const isCommercio    = b.categoriaPrincipale === 'Commercio';
+  const isArtigianato  = b.categoriaPrincipale === 'Artigianato';
+  const isAgroalim     = b.categoriaPrincipale === 'Agroalimentare';
   const isNew          = isNuovo(b);
 
   // Importo + percentuale su una riga
@@ -894,9 +930,13 @@ function renderCard(b) {
       <div class="card-badges">
         ${LEVEL_BADGE[b.livello] || ''}
         ${STATUS_BADGE[u] || ''}
-        ${isBenefit ? '<span class="badge badge-benefit">🌱 Benefit</span>' : ''}
+        ${isBenefit      ? '<span class="badge badge-benefit">🌱 Benefit</span>' : ''}
         ${isCompetizione ? '<span class="badge badge-competizione">🏆 Competizione</span>' : ''}
-        ${isNew ? '<span class="badge badge-nuovo">✨ Nuovo</span>' : ''}
+        ${isTurismo      ? '<span class="badge badge-turismo">🏨 Turismo/HORECA</span>' : ''}
+        ${isCommercio    ? '<span class="badge badge-commercio">🛍️ Commercio</span>' : ''}
+        ${isArtigianato  ? '<span class="badge badge-artigianato">🔨 Artigianato</span>' : ''}
+        ${isAgroalim     ? '<span class="badge badge-agroalim">🌾 Agroalimentare</span>' : ''}
+        ${isNew          ? '<span class="badge badge-nuovo">✨ Nuovo</span>' : ''}
       </div>
       <div class="card-title">${b.nome}</div>
       <div class="card-ente">${b.ente}</div>
@@ -925,9 +965,12 @@ function renderCard(b) {
 
   <div class="card-tags">
     ${[...cats, ...bens, ...extra].map(t => {
-      if (t === 'Benefit') return `<span class="tag tag-benefit">🌱 ${t}</span>`;
-      if (t === 'Competizioni') return `<span class="tag tag-competizione">🏆 ${t}</span>`;
-      if (t === 'Impresa Benefit') return `<span class="tag tag-benefit">🌱 ${t}</span>`;
+      if (t === 'Benefit' || t === 'Impresa Benefit') return `<span class="tag tag-benefit">🌱 ${t}</span>`;
+      if (t === 'Competizioni')  return `<span class="tag tag-competizione">🏆 ${t}</span>`;
+      if (t === 'Turismo')       return `<span class="tag tag-turismo">🏨 ${t}</span>`;
+      if (t === 'Commercio')     return `<span class="tag tag-commercio">🛍️ ${t}</span>`;
+      if (t === 'Artigianato')   return `<span class="tag tag-artigianato">🔨 ${t}</span>`;
+      if (t === 'Agroalimentare') return `<span class="tag tag-agroalim">🌾 ${t}</span>`;
       return `<span class="tag">${t}</span>`;
     }).join('')}
   </div>
@@ -1171,7 +1214,7 @@ function updateStats() {
 function updateURLHash(f) {
   const p = new URLSearchParams();
   const map = { q:'q', livello:'livello', cat:'cat', stato:'stato', ben:'ben',
-                agev:'agev', regime:'regime', ambito:'ambito', scad:'scad', pri:'pri' };
+                agev:'agev', regime:'regime', ambito:'ambito', scad:'scad', pri:'pri', sort:'sort' };
   for (const [k,v] of Object.entries(map)) if (f[k]) p.set(v, f[k]);
   history.replaceState(null, '', p.toString() ? '#' + p : location.pathname);
 }
@@ -1182,7 +1225,7 @@ function loadFromHash() {
   const map = {
     q:'search', livello:'filter-livello', cat:'filter-categoria', stato:'filter-stato',
     ben:'filter-beneficiari', agev:'filter-tipo-agev', regime:'filter-regime',
-    ambito:'filter-ambito', scad:'filter-tipo-scad', pri:'filter-priorita'
+    ambito:'filter-ambito', scad:'filter-tipo-scad', pri:'filter-priorita', sort:'sort-by'
   };
   for (const [k,id] of Object.entries(map)) if (p.has(k)) document.getElementById(id).value = p.get(k);
 }

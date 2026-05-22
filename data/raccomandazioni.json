@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-05-21T20:42:55.529617Z",
+  "aziende": [
+    {
+      "idAzienda": "az-1779394390646",
+      "generatedAt": "2026-05-21T20:42:55.529617Z",
+      "raccomandazioni": [
+        {
+          "id": "ER-2026-001",
+          "rilevanza": "molto_alta",
+          "motivazione": "PMI ER nel software: fino a €200k a fondo perduto per innovazione digitale, scad. 30/06",
+          "scadenza": "2026-06-30",
+          "importoMax": 200000
+        },
+        {
+          "id": "ER-2026-002",
+          "rilevanza": "molto_alta",
+          "motivazione": "70% a fondo perduto per formare nuove risorse: ideale per crescere il team in ER",
+          "importoMax": 50000
+        },
+        {
+          "id": "IT-2026-006",
+          "rilevanza": "alta",
+          "motivazione": "Detrazione automatica su attività R&S software già svolte — misura strutturale"
+        },
+        {
+          "id": "ER-2025-002",
+          "rilevanza": "alta",
+          "motivazione": "FESR ER: finanzia R&S e investimenti digitali per PMI tech, scad. 30/09",
+          "scadenza": "2026-09-30"
+        },
+        {
+          "id": "ER-2026-006",
+          "rilevanza": "alta",
+          "motivazione": "Impresa Benefit ER: finanziamento energia/circolare disponibile in ER — scad. 29/05",
+          "scadenza": "2026-05-29",
+          "importoMax": 1000000
+        },
+        {
+          "id": "IT-2026-016",
+          "rilevanza": "media",
+          "motivazione": "Maxi-deduzione 180% su acquisti beni digitali 4.0 — disponibile fino al 2028",
+          "scadenza": "2028-09-30"
+        },
+        {
+          "id": "IT-2026-001",
+          "rilevanza": "media",
+          "motivazione": "Finanziamento agevolato beni strumentali 4.0: rafforza infrastruttura tecnica",
+          "importoMax": 4000000
+        },
+        {
+          "id": "EU-2026-005",
+          "rilevanza": "media",
+          "motivazione": "75% rimborso registrazione marchio UE: ottimo per rafforzare il brand identity",
+          "scadenza": "2026-12-04"
+        },
+        {
+          "id": "IT-2026-019",
+          "rilevanza": "media",
+          "motivazione": "Impresa Benefit per eco-innovazione: alta visibilità per farsi conoscere, scad. 30/06",
+          "scadenza": "2026-06-30"
+        },
+        {
+          "id": "IT-2026-004",
+          "rilevanza": "media",
+          "motivazione": "Voucher 80% per brevettare innovazioni software — scadenza urgente 31/05",
+          "scadenza": "2026-05-31",
+          "importoMax": 8000
+        }
+      ]
+    }
+  ]
+}

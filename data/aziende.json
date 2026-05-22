@@ -1,0 +1,42 @@
+{
+  "exportedAt": "2026-05-21T20:13:36.653Z",
+  "aziende": [
+    {
+      "id": "az-1779394390646",
+      "nomeProfilo": "Fattor Comune",
+      "ragioneSociale": "Fattor Comune srl",
+      "piva": "1234565778",
+      "settore": "Innovazione, software, benefit",
+      "ateco": "",
+      "comune": "Rimini",
+      "regione": "Emilia Romagna",
+      "tipoAzienda": "PMI tradizionale",
+      "dimensione": "Microimpresa (< 10 add., < 2M €)",
+      "hasDipendenti": "No — solo titolari/soci",
+      "addetti": "12",
+      "fatturato": "400.000€",
+      "annoFondazione": "2017",
+      "formaSociale": "Srl",
+      "fasiCrescita": "Crescita accelerata",
+      "modelloBusiness": "B2B  B2C",
+      "prodottiServizi": "Gestiamo progetti, per aziende abbiamo solo dipendenti a pt iva.",
+      "clientiTarget": "PMI, Comuni, Scuole",
+      "mercati": "Italia 100%",
+      "puntiForza": "Gestione progetti complessi",
+      "sfide": "Vorremmo ingrandirci come struttura e farci conoscere",
+      "deMinimisResiduo": "",
+      "investimentiPrevisti": "",
+      "noteClaudeExtra": "",
+      "flagSpeciali": [
+        "PMI",
+        "Impresa Benefit"
+      ],
+      "obiettivi": [
+        "Crescita fatturato",
+        "Accesso al credito",
+        "Economia circolare"
+      ],
+      "updatedAt": "2026-05-21T20:13:10.647Z"
+    }
+  ]
+}

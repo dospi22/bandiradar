@@ -2037,19 +2037,32 @@ function renderRaccomandazioni(az) {
                       : (b ? scadDisplay(b, urgency(b)).label : '—');
         const impStr  = item.importoMax ? formatEuro(item.importoMax)
                       : (b ? formatEuro(b.importoMax) : '—');
-        // Se il bando non è nel bandiMap (rimosso dal CSV), mostra badge invece di crash silente
-        const clickable = b ? `onclick="openModal('${item.id}')" style="cursor:pointer"` : 'title="Bando non presente nel CSV corrente"';
-        html += `<div class="racc-item" ${clickable} style="${b ? '' : 'opacity:0.6'}">
+        // Se il bando non è nel bandiMap (ID inesistente nel CSV), mostra warning visivo prominente
+        const mancante = !b;
+        const clickable = b ? `onclick="openModal('${item.id}')" style="cursor:pointer"` : '';
+        const cardStyle = mancante
+          ? 'border:1.5px solid #f87171;background:#fef2f2;opacity:0.85;'
+          : '';
+        html += `<div class="racc-item" ${clickable} style="${cardStyle}">
           <div class="racc-item-top">
-            <div class="racc-item-nome">${escHtml(item.nome)}</div>
-            <span class="racc-badge ${relClass}">${relLabel}</span>
+            <div class="racc-item-nome">${escHtml(item.nome || item.id)}</div>
+            ${mancante
+              ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#fca5a5;color:#7f1d1d;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:0.3px">⚠ ID non nel CSV</span>`
+              : `<span class="racc-badge ${relClass}">${relLabel}</span>`
+            }
           </div>
-          <div class="racc-motivazione">"${escHtml(item.motivazione)}"</div>
-          <div class="racc-meta">
-            ${item.tipoAgev ? `<span class="racc-meta-chip">💰 ${escHtml(item.tipoAgev)}</span>` : ''}
-            ${impStr !== '—' ? `<span class="racc-meta-chip">📊 ${impStr}</span>` : ''}
-            ${scadStr !== '—' ? `<span class="racc-meta-chip">📅 ${scadStr}</span>` : ''}
-          </div>
+          ${mancante
+            ? `<div style="font-size:11px;color:#b91c1c;margin-bottom:4px;font-family:monospace">${escHtml(item.id)}</div>
+               <div style="font-size:11px;color:#7f1d1d;background:#fee2e2;border-radius:4px;padding:6px 8px;line-height:1.5">
+                 Questo ID non esiste nel file <strong>bandi.csv</strong>. Il bando potrebbe essere stato rimosso o l'ID potrebbe essere stato generato per errore. Riesegui l'abbinamento per aggiornare le raccomandazioni.
+               </div>`
+            : `<div class="racc-motivazione">"${escHtml(item.motivazione)}"</div>
+               <div class="racc-meta">
+                 ${item.tipoAgev ? `<span class="racc-meta-chip">💰 ${escHtml(item.tipoAgev)}</span>` : ''}
+                 ${impStr !== '—' ? `<span class="racc-meta-chip">📊 ${impStr}</span>` : ''}
+                 ${scadStr !== '—' ? `<span class="racc-meta-chip">📅 ${scadStr}</span>` : ''}
+               </div>`
+          }
         </div>`;
       });
     }

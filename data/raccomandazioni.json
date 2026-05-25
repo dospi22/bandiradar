@@ -1,99 +1,52 @@
 {
-  "generatedAt": "2026-05-25T07:40:19.305520",
+  "generatedAt": "2026-05-25T08:02:58Z",
   "aziende": [
     {
       "idAzienda": "az-1779394390646",
-      "nomeProfilo": "Fattor Comune",
+      "generatedAt": "2026-05-25T08:02:58Z",
       "raccomandazioni": [
         {
-          "id": "IT-2026-024",
-          "nome": "Premio Le donne di ora — Invitalia (imprenditoria femminile)",
+          "id": "ER-2026-001",
           "rilevanza": "molto_alta",
-          "motivazione": "Impresa Benefit flaggata, scadenza 31/05 — presentare subito",
-          "tipoAgev": "Premio",
-          "scadenza": "2026-05-31",
-          "importoMax": 0
+          "motivazione": "Microimpresa ER nel digitale: fino a €200K a fondo perduto. Scadenza 30/06.",
+          "scadenza": "2026-06-30",
+          "importoMax": 200000
         },
         {
           "id": "IT-2026-019",
-          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
           "rilevanza": "molto_alta",
-          "motivazione": "Impresa Benefit + obiettivo economia circolare: fit ideale",
-          "tipoAgev": "Premio",
-          "scadenza": "2026-06-30",
-          "importoMax": 0
+          "motivazione": "Impresa Benefit a Rimini: premio economia circolare a Ecomondo, visibilità.",
+          "scadenza": "2026-06-30"
         },
         {
-          "id": "ER-2026-001",
-          "nome": "POR-FESR ER — Digitalizzazione e innovazione PMI 2026",
-          "rilevanza": "alta",
-          "motivazione": "PMI software in ER, scadenza 30/06, investimenti digitali ammessi",
-          "tipoAgev": "Contributo a fondo perduto",
-          "scadenza": "2026-06-30",
-          "importoMax": 0
-        },
-        {
-          "id": "IT-2026-006",
-          "nome": "Credito d'imposta Ricerca Sviluppo e Innovazione",
-          "rilevanza": "alta",
-          "motivazione": "Attività software/innovazione, misura strutturale senza scadenza fissa",
-          "tipoAgev": "Credito d'imposta",
-          "scadenza": "",
-          "importoMax": 0
-        },
-        {
-          "id": "IT-2026-023",
-          "nome": "SIMEST — Misura Stati Uniti (internazionalizzazione USA)",
-          "rilevanza": "alta",
-          "motivazione": "Obiettivo crescita fatturato: espansione USA a condizioni agevolate",
-          "tipoAgev": "Finanziamento agevolato",
-          "scadenza": "",
-          "importoMax": 0
-        },
-        {
-          "id": "IT-2026-004",
-          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
-          "rilevanza": "alta",
-          "motivazione": "Microimpresa tech: brevettare innovazioni software a costi ridotti",
-          "tipoAgev": "Voucher",
-          "scadenza": "",
-          "importoMax": 4000
+          "id": "IT-2026-001",
+          "rilevanza": "molto_alta",
+          "motivazione": "Finanziamento agevolato beni strumentali 4.0 per crescita operativa PMI.",
+          "importoMax": 4000000
         },
         {
           "id": "ER-2025-002",
-          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
           "rilevanza": "alta",
-          "motivazione": "PMI ER con R&S tech, scadenza settembre 2026, contributo significativo",
-          "tipoAgev": "Contributo a fondo perduto",
-          "scadenza": "2026-09-30",
-          "importoMax": 0
+          "motivazione": "Investimenti R&S e digitale per PMI ER: fondo perduto fino a settembre.",
+          "scadenza": "2026-09-30"
+        },
+        {
+          "id": "IT-2026-025",
+          "rilevanza": "alta",
+          "motivazione": "Finanzia piani formativi + assunzioni TI: ideale per crescere la struttura.",
+          "scadenza": "2026-12-31",
+          "importoMax": 150000
+        },
+        {
+          "id": "IT-2026-006",
+          "rilevanza": "alta",
+          "motivazione": "Credito imposta 10-20% su sviluppo software e innovazione tecnologica."
         },
         {
           "id": "EU-2026-005",
-          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
-          "rilevanza": "media",
-          "motivazione": "IP protection EU: Voucher 3 (brevetti) ancora disponibile a fine 2026",
-          "tipoAgev": "Voucher",
-          "scadenza": "2026-12-04",
-          "importoMax": 2500
-        },
-        {
-          "id": "IT-2026-008",
-          "nome": "Bando ISI INAIL 2025/2026 — Sicurezza sul lavoro",
-          "rilevanza": "media",
-          "motivazione": "12 dipendenti: URGENTE compilazione entro 28/05 per click day",
-          "tipoAgev": "Contributo a fondo perduto",
-          "scadenza": "2026-05-28",
-          "importoMax": 130000
-        },
-        {
-          "id": "EU-2026-001",
-          "nome": "EIC Accelerator — Fase Open",
-          "rilevanza": "media",
-          "motivazione": "PMI software benefit: valutare se componente deep-tech giustifica domanda",
-          "tipoAgev": "Contributo a fondo perduto",
-          "scadenza": "2026-11-04",
-          "importoMax": 2500000
+          "rilevanza": "alta",
+          "motivazione": "Voucher 75% per registrare marchio UE: strategico per farsi conoscere.",
+          "scadenza": "2026-12-04"
         }
       ]
     }

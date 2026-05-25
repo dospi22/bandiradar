@@ -1,71 +1,99 @@
 {
-  "generatedAt": "2026-05-21T20:42:55.529617Z",
+  "generatedAt": "2026-05-25T07:40:19.305520",
   "aziende": [
     {
       "idAzienda": "az-1779394390646",
-      "generatedAt": "2026-05-21T20:42:55.529617Z",
+      "nomeProfilo": "Fattor Comune",
       "raccomandazioni": [
         {
-          "id": "ER-2026-001",
+          "id": "IT-2026-024",
+          "nome": "Premio Le donne di ora — Invitalia (imprenditoria femminile)",
           "rilevanza": "molto_alta",
-          "motivazione": "PMI ER nel software: fino a €200k a fondo perduto per innovazione digitale, scad. 30/06",
-          "scadenza": "2026-06-30",
-          "importoMax": 200000
-        },
-        {
-          "id": "ER-2026-002",
-          "rilevanza": "molto_alta",
-          "motivazione": "70% a fondo perduto per formare nuove risorse: ideale per crescere il team in ER",
-          "importoMax": 50000
-        },
-        {
-          "id": "IT-2026-006",
-          "rilevanza": "alta",
-          "motivazione": "Detrazione automatica su attività R&S software già svolte — misura strutturale"
-        },
-        {
-          "id": "ER-2025-002",
-          "rilevanza": "alta",
-          "motivazione": "FESR ER: finanzia R&S e investimenti digitali per PMI tech, scad. 30/09",
-          "scadenza": "2026-09-30"
-        },
-        {
-          "id": "ER-2026-006",
-          "rilevanza": "alta",
-          "motivazione": "Impresa Benefit ER: finanziamento energia/circolare disponibile in ER — scad. 29/05",
-          "scadenza": "2026-05-29",
-          "importoMax": 1000000
-        },
-        {
-          "id": "IT-2026-016",
-          "rilevanza": "media",
-          "motivazione": "Maxi-deduzione 180% su acquisti beni digitali 4.0 — disponibile fino al 2028",
-          "scadenza": "2028-09-30"
-        },
-        {
-          "id": "IT-2026-001",
-          "rilevanza": "media",
-          "motivazione": "Finanziamento agevolato beni strumentali 4.0: rafforza infrastruttura tecnica",
-          "importoMax": 4000000
-        },
-        {
-          "id": "EU-2026-005",
-          "rilevanza": "media",
-          "motivazione": "75% rimborso registrazione marchio UE: ottimo per rafforzare il brand identity",
-          "scadenza": "2026-12-04"
+          "motivazione": "Impresa Benefit flaggata, scadenza 31/05 — presentare subito",
+          "tipoAgev": "Premio",
+          "scadenza": "2026-05-31",
+          "importoMax": 0
         },
         {
           "id": "IT-2026-019",
-          "rilevanza": "media",
-          "motivazione": "Impresa Benefit per eco-innovazione: alta visibilità per farsi conoscere, scad. 30/06",
-          "scadenza": "2026-06-30"
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "molto_alta",
+          "motivazione": "Impresa Benefit + obiettivo economia circolare: fit ideale",
+          "tipoAgev": "Premio",
+          "scadenza": "2026-06-30",
+          "importoMax": 0
+        },
+        {
+          "id": "ER-2026-001",
+          "nome": "POR-FESR ER — Digitalizzazione e innovazione PMI 2026",
+          "rilevanza": "alta",
+          "motivazione": "PMI software in ER, scadenza 30/06, investimenti digitali ammessi",
+          "tipoAgev": "Contributo a fondo perduto",
+          "scadenza": "2026-06-30",
+          "importoMax": 0
+        },
+        {
+          "id": "IT-2026-006",
+          "nome": "Credito d'imposta Ricerca Sviluppo e Innovazione",
+          "rilevanza": "alta",
+          "motivazione": "Attività software/innovazione, misura strutturale senza scadenza fissa",
+          "tipoAgev": "Credito d'imposta",
+          "scadenza": "",
+          "importoMax": 0
+        },
+        {
+          "id": "IT-2026-023",
+          "nome": "SIMEST — Misura Stati Uniti (internazionalizzazione USA)",
+          "rilevanza": "alta",
+          "motivazione": "Obiettivo crescita fatturato: espansione USA a condizioni agevolate",
+          "tipoAgev": "Finanziamento agevolato",
+          "scadenza": "",
+          "importoMax": 0
         },
         {
           "id": "IT-2026-004",
+          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
+          "rilevanza": "alta",
+          "motivazione": "Microimpresa tech: brevettare innovazioni software a costi ridotti",
+          "tipoAgev": "Voucher",
+          "scadenza": "",
+          "importoMax": 4000
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "alta",
+          "motivazione": "PMI ER con R&S tech, scadenza settembre 2026, contributo significativo",
+          "tipoAgev": "Contributo a fondo perduto",
+          "scadenza": "2026-09-30",
+          "importoMax": 0
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
           "rilevanza": "media",
-          "motivazione": "Voucher 80% per brevettare innovazioni software — scadenza urgente 31/05",
-          "scadenza": "2026-05-31",
-          "importoMax": 8000
+          "motivazione": "IP protection EU: Voucher 3 (brevetti) ancora disponibile a fine 2026",
+          "tipoAgev": "Voucher",
+          "scadenza": "2026-12-04",
+          "importoMax": 2500
+        },
+        {
+          "id": "IT-2026-008",
+          "nome": "Bando ISI INAIL 2025/2026 — Sicurezza sul lavoro",
+          "rilevanza": "media",
+          "motivazione": "12 dipendenti: URGENTE compilazione entro 28/05 per click day",
+          "tipoAgev": "Contributo a fondo perduto",
+          "scadenza": "2026-05-28",
+          "importoMax": 130000
+        },
+        {
+          "id": "EU-2026-001",
+          "nome": "EIC Accelerator — Fase Open",
+          "rilevanza": "media",
+          "motivazione": "PMI software benefit: valutare se componente deep-tech giustifica domanda",
+          "tipoAgev": "Contributo a fondo perduto",
+          "scadenza": "2026-11-04",
+          "importoMax": 2500000
         }
       ]
     }

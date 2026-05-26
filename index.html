@@ -344,6 +344,31 @@
     }
     .card-link:hover { color: var(--blue-dark); text-decoration: underline; }
 
+    /* ── LINK STATUS BADGES ── */
+    .card-link.link-rotto {
+      color: var(--red);
+      cursor: not-allowed;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .card-link.link-warning {
+      color: var(--orange);
+    }
+    .card-link.link-warning:hover { color: #b45309; }
+
+    .badge-link-rotto {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--red);
+      background: var(--red-light);
+      border: 1px solid #fca5a5;
+      border-radius: 4px;
+      padding: 2px 7px;
+    }
+
     .card-id { font-size: 11px; color: #94a3b8; font-family: monospace; }
 
     /* ── EMPTY STATE ── */
@@ -1212,9 +1237,15 @@ function parseNumero(s) {
 // ─────────────────────────────────────────────
 let allBandi    = [];
 let bandiMap    = {};
+let linkStatus  = {};   // caricato da data/link_status.json
 let showArchive = false;
 let advOpen     = false;
 let viewMode    = 'grid';
+
+// Helper link status
+function getLS(id)         { return linkStatus[id] || null; }
+function isLinkRotto(id)   { const s = getLS(id); return s && (s.status === '404' || s.status === 'ERRORE'); }
+function isLinkWarning(id) { const s = getLS(id); return s && (s.status === 'REDIRECT' || s.status === 'VUOTO'); }
 
 function isNuovo(b) {
   const d = parseDate(b.dataInserimento);
@@ -1381,7 +1412,12 @@ function renderCard(b) {
   </div>
 
   <div class="card-footer">
-    <a class="card-link" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 Pagina ufficiale →</a>
+    ${isLinkRotto(b.id)
+      ? `<span class="card-link link-rotto" title="Link non raggiungibile — aggiornalo nel Google Sheet">⚠️ Link non funzionante</span>`
+      : isLinkWarning(b.id)
+        ? `<a class="card-link link-warning" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Link con redirect — verifica che punti ancora al bando corretto">⚠️ Verifica link →</a>`
+        : `<a class="card-link" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 Pagina ufficiale →</a>`
+    }
     <span class="card-id">${b.id}</span>
   </div>
 </div>`;
@@ -1425,7 +1461,12 @@ function renderListItem(b) {
       <div class="list-meta-value">${importoStr}${percStr}</div>
     </div>
   </div>
-  <a class="card-link" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex-shrink:0">→</a>
+  ${isLinkRotto(b.id)
+    ? `<span class="badge-link-rotto" title="Link non raggiungibile — aggiornalo nel Google Sheet" style="flex-shrink:0">⚠️ Link rotto</span>`
+    : isLinkWarning(b.id)
+      ? `<a class="card-link link-warning" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex-shrink:0" title="Redirect rilevato — verifica il link">⚠️</a>`
+      : `<a class="card-link" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex-shrink:0">→</a>`
+  }
 </div>`;
 }
 
@@ -1762,7 +1803,20 @@ function openModal(id) {
   </div>
 </div>
 <div class="modal-footer">
-  <a class="btn btn-primary" href="${b.link}" target="_blank" rel="noopener">🔗 Vai alla pagina ufficiale →</a>
+  ${isLinkRotto(b.id)
+    ? `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+         <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-size:13px;font-weight:600">
+           ⚠️ Link non funzionante — aggiornalo nel Google Sheet
+         </span>
+         <a class="btn" href="${b.link}" target="_blank" rel="noopener" style="font-size:12px;color:var(--text-muted)">Prova comunque →</a>
+       </div>`
+    : isLinkWarning(b.id)
+      ? `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+           <a class="btn btn-primary" href="${b.link}" target="_blank" rel="noopener">🔗 Vai alla pagina ufficiale →</a>
+           <span style="font-size:12px;color:var(--orange)">⚠️ Redirect rilevato — verifica che punti ancora al bando</span>
+         </div>`
+      : `<a class="btn btn-primary" href="${b.link}" target="_blank" rel="noopener">🔗 Vai alla pagina ufficiale →</a>`
+  }
   <button class="btn" onclick="closeModal()">Chiudi</button>
 </div>`;
 
@@ -2278,6 +2332,19 @@ async function loadData() {
   }
 }
 
+async function loadLinkStatus() {
+  try {
+    const resp = await fetch('data/link_status.json', { cache: 'no-cache' });
+    if (!resp.ok) return;  // file non ancora generato: nessun avviso
+    const data = await resp.json();
+    linkStatus = data.bandi || {};
+    // Ri-renderizza se i bandi sono gi\u00e0 caricati, per mostrare i badge
+    if (allBandi.length > 0) render();
+  } catch (e) {
+    // link_status.json non presente: nessun problema, i badge semplicemente non appaiono
+  }
+}
+
 // ─────────────────────────────────────────────
 // BOOTSTRAP
 // ─────────────────────────────────────────────
@@ -2297,6 +2364,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadAziende();
   loadRaccomandazioni();
   loadData();
+  loadLinkStatus();
 });
 </script>
 </body>

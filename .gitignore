@@ -1,0 +1,37 @@
+# ─────────────────────────────────────────────────────────────────
+# BandiRadar — .gitignore
+# ─────────────────────────────────────────────────────────────────
+
+# Dati identificativi dei clienti — NON committare MAI per ragioni GDPR
+# Vedi data/aziende.json per lo schema pubblico anonimizzato
+data/dati_clienti_privati.json
+
+# Secrets locali (mai committarli)
+.bandiradar_secrets
+*.env
+*.env.local
+
+# Backup automatici
+_backup_locale/
+data/*.bak
+data/*_backup_*.csv
+data/*_backup_prefix_*.csv
+*.rotto-*.bak
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cache Python (per gli script in scripts/)
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/

@@ -3,7 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BandiRadar — Monitoraggio Bandi e Agevolazioni</title>
+  <title>BandiRadar — Monitoraggio Bandi e Agevolazioni per PMI</title>
+  <meta name="description" content="Sistema di monitoraggio bandi, incentivi e agevolazioni per PMI italiane. Focus Emilia-Romagna, nazionale ed europeo. Aggiornato quotidianamente.">
+
+  <!-- Open Graph / WhatsApp / Telegram / Slack preview -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="BandiRadar — Monitoraggio Bandi e Agevolazioni">
+  <meta property="og:description" content="Dashboard bandi UE, nazionali e regionali ER per PMI. Aggiornata ogni notte.">
+  <meta property="og:site_name"   content="BandiRadar">
+  <meta property="og:locale"      content="it_IT">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="BandiRadar — Monitoraggio Bandi e Agevolazioni">
+  <meta name="twitter:description" content="Dashboard bandi UE, nazionali e regionali ER per PMI.">
+
+  <!-- Favicon inline (radar emoji) -->
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📡&lt;/text&gt;&lt;/svg&gt;">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -716,6 +733,39 @@
     .check-item:hover { background: var(--gray-light); }
     .check-item.checked { background: var(--blue-light); border-color: var(--blue); color: var(--blue); font-weight: 600; }
     .check-item input[type=checkbox] { accent-color: var(--blue); cursor: pointer; flex-shrink: 0; }
+
+    /* ══════════ FRESHNESS BADGE (Fase 1.2) ══════════ */
+    .freshness {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 10px; border-radius: 14px;
+      font-size: 11px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.12);
+      color: white;
+    }
+    .freshness:hover { background: rgba(255,255,255,0.22); }
+    .freshness .fresh-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.18);
+    }
+    .freshness.ok    .fresh-dot { background: #22c55e; }
+    .freshness.warn  .fresh-dot { background: #f59e0b; }
+    .freshness.fail  .fresh-dot { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.3); }
+    .freshness.fail  { background: rgba(239,68,68,0.25); border-color: rgba(239,68,68,0.6); }
+    .freshness-sub   { opacity: 0.85; font-weight: 500; }
+
+    /* Modal dettaglio freschezza */
+    .fresh-modal-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .fresh-modal-row:last-child { border-bottom: none; }
+    .fresh-modal-row .label { color: var(--text-muted); }
+    .fresh-modal-row .value { font-weight: 600; color: var(--text); }
+    .fresh-modal-row .value.ok   { color: var(--green); }
+    .fresh-modal-row .value.warn { color: var(--orange); }
+    .fresh-modal-row .value.fail { color: var(--red); }
   </style>
 </head>
 <body>
@@ -732,7 +782,10 @@
     </div>
     <div class="header-meta">
       <div>📍 Rimini, Emilia-Romagna</div>
-      <div id="last-update">Aggiornato: —</div>
+      <div id="freshness" class="freshness" onclick="openFreshnessModal()" title="Clicca per il dettaglio stato dati">
+        <span class="fresh-dot"></span>
+        <span><span id="fresh-label">Caricamento…</span> <span class="freshness-sub" id="fresh-sub"></span></span>
+      </div>
     </div>
   </div>
   <div class="stats">
@@ -939,6 +992,27 @@
   </div>
 
 </main>
+
+<!-- ══════════════ FOOTER (Fase 1.6) ══════════════ -->
+<footer style="max-width:1440px;margin:0 auto;padding:28px;border-top:1px solid var(--border);background:var(--card);color:var(--text-muted);font-size:12px;line-height:1.65">
+  <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start">
+    <div style="flex:1;min-width:260px">
+      <div style="font-weight:700;color:var(--text);font-size:13px;margin-bottom:6px">📡 BandiRadar</div>
+      <div>Monitoraggio bandi e agevolazioni per PMI italiane. Dati aggiornati ogni notte da fonti pubbliche (Google Sheet, portali ufficiali enti erogatori).</div>
+    </div>
+    <div style="flex:1;min-width:260px">
+      <div style="font-weight:700;color:var(--text);font-size:13px;margin-bottom:6px">⚖️ Avviso importante</div>
+      <div>I dati riportati sono <strong>indicativi</strong> e a scopo informativo. Prima di presentare qualsiasi domanda, verifica sempre la versione ufficiale del bando sul sito dell'ente erogatore tramite il link "Vai al bando ufficiale". BandiRadar non garantisce esattezza, completezza o aggiornamento in tempo reale dei dati.</div>
+    </div>
+    <div style="flex:0 0 auto;min-width:180px">
+      <div style="font-weight:700;color:var(--text);font-size:13px;margin-bottom:6px">🛠️ Sistema</div>
+      <div>Sistema gestito da Alex<br>Consulenza di finanza agevolata</div>
+    </div>
+  </div>
+  <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);text-align:center;font-size:11px;opacity:0.8">
+    © BandiRadar · Aggiornato automaticamente · Nessun dato personale viene raccolto da chi consulta la dashboard
+  </div>
+</footer>
 
 <!-- ══════════════ MODAL BANDO ══════════════ -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
@@ -1648,8 +1722,7 @@ function updateStats() {
   document.getElementById('stat-scadenza').textContent  = urgenti.length;
   document.getElementById('stat-dotazione').textContent = formatEuro(dotaz);
   document.getElementById('stat-nuovi').textContent     = nuovi.length;
-  document.getElementById('last-update').textContent    =
-    'Aggiornato: ' + TODAY.toLocaleDateString('it-IT', {day:'2-digit',month:'long',year:'numeric'});
+  // Il badge "Aggiornato" è gestito da loadLastSync() — usa data reale del sync, non TODAY
 }
 
 // ─────────────────────────────────────────────
@@ -2301,7 +2374,7 @@ function exportAziende() {
   const btn = document.querySelector('.export-strip .btn-primary');
   if (btn) {
     const orig = btn.textContent;
-    btn.textContent = '\u2705 Scaricato!';
+    btn.textContent = '✅ Scaricato!';
     btn.disabled = true;
     setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2500);
   }
@@ -2327,9 +2400,169 @@ async function loadData() {
     const result = Papa.parse(text, { header: true, skipEmptyLines: true });
     init(result.data.map(csvRowToBando));
   } catch (e) {
-    console.info('\ud83d\udccb Uso dati campione (CSV non trovato in locale)');
+    console.info('📋 Uso dati campione (CSV non trovato in locale)');
     init(SAMPLE_DATA);
   }
+}
+
+// ─────────────────────────────────────────────
+// FRESHNESS DATA (Fase 1.2)
+// Legge data/last_sync.json (Fase 1.1) con fallback al vecchio last_sync.txt
+// e calcola: verde se <24h, giallo 24-36h, rosso >36h o errori
+// ─────────────────────────────────────────────
+let lastSyncInfo = null;
+
+async function loadLastSync() {
+  // Tenta JSON arricchito (formato Fase 1)
+  try {
+    const r = await fetch('data/last_sync.json', { cache: 'no-cache' });
+    if (r.ok) {
+      lastSyncInfo = await r.json();
+      renderFreshness();
+      return;
+    }
+  } catch (e) { /* prova fallback */ }
+
+  // Fallback a last_sync.txt (formato vecchio)
+  try {
+    const r = await fetch('data/last_sync.txt', { cache: 'no-cache' });
+    if (r.ok) {
+      const txt = await r.text();
+      // formato: "2026-05-25 — N attivi, M archivio"
+      const m = txt.match(/^(\d{4}-\d{2}-\d{2})/);
+      if (m) {
+        lastSyncInfo = { data: m[1], legacy: true };
+        renderFreshness();
+        return;
+      }
+    }
+  } catch (e) { /* niente */ }
+
+  // Nessuna info disponibile
+  lastSyncInfo = { error: 'no_data' };
+  renderFreshness();
+}
+
+function renderFreshness() {
+  const el     = document.getElementById('freshness');
+  const labelE = document.getElementById('fresh-label');
+  const subE   = document.getElementById('fresh-sub');
+  if (!el || !labelE) return;
+
+  if (!lastSyncInfo || lastSyncInfo.error) {
+    el.className = 'freshness fail';
+    labelE.textContent = 'Dati non disponibili';
+    subE.textContent   = '';
+    return;
+  }
+
+  // Calcolo età in ore dalla data del sync
+  const syncDate = new Date(lastSyncInfo.timestamp || (lastSyncInfo.data + 'T01:00:00Z'));
+  const ageHours = (Date.now() - syncDate.getTime()) / 3600000;
+
+  let level = 'ok';
+  if (ageHours > 36) level = 'fail';
+  else if (ageHours > 24) level = 'warn';
+
+  // Link KO bumpa a warn (se non già fail)
+  if (level === 'ok' && (lastSyncInfo.link_ko || 0) > 0) level = 'warn';
+
+  el.className = 'freshness ' + level;
+
+  // Label umana
+  const fmt = (d) => d.toLocaleDateString('it-IT', {day:'2-digit', month:'short'});
+  let label;
+  if (ageHours < 1)       label = 'Aggiornato adesso';
+  else if (ageHours < 24) label = `Aggiornato oggi`;
+  else if (ageHours < 48) label = `Aggiornato ieri`;
+  else                    label = `Aggiornato il ${fmt(syncDate)}`;
+  labelE.textContent = label;
+
+  // Sub-label con dettaglio link
+  const lt = lastSyncInfo.link_totali || 0;
+  const lo = lastSyncInfo.link_ok || 0;
+  const lk = lastSyncInfo.link_ko || 0;
+  if (lt > 0) {
+    subE.textContent = `· ${lo}/${lt} link OK${lk > 0 ? ' · ' + lk + ' da ricontrollare' : ''}`;
+  } else {
+    subE.textContent = '';
+  }
+}
+
+function openFreshnessModal() {
+  if (!lastSyncInfo) return;
+
+  const s = lastSyncInfo;
+  const syncDate = s.timestamp ? new Date(s.timestamp) : (s.data ? new Date(s.data + 'T01:00:00Z') : null);
+  const ageHours = syncDate ? (Date.now() - syncDate.getTime()) / 3600000 : null;
+
+  let healthLabel, healthClass;
+  if (s.error)            { healthLabel = 'Dati non disponibili'; healthClass = 'fail'; }
+  else if (!ageHours)     { healthLabel = 'Indeterminato';        healthClass = 'warn'; }
+  else if (ageHours > 36) { healthLabel = 'Sync in ritardo';      healthClass = 'fail'; }
+  else if (ageHours > 24) { healthLabel = 'Attenzione';           healthClass = 'warn'; }
+  else if ((s.link_ko||0) > 0) { healthLabel = 'OK con avvisi';   healthClass = 'warn'; }
+  else                    { healthLabel = 'Tutto OK';             healthClass = 'ok';   }
+
+  const ageStr = ageHours == null ? '—'
+                 : ageHours < 1    ? 'pochi minuti fa'
+                 : ageHours < 48   ? `${Math.floor(ageHours)} ore fa`
+                 : `${Math.floor(ageHours/24)} giorni fa`;
+
+  const rows = [
+    ['Stato generale',   healthLabel,                            healthClass],
+    ['Ultimo sync',      syncDate ? syncDate.toLocaleString('it-IT') : '—', ''],
+    ['Quanto fa',        ageStr,                                 ''],
+    ['Bandi attivi',     s.attivi != null ? s.attivi : '—',      ''],
+    ['Bandi in archivio',s.archivio != null ? s.archivio : '—',  ''],
+    ['Auto-archiviati stanotte', s.auto_archiviati || 0,         ''],
+    ['Warning validazione',      s.warning_count || 0,           (s.warning_count||0) > 0 ? 'warn' : 'ok'],
+    ['Link verificati OK', s.link_totali ? `${s.link_ok}/${s.link_totali}` : '—',  ''],
+    ['Link da ricontrollare', s.link_ko || 0,                    (s.link_ko||0) > 0 ? 'warn' : 'ok'],
+  ];
+
+  if (s.aggiunti != null || s.modificati != null || s.archiviati_in_diff != null) {
+    rows.push(['Cambi vs ieri (diff)',
+               `+${s.aggiunti||0} aggiunti · ${s.modificati||0} modificati · ${s.archiviati_in_diff||0} archiviati`,
+               '']);
+  }
+
+  if (s.legacy) {
+    rows.push(['Nota', 'Dati in formato legacy. Il prossimo sync notturno aggiornerà al formato arricchito.', 'warn']);
+  }
+
+  const html = `
+    <div class="modal-overlay open" id="fresh-modal-overlay" onclick="if(event.target===this)closeFreshnessModal()">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:600">Stato dati</div>
+            <div style="font-size:18px;font-weight:700;margin-top:4px">Sincronizzazione e qualità dati</div>
+          </div>
+          <button class="modal-close" onclick="closeFreshnessModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          ${rows.map(([l,v,c]) => `
+            <div class="fresh-modal-row">
+              <span class="label">${l}</span>
+              <span class="value ${c}">${v}</span>
+            </div>
+          `).join('')}
+          <div style="margin-top:18px;padding:12px;background:#f8fafc;border-radius:6px;font-size:12px;color:var(--text-muted);line-height:1.5">
+            Il sync notturno gira ogni notte alle 02:00. Se vedi questo badge in rosso per più di 36h, controlla le email di alert o lancia il workflow manualmente da GitHub Actions.
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  // rimuovi eventuali aperti, poi appendi
+  closeFreshnessModal();
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
+function closeFreshnessModal() {
+  const m = document.getElementById('fresh-modal-overlay');
+  if (m) m.remove();
 }
 
 async function loadLinkStatus() {
@@ -2338,7 +2571,7 @@ async function loadLinkStatus() {
     if (!resp.ok) return;  // file non ancora generato: nessun avviso
     const data = await resp.json();
     linkStatus = data.bandi || {};
-    // Ri-renderizza se i bandi sono gi\u00e0 caricati, per mostrare i badge
+    // Ri-renderizza se i bandi sono già caricati, per mostrare i badge
     if (allBandi.length > 0) render();
   } catch (e) {
     // link_status.json non presente: nessun problema, i badge semplicemente non appaiono
@@ -2365,6 +2598,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadRaccomandazioni();
   loadData();
   loadLinkStatus();
+  loadLastSync();   // Fase 1.2 — indicatore freschezza dati
 });
 </script>
 </body>

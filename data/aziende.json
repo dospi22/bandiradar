@@ -1,14 +1,14 @@
 {
-  "exportedAt": "2026-05-21T20:13:36.653Z",
+  "_schema": "Versione 2 — Anonimizzata. Contiene SOLO dati non identificativi che possono finire su GitHub pubblico. I dati identificativi (ragione sociale, P.IVA, comune, contatti) sono in dati_clienti_privati.json, NON committato.",
+  "_codiceConvenzione": "Codice mnemonico formato: 2 lettere ragione sociale + anno fondazione + sigla provincia. Es: FC-2017-RN = Fattor Comune, 2017, Rimini.",
+  "exportedAt": "2026-05-27T14:00:00.000Z",
   "aziende": [
     {
       "id": "az-1779394390646",
-      "nomeProfilo": "Fattor Comune",
-      "ragioneSociale": "Fattor Comune srl",
-      "piva": "1234565778",
+      "codice": "FC-2017-RN",
       "settore": "Innovazione, software, benefit",
       "ateco": "",
-      "comune": "Rimini",
+      "provincia": "RN",
       "regione": "Emilia Romagna",
       "tipoAzienda": "PMI tradizionale",
       "dimensione": "Microimpresa (< 10 add., < 2M €)",
@@ -19,14 +19,12 @@
       "formaSociale": "Srl",
       "fasiCrescita": "Crescita accelerata",
       "modelloBusiness": "B2B  B2C",
-      "prodottiServizi": "Gestiamo progetti, per aziende abbiamo solo dipendenti a pt iva.",
       "clientiTarget": "PMI, Comuni, Scuole",
       "mercati": "Italia 100%",
       "puntiForza": "Gestione progetti complessi",
       "sfide": "Vorremmo ingrandirci come struttura e farci conoscere",
       "deMinimisResiduo": "",
       "investimentiPrevisti": "",
-      "noteClaudeExtra": "",
       "flagSpeciali": [
         "PMI",
         "Impresa Benefit"

@@ -1014,6 +1014,478 @@
   </div>
 </footer>
 
+
+<!-- ══════════════ CLIENTI RISERVATI (Fase 2) ══════════════ -->
+<style>
+  /* Banner stato dati riservati */
+  .privacy-banner {
+    background: #fef9c3; color: #713f12;
+    border: 1px solid #fde047; border-left: 4px solid #d97706;
+    padding: 8px 14px; border-radius: 6px;
+    font-size: 12px; display: none;
+    margin: 12px 28px 0 28px;
+    align-items: center; gap: 10px;
+  }
+  .privacy-banner.attivo {
+    display: flex;
+    background: #dcfce7; color: #14532d;
+    border-color: #86efac; border-left-color: #15803d;
+  }
+  .privacy-banner-icon { font-size: 16px; }
+  .privacy-banner-text { flex: 1; }
+  .privacy-banner-actions { display: flex; gap: 6px; }
+  .privacy-banner .btn { padding: 4px 10px; font-size: 11px; background: white; border: 1px solid currentColor; color: inherit; cursor: pointer; border-radius: 4px; font-weight: 600; }
+  .privacy-banner .btn:hover { background: rgba(0,0,0,0.04); }
+
+  /* Pulsante header */
+  .btn-privacy-header {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px; border-radius: 14px;
+    font-size: 11px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.12); color: white;
+    margin-left: 8px;
+  }
+  .btn-privacy-header:hover { background: rgba(255,255,255,0.22); }
+  .btn-privacy-header.attivo {
+    background: rgba(34,197,94,0.28);
+    border-color: rgba(34,197,94,0.6);
+  }
+
+  /* Modal Gestione clienti */
+  .gc-modal-body { padding: 8px 0; }
+  .gc-cliente-row {
+    display: grid; grid-template-columns: 110px 1fr auto;
+    gap: 10px; align-items: center;
+    padding: 10px 12px; border: 1px solid var(--border);
+    border-radius: 6px; margin-bottom: 6px; background: #f8fafc;
+  }
+  .gc-cliente-codice { font-family: monospace; font-size: 12px; font-weight: 700; color: var(--blue); }
+  .gc-cliente-nome { font-size: 13px; font-weight: 600; }
+  .gc-cliente-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .gc-cliente-actions { display: flex; gap: 4px; }
+  .gc-empty {
+    text-align: center; padding: 36px 16px;
+    color: var(--text-muted); font-size: 13px;
+    background: #f8fafc; border-radius: 6px; border: 1px dashed var(--border);
+  }
+  .gc-actions-bar {
+    display: flex; gap: 8px; padding: 12px 0; flex-wrap: wrap;
+    border-top: 1px solid var(--border); margin-top: 12px;
+  }
+  .gc-form-modal { display: none; }
+  .gc-form-modal.open { display: flex; }
+  .gc-form-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+  .gc-form-group label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+  .gc-form-group input, .gc-form-group textarea {
+    padding: 7px 10px; border: 1px solid var(--border); border-radius: 5px;
+    font-size: 13px; font-family: inherit; outline: none;
+  }
+  .gc-form-group input:focus, .gc-form-group textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+  .gc-form-hint { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .gc-info-box {
+    background: #eff6ff; border: 1px solid #bfdbfe;
+    border-radius: 6px; padding: 10px 12px; margin-bottom: 14px;
+    font-size: 12px; color: #1e3a8a; line-height: 1.5;
+  }
+</style>
+
+<!-- Banner posizionato sopra il main -->
+<div class="privacy-banner" id="privacy-banner">
+  <span class="privacy-banner-icon">🔒</span>
+  <span class="privacy-banner-text" id="privacy-banner-text">Caricamento dati riservati…</span>
+  <span class="privacy-banner-actions">
+    <button class="btn" onclick="openGestioneClientiModal()">Gestisci</button>
+    <button class="btn" onclick="clearDatiPrivati()">Rimuovi</button>
+  </span>
+</div>
+
+<!-- File input nascosto per il caricamento -->
+<input type="file" id="gc-file-input" accept=".json,application/json" style="display:none" onchange="handleCaricaDatiPrivati(event)">
+
+<!-- Modal Gestione Clienti Riservati -->
+<div class="modal-overlay" id="gc-modal-overlay" onclick="if(event.target===this)closeGestioneClientiModal()">
+  <div class="modal" style="max-width:720px">
+    <div class="modal-header">
+      <div>
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:600">Privacy</div>
+        <div style="font-size:18px;font-weight:700;margin-top:4px">🔒 Gestione clienti riservati</div>
+      </div>
+      <button class="modal-close" onclick="closeGestioneClientiModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="gc-info-box">
+        <strong>Come funziona:</strong> i dati identificativi dei tuoi clienti (ragione sociale, P.IVA, contatti) sono in un file locale sul tuo PC, mai pubblicato online. Quando li carichi qui, la dashboard mostra i nomi veri. Senza caricamento, vede solo codici tipo <code>FC-2017-RN</code>.
+      </div>
+
+      <div id="gc-clienti-list"></div>
+
+      <div class="gc-actions-bar">
+        <button class="btn btn-primary" onclick="apriFormNuovoCliente()">➕ Aggiungi cliente</button>
+        <button class="btn" onclick="document.getElementById('gc-file-input').click()">📂 Importa da file</button>
+        <button class="btn" onclick="esportaDatiPrivati()">💾 Esporta file aggiornato</button>
+      </div>
+
+      <div style="margin-top:14px;padding:10px 12px;background:#fef2f2;border:1px solid #fecaca;border-radius:6px;font-size:11px;color:#7f1d1d;line-height:1.5">
+        ⚠️ <strong>Importante:</strong> dopo aver modificato i clienti, clicca "Esporta file aggiornato" e sostituisci il file <code>data/dati_clienti_privati.json</code> sul tuo PC. Il file è protetto da <code>.gitignore</code> e non finirà mai su GitHub.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form Aggiungi/Modifica cliente -->
+<div class="modal-overlay gc-form-modal" id="gc-form-overlay" onclick="if(event.target===this)closeFormCliente()">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <div style="font-size:16px;font-weight:700" id="gc-form-title">Aggiungi cliente</div>
+      <button class="modal-close" onclick="closeFormCliente()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="gc-form-id">
+
+      <div class="gc-form-group">
+        <label>Codice mnemonico *</label>
+        <input type="text" id="gc-form-codice" placeholder="Es. FC-2017-RN">
+        <span class="gc-form-hint">Formato suggerito: 2 lettere ragione sociale + anno fondazione + sigla provincia</span>
+      </div>
+
+      <div class="gc-form-group">
+        <label>ID tecnico (auto)</label>
+        <input type="text" id="gc-form-idtec" placeholder="Generato automaticamente" readonly style="background:#f8fafc;color:var(--text-muted)">
+        <span class="gc-form-hint">Generato in automatico, non serve compilarlo</span>
+      </div>
+
+      <div class="gc-form-group">
+        <label>Nome breve cliente</label>
+        <input type="text" id="gc-form-nome" placeholder="Es. Fattor Comune">
+      </div>
+
+      <div class="gc-form-group">
+        <label>Ragione sociale completa *</label>
+        <input type="text" id="gc-form-ragsoc" placeholder="Es. Fattor Comune srl">
+      </div>
+
+      <div class="gc-form-group">
+        <label>Partita IVA</label>
+        <input type="text" id="gc-form-piva" placeholder="Es. 12345678910">
+      </div>
+
+      <div class="gc-form-group">
+        <label>Comune</label>
+        <input type="text" id="gc-form-comune" placeholder="Es. Rimini">
+      </div>
+
+      <div class="gc-form-group">
+        <label>Referente</label>
+        <input type="text" id="gc-form-referente" placeholder="Es. Mario Rossi">
+      </div>
+
+      <div class="gc-form-group">
+        <label>Email</label>
+        <input type="email" id="gc-form-email" placeholder="referente@azienda.it">
+      </div>
+
+      <div class="gc-form-group">
+        <label>Telefono</label>
+        <input type="text" id="gc-form-telefono" placeholder="+39 ...">
+      </div>
+
+      <div class="gc-form-group">
+        <label>Note riservate</label>
+        <textarea id="gc-form-note" rows="3" placeholder="Eventuali appunti privati su questo cliente"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeFormCliente()">Annulla</button>
+      <button class="btn btn-primary" onclick="salvaCliente()">💾 Salva</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ─────────────────────────────────────────────────────────────
+  // CLIENTI RISERVATI (Fase 2)
+  // Mappa codice azienda → dati identificativi.
+  // SOLO in memoria di sessione. Mai in localStorage o cookie.
+  // ─────────────────────────────────────────────────────────────
+  let datiPrivatiMap = {};       // { idAzienda: { codice, nomeProfilo, ragioneSociale, piva, comune, referente, email, telefono, noteClaudeExtra } }
+  let datiPrivatiCaricati = false;
+
+  function handleCaricaDatiPrivati(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const json = JSON.parse(e.target.result);
+        if (!json.clienti || typeof json.clienti !== 'object') {
+          alert('File non valido: manca il campo "clienti".');
+          return;
+        }
+        datiPrivatiMap = json.clienti;
+        datiPrivatiCaricati = true;
+        aggiornaPrivacyBanner();
+        // Ri-renderizza tutto per mostrare i nomi reali
+        if (typeof renderProfili === 'function') renderProfili();
+        if (typeof renderRaccomandazioni === 'function') {
+          try { renderRaccomandazioni(); } catch(e) {}
+        }
+      } catch (err) {
+        alert('Errore lettura JSON: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+    // Reset input per poter ricaricare lo stesso file
+    event.target.value = '';
+  }
+
+  function clearDatiPrivati() {
+    if (!confirm('Rimuovere i dati riservati dalla memoria di questa sessione?\n\nIl file sul tuo PC NON viene toccato — puoi ricaricarlo quando vuoi.')) return;
+    datiPrivatiMap = {};
+    datiPrivatiCaricati = false;
+    aggiornaPrivacyBanner();
+    if (typeof renderProfili === 'function') renderProfili();
+    if (typeof renderRaccomandazioni === 'function') {
+      try { renderRaccomandazioni(); } catch(e) {}
+    }
+  }
+
+  function aggiornaPrivacyBanner() {
+    const banner = document.getElementById('privacy-banner');
+    const txt    = document.getElementById('privacy-banner-text');
+    const btnHdr = document.getElementById('btn-privacy-header');
+    if (!banner) return;
+    const n = Object.keys(datiPrivatiMap).length;
+    if (datiPrivatiCaricati && n > 0) {
+      banner.classList.add('attivo');
+      txt.textContent = `Dati riservati caricati per ${n} cliente${n>1?'i':''}. Stai vedendo le ragioni sociali reali.`;
+      if (btnHdr) { btnHdr.classList.add('attivo'); btnHdr.title = `${n} clienti riservati caricati — clicca per gestire`; }
+    } else {
+      banner.classList.remove('attivo');
+      if (btnHdr) { btnHdr.classList.remove('attivo'); btnHdr.title = 'Carica file dati riservati clienti'; }
+    }
+  }
+
+  // Helper UNICO usato in tutta la dashboard per mostrare il nome cliente
+  // Restituisce ragione sociale se i dati privati sono caricati, altrimenti il codice.
+  function displayNomeAzienda(azienda) {
+    if (!azienda) return '—';
+    const privato = datiPrivatiMap[azienda.id];
+    if (datiPrivatiCaricati && privato) {
+      return privato.ragioneSociale || privato.nomeProfilo || azienda.codice || azienda.id;
+    }
+    return azienda.codice || azienda.id || '—';
+  }
+
+  function displayNomeBreveAzienda(azienda) {
+    if (!azienda) return '—';
+    const privato = datiPrivatiMap[azienda.id];
+    if (datiPrivatiCaricati && privato) {
+      return privato.nomeProfilo || privato.ragioneSociale || azienda.codice;
+    }
+    return azienda.codice || azienda.id;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // MODAL GESTIONE
+  // ─────────────────────────────────────────────────────────────
+  function openGestioneClientiModal() {
+    renderGestioneClientiLista();
+    document.getElementById('gc-modal-overlay').classList.add('open');
+  }
+  function closeGestioneClientiModal() {
+    document.getElementById('gc-modal-overlay').classList.remove('open');
+  }
+
+  function renderGestioneClientiLista() {
+    const container = document.getElementById('gc-clienti-list');
+    const ids = Object.keys(datiPrivatiMap);
+    if (ids.length === 0) {
+      container.innerHTML = `<div class="gc-empty">
+        Nessun cliente riservato caricato.<br>
+        Clicca <strong>Importa da file</strong> per caricare <code>dati_clienti_privati.json</code>,
+        oppure <strong>Aggiungi cliente</strong> per crearne uno nuovo.
+      </div>`;
+      return;
+    }
+    container.innerHTML = ids.map(id => {
+      const c = datiPrivatiMap[id];
+      const codice = c.codice || id;
+      const ragsoc = c.ragioneSociale || c.nomeProfilo || '(senza ragione sociale)';
+      const subParts = [];
+      if (c.piva)       subParts.push('P.IVA ' + c.piva);
+      if (c.comune)     subParts.push(c.comune);
+      if (c.referente)  subParts.push(c.referente);
+      return `<div class="gc-cliente-row">
+        <div class="gc-cliente-codice">${escHtml(codice)}</div>
+        <div>
+          <div class="gc-cliente-nome">${escHtml(ragsoc)}</div>
+          ${subParts.length ? `<div class="gc-cliente-sub">${escHtml(subParts.join(' · '))}</div>` : ''}
+        </div>
+        <div class="gc-cliente-actions">
+          <button class="btn btn-sm" onclick="apriFormModificaCliente('${escAttr(id)}')">✏️</button>
+          <button class="btn btn-sm btn-danger" onclick="eliminaClienteRiservato('${escAttr(id)}')">🗑️</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // FORM AGGIUNGI/MODIFICA
+  // ─────────────────────────────────────────────────────────────
+  function apriFormNuovoCliente() {
+    document.getElementById('gc-form-title').textContent = 'Aggiungi cliente';
+    document.getElementById('gc-form-id').value       = '';
+    document.getElementById('gc-form-idtec').value    = 'az-' + Date.now();
+    document.getElementById('gc-form-codice').value   = '';
+    document.getElementById('gc-form-nome').value     = '';
+    document.getElementById('gc-form-ragsoc').value   = '';
+    document.getElementById('gc-form-piva').value     = '';
+    document.getElementById('gc-form-comune').value   = '';
+    document.getElementById('gc-form-referente').value= '';
+    document.getElementById('gc-form-email').value    = '';
+    document.getElementById('gc-form-telefono').value = '';
+    document.getElementById('gc-form-note').value     = '';
+    document.getElementById('gc-form-overlay').classList.add('open');
+  }
+
+  function apriFormModificaCliente(id) {
+    const c = datiPrivatiMap[id];
+    if (!c) return;
+    document.getElementById('gc-form-title').textContent = 'Modifica cliente';
+    document.getElementById('gc-form-id').value       = id;
+    document.getElementById('gc-form-idtec').value    = id;
+    document.getElementById('gc-form-codice').value   = c.codice || '';
+    document.getElementById('gc-form-nome').value     = c.nomeProfilo || '';
+    document.getElementById('gc-form-ragsoc').value   = c.ragioneSociale || '';
+    document.getElementById('gc-form-piva').value     = c.piva || '';
+    document.getElementById('gc-form-comune').value   = c.comune || '';
+    document.getElementById('gc-form-referente').value= c.referente || '';
+    document.getElementById('gc-form-email').value    = c.email || '';
+    document.getElementById('gc-form-telefono').value = c.telefono || '';
+    document.getElementById('gc-form-note').value     = c.noteClaudeExtra || '';
+    document.getElementById('gc-form-overlay').classList.add('open');
+  }
+
+  function closeFormCliente() {
+    document.getElementById('gc-form-overlay').classList.remove('open');
+  }
+
+  function salvaCliente() {
+    const codice = document.getElementById('gc-form-codice').value.trim();
+    const ragsoc = document.getElementById('gc-form-ragsoc').value.trim();
+    if (!codice) { alert('Il codice mnemonico è obbligatorio (es. FC-2017-RN).'); return; }
+    if (!ragsoc) { alert('La ragione sociale completa è obbligatoria.'); return; }
+
+    let id = document.getElementById('gc-form-id').value.trim();
+    if (!id) id = document.getElementById('gc-form-idtec').value.trim() || ('az-' + Date.now());
+
+    datiPrivatiMap[id] = {
+      codice:         codice,
+      nomeProfilo:    document.getElementById('gc-form-nome').value.trim(),
+      ragioneSociale: ragsoc,
+      piva:           document.getElementById('gc-form-piva').value.trim(),
+      comune:         document.getElementById('gc-form-comune').value.trim(),
+      referente:      document.getElementById('gc-form-referente').value.trim(),
+      email:          document.getElementById('gc-form-email').value.trim(),
+      telefono:       document.getElementById('gc-form-telefono').value.trim(),
+      noteClaudeExtra:document.getElementById('gc-form-note').value.trim(),
+    };
+    datiPrivatiCaricati = true;
+    closeFormCliente();
+    renderGestioneClientiLista();
+    aggiornaPrivacyBanner();
+    if (typeof renderProfili === 'function') renderProfili();
+  }
+
+  function eliminaClienteRiservato(id) {
+    const c = datiPrivatiMap[id];
+    if (!c) return;
+    const nome = c.ragioneSociale || c.nomeProfilo || c.codice || id;
+    if (!confirm(`Rimuovere "${nome}" dai dati riservati di questa sessione?\n\nNon viene toccato il file sul disco — solo la sessione corrente.`)) return;
+    delete datiPrivatiMap[id];
+    renderGestioneClientiLista();
+    aggiornaPrivacyBanner();
+    if (typeof renderProfili === 'function') renderProfili();
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // EXPORT / IMPORT FILE
+  // ─────────────────────────────────────────────────────────────
+  function esportaDatiPrivati() {
+    const payload = {
+      "_avviso": "ATTENZIONE — Questo file contiene dati identificativi dei clienti. NON DEVE essere committato su GitHub. È protetto da .gitignore. Tienilo solo sul tuo PC.",
+      version:   1,
+      updatedAt: new Date().toISOString(),
+      clienti:   datiPrivatiMap
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'dati_clienti_privati.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    alert('File scaricato. Sostituisci data/dati_clienti_privati.json sul tuo PC con quello appena scaricato.');
+  }
+
+  // helper escape per HTML / attributi (definito qui per non dipendere da escHtml che è più sotto)
+  function escAttr(s) { return String(s||'').replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+
+  // ─────────────────────────────────────────────────────────────
+  // INIT: pulsante header + auto-load del file se presente in data/
+  // ─────────────────────────────────────────────────────────────
+  function iniettaPulsantePrivacyHeader() {
+    const fresh = document.getElementById('freshness');
+    if (!fresh || document.getElementById('btn-privacy-header')) return;
+    const btn = document.createElement('button');
+    btn.id          = 'btn-privacy-header';
+    btn.className   = 'btn-privacy-header';
+    btn.title       = 'Carica file dati riservati clienti';
+    btn.innerHTML   = '🔒 <span>Clienti riservati</span>';
+    btn.onclick     = () => {
+      // se già caricati, apri gestione; altrimenti file picker
+      if (datiPrivatiCaricati) openGestioneClientiModal();
+      else document.getElementById('gc-file-input').click();
+    };
+    fresh.parentNode.insertBefore(btn, fresh);
+  }
+
+  function iniettaBannerSottoHeader() {
+    const banner = document.getElementById('privacy-banner');
+    const header = document.querySelector('header.header');
+    if (banner && header && banner.parentNode !== document.body) return;
+    // sposta il banner subito dopo l'header
+    if (banner && header) header.parentNode.insertBefore(banner, header.nextSibling);
+  }
+
+  async function autoLoadDatiPrivatiSeDisponibili() {
+    // Tenta un fetch silenzioso del file in data/. Funziona solo su file system locali
+    // (la dashboard servita da GitHub Pages NON troverà mai il file privato perché .gitignore).
+    try {
+      const r = await fetch('data/dati_clienti_privati.json', { cache: 'no-cache' });
+      if (!r.ok) return;
+      const json = await r.json();
+      if (json && json.clienti && Object.keys(json.clienti).length > 0) {
+        datiPrivatiMap = json.clienti;
+        datiPrivatiCaricati = true;
+        aggiornaPrivacyBanner();
+        if (typeof renderProfili === 'function') renderProfili();
+      }
+    } catch (e) { /* file assente: normale in pubblicazione GitHub Pages */ }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    iniettaPulsantePrivacyHeader();
+    iniettaBannerSottoHeader();
+    autoLoadDatiPrivatiSeDisponibili();
+  });
+</script>
+<!-- ══════════════ FINE CLIENTI RISERVATI ══════════════ -->
+
 <!-- ══════════════ MODAL BANDO ══════════════ -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
   <div class="modal" id="modal-content"></div>
@@ -2060,7 +2532,7 @@ function renderProfilSidebar() {
     const sel = az.id === selectedProfileId;
     const flags = (az.flagSpeciali || []).slice(0, 3);
     html += `<div class="profilo-card${sel ? ' selected' : ''}" onclick="selectProfile('${az.id}')">
-      <div class="profilo-nome">${escHtml(az.nomeProfilo || az.ragioneSociale || 'Senza nome')}</div>
+      <div class="profilo-nome">${escHtml(displayNomeBreveAzienda(az))}</div>
       <div class="profilo-sub">${escHtml(az.settore || '')}${az.comune ? ' · ' + escHtml(az.comune) : ''}</div>
       <div class="profilo-flags">
         ${flags.map(f => `<span class="profilo-flag">${escHtml(f)}</span>`).join('')}
@@ -2112,7 +2584,7 @@ function renderRaccomandazioni(az) {
   let html = `<div class="racc-panel">
     <div class="racc-panel-header">
       <div>
-        <div class="racc-panel-title">🎯 Bandi consigliati per ${escHtml(az.nomeProfilo || az.ragioneSociale)}</div>
+        <div class="racc-panel-title">🎯 Bandi consigliati per ${escHtml(displayNomeAzienda(az))}</div>
         <div class="racc-panel-sub">Raccomandazioni generate da Claude sulla base del profilo aziendale</div>
       </div>
     </div>
@@ -2214,7 +2686,7 @@ function escHtml(s) {
 function openProfileForm(id) {
   editingProfileId = id;
   const az    = id ? aziende.find(a => a.id === id) : null;
-  const title = az ? `Modifica: ${az.nomeProfilo || az.ragioneSociale}` : 'Nuovo profilo aziendale';
+  const title = az ? `Modifica: ${displayNomeBreveAzienda(az)}` : 'Nuovo profilo aziendale';
   document.getElementById('form-modal-title').textContent = title;
 
   ['nomeProfilo','ragioneSociale','piva','settore','ateco','comune','regione',
@@ -2348,7 +2820,7 @@ function saveProfile() {
 function deleteProfile(id) {
   const az = aziende.find(a => a.id === id);
   if (!az) return;
-  if (!confirm(`Eliminare il profilo "${az.nomeProfilo || az.ragioneSociale}"?`)) return;
+  if (!confirm(`Eliminare il profilo "${displayNomeBreveAzienda(az)}"?`)) return;
   aziende = aziende.filter(a => a.id !== id);
   saveAziende();
   if (selectedProfileId === id) selectedProfileId = null;

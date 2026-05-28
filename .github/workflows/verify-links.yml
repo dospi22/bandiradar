@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# BandiRadar — Verifica settimanale link ufficiali
+#
+# Ogni lunedì alle 06:00 (ora italiana = 05:00 UTC) controlla tutti i link
+# dei bandi attivi e salva il risultato in data/link_status.json.
+# La dashboard legge questo file per mostrare avvisi sui link rotti.
+#
+# Avvio manuale: Actions → Verifica Link Bandi → Run workflow
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Verifica Link Bandi
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'   # ogni lunedì alle 06:00 ora italiana (05:00 UTC)
+  workflow_dispatch:        # avvio manuale dalla tab Actions
+
+permissions:
+  contents: write           # necessario per fare commit di link_status.json
+
+jobs:
+  verify:
+    name: Controlla link ufficiali e aggiorna link_status.json
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installa dipendenze
+        run: pip install requests
+
+      - name: Verifica tutti i link (attivi + sospesi)
+        run: python scripts/verifica_link.py --tutti
+
+      - name: Commit e push link_status.json
+        run: |
+          git config user.name  "BandiRadar Bot"
+          git config user.email "actions@github.com"
+          git add data/link_status.json
+          if git diff --staged --quiet; then
+            echo "ℹ️  Nessuna modifica allo stato link"
+          else
+            git commit -m "🔗 Verifica link settimanale — $(date '+%Y-%m-%d')"
+            git push
+            echo "✅ link_status.json aggiornato e pubblicato"
+          fi
+
+      - name: Notifica email se ci sono link rotti
+        if: failure()
+        continue-on-error: true   # senza SMTP configurato, l'invio fallisce ma non blocca il workflow
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: BandiRadar <${{ secrets.SMTP_USER }}>
+          subject: "⚠️ BandiRadar — Errore verifica link del ${{ github.run_id }}"
+          body: |
+            La verifica settimanale dei link ha incontrato un errore.
+
+            Controlla i log su GitHub Actions:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}

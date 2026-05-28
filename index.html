@@ -773,327 +773,59 @@
     .fresh-modal-row .value.ok   { color: var(--green); }
     .fresh-modal-row .value.warn { color: var(--orange); }
     .fresh-modal-row .value.fail { color: var(--red); }
-
-    /* ══════════════════════════════════════════
-       NUOVO LAYOUT — SIDEBAR + CONTENT AREA
-    ══════════════════════════════════════════ */
-
-    /* ══════════════════════════════════════
-       LAYOUT PRINCIPALE — SIDEBAR + CONTENT
-    ══════════════════════════════════════ */
-    body {
-      display: flex;
-      min-height: 100vh;
-      background: #f4f6f9;
-    }
-
-    /* Nascondi vecchio header */
-    .header { display: none !important; }
-    .section-nav { display: none !important; }
-
-    /* ── SIDEBAR ── */
-    .sidebar {
-      width: 260px;
-      min-width: 260px;
-      background: #1e2a3a;
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top: 0; left: 0; bottom: 0;
-      z-index: 200;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    /* Logo */
-    .sidebar-logo {
-      padding: 24px 20px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .sidebar-logo-row {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
-    }
-    .sidebar-logo-icon {
-      width: 40px; height: 40px; flex-shrink: 0;
-      background: #2563eb;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-    }
-    .sidebar-logo-text h1 {
-      font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.3px; line-height: 1.2;
-    }
-    .sidebar-logo-text p {
-      font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px;
-    }
-
-    /* Freshness nella sidebar */
-    .sidebar-freshness {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 11px; color: rgba(255,255,255,0.5);
-      cursor: pointer; padding: 6px 8px; border-radius: 6px;
-      transition: background 0.15s;
-      /* override stili freshness originali */
-      background: rgba(255,255,255,0.06) !important;
-      border: 1px solid rgba(255,255,255,0.08) !important;
-    }
-    .sidebar-freshness:hover { background: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.8); }
-    .sidebar-freshness .fresh-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; box-shadow: none !important; }
-    .sidebar-freshness.ok   .fresh-dot { background: #22c55e; }
-    .sidebar-freshness.warn .fresh-dot { background: #f59e0b; }
-    .sidebar-freshness.fail .fresh-dot { background: #ef4444; }
-    .sidebar-freshness .freshness-sub { color: rgba(255,255,255,0.4); }
-
-    /* Stats 2x2 */
-    .sidebar-stats {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 8px; padding: 16px 16px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .sidebar-stat {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px; padding: 12px 10px 10px; text-align: center;
-    }
-    .sidebar-stat-value {
-      font-size: 22px; font-weight: 700; color: #fff; display: block; line-height: 1.1;
-    }
-    .sidebar-stat-value.warn { color: #f59e0b; }
-    .sidebar-stat-value.new  { color: #34d399; }
-    .sidebar-stat-label {
-      font-size: 10px; color: rgba(255,255,255,0.4);
-      text-transform: uppercase; letter-spacing: 0.4px; margin-top: 4px; display: block;
-    }
-
-    /* Nav principale */
-    .sidebar-nav {
-      flex: 1; padding: 16px 12px 8px;
-    }
-    .sidebar-nav-label {
-      font-size: 10px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.8px; color: rgba(255,255,255,0.25);
-      padding: 0 8px; margin-bottom: 6px;
-    }
-    .sidebar-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 11px 14px; border-radius: 10px;
-      color: rgba(255,255,255,0.55);
-      font-size: 14px; font-weight: 500;
-      cursor: pointer; border: none; background: none;
-      width: 100%; text-align: left;
-      transition: all 0.15s; margin-bottom: 3px;
-      text-decoration: none;
-    }
-    .sidebar-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.9); }
-    .sidebar-item.active { background: #2563eb; color: #fff; font-weight: 600; }
-    .sidebar-item.active:hover { background: #1d4ed8; }
-    .sidebar-item-icon { font-size: 17px; width: 22px; text-align: center; flex-shrink: 0; }
-    .sidebar-item-badge {
-      margin-left: auto; flex-shrink: 0;
-      background: rgba(255,255,255,0.13);
-      color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700;
-      padding: 2px 8px; border-radius: 20px; min-width: 26px; text-align: center;
-    }
-    .sidebar-item.active .sidebar-item-badge { background: rgba(255,255,255,0.22); }
-
-    /* Footer sidebar — strumenti interni */
-    .sidebar-footer {
-      padding: 8px 12px 16px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-    .sidebar-footer-label {
-      font-size: 10px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.8px; color: rgba(255,255,255,0.2);
-      padding: 8px 8px 4px; display: block;
-    }
-    .sidebar-footer .sidebar-item {
-      font-size: 12px; padding: 8px 12px; color: rgba(255,255,255,0.4);
-    }
-    .sidebar-footer .sidebar-item:hover { color: rgba(255,255,255,0.75); }
-
-    /* ── CONTENT AREA ── */
-    .content-area {
-      margin-left: 260px;
-      flex: 1; min-width: 0;
-      display: flex; flex-direction: column; min-height: 100vh;
-    }
-
-    /* ── TOP BAR ── */
-    .topbar {
-      background: #fff;
-      border-bottom: 1px solid #e8ecf0;
-      padding: 0 32px;
-      height: 64px;
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 16px;
-      position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-    .topbar-title {
-      font-size: 22px; font-weight: 700; color: #1a1f2e; letter-spacing: -0.3px;
-    }
-    .topbar-actions { display: flex; align-items: center; gap: 10px; }
-
-    /* ── MAIN ── */
-    .main {
-      max-width: none; margin: 0;
-      padding: 28px 32px 64px;
-    }
-
-    /* ── SCORE CIRCLE ── */
-    .score-circle {
-      width: 50px; height: 50px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 700; flex-shrink: 0;
-      border: 3px solid currentColor;
-    }
-    .score-alta  { color: #059669; border-color: #059669; background: #f0fdf4; }
-    .score-media { color: #d97706; border-color: #d97706; background: #fffbeb; }
-    .score-bassa { color: #6b7280; border-color: #d1d5db; background: #f9fafb; }
-
-    /* ── CARD: layout con score a sinistra ── */
-    .bando-card {
-      display: flex; flex-direction: row;
-      gap: 16px; align-items: flex-start;
-      padding: 18px 20px;
-      background: #fff;
-      border-radius: 12px;
-      border: 1px solid #e8ecf0;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-      transition: box-shadow 0.2s, transform 0.15s;
-      cursor: pointer;
-    }
-    .bando-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-1px); }
-    .bando-card.urgente { border-left: 4px solid #dc2626; }
-    .bando-card.presto  { border-left: 4px solid #d97706; }
-    .bando-card.archivio { opacity: 0.6; }
-
-    .card-score-col { flex-shrink: 0; padding-top: 3px; }
-    .card-body-col  { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
-    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-
-    /* ── BANDI GRID verticale ── */
-    .bandi-grid { grid-template-columns: 1fr; gap: 10px; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .sidebar { width: 220px; min-width: 220px; }
-      .content-area { margin-left: 220px; }
-    }
-    @media (max-width: 700px) {
-      .sidebar { display: none; }
-      .content-area { margin-left: 0; }
-      .topbar { padding: 0 16px; }
-      .main { padding: 16px; }
-      .bando-card { flex-direction: column; }
-    }
   </style>
 </head>
 <body>
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
-<!-- ══════════════ SIDEBAR ══════════════ -->
-<nav class="sidebar" aria-label="Navigazione principale">
-
-  <!-- Logo -->
-  <div class="sidebar-logo">
-    <div class="sidebar-logo-row">
-      <div class="sidebar-logo-icon">📡</div>
-      <div class="sidebar-logo-text">
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">📡</div>
+      <div class="logo-text">
         <h1>BandiRadar</h1>
-        <p>Finanza Agevolata PMI</p>
+        <p>Monitoraggio bandi · Emilia-Romagna, Italia, Europa</p>
       </div>
     </div>
-    <div id="freshness" class="freshness sidebar-freshness" onclick="openFreshnessModal()" title="Clicca per il dettaglio stato dati">
-      <span class="fresh-dot"></span>
-      <span><span id="fresh-label">Caricamento…</span> <span class="freshness-sub" id="fresh-sub"></span></span>
+    <div class="header-meta">
+      <div>📍 Rimini, Emilia-Romagna</div>
+      <div id="freshness" class="freshness" onclick="openFreshnessModal()" title="Clicca per il dettaglio stato dati">
+        <span class="fresh-dot"></span>
+        <span><span id="fresh-label">Caricamento…</span> <span class="freshness-sub" id="fresh-sub"></span></span>
+      </div>
     </div>
   </div>
-
-  <!-- Stats compatte -->
-  <div class="sidebar-stats">
-    <div class="sidebar-stat">
-      <span class="sidebar-stat-value" id="stat-aperti">—</span>
-      <div class="sidebar-stat-label">Bandi aperti</div>
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-value" id="stat-aperti">—</span>
+      <div class="stat-label">Bandi aperti</div>
     </div>
-    <div class="sidebar-stat">
-      <span class="sidebar-stat-value warn" id="stat-scadenza">—</span>
-      <div class="sidebar-stat-label">In scadenza</div>
+    <div class="stat-card">
+      <span class="stat-value" id="stat-scadenza">—</span>
+      <div class="stat-label">⚠️ In scadenza 30gg</div>
     </div>
-    <div class="sidebar-stat">
-      <span class="sidebar-stat-value new" id="stat-nuovi">—</span>
-      <div class="sidebar-stat-label">Nuovi 30gg</div>
+    <div class="stat-card">
+      <span class="stat-value" id="stat-dotazione">—</span>
+      <div class="stat-label">Dotazione disponibile</div>
     </div>
-    <div class="sidebar-stat">
-      <span class="sidebar-stat-value" id="stat-dotazione">—</span>
-      <div class="sidebar-stat-label">Dotazione</div>
+    <div class="stat-card">
+      <span class="stat-value" id="stat-nuovi">—</span>
+      <div class="stat-label">Nuovi (ultimi 30gg)</div>
     </div>
   </div>
-
-  <!-- Nav items -->
-  <div class="sidebar-nav">
-    <div class="sidebar-nav-label">Menu</div>
-    <button class="sidebar-item active" id="tab-bandi" role="tab" aria-selected="true" aria-controls="section-bandi" onclick="switchSection('bandi')">
-      <span class="sidebar-item-icon">📡</span>
-      Bandi
-      <span class="sidebar-item-badge" id="sidebar-count-bandi">—</span>
-    </button>
-    <button class="sidebar-item" id="tab-scadenze" role="tab" aria-selected="false" aria-controls="section-scadenze" onclick="switchSection('scadenze')">
-      <span class="sidebar-item-icon">📅</span>
-      Scadenze
-    </button>
-    <button class="sidebar-item" id="tab-profili" role="tab" aria-selected="false" aria-controls="section-profili" onclick="switchSection('profili')">
-      <span class="sidebar-item-icon">🏢</span>
-      Profili Aziende
-    </button>
-    <button class="sidebar-item internal-only" id="tab-pratiche" role="tab" aria-selected="false" aria-controls="section-pratiche" onclick="switchSection('pratiche')">
-      <span class="sidebar-item-icon">📂</span>
-      Le mie pratiche
-    </button>
-  </div>
-
-  <!-- Footer sidebar -->
-  <div class="sidebar-footer">
-    <button class="sidebar-item" onclick="openClienteModal()" id="btn-clienti" style="font-size:12px">
-      <span class="sidebar-item-icon">🔒</span>
-      Clienti riservati
-    </button>
-    <button class="sidebar-item" onclick="togglePresentation()" style="font-size:12px">
-      <span class="sidebar-item-icon">📺</span>
-      Modalità presenta
-    </button>
-    <a class="sidebar-item" href="glossario.html" target="_blank" style="text-decoration:none;font-size:12px">
-      <span class="sidebar-item-icon">📖</span>
-      Glossario
-    </a>
-    <a class="sidebar-item" href="status.html" target="_blank" style="text-decoration:none;font-size:12px">
-      <span class="sidebar-item-icon">🔧</span>
-      Status sistema
-    </a>
-  </div>
-</nav>
-
-<!-- ══════════════ CONTENT AREA ══════════════ -->
-<div class="content-area">
-
-<!-- Top bar -->
-<div class="topbar">
-  <div class="topbar-title" id="topbar-title">📡 Bandi</div>
-  <div class="topbar-actions" id="header-actions">
-    <!-- i pulsanti esistenti verranno spostati qui via JS -->
-  </div>
-</div>
+</header>
 
 <!-- ══════════════ MAIN ══════════════ -->
 <main class="main" id="main-content" role="main">
 
-  <!-- Section Nav (nascosta, la sidebar fa da nav) -->
-  <div class="section-nav" role="tablist" aria-label="Sezioni della dashboard" style="display:none">
-    <button class="section-tab active" id="tab-bandi-hidden" role="tab" aria-selected="true" aria-controls="section-bandi"></button>
-    <button class="section-tab" id="tab-scadenze-hidden" role="tab" aria-selected="false" aria-controls="section-scadenze"></button>
-    <button class="section-tab" id="tab-profili-hidden" role="tab" aria-selected="false" aria-controls="section-profili"></button>
-    <button class="section-tab" id="tab-pratiche-hidden" role="tab" aria-selected="false" aria-controls="section-pratiche"></button>
+  <!-- Section Nav -->
+  <div class="section-nav" role="tablist" aria-label="Sezioni della dashboard">
+    <button class="section-tab active" id="tab-bandi" role="tab" aria-selected="true" aria-controls="section-bandi" onclick="switchSection('bandi')">📡 Bandi</button>
+    <button class="section-tab" id="tab-scadenze" role="tab" aria-selected="false" aria-controls="section-scadenze" onclick="switchSection('scadenze')">📅 Scadenze</button>
+    <button class="section-tab" id="tab-profili" role="tab" aria-selected="false" aria-controls="section-profili" onclick="switchSection('profili')">🏢 Profili Aziende</button>
+    <button class="section-tab" id="tab-pratiche" role="tab" aria-selected="false" aria-controls="section-pratiche" onclick="switchSection('pratiche')">📂 Le mie pratiche</button>
   </div>
 
   <!-- ══════════════ SEZIONE BANDI ══════════════ -->
@@ -1383,7 +1115,6 @@
     © BandiRadar · Aggiornato automaticamente · <a href="glossario.html" style="color:inherit;text-decoration:underline">📖 Glossario</a> · <a href="status.html" style="color:inherit;text-decoration:underline">📊 Stato sistema</a> · Nessun dato personale viene raccolto da chi consulta la dashboard
   </div>
 </footer>
-</div><!-- fine .content-area -->
 
 
 <!-- ══════════════ CLIENTI RISERVATI (Fase 2) ══════════════ -->
@@ -1625,17 +1356,16 @@
   function aggiornaPrivacyBanner() {
     const banner = document.getElementById('privacy-banner');
     const txt    = document.getElementById('privacy-banner-text');
+    const btnHdr = document.getElementById('btn-privacy-header');
     if (!banner) return;
     const n = Object.keys(datiPrivatiMap).length;
-    // Aggiorna label pulsante sidebar clienti
-    const btnSidebar = document.getElementById('btn-clienti');
     if (datiPrivatiCaricati && n > 0) {
       banner.classList.add('attivo');
       txt.textContent = `Dati riservati caricati per ${n} cliente${n>1?'i':''}. Stai vedendo le ragioni sociali reali.`;
-      if (btnSidebar) btnSidebar.title = `${n} clienti riservati caricati — clicca per gestire`;
+      if (btnHdr) { btnHdr.classList.add('attivo'); btnHdr.title = `${n} clienti riservati caricati — clicca per gestire`; }
     } else {
       banner.classList.remove('attivo');
-      if (btnSidebar) btnSidebar.title = 'Carica file dati riservati clienti';
+      if (btnHdr) { btnHdr.classList.remove('attivo'); btnHdr.title = 'Carica file dati riservati clienti'; }
     }
   }
 
@@ -1811,24 +1541,27 @@
   // INIT: pulsante header + auto-load del file se presente in data/
   // ─────────────────────────────────────────────────────────────
   function iniettaPulsantePrivacyHeader() {
-    // Pulsante già presente nella sidebar — nessuna iniezione necessaria
-    // Aggiorna però l'onclick del pulsante sidebar
-    const btn = document.getElementById('btn-clienti');
-    if (btn) {
-      btn.onclick = () => {
-        if (datiPrivatiCaricati) openGestioneClientiModal();
-        else document.getElementById('gc-file-input').click();
-      };
-    }
+    const fresh = document.getElementById('freshness');
+    if (!fresh || document.getElementById('btn-privacy-header')) return;
+    const btn = document.createElement('button');
+    btn.id          = 'btn-privacy-header';
+    btn.className   = 'btn-privacy-header';
+    btn.title       = 'Carica file dati riservati clienti';
+    btn.innerHTML   = '🔒 <span>Clienti riservati</span>';
+    btn.onclick     = () => {
+      // se già caricati, apri gestione; altrimenti file picker
+      if (datiPrivatiCaricati) openGestioneClientiModal();
+      else document.getElementById('gc-file-input').click();
+    };
+    fresh.parentNode.insertBefore(btn, fresh);
   }
 
   function iniettaBannerSottoHeader() {
-    // Sposta il privacy-banner dopo la topbar nella nuova struttura
-    const banner  = document.getElementById('privacy-banner');
-    const topbar  = document.querySelector('.topbar');
-    if (banner && topbar && banner.parentNode !== topbar.parentNode) {
-      topbar.parentNode.insertBefore(banner, topbar.nextSibling);
-    }
+    const banner = document.getElementById('privacy-banner');
+    const header = document.querySelector('header.header');
+    if (banner && header && banner.parentNode !== document.body) return;
+    // sposta il banner subito dopo l'header
+    if (banner && header) header.parentNode.insertBefore(banner, header.nextSibling);
   }
 
   async function autoLoadDatiPrivatiSeDisponibili() {
@@ -2274,17 +2007,8 @@ function renderCard(b) {
   if (u === 'presto')  cls += ' presto';
   if (isAr)            cls += ' archivio';
 
-  // Score circolare basato su priorità
-  const scoreMap = { 'Alta': 90, 'Media': 70, 'Bassa': 45 };
-  const scoreVal = scoreMap[b.priorita] || 50;
-  const scoreCls = b.priorita === 'Alta' ? 'score-alta' : b.priorita === 'Media' ? 'score-media' : 'score-bassa';
-
   return `
 <div class="${cls}" onclick="openModal('${b.id}')">
-  <div class="card-score-col">
-    <div class="score-circle ${scoreCls}" title="Priorità ${b.priorita}">${scoreVal}</div>
-  </div>
-  <div class="card-body-col">
   <div class="card-top">
     <div style="flex:1">
       <div class="card-badges">
@@ -2301,7 +2025,7 @@ function renderCard(b) {
       <div class="card-title">${b.nome}</div>
       <div class="card-ente">${b.ente}</div>
     </div>
-    <div class="priority-dot ${PRIORITY_CLASS[b.priorita] || ''}" title="Priorità: ${b.priorita}" style="display:none"></div>
+    <div class="priority-dot ${PRIORITY_CLASS[b.priorita] || ''}" title="Priorità: ${b.priorita}"></div>
   </div>
 
   <div class="card-info">
@@ -2344,7 +2068,6 @@ function renderCard(b) {
     }
     <span class="card-id">${b.id}</span>
   </div>
-  </div><!-- fine card-body-col -->
 </div>`;
 }
 
@@ -2573,9 +2296,6 @@ function updateStats() {
   document.getElementById('stat-scadenza').textContent  = urgenti.length;
   document.getElementById('stat-dotazione').textContent = formatEuro(dotaz);
   document.getElementById('stat-nuovi').textContent     = nuovi.length;
-  // Badge sidebar bandi
-  const sidebarBadge = document.getElementById('sidebar-count-bandi');
-  if (sidebarBadge) sidebarBadge.textContent = aperti.length;
   // Il badge "Aggiornato" è gestito da loadLastSync() — usa data reale del sync, non TODAY
 }
 
@@ -3060,15 +2780,6 @@ async function loadRaccomandazioni() {
 function switchSection(name) {
   const sezioni = ['bandi', 'scadenze', 'profili', 'pratiche'];
   if (!sezioni.includes(name)) name = 'bandi';
-
-  // Titoli per la topbar
-  const titoli = {
-    bandi:    '📡 Bandi',
-    scadenze: '📅 Scadenze',
-    profili:  '🏢 Profili Aziende',
-    pratiche: '📂 Le mie pratiche'
-  };
-
   sezioni.forEach(s => {
     const sec = document.getElementById('section-' + s);
     const tab = document.getElementById('tab-' + s);
@@ -3078,11 +2789,6 @@ function switchSection(name) {
       tab.setAttribute('aria-selected', s === name ? 'true' : 'false');
     }
   });
-
-  // Aggiorna titolo topbar
-  const topbarTitle = document.getElementById('topbar-title');
-  if (topbarTitle) topbarTitle.textContent = titoli[name] || '';
-
   if (name === 'profili')  renderProfili();
   if (name === 'scadenze') renderTimeline();
   if (name === 'pratiche') renderPratiche();

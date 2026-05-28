@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BandiRadar — Report cliente</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📡&lt;/text&gt;&lt;/svg&gt;">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1e40af; --blue-dark: #1e3a8a; --blue-light: #dbeafe;
+      --text: #0f172a; --text-muted: #475569; --border: #e2e8f0;
+      --bg: #f1f5f9; --card: #ffffff;
+      --rel-alta:    #dcfce7; --rel-alta-fg:    #14532d;
+      --rel-media:   #dbeafe; --rel-media-fg:   #1e3a8a;
+      --rel-bassa:   #fef3c7; --rel-bassa-fg:   #92400e;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55;
+      font-size: 14px;
+    }
+    .page { max-width: 840px; margin: 0 auto; padding: 28px 32px 60px; }
+
+    /* Toolbar (non stampata) */
+    .toolbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 18px; margin-bottom: 22px;
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05); flex-wrap: wrap; gap: 12px;
+    }
+    .toolbar h2 { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .toolbar .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 16px; border: 1px solid var(--border); border-radius: 7px;
+      background: white; color: var(--text); cursor: pointer; font-size: 13px;
+      text-decoration: none; font-weight: 600; transition: all 0.15s;
+    }
+    .btn:hover { background: var(--bg); border-color: #cbd5e1; }
+    .btn-primary { background: var(--blue); color: white; border-color: var(--blue); }
+    .btn-primary:hover { background: var(--blue-dark); color: white; }
+
+    /* Cover */
+    .cover {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      color: white; padding: 38px 36px;
+      border-radius: 12px; margin-bottom: 22px;
+      page-break-after: avoid;
+    }
+    .cover .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+    .cover .brand-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .cover .brand-text h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; }
+    .cover .brand-text p  { font-size: 12px; opacity: 0.85; margin-top: 1px; }
+    .cover .title  { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.25; }
+    .cover .subtitle { font-size: 14px; opacity: 0.92; margin-top: 6px; }
+    .cover .meta {
+      display: flex; gap: 28px; margin-top: 24px; font-size: 12px; opacity: 0.88;
+      flex-wrap: wrap; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.18);
+    }
+    .cover .meta-label { display: block; opacity: 0.75; margin-bottom: 2px; letter-spacing: 0.4px; text-transform: uppercase; font-size: 10px; }
+    .cover .meta-value { font-weight: 600; font-size: 13px; }
+
+    /* Profilo cliente (sintesi) */
+    .profilo-card {
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 22px; margin-bottom: 22px;
+    }
+    .profilo-card h3 {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px;
+      color: var(--text-muted); font-weight: 700; margin-bottom: 10px;
+    }
+    .profilo-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+    }
+    .profilo-item .lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+    .profilo-item .val { font-size: 13px; font-weight: 600; margin-top: 2px; }
+
+    /* Sezione bandi */
+    .sec-title {
+      font-size: 18px; font-weight: 700; margin: 26px 0 14px;
+      padding-bottom: 8px; border-bottom: 2px solid var(--blue);
+      color: var(--text);
+    }
+    .sec-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+
+    .bando-block {
+      background: white; border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 22px; margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+    .bando-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 14px; margin-bottom: 10px;
+    }
+    .bando-nome { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.35; flex: 1; }
+    .bando-ente { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+    .rel-badge {
+      flex-shrink: 0; padding: 4px 12px; border-radius: 16px;
+      font-size: 11px; font-weight: 700; white-space: nowrap;
+    }
+    .rel-molto_alta { background: var(--rel-alta); color: var(--rel-alta-fg); }
+    .rel-alta       { background: var(--rel-media); color: var(--rel-media-fg); }
+    .rel-media      { background: var(--rel-bassa); color: var(--rel-bassa-fg); }
+
+    .bando-motivazione {
+      background: #f8fafc; border-left: 3px solid var(--blue); padding: 10px 14px;
+      font-style: italic; font-size: 13px; color: var(--text-muted); margin: 10px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .bando-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 14px; padding-top: 10px; border-top: 1px solid var(--border);
+    }
+    .bando-field { }
+    .bando-field .lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+    .bando-field .val { font-size: 13px; font-weight: 600; margin-top: 2px; }
+    .bando-field .val.big { font-size: 16px; color: var(--blue); }
+    .bando-field .val.urg { color: #b91c1c; }
+    .bando-sintesi {
+      margin-top: 12px; padding: 10px 14px;
+      background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px;
+      font-size: 13px; color: #1e3a8a; line-height: 1.55;
+    }
+    .bando-link {
+      display: inline-block; margin-top: 10px; font-size: 12px;
+      color: var(--blue); text-decoration: none; word-break: break-all;
+    }
+    .bando-link:hover { text-decoration: underline; }
+
+    .empty {
+      background: white; border: 1px dashed var(--border); border-radius: 10px;
+      padding: 48px 24px; text-align: center; color: var(--text-muted); font-size: 14px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 36px; padding: 18px 22px; border: 1px solid var(--border);
+      border-radius: 10px; background: white;
+      font-size: 11px; color: var(--text-muted); line-height: 1.6;
+    }
+    .footer strong { color: var(--text); }
+
+    /* ── STAMPA / PDF ───────────────────────────────────────── */
+    @page { size: A4; margin: 14mm 12mm; }
+    @media print {
+      body { background: white !important; }
+      .toolbar { display: none !important; }
+      .page { padding: 0; max-width: none; }
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-shadow: none; }
+      .bando-block { box-shadow: none; }
+      .rel-badge, .bando-motivazione, .bando-sintesi {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      .bando-block { page-break-inside: avoid; break-inside: avoid; }
+      a { color: var(--text); text-decoration: none; }
+      .bando-link { color: var(--blue); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Toolbar (non stampata) -->
+  <div class="toolbar">
+    <h2>Report cliente</h2>
+    <div class="btns">
+      <a class="btn" href="index.html">← Dashboard</a>
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Stampa / Salva PDF</button>
+    </div>
+  </div>
+
+  <!-- Tutto il contenuto generato da JS -->
+  <div id="report-root"><div class="empty">Caricamento report…</div></div>
+
+</div>
+
+<script>
+  // ── Parametri URL ─────────────────────────────────────────────────
+  const urlParams  = new URLSearchParams(window.location.search);
+  const codiceArg  = (urlParams.get('cliente') || '').trim();
+  const consulente = 'Alex';   // personalizzabile in futuro
+
+  // Stato dati
+  let bandi = [], bandiMap = {};
+  let aziendePub = [];        // da data/aziende.json (anonimo)
+  let datiPrivati = {};       // da localStorage o file privato locale
+  let raccomandazioni = null; // raccomandazioni dell'azienda selezionata
+  let aziendaScelta = null;
+
+  function escHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+  }
+  function fmtEuro(n) {
+    n = Number(n)||0;
+    if (n >= 1e9) return '€'+(n/1e9).toFixed(1)+' Mld';
+    if (n >= 1e6) return '€'+(n/1e6).toFixed(1)+' M';
+    if (n >= 1e3) return '€'+(n/1e3).toFixed(0)+' K';
+    return n ? '€'+n.toLocaleString('it-IT') : '—';
+  }
+  function fmtData(s) {
+    if (!s) return '—';
+    try { return new Date(s).toLocaleDateString('it-IT', {day:'2-digit', month:'long', year:'numeric'}); }
+    catch(e) { return s; }
+  }
+  function giorniA(scad) {
+    if (!scad) return null;
+    const d = new Date(scad);
+    if (isNaN(d)) return null;
+    return Math.ceil((d - new Date()) / 86400000);
+  }
+
+  async function caricaBandi() {
+    try {
+      const r = await fetch('data/bandi.csv', {cache:'no-cache'});
+      if (!r.ok) return;
+      const t = await r.text();
+      const result = Papa.parse(t, { header: true, skipEmptyLines: true });
+      bandi = result.data;
+      bandi.forEach(b => { if (b['ID']) bandiMap[b['ID']] = b; });
+    } catch(e) {}
+  }
+  async function caricaAziendePub() {
+    try {
+      const r = await fetch('data/aziende.json', {cache:'no-cache'});
+      if (!r.ok) return;
+      const j = await r.json();
+      aziendePub = j.aziende || [];
+    } catch(e) {}
+  }
+  async function caricaRaccomandazioni() {
+    try {
+      const r = await fetch('data/raccomandazioni.json', {cache:'no-cache'});
+      if (!r.ok) return;
+      const j = await r.json();
+      // Trova l'azienda corrispondente al codice arg
+      // Match per codice mnemonico (su aziendePub) -> id tecnico -> raccomandazioni
+      let idAzienda = null;
+      const azByCodice = aziendePub.find(a => (a.codice||'').toLowerCase() === codiceArg.toLowerCase());
+      if (azByCodice) { idAzienda = azByCodice.id; aziendaScelta = azByCodice; }
+      // fallback: tratta arg come id tecnico
+      if (!idAzienda) idAzienda = codiceArg;
+      const racc = (j.aziende || []).find(a => a.idAzienda === idAzienda);
+      raccomandazioni = racc ? racc.raccomandazioni : null;
+    } catch(e) {}
+  }
+  function caricaDatiPrivatiDaLocalStorage() {
+    // La dashboard tiene i dati privati in memoria sessione, non in localStorage.
+    // Per report.html (pagina separata) usiamo come fallback un'eventuale chiave
+    // che la dashboard può salvare opzionalmente, o lasciamo solo la versione pubblica.
+    // Per ora: usiamo solo codice/dati pubblici (la ragione sociale comparirà solo se
+    // l'utente la carica anche qui — funzionalità opzionale futura).
+    // (Compatibilità: se in futuro inseriremo localStorage condiviso, qui andrà letto.)
+    try {
+      const raw = sessionStorage.getItem('bandiRadar_datiPrivati');
+      if (raw) datiPrivati = JSON.parse(raw);
+    } catch(e) {}
+  }
+
+  function nomeClienteVisualizzato() {
+    if (aziendaScelta) {
+      const p = datiPrivati[aziendaScelta.id];
+      if (p && p.ragioneSociale) return p.ragioneSociale;
+      return aziendaScelta.codice || aziendaScelta.id;
+    }
+    return codiceArg || '—';
+  }
+
+  function relClass(rel) {
+    if (rel === 'molto_alta') return 'rel-molto_alta';
+    if (rel === 'alta')       return 'rel-alta';
+    return 'rel-media';
+  }
+  function relLabel(rel) {
+    if (rel === 'molto_alta') return '⭐ Molto alta';
+    if (rel === 'alta')       return '🔵 Alta';
+    return '🟡 Media';
+  }
+
+  function renderProfiloSintesi() {
+    if (!aziendaScelta) return '';
+    const items = [];
+    if (aziendaScelta.settore)    items.push(['Settore', aziendaScelta.settore]);
+    if (aziendaScelta.dimensione) items.push(['Dimensione', aziendaScelta.dimensione]);
+    if (aziendaScelta.regione)    items.push(['Regione', aziendaScelta.regione]);
+    if (aziendaScelta.provincia)  items.push(['Provincia', aziendaScelta.provincia]);
+    if (aziendaScelta.tipoAzienda)items.push(['Tipologia', aziendaScelta.tipoAzienda]);
+    if (aziendaScelta.addetti)    items.push(['Addetti', aziendaScelta.addetti]);
+    if (aziendaScelta.fatturato)  items.push(['Fatturato', aziendaScelta.fatturato]);
+    if (aziendaScelta.annoFondazione) items.push(['Fondazione', aziendaScelta.annoFondazione]);
+    if (!items.length) return '';
+    return `<div class="profilo-card">
+      <h3>Profilo aziendale (sintesi)</h3>
+      <div class="profilo-grid">
+        ${items.map(([l,v]) => `<div class="profilo-item"><div class="lbl">${escHtml(l)}</div><div class="val">${escHtml(v)}</div></div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  function renderBando(item) {
+    const b = bandiMap[item.id];
+    if (!b) {
+      return `<div class="bando-block">
+        <div class="bando-head">
+          <div>
+            <div class="bando-nome">${escHtml(item.id)}</div>
+            <div class="bando-ente">⚠ Bando non più disponibile nel catalogo corrente</div>
+          </div>
+          <span class="rel-badge ${relClass(item.rilevanza)}">${relLabel(item.rilevanza)}</span>
+        </div>
+        <div class="bando-motivazione">${escHtml(item.motivazione || '')}</div>
+      </div>`;
+    }
+
+    const giorni = giorniA(b['Scadenza']);
+    const urg = giorni !== null && giorni <= 30 ? ' urg' : '';
+
+    const fields = [];
+    if (b['Importo max beneficiario']) fields.push(['Importo max', fmtEuro(b['Importo max beneficiario']), 'big']);
+    if (b['Percentuale contributo'])   fields.push(['% Contributo', b['Percentuale contributo']+'%', 'big']);
+    if (b['Tipo agevolazione'])        fields.push(['Tipo', b['Tipo agevolazione'], '']);
+    if (b['Regime aiuto'])             fields.push(['Regime', b['Regime aiuto'], '']);
+    if (b['Scadenza'])                 fields.push(['Scadenza', fmtData(b['Scadenza']) + (giorni!==null && giorni>=0 ? ` (tra ${giorni}gg)` : ''), urg]);
+    if (b['Tipo scadenza'])            fields.push(['Tipo scadenza', b['Tipo scadenza'], '']);
+    if (b['Beneficiari'])              fields.push(['Beneficiari', String(b['Beneficiari']).split('|').join(', '), '']);
+    if (b['Ambito geografico'])        fields.push(['Ambito', b['Ambito geografico'] + (b['Dettaglio geografico'] ? ' — '+b['Dettaglio geografico'] : ''), '']);
+
+    return `<div class="bando-block">
+      <div class="bando-head">
+        <div>
+          <div class="bando-nome">${escHtml(b['Nome bando'])}</div>
+          <div class="bando-ente">${escHtml(b['Ente erogatore']||'')}</div>
+        </div>
+        <span class="rel-badge ${relClass(item.rilevanza)}">${relLabel(item.rilevanza)}</span>
+      </div>
+      ${item.motivazione ? `<div class="bando-motivazione">"${escHtml(item.motivazione)}"</div>` : ''}
+      <div class="bando-grid">
+        ${fields.map(([l,v,c]) => `<div class="bando-field"><div class="lbl">${escHtml(l)}</div><div class="val ${c||''}">${escHtml(v)}</div></div>`).join('')}
+      </div>
+      ${b['Sintesi cliente'] ? `<div class="bando-sintesi"><strong>💬 Spiegazione:</strong> ${escHtml(b['Sintesi cliente'])}</div>` : ''}
+      ${b['Link ufficiale'] && b['Link ufficiale'] !== '#' ? `<a class="bando-link" href="${escHtml(b['Link ufficiale'])}" target="_blank" rel="noopener">🔗 ${escHtml(b['Link ufficiale'])}</a>` : ''}
+    </div>`;
+  }
+
+  function render() {
+    const root = document.getElementById('report-root');
+    const oggi = new Date().toLocaleDateString('it-IT', {day:'2-digit', month:'long', year:'numeric'});
+    const nomeCli = nomeClienteVisualizzato();
+
+    if (!codiceArg) {
+      root.innerHTML = `<div class="empty">
+        <strong>Codice cliente non specificato.</strong><br>
+        Apri questa pagina passando un parametro come <code>?cliente=FC-2017-RN</code>,<br>
+        oppure usa il pulsante "📄 Esporta PDF" dal pannello raccomandazioni della dashboard.
+        <br><br><a class="btn" href="index.html">← Torna alla dashboard</a>
+      </div>`;
+      return;
+    }
+
+    let html = `
+      <div class="cover">
+        <div class="brand">
+          <div class="brand-icon">📡</div>
+          <div class="brand-text">
+            <h1>BandiRadar</h1>
+            <p>Selezione bandi e agevolazioni — consulenza di finanza agevolata</p>
+          </div>
+        </div>
+        <div class="title">Bandi consigliati per ${escHtml(nomeCli)}</div>
+        <div class="subtitle">Selezione personalizzata sulla base del profilo aziendale</div>
+        <div class="meta">
+          <div><span class="meta-label">Data</span><span class="meta-value">${oggi}</span></div>
+          <div><span class="meta-label">Cliente</span><span class="meta-value">${escHtml(nomeCli)}</span></div>
+          <div><span class="meta-label">Preparato da</span><span class="meta-value">${escHtml(consulente)}</span></div>
+        </div>
+      </div>
+    `;
+
+    html += renderProfiloSintesi();
+
+    if (!raccomandazioni || !raccomandazioni.length) {
+      html += `<div class="empty">
+        Nessuna raccomandazione disponibile per <strong>${escHtml(nomeCli)}</strong> al momento.<br>
+        <small style="display:block;margin-top:8px">Rigenera le raccomandazioni dalla dashboard e riprova.</small>
+      </div>`;
+    } else {
+      const order = { 'molto_alta': 0, 'alta': 1, 'media': 2 };
+      const sorted = raccomandazioni.slice().sort((a,b) => (order[a.rilevanza]??9) - (order[b.rilevanza]??9));
+      html += `<div class="sec-title">📌 Bandi selezionati (${sorted.length})</div>
+        <div class="sec-sub">Ordinati per rilevanza decrescente. Verifica sempre le condizioni complete sul sito ufficiale di ciascun ente.</div>`;
+      sorted.forEach(item => { html += renderBando(item); });
+    }
+
+    html += `
+      <div class="footer">
+        <strong>⚖️ Avviso importante.</strong> I dati riportati in questo report sono indicativi e a scopo informativo, basati sulle informazioni pubbliche disponibili al ${oggi}. Prima di presentare qualsiasi domanda, verificare sempre la versione ufficiale del bando sul sito dell'ente erogatore tramite il link "🔗" indicato. <strong>BandiRadar non garantisce esattezza, completezza o aggiornamento in tempo reale dei dati.</strong>
+        <br><br>
+        Report generato il ${oggi} · BandiRadar · Consulente: ${escHtml(consulente)}
+      </div>
+    `;
+
+    root.innerHTML = html;
+    document.title = `Report ${nomeCli} — BandiRadar`;
+  }
+
+  // ── Avvio ──
+  (async () => {
+    caricaDatiPrivatiDaLocalStorage();
+    await Promise.all([caricaBandi(), caricaAziendePub()]);
+    await caricaRaccomandazioni();
+    render();
+  })();
+</script>
+</body>
+</html>

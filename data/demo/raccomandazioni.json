@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-05-28T08:00:00.000Z",
+  "aziende": [
+    {
+      "idAzienda": "az-demo-acme",
+      "generatedAt": "2026-05-28T08:00:00.000Z",
+      "raccomandazioni": [
+        {
+          "id": "DEMO-EU-001",
+          "rilevanza": "molto_alta",
+          "motivazione": "PMI scaleup R&S in tech: match perfetto col bando europeo. Fondo perduto fino a 2.5M €.",
+          "scadenza": "2026-11-04",
+          "importoMax": 2500000
+        },
+        {
+          "id": "DEMO-ER-001",
+          "rilevanza": "molto_alta",
+          "motivazione": "PMI in Emilia-Romagna nel digitale: bando regionale dedicato, fondo perduto al 50%.",
+          "scadenza": "2026-09-30",
+          "importoMax": 500000
+        },
+        {
+          "id": "DEMO-IT-002",
+          "rilevanza": "alta",
+          "motivazione": "Credito d'imposta R&S sempre attivo: 20% sulle spese di ricerca. Si applica in dichiarazione."
+        }
+      ]
+    }
+  ]
+}

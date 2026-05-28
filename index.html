@@ -18,6 +18,13 @@
   <meta name="twitter:title"       content="BandiRadar — Monitoraggio Bandi e Agevolazioni">
   <meta name="twitter:description" content="Dashboard bandi UE, nazionali e regionali ER per PMI.">
 
+  <!-- PWA manifest + theme color (Fase 5.3) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BandiRadar">
+
   <!-- Favicon inline (radar emoji) -->
   <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📡&lt;/text&gt;&lt;/svg&gt;">
 
@@ -770,6 +777,8 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
+
 <!-- ══════════════ HEADER ══════════════ -->
 <header class="header">
   <div class="header-top">
@@ -809,14 +818,14 @@
 </header>
 
 <!-- ══════════════ MAIN ══════════════ -->
-<main class="main">
+<main class="main" id="main-content" role="main">
 
   <!-- Section Nav -->
-  <div class="section-nav">
-    <button class="section-tab active" id="tab-bandi" onclick="switchSection('bandi')">📡 Bandi</button>
-    <button class="section-tab" id="tab-scadenze" onclick="switchSection('scadenze')">📅 Scadenze</button>
-    <button class="section-tab" id="tab-profili" onclick="switchSection('profili')">🏢 Profili Aziende</button>
-    <button class="section-tab" id="tab-pratiche" onclick="switchSection('pratiche')">📂 Le mie pratiche</button>
+  <div class="section-nav" role="tablist" aria-label="Sezioni della dashboard">
+    <button class="section-tab active" id="tab-bandi" role="tab" aria-selected="true" aria-controls="section-bandi" onclick="switchSection('bandi')">📡 Bandi</button>
+    <button class="section-tab" id="tab-scadenze" role="tab" aria-selected="false" aria-controls="section-scadenze" onclick="switchSection('scadenze')">📅 Scadenze</button>
+    <button class="section-tab" id="tab-profili" role="tab" aria-selected="false" aria-controls="section-profili" onclick="switchSection('profili')">🏢 Profili Aziende</button>
+    <button class="section-tab" id="tab-pratiche" role="tab" aria-selected="false" aria-controls="section-pratiche" onclick="switchSection('pratiche')">📂 Le mie pratiche</button>
   </div>
 
   <!-- ══════════════ SEZIONE BANDI ══════════════ -->
@@ -1103,7 +1112,7 @@
     </div>
   </div>
   <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);text-align:center;font-size:11px;opacity:0.8">
-    © BandiRadar · Aggiornato automaticamente · Nessun dato personale viene raccolto da chi consulta la dashboard
+    © BandiRadar · Aggiornato automaticamente · <a href="glossario.html" style="color:inherit;text-decoration:underline">📖 Glossario</a> · <a href="status.html" style="color:inherit;text-decoration:underline">📊 Stato sistema</a> · Nessun dato personale viene raccolto da chi consulta la dashboard
   </div>
 </footer>
 
@@ -1580,7 +1589,7 @@
 <!-- ══════════════ FINE CLIENTI RISERVATI ══════════════ -->
 
 <!-- ══════════════ MODAL BANDO ══════════════ -->
-<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-label="Dettaglio bando" onclick="handleOverlayClick(event)">
   <div class="modal" id="modal-content"></div>
 </div>
 
@@ -2775,7 +2784,10 @@ function switchSection(name) {
     const sec = document.getElementById('section-' + s);
     const tab = document.getElementById('tab-' + s);
     if (sec) sec.style.display = (s === name) ? '' : 'none';
-    if (tab) tab.classList.toggle('active', s === name);
+    if (tab) {
+      tab.classList.toggle('active', s === name);
+      tab.setAttribute('aria-selected', s === name ? 'true' : 'false');
+    }
   });
   if (name === 'profili')  renderProfili();
   if (name === 'scadenze') renderTimeline();
@@ -2866,6 +2878,7 @@ function renderRaccomandazioni(az) {
         <div class="racc-panel-title">🎯 Bandi consigliati per ${escHtml(displayNomeAzienda(az))}</div>
         <div class="racc-panel-sub">Raccomandazioni generate da Claude sulla base del profilo aziendale</div>
       </div>
+      <button class="btn btn-sm internal-only" onclick="apriStorico('${escAttr(az.id)}')" style="font-size:11px" title="Vedi snapshot precedenti delle raccomandazioni">📜 Storico</button>
     </div>
     <div class="racc-panel-body">`;
 
@@ -3573,5 +3586,331 @@ document.addEventListener('DOMContentLoaded', () => {
     cont.innerHTML = html;
   }
 </script>
+
+<style>
+  /* Glossario inline: hover-tooltip via abbr (Fase 5.1) */
+  abbr[title] {
+    text-decoration: underline dotted #94a3b8;
+    text-underline-offset: 2px;
+    cursor: help;
+  }
+
+  /* Accessibilità (Fase 5.2) */
+  .skip-link {
+    position: absolute; top: -40px; left: 0;
+    background: var(--blue); color: white;
+    padding: 8px 14px; z-index: 9999;
+    text-decoration: none; font-weight: 600; font-size: 13px;
+    border-radius: 0 0 8px 0;
+    transition: top 0.15s;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* Focus visibile solo per navigazione tastiera (non al click mouse) */
+  *:focus-visible {
+    outline: 3px solid #2563eb !important;
+    outline-offset: 2px !important;
+    border-radius: 4px;
+  }
+  /* Mai outline indesiderato sui click mouse */
+  *:focus:not(:focus-visible) { outline: none; }
+
+  /* Visually-hidden (per testo per screen reader) */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+</style>
+
+<!-- ══════════════ MODALITÀ PRESENTAZIONE + DEMO (Fase 4) ══════════════ -->
+<style>
+  /* Elementi marcati internal-only sono nascosti in modalità presentazione */
+  body.presentation-mode .internal-only { display: none !important; }
+
+  /* Layout più arioso + font più grande */
+  body.presentation-mode {
+    --shadow-md: 0 6px 18px rgba(0,0,0,0.12);
+  }
+  body.presentation-mode .main { padding: 32px 36px 80px; max-width: 1300px; }
+  body.presentation-mode .bando-card { padding: 22px; gap: 16px; }
+  body.presentation-mode .card-title { font-size: 16px; }
+  body.presentation-mode .card-ente { font-size: 13px; }
+  body.presentation-mode .stat-value { font-size: 30px; }
+  body.presentation-mode .stat-label { font-size: 12px; }
+  body.presentation-mode .badge { font-size: 12px; padding: 4px 11px; }
+  body.presentation-mode .racc-item { padding: 16px 18px; margin-bottom: 12px; }
+  body.presentation-mode .racc-item-nome { font-size: 15px; }
+  body.presentation-mode .racc-motivazione { font-size: 14px; }
+  body.presentation-mode .section-tab { padding: 12px 28px; font-size: 15px; }
+  body.presentation-mode .modal { max-width: 760px; }
+  body.presentation-mode .modal-field-value { font-size: 14px; }
+  body.presentation-mode .modal-field-value.big { font-size: 24px; }
+
+  /* Header brandizzato (visibile in presentation se c'è un cliente selezionato) */
+  body.presentation-mode .header-presenter {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 10px; padding: 8px 14px; margin-top: 8px; display: inline-block;
+    font-size: 13px; color: white;
+  }
+  body.presentation-mode .header-presenter strong { font-weight: 700; }
+
+  /* Pulsante "Presenta" nell'header */
+  .btn-presenta-header {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px; border-radius: 14px; font-size: 11px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.12); color: white;
+    margin-left: 8px;
+  }
+  .btn-presenta-header:hover { background: rgba(255,255,255,0.22); }
+
+  /* Pulsante "Esci da presentazione" floating */
+  .btn-esci-presenta {
+    display: none; position: fixed; bottom: 24px; right: 24px;
+    z-index: 5000; padding: 10px 18px; border-radius: 24px;
+    background: white; color: var(--text); border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18); cursor: pointer;
+    font-size: 13px; font-weight: 600; transition: all 0.15s;
+  }
+  .btn-esci-presenta:hover { background: var(--gray-light); transform: translateY(-1px); }
+  body.presentation-mode .btn-esci-presenta { display: inline-flex; align-items: center; gap: 7px; }
+
+  /* DEMO banner */
+  .demo-banner {
+    display: none; background: #fef9c3; color: #713f12;
+    border-bottom: 2px solid #d97706;
+    padding: 10px 28px; font-size: 13px; font-weight: 600;
+    text-align: center; letter-spacing: 0.3px;
+  }
+  body.demo-mode .demo-banner { display: block; }
+  body.demo-mode .header { box-shadow: inset 0 -4px 0 #d97706; }
+</style>
+
+<!-- Banner DEMO -->
+<div class="demo-banner" id="demo-banner">
+  🟡 <strong>MODALITÀ DEMO</strong> — Dati fittizi a solo scopo dimostrativo. Non rappresentano clienti o bandi reali.
+</div>
+
+<!-- Pulsante esci da presentazione -->
+<button class="btn-esci-presenta" id="btn-esci-presenta" onclick="togglePresentationMode(false)">
+  ❎ Esci dalla presentazione
+</button>
+
+<script>
+  // ═══════════════════════════════════════════════════════════════
+  // FASE 4 — MODALITÀ PRESENTAZIONE + DEMO + REPORT
+  // ═══════════════════════════════════════════════════════════════
+
+  // ── 4.3 Modalità DEMO: se ?demo=1 nell'URL, carica dati da data/demo/ ──
+  function isDemoMode() {
+    return new URLSearchParams(window.location.search).get('demo') === '1';
+  }
+
+  function attivaDemoMode() {
+    if (!isDemoMode()) return;
+    document.body.classList.add('demo-mode');
+    // intercetta fetch verso data/* per redirigerlo a data/demo/*
+    const origFetch = window.fetch;
+    window.fetch = function(input, init) {
+      if (typeof input === 'string' && input.startsWith('data/') && !input.startsWith('data/demo/')) {
+        const redirected = input.replace(/^data\//, 'data/demo/');
+        return origFetch(redirected, init);
+      }
+      return origFetch(input, init);
+    };
+  }
+
+  // ── 4.1 Modalità PRESENTAZIONE ──
+  const PRES_KEY = 'bandiRadar_presentation';
+
+  function togglePresentationMode(forceOn) {
+    const isOn = forceOn !== undefined
+      ? forceOn
+      : !document.body.classList.contains('presentation-mode');
+    document.body.classList.toggle('presentation-mode', isOn);
+    try { localStorage.setItem(PRES_KEY, isOn ? '1' : '0'); } catch(e) {}
+    aggiornaHeaderPresenter();
+    const btn = document.getElementById('btn-presenta-header');
+    if (btn) {
+      btn.textContent = isOn ? '✕ Modalità lavoro' : '📺 Presenta';
+      btn.title = isOn
+        ? 'Torna alla modalità di lavoro normale'
+        : 'Modalità vetrina: nasconde i dettagli tecnici, ingrandisce, ideale davanti al cliente';
+    }
+  }
+
+  function aggiornaHeaderPresenter() {
+    let el = document.getElementById('header-presenter');
+    const isOn = document.body.classList.contains('presentation-mode');
+    const az   = aziende && selectedProfileId
+                 ? aziende.find(a => a.id === selectedProfileId)
+                 : null;
+    if (!isOn || !az) {
+      if (el) el.remove();
+      return;
+    }
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'header-presenter';
+      el.className = 'header-presenter';
+      const meta = document.querySelector('.header-meta');
+      if (meta) meta.appendChild(el);
+    }
+    const nome = (typeof displayNomeAzienda === 'function')
+      ? displayNomeAzienda(az) : (az.codice || az.id);
+    const oggi = new Date().toLocaleDateString('it-IT', {day:'2-digit', month:'long', year:'numeric'});
+    el.innerHTML = `Selezione per <strong>${escHtml(nome)}</strong> · ${oggi} · preparato da Alex`;
+  }
+
+  function iniettaPulsantePresentaHeader() {
+    const fresh = document.getElementById('freshness');
+    if (!fresh || document.getElementById('btn-presenta-header')) return;
+    const btn = document.createElement('button');
+    btn.id        = 'btn-presenta-header';
+    btn.className = 'btn-presenta-header internal-only';   // in presentation mode, viene sostituito col btn-esci floating
+    btn.innerHTML = '📺 Presenta';
+    btn.title     = 'Modalità vetrina per il cliente';
+    btn.onclick   = () => togglePresentationMode();
+    fresh.parentNode.insertBefore(btn, fresh);
+  }
+
+  // Marca elementi "tecnici" come .internal-only (sparsi nella dashboard)
+  function marcaElementiInternal() {
+    // ID bando in formato monospace nelle card
+    document.querySelectorAll('.card-id').forEach(el => el.classList.add('internal-only'));
+    // pulsante 🔒 clienti riservati (operativo, non per il cliente)
+    const btnPriv = document.getElementById('btn-privacy-header');
+    if (btnPriv) btnPriv.classList.add('internal-only');
+    // banner privacy (operativo)
+    const banPriv = document.getElementById('privacy-banner');
+    if (banPriv) banPriv.classList.add('internal-only');
+    // tab Pratiche è strumento interno
+    const tabPr = document.getElementById('tab-pratiche');
+    if (tabPr) tabPr.classList.add('internal-only');
+  }
+
+  // ── 4.2 Bottone "Esporta PDF" nel pannello raccomandazioni ──
+  // Lo inietto al volo dopo renderRaccomandazioni()
+  function iniettaPulsantePDFinRaccomandazioni() {
+    // observer leggero che aggancia il pulsante quando appare il pannello racc
+    const main = document.getElementById('profili-main');
+    if (!main) return;
+    const obs = new MutationObserver(() => {
+      const panel  = main.querySelector('.racc-panel-header');
+      if (!panel || panel.querySelector('.btn-export-pdf')) return;
+      const az = aziende && selectedProfileId
+                 ? aziende.find(a => a.id === selectedProfileId) : null;
+      if (!az) return;
+      const codice = az.codice || az.id;
+      const btn = document.createElement('a');
+      btn.className = 'btn btn-primary btn-export-pdf';
+      btn.href = 'report.html?cliente=' + encodeURIComponent(codice);
+      btn.target = '_blank';
+      btn.rel    = 'noopener';
+      btn.style.cssText = 'font-size:12px;text-decoration:none';
+      btn.innerHTML = '📄 Esporta PDF';
+      btn.title = 'Apre il report stampabile per questo cliente';
+      panel.appendChild(btn);
+    });
+    obs.observe(main, { childList: true, subtree: true });
+  }
+
+  // Init
+  document.addEventListener('DOMContentLoaded', () => {
+    attivaDemoMode();
+    iniettaPulsantePresentaHeader();
+    marcaElementiInternal();
+    iniettaPulsantePDFinRaccomandazioni();
+    // Ripristina stato presentazione da localStorage
+    try {
+      if (localStorage.getItem(PRES_KEY) === '1') {
+        // aspetta che gli aziende siano caricate per popolare header
+        setTimeout(() => togglePresentationMode(true), 400);
+      }
+    } catch(e) {}
+  });
+</script>
+<!-- ══════════════ FINE FASE 4 ══════════════ -->
+
+<script>
+  // ── Fase 5.4: Storico raccomandazioni ─────────────────────────────
+  let storicoIndex = null;
+
+  async function caricaIndiceStorico() {
+    if (storicoIndex) return storicoIndex;
+    try {
+      const r = await fetch('data/raccomandazioni_storico/_index.json', { cache: 'no-cache' });
+      if (!r.ok) return null;
+      storicoIndex = await r.json();
+      return storicoIndex;
+    } catch(e) { return null; }
+  }
+
+  async function apriStorico(idAzienda) {
+    const idx = await caricaIndiceStorico();
+    if (!idx || !idx.snapshots || !idx.snapshots.length) {
+      alert('Nessuno snapshot storico disponibile.\n\nGli snapshot vengono salvati automaticamente quando l\'agente Claude rigenera le raccomandazioni.');
+      return;
+    }
+    let html = `<div class="modal-overlay open" onclick="if(event.target===this)this.remove()" id="storico-overlay">
+      <div class="modal" style="max-width:560px">
+        <div class="modal-header">
+          <div>
+            <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:600">Storico</div>
+            <div style="font-size:18px;font-weight:700;margin-top:4px">📜 Snapshot raccomandazioni precedenti</div>
+          </div>
+          <button class="modal-close" onclick="document.getElementById('storico-overlay').remove()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px">${idx.snapshots.length} snapshot disponibili. Si tratta di copie storiche, non modificabili.</div>`;
+    idx.snapshots.slice().reverse().forEach(s => {
+      const dataIt = new Date(s.data + 'T12:00:00').toLocaleDateString('it-IT', {day:'2-digit', month:'long', year:'numeric'});
+      html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:1px solid var(--border);border-radius:6px;margin-bottom:6px;background:#f8fafc">
+        <div>
+          <div style="font-weight:600;font-size:13px">${escHtml(dataIt)}</div>
+          <div style="font-size:11px;color:var(--text-muted)">${s.aziende} azienda${s.aziende!==1?'e':''} · ${s.raccomandazioni} raccomandazioni totali</div>
+        </div>
+        <a class="btn btn-sm" href="data/raccomandazioni_storico/${escAttr(s.file)}" target="_blank" rel="noopener" style="font-size:11px">👁 Apri JSON</a>
+      </div>`;
+    });
+    html += `</div></div></div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+  }
+</script>
+
+<!-- ══════════════ SERVICE WORKER (Fase 5.3) ══════════════ -->
+<script>
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then((reg) => {
+          // Banner "Nuova versione" quando arriva un update
+          reg.addEventListener('updatefound', () => {
+            const nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener('statechange', () => {
+              if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+                mostraBannerNuovaVersione();
+              }
+            });
+          });
+        })
+        .catch(() => { /* SW non disponibile: la dashboard funziona comunque */ });
+    });
+  }
+
+  function mostraBannerNuovaVersione() {
+    if (document.getElementById('sw-update-banner')) return;
+    const b = document.createElement('div');
+    b.id = 'sw-update-banner';
+    b.style.cssText = 'position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:6000;background:#1e40af;color:white;padding:10px 18px;border-radius:24px;box-shadow:0 8px 24px rgba(0,0,0,0.3);font-size:13px;font-weight:600;display:flex;align-items:center;gap:12px';
+    b.innerHTML = `<span>🔄 Nuova versione disponibile</span>
+      <button style="background:white;color:#1e40af;border:none;padding:5px 12px;border-radius:14px;cursor:pointer;font-weight:700;font-size:12px" onclick="location.reload()">Ricarica</button>`;
+    document.body.appendChild(b);
+  }
+</script>
+
+
 </body>
 </html>

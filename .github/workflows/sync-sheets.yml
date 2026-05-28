@@ -1,21 +1,34 @@
 # ─────────────────────────────────────────────────────────────────────────────
-# BandiRadar — Sync notturno Google Sheets → CSV
+# BandiRadar — Sync notturno Google Sheets → CSV (Fase 1)
+#
 # Si attiva ogni notte alle 02:00 (ora italiana = 01:00 UTC) e manualmente.
 #
+# Cosa fa, in ordine:
+#   1. Scarica il foglio "Bandi" dal Google Sheet pubblico
+#   2. VALIDA il contenuto. Errori critici (es. ID duplicati, valori non
+#      ammessi, date non ISO) BLOCCANO il commit e ti mandano email.
+#   3. AUTO-ARCHIVIA i bandi scaduti da oltre 30 giorni (non Prorogati)
+#      → li sposta in archivio.csv senza toccare il Google Sheet
+#   4. CALCOLA il diff vs il bandi.csv precedente
+#      → manda email IMMEDIATA solo se il diff impatta bandi presenti
+#        in raccomandazioni.json (cliente reale interessato)
+#   5. Scrive bandi.csv, archivio.csv, last_sync.txt, ultimo_diff.json
+#   6. Commit + push se ci sono modifiche
+#
 # SETUP RICHIESTO (una tantum):
-#   1. Vai su Settings → Secrets and variables → Actions nel tuo repository
-#   2. Aggiungi i seguenti secrets:
-#      SHEET_ID        → ID del tuo Google Sheet (dalla URL)
-#      NOTIFY_EMAIL    → email destinataria degli alert di errore
-#      SMTP_USER       → email Gmail mittente (es. bandiradar@gmail.com)
+#   Settings → Secrets and variables → Actions, aggiungere:
+#      SHEET_ID        → ID del Google Sheet (dalla URL)
+#      NOTIFY_EMAIL    → email destinataria degli alert
+#      SMTP_USER       → email Gmail mittente
 #      SMTP_PASS       → App Password Gmail (NON la password normale)
 # ─────────────────────────────────────────────────────────────────────────────
 
 name: Sync Notturno Google Sheets
 
+# Disattivato lo schedule notturno: il flusso operativo è LOCALE
+# (vedi scripts/valida_e_archivia.py). Lasciato solo l'avvio manuale per
+# riattivare il sync da Google Sheet se in futuro verrà collegato un Sheet.
 on:
-  schedule:
-    - cron: '0 1 * * *'   # ogni notte alle 02:00 ora italiana (01:00 UTC)
   workflow_dispatch:        # avvio manuale dalla tab Actions
 
 permissions:
@@ -23,135 +36,495 @@ permissions:
 
 jobs:
   sync:
-    name: Scarica CSV da Google Sheets e aggiorna repository
+    name: Scarica, valida, archivia, diff e pubblica
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout del repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. Installa dipendenze
       - name: Installa dipendenze
         run: pip install requests
 
-      # 4. Scarica e processa il CSV da Google Sheets
-      - name: Scarica e processa CSV
+      # ─────────────────────────────────────────────────────────────────────
+      # Step 1+2+3+4: scarica, valida, archivia, diff
+      # ─────────────────────────────────────────────────────────────────────
+      - name: Scarica, valida, archivia e calcola diff
+        id: sync
         env:
           SHEET_ID: ${{ secrets.SHEET_ID }}
         run: |
           python << 'EOF'
-          import os, requests, csv, io, sys
-          from datetime import date
+          import os, sys, csv, io, json, requests
+          from datetime import date, timedelta, datetime
 
-          sheet_id = os.environ.get('SHEET_ID', '')
+          # ─── Costanti di validazione ───────────────────────────────────
+          REQUIRED_FIELDS  = ['ID', 'Nome bando', 'Livello', 'Stato', 'File CSV']
+          VALID_LIVELLO    = {'Europeo', 'Nazionale', 'Regionale ER', 'Regionale'}
+          VALID_STATO      = {'Aperto', 'In arrivo', 'Prorogato', 'Sospeso'}
+          VALID_FILECSV    = {'Attivo', 'Archivio'}
+          VALID_PRIORITA   = {'Alta', 'Media', 'Bassa', ''}
+          VALID_TIPOSCAD   = {
+              'Data fissa',
+              'Sportello (fino a esaurimento fondi)',
+              'Misura strutturale',
+              'Anno fiscale',
+              'Finestre periodiche',
+              'Multidata/tappe',
+              ''
+          }
+          ARCHIVE_AFTER_DAYS = 30   # giorni dopo scadenza per auto-archiviare
+
+          OGGI = date.today()
+
+          # ─── Step 1: scarica CSV ───────────────────────────────────────
+          sheet_id = os.environ.get('SHEET_ID', '').strip()
           if not sheet_id:
-              print("❌ SHEET_ID non configurato nei secrets")
-              sys.exit(1)
+              print("SHEET_ID non configurato — uso flusso LOCALE (vedi scripts/valida_e_archivia.py). Skip senza errore.")
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as o:
+                  o.write("validation_blocked=false\n")
+                  o.write("send_diff_email=false\n")
+              sys.exit(0)
 
-          # URL export CSV pubblico (il foglio deve essere condiviso pubblicamente in sola lettura)
-          # Foglio 1 = "Bandi" (dati pubblici)
           url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid=0"
-
-          print(f"📥 Scaricamento CSV da Google Sheets...")
+          print(f"Scaricamento CSV da Google Sheets...")
           try:
               resp = requests.get(url, timeout=30)
               resp.raise_for_status()
           except Exception as e:
-              print(f"❌ Errore download: {e}")
+              print(f"ERRORE download: {e}")
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as o:
+                  o.write("validation_blocked=true\n")
+                  o.write(f"error_reason=Download fallito: {e}\n")
               sys.exit(1)
 
-          content = resp.content.decode('utf-8-sig')  # gestisce BOM UTF-8
+          content = resp.content.decode('utf-8-sig')   # BOM safe
           reader  = csv.DictReader(io.StringIO(content))
           rows    = list(reader)
-          print(f"✅ {len(rows)} righe scaricate")
+          fields  = reader.fieldnames or []
+          print(f"Scaricate {len(rows)} righe")
 
-          # Validazione campi obbligatori
-          required = ['ID', 'Nome bando', 'Livello', 'Stato', 'File CSV']
-          errors   = []
-          ids_seen = set()
-          for i, row in enumerate(rows, 2):
-              for f in required:
+          # ─── Step 2: VALIDAZIONE BLOCCANTE ─────────────────────────────
+          critical   = []   # bloccano commit
+          warnings   = []   # informativi, non bloccano
+          ids_seen   = set()
+
+          def is_iso_date(s):
+              try:
+                  datetime.strptime(s.strip(), '%Y-%m-%d')
+                  return True
+              except Exception:
+                  return False
+
+          for i, row in enumerate(rows, 2):  # riga 1 = header
+              # campi obbligatori
+              for f in REQUIRED_FIELDS:
                   if not row.get(f, '').strip():
-                      errors.append(f"Riga {i}: campo '{f}' vuoto")
+                      critical.append(f"Riga {i}: campo obbligatorio vuoto '{f}'")
+
+              # ID duplicati
               rid = row.get('ID', '').strip()
-              if rid in ids_seen:
-                  errors.append(f"Riga {i}: ID duplicato '{rid}'")
-              ids_seen.add(rid)
+              if rid:
+                  if rid in ids_seen:
+                      critical.append(f"Riga {i}: ID duplicato '{rid}'")
+                  ids_seen.add(rid)
 
-          if errors:
-              print(f"⚠️  {len(errors)} problemi trovati:")
-              for e in errors[:20]: print(f"   {e}")
-              # Continua comunque (non bloccare il sync per errori minori)
+              # valori enum
+              liv  = row.get('Livello', '').strip()
+              if liv and liv not in VALID_LIVELLO:
+                  critical.append(f"Riga {i} ({rid}): Livello non valido '{liv}'")
 
-          # Separa bandi attivi da archivio
+              stato = row.get('Stato', '').strip()
+              if stato and stato not in VALID_STATO:
+                  critical.append(f"Riga {i} ({rid}): Stato non valido '{stato}'")
+
+              fcsv = row.get('File CSV', '').strip()
+              if fcsv and fcsv not in VALID_FILECSV:
+                  critical.append(f"Riga {i} ({rid}): File CSV non valido '{fcsv}'")
+
+              prio = row.get('Priorità', '').strip()
+              if prio and prio not in VALID_PRIORITA:
+                  warnings.append(f"Riga {i} ({rid}): Priorità non valida '{prio}'")
+
+              tscad = row.get('Tipo scadenza', '').strip()
+              if tscad and tscad not in VALID_TIPOSCAD:
+                  warnings.append(f"Riga {i} ({rid}): Tipo scadenza non valido '{tscad}'")
+
+              # date in formato ISO
+              for date_field in ('Scadenza', 'Data apertura', 'Data inserimento'):
+                  v = row.get(date_field, '').strip()
+                  if v and not is_iso_date(v):
+                      critical.append(f"Riga {i} ({rid}): {date_field} non in formato YYYY-MM-DD: '{v}'")
+
+          # Se errori critici → BLOCCA
+          if critical:
+              print(f"BLOCCO: {len(critical)} errori critici trovati")
+              for e in critical[:30]:
+                  print(f"  - {e}")
+              if len(critical) > 30:
+                  print(f"  ... e altri {len(critical)-30} errori")
+
+              # Salva report per email
+              with open('/tmp/validation_errors.txt', 'w') as f:
+                  f.write(f"VALIDAZIONE FALLITA — {len(critical)} errori critici\n\n")
+                  for e in critical:
+                      f.write(f"- {e}\n")
+                  if warnings:
+                      f.write(f"\n\nAltri {len(warnings)} warning non bloccanti:\n")
+                      for w in warnings:
+                          f.write(f"- {w}\n")
+
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as o:
+                  o.write("validation_blocked=true\n")
+                  o.write(f"error_count={len(critical)}\n")
+                  o.write(f"error_reason=Validazione fallita: {len(critical)} errori critici nel Google Sheet\n")
+              sys.exit(1)
+
+          if warnings:
+              print(f"WARNING (non bloccanti): {len(warnings)}")
+              for w in warnings[:10]:
+                  print(f"  - {w}")
+
+          # ─── Step 3: AUTO-ARCHIVIAZIONE ────────────────────────────────
+          # Bandi con scadenza < (oggi - 30gg) E stato != Prorogato vanno in archivio.csv
+          # anche se nel Sheet sono ancora marcati come "Attivo"
+          auto_archived = []
+          cutoff = OGGI - timedelta(days=ARCHIVE_AFTER_DAYS)
+
+          for row in rows:
+              if row.get('File CSV', '').strip() != 'Attivo':
+                  continue
+              if row.get('Stato', '').strip() == 'Prorogato':
+                  continue
+              scad_str = row.get('Scadenza', '').strip()
+              if not scad_str:
+                  continue
+              try:
+                  scad = datetime.strptime(scad_str, '%Y-%m-%d').date()
+              except Exception:
+                  continue
+              if scad < cutoff:
+                  row['File CSV'] = 'Archivio'   # override locale, non tocca il Sheet
+                  auto_archived.append(row.get('ID', ''))
+
+          if auto_archived:
+              print(f"Auto-archiviati {len(auto_archived)} bandi scaduti da oltre {ARCHIVE_AFTER_DAYS} giorni:")
+              for rid in auto_archived[:20]:
+                  print(f"  - {rid}")
+
+          # Split definitivo
           attivi   = [r for r in rows if r.get('File CSV','').strip() == 'Attivo']
           archivio = [r for r in rows if r.get('File CSV','').strip() == 'Archivio']
+          print(f"Risultato split: {len(attivi)} attivi, {len(archivio)} archivio")
 
-          print(f"📊 Bandi attivi: {len(attivi)} | Archivio: {len(archivio)}")
-
-          # Scrivi i due file CSV
+          # ─── Step 4: DIFF vs bandi.csv precedente ──────────────────────
           os.makedirs('data', exist_ok=True)
 
+          def read_existing_csv(path):
+              # utf-8-sig per gestire correttamente il BOM lasciato da Google Sheets
+              if not os.path.exists(path):
+                  return {}
+              with open(path, encoding='utf-8-sig') as f:
+                  return {r['ID']: r for r in csv.DictReader(f) if r.get('ID')}
+
+          old_attivi   = read_existing_csv('data/bandi.csv')
+          old_archivio = read_existing_csv('data/archivio.csv')
+          new_attivi   = {r['ID']: r for r in attivi if r.get('ID')}
+
+          ids_old = set(old_attivi.keys())
+          ids_new = set(new_attivi.keys())
+
+          aggiunti     = sorted(ids_new - ids_old)
+          archiviati   = sorted(ids_old - ids_new)
+          # Modificati: cambio Stato, Scadenza, Importo max, Percentuale contributo
+          tracked_fields = ['Stato', 'Scadenza', 'Importo max beneficiario',
+                            'Percentuale contributo', 'Dotazione totale',
+                            'Priorità', 'Link ufficiale']
+          modificati = []
+          for rid in (ids_old & ids_new):
+              changes = {}
+              for f in tracked_fields:
+                  ov = old_attivi[rid].get(f, '').strip()
+                  nv = new_attivi[rid].get(f, '').strip()
+                  if ov != nv:
+                      changes[f] = {'da': ov, 'a': nv}
+              if changes:
+                  modificati.append({
+                      'id':       rid,
+                      'nome':     new_attivi[rid].get('Nome bando', ''),
+                      'changes':  changes
+                  })
+
+          # Carica ID in raccomandazioni (per email IMMEDIATA su impatto cliente)
+          racc_ids = set()
+          try:
+              with open('data/raccomandazioni.json', encoding='utf-8') as f:
+                  racc_data = json.load(f)
+              for az in racc_data.get('aziende', []):
+                  for item in az.get('raccomandazioni', []):
+                      if item.get('id'):
+                          racc_ids.add(item['id'])
+          except Exception as e:
+              print(f"INFO: raccomandazioni.json non leggibile ({e}), nessun match cliente")
+
+          # Cambi rilevanti per cliente
+          aggiunti_rilevanti   = [i for i in aggiunti   if i in racc_ids]
+          archiviati_rilevanti = [i for i in archiviati if i in racc_ids]
+          modificati_rilevanti = [m for m in modificati if m['id'] in racc_ids]
+
+          impatta_cliente = bool(aggiunti_rilevanti or archiviati_rilevanti or modificati_rilevanti)
+
+          # ─── Step 5: scrivi i file CSV ─────────────────────────────────
           def write_csv(filepath, data, fieldnames):
               with open(filepath, 'w', newline='', encoding='utf-8') as f:
-                  writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
-                  writer.writeheader()
-                  writer.writerows(data)
+                  w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
+                  w.writeheader()
+                  w.writerows(data)
 
           if rows:
-              fields = list(rows[0].keys())
               write_csv('data/bandi.csv',    attivi,   fields)
               write_csv('data/archivio.csv', archivio, fields)
-              print("✅ File CSV scritti: data/bandi.csv, data/archivio.csv")
+              print("File CSV scritti")
 
-          # Scrivi log di sincronizzazione
+          # last_sync.txt arricchito (la dashboard lo legge)
+          link_ok = link_ko = link_totali = 0
+          try:
+              with open('data/link_status.json', encoding='utf-8') as f:
+                  ls = json.load(f).get('bandi', {})
+                  for b in ls.values():
+                      link_totali += 1
+                      if b.get('status') == 'OK':
+                          link_ok += 1
+                      else:
+                          link_ko += 1
+          except Exception:
+              pass
+
+          sync_info = {
+              'data':            OGGI.isoformat(),
+              'timestamp':       datetime.utcnow().isoformat() + 'Z',
+              'attivi':          len(attivi),
+              'archivio':        len(archivio),
+              'auto_archiviati': len(auto_archived),
+              'warning_count':   len(warnings),
+              'link_ok':         link_ok,
+              'link_ko':         link_ko,
+              'link_totali':     link_totali,
+              'aggiunti':        len(aggiunti),
+              'modificati':      len(modificati),
+              'archiviati_in_diff': len(archiviati),
+          }
+          with open('data/last_sync.json', 'w', encoding='utf-8') as f:
+              json.dump(sync_info, f, ensure_ascii=False, indent=2)
+          # mantieni anche il txt vecchio per compatibilità
           with open('data/last_sync.txt', 'w') as f:
-              f.write(f"{date.today().isoformat()} — {len(attivi)} attivi, {len(archivio)} archivio")
-          print("✅ Log aggiornato: data/last_sync.txt")
+              f.write(f"{OGGI.isoformat()} — {len(attivi)} attivi, {len(archivio)} archivio")
+          print("last_sync.json scritto")
 
-          if errors:
-              with open('data/sync_errors.txt', 'w') as f:
-                  f.write('\n'.join(errors))
-              print(f"⚠️  Errori salvati in data/sync_errors.txt")
+          # ultimo_diff.json (la dashboard può mostrarlo)
+          diff_data = {
+              'generatedAt':         datetime.utcnow().isoformat() + 'Z',
+              'aggiunti':            [{'id': i, 'nome': new_attivi[i].get('Nome bando', '')} for i in aggiunti[:50]],
+              'archiviati':          [{'id': i, 'nome': old_attivi[i].get('Nome bando', '')} for i in archiviati[:50]],
+              'modificati':          modificati[:50],
+              'auto_archiviati':     auto_archived[:50],
+              'totali': {
+                  'aggiunti':         len(aggiunti),
+                  'archiviati':       len(archiviati),
+                  'modificati':       len(modificati),
+                  'auto_archiviati':  len(auto_archived),
+              },
+              'rilevanti_cliente':   {
+                  'aggiunti':    aggiunti_rilevanti,
+                  'archiviati':  archiviati_rilevanti,
+                  'modificati':  [m['id'] for m in modificati_rilevanti],
+              }
+          }
+          with open('data/ultimo_diff.json', 'w', encoding='utf-8') as f:
+              json.dump(diff_data, f, ensure_ascii=False, indent=2)
+          print("ultimo_diff.json scritto")
+
+          # ─── Step 6: prepara payload email se serve ────────────────────
+          if impatta_cliente:
+              MAX_ROWS = 15
+
+              def fmt_cambio(c):
+                  da = c['da'] or '(vuoto)'
+                  a  = c['a']  or '(vuoto)'
+                  return f"{da} → {a}"
+
+              lines = ['CAMBI RILEVANTI per i tuoi clienti (presenti in raccomandazioni.json):\n']
+
+              if aggiunti_rilevanti:
+                  lines.append(f"\nBandi AGGIUNTI ({len(aggiunti_rilevanti)}):")
+                  for rid in aggiunti_rilevanti[:MAX_ROWS]:
+                      lines.append(f"  + {rid} — {new_attivi[rid].get('Nome bando', '')}")
+                  if len(aggiunti_rilevanti) > MAX_ROWS:
+                      lines.append(f"  ... e altri {len(aggiunti_rilevanti)-MAX_ROWS} (vedi dashboard)")
+
+              if archiviati_rilevanti:
+                  lines.append(f"\nBandi ARCHIVIATI ({len(archiviati_rilevanti)}):")
+                  for rid in archiviati_rilevanti[:MAX_ROWS]:
+                      lines.append(f"  - {rid} — {old_attivi[rid].get('Nome bando', '')}")
+                  if len(archiviati_rilevanti) > MAX_ROWS:
+                      lines.append(f"  ... e altri {len(archiviati_rilevanti)-MAX_ROWS} (vedi dashboard)")
+
+              if modificati_rilevanti:
+                  lines.append(f"\nBandi MODIFICATI ({len(modificati_rilevanti)}):")
+                  for m in modificati_rilevanti[:MAX_ROWS]:
+                      lines.append(f"\n  * {m['id']} — {m['nome']}")
+                      for fld, c in m['changes'].items():
+                          lines.append(f"      {fld}: {fmt_cambio(c)}")
+                  if len(modificati_rilevanti) > MAX_ROWS:
+                      lines.append(f"\n  ... e altri {len(modificati_rilevanti)-MAX_ROWS} (vedi dashboard)")
+
+              tot = len(aggiunti) + len(archiviati) + len(modificati)
+              lines.append(f"\n\n---\nDiff totale stanotte: {len(aggiunti)} aggiunti, {len(modificati)} modificati, {len(archiviati)} archiviati ({tot} cambi totali)")
+              if auto_archived:
+                  lines.append(f"Auto-archiviati per scadenza > 30gg: {len(auto_archived)}")
+              lines.append(f"\nDashboard: https://github.com/{os.environ.get('GITHUB_REPOSITORY','')}")
+
+              with open('/tmp/diff_email_body.txt', 'w') as f:
+                  f.write('\n'.join(lines))
+
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as o:
+                  o.write("send_diff_email=true\n")
+                  o.write(f"diff_subject=BandiRadar — {len(aggiunti_rilevanti)+len(modificati_rilevanti)+len(archiviati_rilevanti)} cambi su bandi dei tuoi clienti\n")
+              print(f"Email cliente preparata ({len(aggiunti_rilevanti)+len(modificati_rilevanti)+len(archiviati_rilevanti)} cambi)")
+          else:
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as o:
+                  o.write("send_diff_email=false\n")
+              if aggiunti or modificati or archiviati:
+                  print(f"Cambi non rilevanti per cliente ({len(aggiunti)+len(modificati)+len(archiviati)} totali) — niente email immediata, finiranno nel digest settimanale")
+              else:
+                  print("Nessun cambio rispetto a ieri")
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as o:
+              o.write("validation_blocked=false\n")
           EOF
 
-      # 5. Commit e push se ci sono modifiche
+      # ─────────────────────────────────────────────────────────────────────
+      # Step 6b (Fase 3.3): scarica il foglio "Pratiche" se esiste → data/pratiche.csv
+      # ─────────────────────────────────────────────────────────────────────
+      - name: Scarica foglio Pratiche (CRM)
+        if: steps.sync.outputs.validation_blocked != 'true'
+        env:
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+        run: |
+          python << 'EOF'
+          import os, requests, csv, io
+          sheet_id = os.environ.get('SHEET_ID', '').strip()
+          if not sheet_id:
+              raise SystemExit(0)
+          url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet=Pratiche"
+          try:
+              r = requests.get(url, timeout=30)
+          except Exception as e:
+              print(f"Pratiche: download fallito (non bloccante): {e}")
+              raise SystemExit(0)
+          if r.status_code != 200:
+              print(f"Pratiche: foglio non disponibile (HTTP {r.status_code}) - skip")
+              raise SystemExit(0)
+          content = r.content.decode('utf-8-sig')
+          # gviz puo' restituire HTML/JS se il foglio non esiste: scarta in quel caso
+          head = content.lstrip()[:80].lower()
+          if head.startswith('<') or 'google.visualization' in head or ")]}'" in content[:8]:
+              print("Pratiche: foglio inesistente o risposta non-CSV - skip")
+              raise SystemExit(0)
+          rows = list(csv.DictReader(io.StringIO(content)))
+          if not rows:
+              print("Pratiche: foglio vuoto - skip")
+              raise SystemExit(0)
+          os.makedirs('data', exist_ok=True)
+          with open('data/pratiche.csv', 'w', newline='', encoding='utf-8') as f:
+              f.write(content)
+          print(f"Pratiche: data/pratiche.csv scritto ({len(rows)} righe)")
+          EOF
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Step 7: commit e push (solo se validazione OK)
+      # ─────────────────────────────────────────────────────────────────────
       - name: Commit e push aggiornamenti
+        if: steps.sync.outputs.validation_blocked != 'true'
         run: |
           git config user.name  "BandiRadar Bot"
           git config user.email "actions@github.com"
-          git add data/bandi.csv data/archivio.csv data/last_sync.txt data/sync_errors.txt 2>/dev/null || true
+          git add data/bandi.csv data/archivio.csv data/last_sync.txt data/last_sync.json data/ultimo_diff.json data/pratiche.csv 2>/dev/null || true
           if git diff --staged --quiet; then
-            echo "ℹ️  Nessuna modifica — niente da committare"
+            echo "Nessuna modifica — niente da committare"
           else
-            git commit -m "🔄 Sync automatico $(date '+%Y-%m-%d %H:%M') — dati aggiornati"
+            git commit -m "Sync automatico $(date '+%Y-%m-%d %H:%M') — dati aggiornati"
             git push
-            echo "✅ Push completato"
+            echo "Push completato"
           fi
 
-      # 6. (Opzionale) Notifica email in caso di errori nel sync
-      - name: Notifica email in caso di errori
-        if: failure()
+      # ─────────────────────────────────────────────────────────────────────
+      # Email A: VALIDAZIONE FALLITA (blocco commit)
+      # ─────────────────────────────────────────────────────────────────────
+      - name: Email — validazione bloccata
+        if: steps.sync.outputs.validation_blocked == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.SMTP_USER }}
-          password: ${{ secrets.SMTP_PASS }}
-          to: ${{ secrets.NOTIFY_EMAIL }}
-          from: BandiRadar <${{ secrets.SMTP_USER }}>
-          subject: "⚠️ BandiRadar — Errore sync notturno del ${{ github.run_id }}"
+          server_port:    587
+          username:       ${{ secrets.SMTP_USER }}
+          password:       ${{ secrets.SMTP_PASS }}
+          to:             ${{ secrets.NOTIFY_EMAIL }}
+          from:           BandiRadar <${{ secrets.SMTP_USER }}>
+          subject:        "BandiRadar — Sync BLOCCATO: ${{ steps.sync.outputs.error_count || 0 }} errori nel Google Sheet"
           body: |
-            Il sync notturno di BandiRadar ha incontrato un errore.
+            Il sync notturno è stato BLOCCATO per evitare di pubblicare dati corrotti.
+
+            Motivo: ${{ steps.sync.outputs.error_reason }}
+
+            La dashboard continua a mostrare i dati di ieri (non si rompe).
+            Per ripristinare: correggi i problemi nel Google Sheet e rilancia il workflow
+            dalla tab Actions (workflow_dispatch).
+
+            Log completo:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            (Email automatica — non rispondere)
+          attachments: /tmp/validation_errors.txt
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Email B: CAMBI RILEVANTI PER CLIENTE
+      # ─────────────────────────────────────────────────────────────────────
+      - name: Email — cambi rilevanti per cliente
+        if: steps.sync.outputs.send_diff_email == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port:    587
+          username:       ${{ secrets.SMTP_USER }}
+          password:       ${{ secrets.SMTP_PASS }}
+          to:             ${{ secrets.NOTIFY_EMAIL }}
+          from:           BandiRadar <${{ secrets.SMTP_USER }}>
+          subject:        ${{ steps.sync.outputs.diff_subject }}
+          body:           file:///tmp/diff_email_body.txt
+
+      # ─────────────────────────────────────────────────────────────────────
+      # Email C: errore generico (es. SMTP, rete, eccezione Python)
+      # ─────────────────────────────────────────────────────────────────────
+      - name: Email — errore generico workflow
+        if: failure() && steps.sync.outputs.validation_blocked != 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port:    587
+          username:       ${{ secrets.SMTP_USER }}
+          password:       ${{ secrets.SMTP_PASS }}
+          to:             ${{ secrets.NOTIFY_EMAIL }}
+          from:           BandiRadar <${{ secrets.SMTP_USER }}>
+          subject:        "BandiRadar — Errore sync notturno (workflow run ${{ github.run_id }})"
+          body: |
+            Il sync notturno di BandiRadar ha incontrato un errore tecnico
+            (non un problema di dati nel Google Sheet).
 
             Controlla i log su GitHub Actions:
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-            Data: ${{ github.event.repository.updated_at }}

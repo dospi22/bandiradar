@@ -778,209 +778,212 @@
        NUOVO LAYOUT — SIDEBAR + CONTENT AREA
     ══════════════════════════════════════════ */
 
-    /* Reset body per layout sidebar */
+    /* ══════════════════════════════════════
+       LAYOUT PRINCIPALE — SIDEBAR + CONTENT
+    ══════════════════════════════════════ */
     body {
       display: flex;
       min-height: 100vh;
-      background: #f0f2f5;
+      background: #f4f6f9;
     }
+
+    /* Nascondi vecchio header */
+    .header { display: none !important; }
+    .section-nav { display: none !important; }
 
     /* ── SIDEBAR ── */
     .sidebar {
-      width: 240px;
-      min-width: 240px;
-      background: #1a2035;
+      width: 260px;
+      min-width: 260px;
+      background: #1e2a3a;
       display: flex;
       flex-direction: column;
       position: fixed;
       top: 0; left: 0; bottom: 0;
-      z-index: 100;
+      z-index: 200;
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
+    /* Logo */
     .sidebar-logo {
-      padding: 22px 20px 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .sidebar-logo-row {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
     }
     .sidebar-logo-icon {
-      width: 36px; height: 36px;
-      background: var(--blue);
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: #2563eb;
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
     }
     .sidebar-logo-text h1 {
-      font-size: 16px; font-weight: 700; color: white; letter-spacing: -0.3px;
+      font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.3px; line-height: 1.2;
     }
     .sidebar-logo-text p {
-      font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 1px;
+      font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px;
     }
+
+    /* Freshness nella sidebar */
     .sidebar-freshness {
-      margin-top: 10px;
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 10px; color: rgba(255,255,255,0.55);
-      cursor: pointer; padding: 4px 0;
+      display: flex; align-items: center; gap: 7px;
+      font-size: 11px; color: rgba(255,255,255,0.5);
+      cursor: pointer; padding: 6px 8px; border-radius: 6px;
+      transition: background 0.15s;
+      /* override stili freshness originali */
+      background: rgba(255,255,255,0.06) !important;
+      border: 1px solid rgba(255,255,255,0.08) !important;
     }
-    .sidebar-freshness:hover { color: rgba(255,255,255,0.85); }
-    .sidebar-freshness .fresh-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .sidebar-freshness:hover { background: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.8); }
+    .sidebar-freshness .fresh-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; box-shadow: none !important; }
     .sidebar-freshness.ok   .fresh-dot { background: #22c55e; }
     .sidebar-freshness.warn .fresh-dot { background: #f59e0b; }
     .sidebar-freshness.fail .fresh-dot { background: #ef4444; }
+    .sidebar-freshness .freshness-sub { color: rgba(255,255,255,0.4); }
 
-    /* ── SIDEBAR STATS ── */
+    /* Stats 2x2 */
     .sidebar-stats {
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; padding: 16px 16px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .sidebar-stat {
-      background: rgba(255,255,255,0.06);
-      border-radius: 8px;
-      padding: 10px 10px 8px;
-      text-align: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 12px 10px 10px; text-align: center;
     }
     .sidebar-stat-value {
-      font-size: 20px; font-weight: 700; color: white; display: block;
+      font-size: 22px; font-weight: 700; color: #fff; display: block; line-height: 1.1;
     }
     .sidebar-stat-value.warn { color: #f59e0b; }
     .sidebar-stat-value.new  { color: #34d399; }
     .sidebar-stat-label {
-      font-size: 9px; color: rgba(255,255,255,0.45);
-      text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;
+      font-size: 10px; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; letter-spacing: 0.4px; margin-top: 4px; display: block;
     }
 
-    /* ── SIDEBAR NAV ── */
+    /* Nav principale */
     .sidebar-nav {
-      flex: 1;
-      padding: 12px 10px;
+      flex: 1; padding: 16px 12px 8px;
     }
     .sidebar-nav-label {
-      font-size: 9px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.8px; color: rgba(255,255,255,0.3);
-      padding: 6px 10px 4px; margin-bottom: 2px;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.8px; color: rgba(255,255,255,0.25);
+      padding: 0 8px; margin-bottom: 6px;
     }
     .sidebar-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px; border-radius: 8px;
-      color: rgba(255,255,255,0.6);
-      font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px; border-radius: 10px;
+      color: rgba(255,255,255,0.55);
+      font-size: 14px; font-weight: 500;
       cursor: pointer; border: none; background: none;
       width: 100%; text-align: left;
-      transition: all 0.15s;
-      margin-bottom: 2px;
+      transition: all 0.15s; margin-bottom: 3px;
+      text-decoration: none;
     }
-    .sidebar-item:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); }
-    .sidebar-item.active { background: var(--blue); color: white; font-weight: 600; }
-    .sidebar-item-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+    .sidebar-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.9); }
+    .sidebar-item.active { background: #2563eb; color: #fff; font-weight: 600; }
+    .sidebar-item.active:hover { background: #1d4ed8; }
+    .sidebar-item-icon { font-size: 17px; width: 22px; text-align: center; flex-shrink: 0; }
     .sidebar-item-badge {
-      margin-left: auto;
-      background: rgba(255,255,255,0.15);
-      color: white; font-size: 10px; font-weight: 700;
-      padding: 1px 7px; border-radius: 20px;
+      margin-left: auto; flex-shrink: 0;
+      background: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px; min-width: 26px; text-align: center;
     }
-    .sidebar-item.active .sidebar-item-badge { background: rgba(255,255,255,0.25); }
+    .sidebar-item.active .sidebar-item-badge { background: rgba(255,255,255,0.22); }
 
-    /* ── SIDEBAR FOOTER ── */
+    /* Footer sidebar — strumenti interni */
     .sidebar-footer {
-      padding: 12px 10px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 8px 12px 16px;
+      border-top: 1px solid rgba(255,255,255,0.07);
     }
+    .sidebar-footer-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.8px; color: rgba(255,255,255,0.2);
+      padding: 8px 8px 4px; display: block;
+    }
+    .sidebar-footer .sidebar-item {
+      font-size: 12px; padding: 8px 12px; color: rgba(255,255,255,0.4);
+    }
+    .sidebar-footer .sidebar-item:hover { color: rgba(255,255,255,0.75); }
 
     /* ── CONTENT AREA ── */
     .content-area {
-      margin-left: 240px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      min-width: 0;
+      margin-left: 260px;
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column; min-height: 100vh;
     }
 
     /* ── TOP BAR ── */
     .topbar {
-      background: white;
-      border-bottom: 1px solid var(--border);
-      padding: 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      position: sticky; top: 0; z-index: 90;
+      background: #fff;
+      border-bottom: 1px solid #e8ecf0;
+      padding: 0 32px;
+      height: 64px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
     .topbar-title {
-      font-size: 20px; font-weight: 700; color: var(--text);
+      font-size: 22px; font-weight: 700; color: #1a1f2e; letter-spacing: -0.3px;
     }
-    .topbar-actions {
-      display: flex; align-items: center; gap: 10px;
-    }
+    .topbar-actions { display: flex; align-items: center; gap: 10px; }
 
-    /* ── MAIN CONTENT ── */
+    /* ── MAIN ── */
     .main {
-      max-width: none;
-      margin: 0;
-      padding: 24px 28px 56px;
+      max-width: none; margin: 0;
+      padding: 28px 32px 64px;
     }
 
-    /* Nascondi vecchio header e section-nav */
-    .header { display: none !important; }
-    .section-nav { display: none !important; }
-
-    /* ── SCORE CIRCLE sulle card bandi ── */
+    /* ── SCORE CIRCLE ── */
     .score-circle {
-      width: 46px; height: 46px;
-      border-radius: 50%;
+      width: 50px; height: 50px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700;
-      flex-shrink: 0;
+      font-size: 14px; font-weight: 700; flex-shrink: 0;
       border: 3px solid currentColor;
-      position: relative;
     }
-    .score-alta   { color: #059669; border-color: #059669; background: #f0fdf4; }
-    .score-media  { color: #d97706; border-color: #d97706; background: #fffbeb; }
-    .score-bassa  { color: #6b7280; border-color: #d1d5db; background: #f9fafb; }
+    .score-alta  { color: #059669; border-color: #059669; background: #f0fdf4; }
+    .score-media { color: #d97706; border-color: #d97706; background: #fffbeb; }
+    .score-bassa { color: #6b7280; border-color: #d1d5db; background: #f9fafb; }
 
-    /* ── CARD: nuovo layout con score ── */
+    /* ── CARD: layout con score a sinistra ── */
     .bando-card {
-      display: flex;
-      flex-direction: row;
-      gap: 14px;
-      align-items: flex-start;
-      padding: 16px 18px;
+      display: flex; flex-direction: row;
+      gap: 16px; align-items: flex-start;
+      padding: 18px 20px;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e8ecf0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: box-shadow 0.2s, transform 0.15s;
+      cursor: pointer;
     }
-    .card-score-col { flex-shrink: 0; padding-top: 2px; }
+    .bando-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-1px); }
+    .bando-card.urgente { border-left: 4px solid #dc2626; }
+    .bando-card.presto  { border-left: 4px solid #d97706; }
+    .bando-card.archivio { opacity: 0.6; }
+
+    .card-score-col { flex-shrink: 0; padding-top: 3px; }
     .card-body-col  { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
-    .card-top       { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
 
-    /* ── STATO PRATICA badge nella card ── */
-    .card-stato-pratica {
-      font-size: 11px; font-weight: 600; padding: 2px 9px;
-      border-radius: 20px; white-space: nowrap; flex-shrink: 0;
-    }
-    .stato-in-valutazione  { background: #dbeafe; color: #1e40af; }
-    .stato-bozza           { background: #f3f4f6; color: #374151; }
-    .stato-non-avviata     { background: #f3f4f6; color: #6b7280; }
-    .stato-in-integrazione { background: #fef3c7; color: #92400e; }
-    .stato-ammessa         { background: #d1fae5; color: #065f46; }
-    .stato-presentata      { background: #ede9fe; color: #5b21b6; }
+    /* ── BANDI GRID verticale ── */
+    .bandi-grid { grid-template-columns: 1fr; gap: 10px; }
 
-    /* ── BANDI GRID in lista verticale ── */
-    .bandi-grid {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    /* ── RESPONSIVE sidebar ── */
-    @media (max-width: 900px) {
-      .sidebar { width: 200px; min-width: 200px; }
-      .content-area { margin-left: 200px; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .sidebar { width: 220px; min-width: 220px; }
+      .content-area { margin-left: 220px; }
     }
     @media (max-width: 700px) {
       .sidebar { display: none; }
       .content-area { margin-left: 0; }
-      .topbar { padding: 12px 16px; }
+      .topbar { padding: 0 16px; }
       .main { padding: 16px; }
       .bando-card { flex-direction: column; }
     }
@@ -1622,16 +1625,17 @@
   function aggiornaPrivacyBanner() {
     const banner = document.getElementById('privacy-banner');
     const txt    = document.getElementById('privacy-banner-text');
-    const btnHdr = document.getElementById('btn-privacy-header');
     if (!banner) return;
     const n = Object.keys(datiPrivatiMap).length;
+    // Aggiorna label pulsante sidebar clienti
+    const btnSidebar = document.getElementById('btn-clienti');
     if (datiPrivatiCaricati && n > 0) {
       banner.classList.add('attivo');
       txt.textContent = `Dati riservati caricati per ${n} cliente${n>1?'i':''}. Stai vedendo le ragioni sociali reali.`;
-      if (btnHdr) { btnHdr.classList.add('attivo'); btnHdr.title = `${n} clienti riservati caricati — clicca per gestire`; }
+      if (btnSidebar) btnSidebar.title = `${n} clienti riservati caricati — clicca per gestire`;
     } else {
       banner.classList.remove('attivo');
-      if (btnHdr) { btnHdr.classList.remove('attivo'); btnHdr.title = 'Carica file dati riservati clienti'; }
+      if (btnSidebar) btnSidebar.title = 'Carica file dati riservati clienti';
     }
   }
 
@@ -1807,27 +1811,24 @@
   // INIT: pulsante header + auto-load del file se presente in data/
   // ─────────────────────────────────────────────────────────────
   function iniettaPulsantePrivacyHeader() {
-    const fresh = document.getElementById('freshness');
-    if (!fresh || document.getElementById('btn-privacy-header')) return;
-    const btn = document.createElement('button');
-    btn.id          = 'btn-privacy-header';
-    btn.className   = 'btn-privacy-header';
-    btn.title       = 'Carica file dati riservati clienti';
-    btn.innerHTML   = '🔒 <span>Clienti riservati</span>';
-    btn.onclick     = () => {
-      // se già caricati, apri gestione; altrimenti file picker
-      if (datiPrivatiCaricati) openGestioneClientiModal();
-      else document.getElementById('gc-file-input').click();
-    };
-    fresh.parentNode.insertBefore(btn, fresh);
+    // Pulsante già presente nella sidebar — nessuna iniezione necessaria
+    // Aggiorna però l'onclick del pulsante sidebar
+    const btn = document.getElementById('btn-clienti');
+    if (btn) {
+      btn.onclick = () => {
+        if (datiPrivatiCaricati) openGestioneClientiModal();
+        else document.getElementById('gc-file-input').click();
+      };
+    }
   }
 
   function iniettaBannerSottoHeader() {
-    const banner = document.getElementById('privacy-banner');
-    const header = document.querySelector('header.header');
-    if (banner && header && banner.parentNode !== document.body) return;
-    // sposta il banner subito dopo l'header
-    if (banner && header) header.parentNode.insertBefore(banner, header.nextSibling);
+    // Sposta il privacy-banner dopo la topbar nella nuova struttura
+    const banner  = document.getElementById('privacy-banner');
+    const topbar  = document.querySelector('.topbar');
+    if (banner && topbar && banner.parentNode !== topbar.parentNode) {
+      topbar.parentNode.insertBefore(banner, topbar.nextSibling);
+    }
   }
 
   async function autoLoadDatiPrivatiSeDisponibili() {

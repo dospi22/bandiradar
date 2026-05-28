@@ -1100,7 +1100,7 @@
   <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start">
     <div style="flex:1;min-width:260px">
       <div style="font-weight:700;color:var(--text);font-size:13px;margin-bottom:6px">📡 BandiRadar</div>
-      <div>Monitoraggio bandi e agevolazioni per PMI italiane. Dati aggiornati ogni notte da fonti pubbliche (Google Sheet, portali ufficiali enti erogatori).</div>
+      <div>Monitoraggio bandi e agevolazioni per PMI italiane. Dati aggiornati ogni notte da fonti pubbliche (CSV locali, portali ufficiali enti erogatori).</div>
     </div>
     <div style="flex:1;min-width:260px">
       <div style="font-weight:700;color:var(--text);font-size:13px;margin-bottom:6px">⚖️ Avviso importante</div>
@@ -2061,7 +2061,7 @@ function renderCard(b) {
 
   <div class="card-footer">
     ${isLinkRotto(b.id)
-      ? `<span class="card-link link-rotto" title="Link non raggiungibile — aggiornalo nel Google Sheet">⚠️ Link non funzionante</span>`
+      ? `<span class="card-link link-rotto" title="Link non raggiungibile — aggiornalo nel CSV bandi">⚠️ Link non funzionante</span>`
       : isLinkWarning(b.id)
         ? `<a class="card-link link-warning" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Link con redirect — verifica che punti ancora al bando corretto">⚠️ Verifica link →</a>`
         : `<a class="card-link" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">🔗 Pagina ufficiale →</a>`
@@ -2110,7 +2110,7 @@ function renderListItem(b) {
     </div>
   </div>
   ${isLinkRotto(b.id)
-    ? `<span class="badge-link-rotto" title="Link non raggiungibile — aggiornalo nel Google Sheet" style="flex-shrink:0">⚠️ Link rotto</span>`
+    ? `<span class="badge-link-rotto" title="Link non raggiungibile — aggiornalo nel CSV bandi" style="flex-shrink:0">⚠️ Link rotto</span>`
     : isLinkWarning(b.id)
       ? `<a class="card-link link-warning" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex-shrink:0" title="Redirect rilevato — verifica il link">⚠️</a>`
       : `<a class="card-link" href="${b.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex-shrink:0">→</a>`
@@ -2460,7 +2460,7 @@ function openModal(id) {
   ${isLinkRotto(b.id)
     ? `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
          <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;font-size:13px;font-weight:600">
-           ⚠️ Link non funzionante — aggiornalo nel Google Sheet
+           ⚠️ Link non funzionante — aggiornalo nel CSV bandi
          </span>
          <a class="btn" href="${b.link}" target="_blank" rel="noopener" style="font-size:12px;color:var(--text-muted)">Prova comunque →</a>
        </div>`
@@ -3461,7 +3461,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Da chiarire
     if (daChiarire.length) {
-      html += `<div class="tl-dachiarire">⚠️ ${daChiarire.length} band${daChiarire.length === 1 ? 'o' : 'i'} senza scadenza chiara e non strutturale: ${daChiarire.map(b => escHtml(b.id)).join(', ')}. Verifica il campo "Tipo scadenza" nel Google Sheet.</div>`;
+      html += `<div class="tl-dachiarire">⚠️ ${daChiarire.length} band${daChiarire.length === 1 ? 'o' : 'i'} senza scadenza chiara e non strutturale: ${daChiarire.map(b => escHtml(b.id)).join(', ')}. Verifica il campo "Tipo scadenza" nel CSV bandi.</div>`;
     }
 
     html += '</div>';
@@ -3534,10 +3534,10 @@ document.addEventListener('DOMContentLoaded', () => {
       cont.innerHTML = `<div class="section-empty">
         <div class="section-empty-icon">📂</div>
         <h3>Nessuna pratica da mostrare</h3>
-        <p>Aggiungi un foglio <strong>"Pratiche"</strong> al tuo Google Sheet con le colonne:<br>
+        <p>Aggiungi righe al file <strong>data/pratiche.csv</strong> con le colonne:<br>
         <code>ID Pratica · ID Bando · Cliente · Stato · Data ultimo aggiornamento · Note</code><br><br>
         Nella colonna <strong>Cliente</strong> usa il <strong>codice</strong> (es. FC-2017-RN), non la ragione sociale.<br>
-        Le pratiche si aggiornano da sole al sync notturno.</p>
+        Le pratiche si aggiornano al prossimo aggiornamento dei dati.</p>
       </div>`;
       return;
     }
@@ -3553,13 +3553,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let warn = '';
     if (pratiche.some(p => sembraRagioneSociale(p.cliente))) {
-      warn = `<div class="pr-warn">⚠️ Alcune righe sembrano contenere ragioni sociali nella colonna Cliente. Per privacy, usa il codice cliente (es. FC-2017-RN) nel foglio Pratiche.</div>`;
+      warn = `<div class="pr-warn">⚠️ Alcune righe sembrano contenere ragioni sociali nella colonna Cliente. Per privacy, usa il codice cliente (es. FC-2017-RN) nel file pratiche.csv.</div>`;
     }
 
     let html = `<div class="pr-wrap">
       <div class="pr-head-info">
         <div style="font-size:15px;font-weight:700">📂 Le mie pratiche</div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${pratiche.length} pratich${pratiche.length === 1 ? 'a' : 'e'} · modifica dal Google Sheet (foglio "Pratiche"), si aggiornano al sync notturno</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${pratiche.length} pratich${pratiche.length === 1 ? 'a' : 'e'} · modifica il file data/pratiche.csv, si aggiornano al prossimo sync</div>
         <div class="pr-stat-row">`;
     Object.keys(statLabels).forEach(cls => {
       if (conteggi[cls]) html += `<div class="pr-stat"><div class="pr-stat-n">${conteggi[cls]}</div><div class="pr-stat-l">${statLabels[cls]}</div></div>`;

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stato sistema — BandiRadar</title>
+  <meta name="description" content="Trasparenza tecnica BandiRadar: stato sincronizzazione dati, qualità link, ultimi aggiornamenti.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📡&lt;/text&gt;&lt;/svg&gt;">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #2563eb; --blue-dark: #1d4ed8;
+      --green: #15803d; --green-bg: #dcfce7;
+      --orange: #b45309; --orange-bg: #fef3c7;
+      --red: #b91c1c; --red-bg: #fee2e2;
+      --text: #0f172a; --text-muted: #475569; --border: #e2e8f0;
+      --bg: #f1f5f9; --card: #ffffff;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5; font-size: 14px;
+    }
+    .page { max-width: 980px; margin: 0 auto; padding: 30px 24px 60px; }
+
+    /* Heading */
+    .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 14px; }
+    .head .brand { display: flex; align-items: center; gap: 12px; }
+    .head .brand-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark)); color: white;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .head h1 { font-size: 22px; font-weight: 700; }
+    .head .sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    /* Status hero */
+    .hero {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 32px; margin-bottom: 22px; display: flex; align-items: center; gap: 22px;
+    }
+    .hero .dot {
+      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700;
+    }
+    .hero .dot.ok   { background: var(--green-bg);  color: var(--green);  box-shadow: 0 0 0 6px rgba(21,128,61,0.08); }
+    .hero .dot.warn { background: var(--orange-bg); color: var(--orange); box-shadow: 0 0 0 6px rgba(180,83,9,0.08); }
+    .hero .dot.fail { background: var(--red-bg);    color: var(--red);    box-shadow: 0 0 0 6px rgba(185,28,28,0.08); }
+    .hero h2 { font-size: 22px; font-weight: 700; margin-bottom: 3px; }
+    .hero p  { font-size: 13px; color: var(--text-muted); }
+
+    /* Grid */
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px; margin-bottom: 22px;
+    }
+    .stat {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .stat .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-muted); font-weight: 600; }
+    .stat .val { font-size: 28px; font-weight: 700; margin-top: 6px; line-height: 1.1; }
+    .stat .sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .stat .val.ok   { color: var(--green); }
+    .stat .val.warn { color: var(--orange); }
+    .stat .val.fail { color: var(--red); }
+
+    /* Sezione */
+    .sec {
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 22px; margin-bottom: 14px;
+    }
+    .sec h3 {
+      font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text-muted); font-weight: 700; margin-bottom: 12px;
+    }
+    .row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .row:last-child { border-bottom: none; }
+    .row .lab { color: var(--text-muted); }
+    .row .v   { font-weight: 600; }
+    .row .v.ok   { color: var(--green); }
+    .row .v.warn { color: var(--orange); }
+    .row .v.fail { color: var(--red); }
+
+    .link-list { display: flex; flex-direction: column; gap: 6px; }
+    .link-row {
+      display: flex; gap: 10px; align-items: center;
+      padding: 7px 10px; border-radius: 6px; background: #fef2f2; border: 1px solid #fecaca;
+      font-size: 12px;
+    }
+    .link-row code { font-family: 'SF Mono', Menlo, monospace; font-size: 11px; color: #7f1d1d; }
+    .link-row .nota { color: var(--text-muted); flex: 1; }
+
+    .footer { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); line-height: 1.6; text-align: center; }
+    .footer a { color: var(--blue); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border: 1px solid var(--border); border-radius: 7px;
+      background: white; color: var(--text); cursor: pointer; font-size: 13px;
+      text-decoration: none; font-weight: 600; transition: all 0.15s;
+    }
+    .btn:hover { background: var(--bg); }
+
+    .loading { text-align: center; padding: 48px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="head">
+    <div class="brand">
+      <div class="brand-icon">📡</div>
+      <div>
+        <h1>📊 Stato del sistema</h1>
+        <div class="sub">Trasparenza tecnica BandiRadar — qualità e freschezza dei dati</div>
+      </div>
+    </div>
+    <div>
+      <a class="btn" href="index.html">← Dashboard</a>
+    </div>
+  </header>
+
+  <div id="content"><div class="loading">Caricamento metriche…</div></div>
+
+  <div class="footer">
+    I dati di questa pagina sono calcolati al volo dai file pubblici del sistema. Aggiornati al sync notturno. ·
+    <a href="index.html">Dashboard</a> · <a href="glossario.html">Glossario</a>
+  </div>
+</div>
+
+<script>
+  async function fetchJson(path) {
+    try { const r = await fetch(path, {cache:'no-cache'}); if (!r.ok) return null; return await r.json(); }
+    catch(e) { return null; }
+  }
+  async function fetchText(path) {
+    try { const r = await fetch(path, {cache:'no-cache'}); if (!r.ok) return null; return await r.text(); }
+    catch(e) { return null; }
+  }
+  function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function ageHours(ts) {
+    if (!ts) return null;
+    const d = new Date(ts);
+    if (isNaN(d)) return null;
+    return (Date.now() - d.getTime()) / 3600000;
+  }
+  function ageString(h) {
+    if (h == null) return '—';
+    if (h < 1) return 'pochi minuti fa';
+    if (h < 48) return Math.floor(h) + ' ore fa';
+    return Math.floor(h/24) + ' giorni fa';
+  }
+
+  (async () => {
+    const lastSync   = await fetchJson('data/last_sync.json');
+    const linkStatus = await fetchJson('data/link_status.json');
+    const bandiCsv   = await fetchText('data/bandi.csv');
+    const storicoIdx = await fetchJson('data/raccomandazioni_storico/_index.json');
+
+    const content = document.getElementById('content');
+
+    // ── Calcola stato generale ──────────────────────────────────────
+    const h = ageHours(lastSync && lastSync.timestamp);
+    let level = 'ok', label = 'Tutto OK', icon = '✓';
+    if (!lastSync)              { level = 'fail'; label = 'Dati non disponibili'; icon = '!'; }
+    else if (h == null)         { level = 'warn'; label = 'Indeterminato'; icon = '?'; }
+    else if (h > 36)            { level = 'fail'; label = 'Sync in ritardo'; icon = '!'; }
+    else if (h > 24)            { level = 'warn'; label = 'Attenzione (>24h)'; icon = '⚠'; }
+    else if ((lastSync.link_ko||0) > 0) { level = 'warn'; label = 'OK con avvisi sui link'; icon = '⚠'; }
+
+    // Conta bandi nel CSV (header + righe)
+    let nBandi = 0;
+    if (bandiCsv) nBandi = bandiCsv.replace(/\r/g,'').split('\n').filter(l => l.trim()).length - 1;
+
+    // Link KO dettagli
+    const linkKO = [];
+    if (linkStatus && linkStatus.bandi) {
+      for (const id in linkStatus.bandi) {
+        const b = linkStatus.bandi[id];
+        if (b.status !== 'OK') linkKO.push({ id, status: b.status, codice: b.codice, nota: b.nota });
+      }
+    }
+
+    // Render
+    let html = '';
+    html += `<div class="hero">
+      <div class="dot ${level}">${icon}</div>
+      <div style="flex:1">
+        <h2>${escHtml(label)}</h2>
+        <p>Ultimo aggiornamento: ${ageString(h)} ${lastSync && lastSync.timestamp ? '(' + new Date(lastSync.timestamp).toLocaleString('it-IT') + ')' : ''}</p>
+      </div>
+    </div>`;
+
+    html += `<div class="grid">`;
+    html += `<div class="stat"><div class="lbl">Bandi attivi</div><div class="val ok">${(lastSync && lastSync.attivi) || nBandi || '—'}</div><div class="sub">visibili in dashboard</div></div>`;
+    html += `<div class="stat"><div class="lbl">In archivio</div><div class="val">${(lastSync && lastSync.archivio) || 0}</div><div class="sub">bandi scaduti conservati</div></div>`;
+    const okPct = linkStatus && lastSync && lastSync.link_totali ? Math.round((lastSync.link_ok / lastSync.link_totali) * 100) : null;
+    html += `<div class="stat"><div class="lbl">Link verificati</div><div class="val ${okPct>=90?'ok':okPct>=70?'warn':'fail'}">${lastSync ? lastSync.link_ok + '/' + lastSync.link_totali : '—'}</div><div class="sub">${okPct!=null ? okPct+'% funzionanti' : 'non disponibile'}</div></div>`;
+    html += `<div class="stat"><div class="lbl">Warning validazione</div><div class="val ${(lastSync && lastSync.warning_count) ? 'warn' : 'ok'}">${(lastSync && lastSync.warning_count) || 0}</div><div class="sub">su ultimo sync</div></div>`;
+    if (storicoIdx && storicoIdx.snapshots) {
+      html += `<div class="stat"><div class="lbl">Snapshot storici</div><div class="val">${storicoIdx.snapshots.length}</div><div class="sub">versioni raccomandazioni</div></div>`;
+    }
+    html += `</div>`;
+
+    // Dettagli sync
+    html += `<div class="sec"><h3>📦 Sincronizzazione</h3>`;
+    if (lastSync) {
+      html += `<div class="row"><span class="lab">Origine sync</span><span class="v">${escHtml(lastSync.origine || 'cloud')}</span></div>`;
+      html += `<div class="row"><span class="lab">Data ultimo sync</span><span class="v">${escHtml(lastSync.data || '—')}</span></div>`;
+      html += `<div class="row"><span class="lab">Età</span><span class="v ${level}">${ageString(h)}</span></div>`;
+      html += `<div class="row"><span class="lab">Auto-archiviati nell'ultimo sync</span><span class="v">${lastSync.auto_archiviati || 0}</span></div>`;
+    } else {
+      html += `<div class="row"><span class="lab">Stato</span><span class="v fail">last_sync.json non disponibile</span></div>`;
+    }
+    html += `</div>`;
+
+    // Link rotti
+    if (linkKO.length) {
+      html += `<div class="sec"><h3>🔗 Link da ricontrollare (${linkKO.length})</h3>
+        <div class="link-list">`;
+      linkKO.slice(0, 30).forEach(l => {
+        html += `<div class="link-row"><code>${escHtml(l.id)}</code><span class="nota">${escHtml(l.status)} — ${escHtml(l.nota || '')}</span></div>`;
+      });
+      if (linkKO.length > 30) {
+        html += `<div style="text-align:center;font-size:12px;color:var(--text-muted);padding:6px">… e altri ${linkKO.length - 30} non mostrati</div>`;
+      }
+      html += `</div></div>`;
+    }
+
+    // Storico raccomandazioni
+    if (storicoIdx && storicoIdx.snapshots && storicoIdx.snapshots.length > 0) {
+      html += `<div class="sec"><h3>📜 Storico raccomandazioni (${storicoIdx.snapshots.length} snapshot)</h3>`;
+      storicoIdx.snapshots.slice().reverse().slice(0, 6).forEach(s => {
+        const dataIt = new Date(s.data + 'T12:00:00').toLocaleDateString('it-IT', {day:'2-digit', month:'long', year:'numeric'});
+        html += `<div class="row"><span class="lab">${escHtml(dataIt)}</span><span class="v">${s.raccomandazioni} raccomandazioni, ${s.aziende} azienda${s.aziende!==1?'e':''}</span></div>`;
+      });
+      html += `</div>`;
+    }
+
+    content.innerHTML = html;
+  })();
+</script>
+</body>
+</html>

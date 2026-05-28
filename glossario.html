@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossario — BandiRadar</title>
+  <meta name="description" content="Glossario degli acronimi e termini della finanza agevolata italiana ed europea: GBER, FESR, FSE+, PNRR, ATECO, RNA, de minimis e altri.">
+  <meta property="og:title"       content="Glossario finanza agevolata — BandiRadar">
+  <meta property="og:description" content="Tutti gli acronimi della finanza agevolata, spiegati semplicemente.">
+  <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;📡&lt;/text&gt;&lt;/svg&gt;">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #2563eb; --blue-dark: #1d4ed8; --blue-light: #dbeafe;
+      --text: #0f172a; --text-muted: #475569; --border: #e2e8f0;
+      --bg: #f1f5f9; --card: #ffffff;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+      font-size: 14px;
+    }
+    .header {
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+      color: white; padding: 36px 28px;
+    }
+    .header-inner { max-width: 980px; margin: 0 auto; }
+    .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .brand-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.18); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; border: 1px solid rgba(255,255,255,0.25);
+    }
+    .brand-text h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; }
+    .brand-text p  { font-size: 12px; opacity: 0.8; margin-top: 1px; }
+    .title { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    .subtitle { font-size: 14px; opacity: 0.9; margin-top: 6px; max-width: 640px; }
+
+    .main { max-width: 980px; margin: 0 auto; padding: 28px 24px 60px; }
+
+    .toolbar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border: 1px solid var(--border); border-radius: 7px;
+      background: white; color: var(--text); cursor: pointer; font-size: 13px;
+      text-decoration: none; font-weight: 600; transition: all 0.15s;
+    }
+    .btn:hover { background: var(--bg); border-color: #cbd5e1; }
+    .search {
+      flex: 1; min-width: 220px;
+      padding: 9px 14px; border: 1px solid var(--border); border-radius: 7px;
+      font-size: 14px; outline: none; transition: border-color 0.15s;
+    }
+    .search:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+
+    .toc {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px; margin-bottom: 18px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .toc-letter {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 32px; height: 32px; padding: 0 9px;
+      border-radius: 16px; background: var(--blue-light); color: var(--blue);
+      font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none;
+      transition: all 0.15s;
+    }
+    .toc-letter:hover { background: var(--blue); color: white; }
+    .toc-letter.disabled { background: #f1f5f9; color: #cbd5e1; pointer-events: none; }
+
+    .voce {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 22px; margin-bottom: 12px;
+      transition: box-shadow 0.15s;
+    }
+    .voce:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    .voce h2 {
+      font-size: 18px; font-weight: 700; color: var(--text);
+      margin-bottom: 4px; display: flex; align-items: baseline; gap: 10px;
+    }
+    .voce .nome-esteso { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+    .voce .cat {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    .voce .cat.ente      { background: #dbeafe; color: #1e40af; }
+    .voce .cat.regime    { background: #fef3c7; color: #92400e; }
+    .voce .cat.programma { background: #dcfce7; color: #166534; }
+    .voce .cat.classific { background: #ede9fe; color: #5b21b6; }
+    .voce p { margin-top: 8px; font-size: 14px; color: #1e293b; }
+    .voce .esempio {
+      margin-top: 8px; padding: 8px 12px;
+      background: #f8fafc; border-left: 3px solid var(--blue);
+      font-size: 13px; color: var(--text-muted); border-radius: 0 6px 6px 0;
+    }
+    .voce.hidden { display: none; }
+
+    .no-results {
+      text-align: center; padding: 48px 24px;
+      color: var(--text-muted); font-size: 14px;
+      background: var(--card); border: 1px dashed var(--border); border-radius: 10px;
+    }
+
+    .footer {
+      max-width: 980px; margin: 36px auto 0; padding: 18px 24px;
+      font-size: 12px; color: var(--text-muted); line-height: 1.5;
+      border-top: 1px solid var(--border);
+    }
+    .footer a { color: var(--blue); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-icon">📡</div>
+      <div class="brand-text">
+        <h1>BandiRadar</h1>
+        <p>Monitoraggio bandi · Glossario</p>
+      </div>
+    </div>
+    <div class="title">📖 Glossario finanza agevolata</div>
+    <div class="subtitle">Acronimi, sigle, regimi e programmi del mondo dei bandi italiani ed europei, spiegati in modo semplice.</div>
+  </div>
+</header>
+
+<main class="main">
+
+  <div class="toolbar">
+    <input type="search" id="search" class="search" placeholder="🔍 Cerca un termine (es. de minimis, FESR, PNRR…)" aria-label="Cerca nel glossario">
+    <a class="btn" href="index.html">← Torna alla dashboard</a>
+  </div>
+
+  <div class="toc" id="toc" aria-label="Indice alfabetico"></div>
+
+  <div id="elenco-voci"></div>
+  <div id="no-results" class="no-results" style="display:none">
+    Nessuna voce trovata per la tua ricerca.
+  </div>
+</main>
+
+<div class="footer">
+  Le definizioni sono indicative, formulate a scopo divulgativo. Per il significato giuridicamente vincolante consultare sempre le fonti normative ufficiali (Regolamenti UE, Gazzetta Ufficiale, sito dell'ente erogatore).
+  · <a href="index.html">Dashboard BandiRadar</a>
+</div>
+
+<script>
+  // ── Dizionario glossario ──────────────────────────────────────────
+  const GLOSSARIO = [
+    // ENTI ED EROGATORI
+    { sigla: 'MIMIT', nome: 'Ministero delle Imprese e del Made in Italy', cat: 'ente',
+      desc: 'Ministero italiano che gestisce le principali misure di politica industriale: Nuova Sabatini, Transizione 5.0, voucher per la digitalizzazione, contratti di sviluppo. Successore del MiSE.',
+      esempio: 'La Nuova Sabatini per i beni strumentali 4.0 è gestita da MIMIT.' },
+    { sigla: 'MUR', nome: 'Ministero dell\'Università e della Ricerca', cat: 'ente',
+      desc: 'Ministero competente per ricerca scientifica, università, alta formazione. Gestisce molte misure del PNRR per ricerca e innovazione.', esempio: '' },
+    { sigla: 'GSE', nome: 'Gestore dei Servizi Energetici', cat: 'ente',
+      desc: 'Società pubblica che gestisce gli incentivi per l\'energia rinnovabile e l\'efficienza energetica (es. Conto Termico, incentivi fotovoltaico).', esempio: '' },
+    { sigla: 'INAIL', nome: 'Istituto Nazionale per l\'Assicurazione contro gli Infortuni sul Lavoro', cat: 'ente',
+      desc: 'Oltre alla copertura assicurativa, gestisce bandi annuali (ISI) per il finanziamento di interventi di sicurezza sul lavoro.', esempio: 'Bando ISI INAIL: contributi fino al 65% per progetti di miglioramento della sicurezza.' },
+    { sigla: 'CDP', nome: 'Cassa Depositi e Prestiti', cat: 'ente',
+      desc: 'Istituto pubblico che finanzia investimenti e infrastrutture. Co-gestisce molte misure di sostegno alle imprese.', esempio: '' },
+    { sigla: 'SIMEST', nome: 'Società Italiana per le Imprese all\'Estero (Gruppo CDP)', cat: 'ente',
+      desc: 'Società del gruppo CDP che sostiene l\'internazionalizzazione delle imprese italiane attraverso finanziamenti a tasso agevolato (Fondo 394).', esempio: 'Fondo SIMEST 394: prestiti agevolati per fiere internazionali e digital marketing export.' },
+    { sigla: 'INVITALIA', nome: 'Agenzia nazionale per l\'attrazione degli investimenti e lo sviluppo d\'impresa', cat: 'ente',
+      desc: 'Agenzia del MEF che gestisce molte misure di sostegno alle imprese: Contratti di Sviluppo, Resto al Sud, Smart&Start, ON-Oltre Nuove Imprese.', esempio: '' },
+    { sigla: 'ART-ER', nome: 'Attrattività, Ricerca, Territorio — Emilia-Romagna (ex ASTER)', cat: 'ente',
+      desc: 'Consorzio interuniversitario regionale per l\'innovazione e l\'internazionalizzazione. In ER organizza bandi e servizi per startup, PMI, ricerca industriale.', esempio: '' },
+    { sigla: 'EISMEA', nome: 'European Innovation Council and SMEs Executive Agency', cat: 'ente',
+      desc: 'Agenzia europea che gestisce l\'EIC (European Innovation Council): Accelerator, Pathfinder, Transition. Finanzia innovazione deep-tech.', esempio: 'EIC Accelerator gestito da EISMEA: fino a 2.5M € a fondo perduto per startup.' },
+    { sigla: 'CINEA', nome: 'Climate, Infrastructure and Environment Executive Agency', cat: 'ente',
+      desc: 'Agenzia europea che gestisce i programmi LIFE (ambiente e clima) e CEF (connettività trasporti/digitale/energia).', esempio: 'Programma LIFE per progetti di sostenibilità ambientale, gestito da CINEA.' },
+    { sigla: 'EUIPO', nome: 'European Union Intellectual Property Office', cat: 'ente',
+      desc: 'Agenzia UE per la proprietà intellettuale (marchi, design). Gestisce l\'SME Fund: voucher per PMI per la registrazione di marchi e brevetti.', esempio: 'EUIPO SME Fund: voucher fino al 75% per registrazione marchi UE.' },
+
+    // REGIMI DI AIUTO
+    { sigla: 'de minimis', nome: 'Regolamento UE de minimis (n. 2831/2023)', cat: 'regime',
+      desc: 'Regime di aiuti di Stato di importo "minimo" che non richiede notifica alla Commissione UE. Plafond di 300.000 € per "impresa unica" su un arco mobile di 3 esercizi fiscali. Cambiato dal 1° gennaio 2024 (era 200.000 €). Soglie diverse per agricoltura primaria (20K) e pesca (30K).',
+      esempio: 'Una PMI che ha ricevuto 150K di aiuti de minimis nel triennio può ricevere ancora fino a 150K in altri bandi de minimis.' },
+    { sigla: 'GBER', nome: 'General Block Exemption Regulation (Reg. UE 651/2014)', cat: 'regime',
+      desc: 'Regolamento di esenzione per categoria: consente agli Stati membri di concedere aiuti senza notifica preventiva alla Commissione, entro soglie e condizioni precise (es. R&S, PMI, formazione, ambiente). Più vincoli e soglie più alte del de minimis.',
+      esempio: 'Bando FESR ER in regime GBER: contributo fino al 70% per progetti di R&S per PMI.' },
+    { sigla: 'Notificato', nome: 'Aiuto di Stato notificato individualmente', cat: 'regime',
+      desc: 'Aiuto di Stato approvato individualmente dalla Commissione UE attraverso una procedura di notifica. Tipico di grandi schemi nazionali o aiuti settoriali.', esempio: '' },
+    { sigla: 'Non aiuto di Stato', nome: 'Misura non configurabile come aiuto di Stato', cat: 'regime',
+      desc: 'Misure che non costituiscono aiuto ai sensi dell\'art. 107 TFUE (formazione lavoratori, misure fiscali generali, voucher su servizi standard). Non incidono sul plafond de minimis.', esempio: '' },
+
+    // PROGRAMMI E STRUMENTI
+    { sigla: 'PNRR', nome: 'Piano Nazionale di Ripresa e Resilienza', cat: 'programma',
+      desc: 'Piano italiano per gestire i fondi NextGenerationEU (~191 mld €). Articolato in 6 missioni (digitalizzazione, transizione verde, infrastrutture, istruzione, inclusione, salute). Scade nel 2026.', esempio: '' },
+    { sigla: 'FESR', nome: 'Fondo Europeo di Sviluppo Regionale', cat: 'programma',
+      desc: 'Principale strumento UE per ridurre le disparità tra regioni. Cofinanzia investimenti in innovazione, PMI, digitale, sostenibilità. In Italia è gestito da Programmi Regionali (es. POR-FESR Emilia-Romagna 2021-2027).',
+      esempio: 'POR-FESR Emilia-Romagna: bandi per R&S, digitalizzazione, internazionalizzazione PMI.' },
+    { sigla: 'FSE+', nome: 'Fondo Sociale Europeo Plus', cat: 'programma',
+      desc: 'Fondo UE per occupazione, formazione e inclusione sociale. In Italia gestito da Programmi Regionali. Finanzia tirocini, apprendistato, formazione continua.', esempio: '' },
+    { sigla: 'Interreg', nome: 'Programmi di Cooperazione Territoriale Europea', cat: 'programma',
+      desc: 'Programmi UE per progetti di cooperazione transfrontaliera, transnazionale e interregionale (es. Italia-Croatia, MED, Central Europe).', esempio: '' },
+    { sigla: 'Horizon Europe', nome: 'Programma quadro UE per la ricerca e l\'innovazione 2021-2027', cat: 'programma',
+      desc: 'Programma da ~95 mld € che finanzia ricerca scientifica e innovazione attraverso 3 pilastri: scienza eccellente, sfide globali, Europa innovativa (che include EIC).', esempio: 'EIC Pathfinder dentro Horizon Europe: ricerca di frontiera per tecnologie radicalmente nuove.' },
+    { sigla: 'EIC', nome: 'European Innovation Council', cat: 'programma',
+      desc: 'Council UE dedicato all\'innovazione deep-tech, dentro Horizon Europe. Tre strumenti: Pathfinder (ricerca early-stage), Transition (validazione tecnologica), Accelerator (scale-up con fondo perduto + equity).', esempio: '' },
+    { sigla: 'LIFE', nome: 'Programma UE per l\'ambiente e l\'azione climatica', cat: 'programma',
+      desc: 'Programma da ~5.4 mld € (2021-2027) che cofinanzia progetti su biodiversità, economia circolare, mitigazione climatica, transizione energetica. Gestito da CINEA.', esempio: '' },
+    { sigla: 'Transizione 5.0', nome: 'Credito d\'imposta per investimenti in digitalizzazione + sostenibilità', cat: 'programma',
+      desc: 'Misura nazionale (MIMIT) che riconosce un credito d\'imposta a chi investe in beni 4.0 con effetto di riduzione dei consumi energetici. Compensa in F24.', esempio: '' },
+    { sigla: 'Nuova Sabatini', nome: 'Beni strumentali Nuova Sabatini', cat: 'programma',
+      desc: 'Finanziamento agevolato per l\'acquisto di macchinari, impianti, attrezzature, beni strumentali 4.0 e green. Combinato a contributo MIMIT sui interessi.', esempio: '' },
+    { sigla: 'Fondo 394', nome: 'Fondo SIMEST 394/81 per l\'internazionalizzazione', cat: 'programma',
+      desc: 'Prestiti agevolati per attività di internazionalizzazione delle PMI: fiere, e-commerce, inserimento mercati esteri, transizione digitale/ecologica per export. Regime de minimis.', esempio: '' },
+
+    // CLASSIFICAZIONI E REGISTRI
+    { sigla: 'ATECO', nome: 'Codici di classificazione ATtività ECOnomica (ISTAT)', cat: 'classific',
+      desc: 'Sistema di classificazione dei settori economici (es. 62.01 = produzione di software). I bandi tipicamente ammettono solo certi codici ATECO. È un parametro fondamentale per l\'ammissibilità.',
+      esempio: 'Codice ATECO 62.01 (software) ammesso al bando FESR R&S.' },
+    { sigla: 'RNA', nome: 'Registro Nazionale degli Aiuti di Stato', cat: 'classific',
+      desc: 'Registro pubblico (gestito da MIMIT) di tutti gli aiuti di Stato concessi alle imprese italiane. La verifica del residuo de minimis si fa qui. Obbligatorio prima di presentare una nuova domanda di aiuto.',
+      esempio: 'Prima di presentare una domanda de minimis, verifica gli aiuti già ricevuti su rna.mise.gov.it.' },
+    { sigla: 'PMI', nome: 'Piccola e Media Impresa', cat: 'classific',
+      desc: 'Classificazione UE (Raccomandazione 2003/361/CE): impresa con < 250 dipendenti E fatturato < 50M € (o totale attivo < 43M €). Soglie di contributo più alte rispetto alle grandi imprese.', esempio: '' },
+    { sigla: 'Microimpresa', nome: 'Microimpresa (classificazione UE)', cat: 'classific',
+      desc: 'Impresa con < 10 dipendenti E fatturato O totale attivo < 2M €. Spesso ha canali dedicati o priorità nei bandi.', esempio: 'Fattor Comune srl: 12 addetti, 400K € fatturato → tecnicamente piccola impresa (12 add. > 10), pur restando nella fascia micro per fatturato.' },
+    { sigla: 'TFUE', nome: 'Trattato sul Funzionamento dell\'Unione Europea', cat: 'classific',
+      desc: 'Trattato che, agli artt. 107-109, disciplina gli aiuti di Stato. È la base giuridica di tutto il sistema (de minimis, GBER, notificati).', esempio: '' },
+    { sigla: 'ZES', nome: 'Zone Economiche Speciali', cat: 'classific',
+      desc: 'Aree geografiche del Sud Italia con regime fiscale e amministrativo agevolato per attrarre investimenti. Dal 2024: ZES Unica per Abruzzo, Molise, Campania, Puglia, Basilicata, Calabria, Sicilia, Sardegna.', esempio: '' },
+  ];
+
+  // ── Render ─────────────────────────────────────────────────────────
+  const elenco = document.getElementById('elenco-voci');
+  const noRes  = document.getElementById('no-results');
+  const tocEl  = document.getElementById('toc');
+  const search = document.getElementById('search');
+
+  function escHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;');
+  }
+
+  // Ordina alfabeticamente per sigla
+  GLOSSARIO.sort((a,b) => a.sigla.localeCompare(b.sigla, 'it', {sensitivity:'base'}));
+
+  // Indice alfabetico
+  const lettereDisp = new Set(GLOSSARIO.map(v => v.sigla[0].toUpperCase()));
+  const allLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  tocEl.innerHTML = allLetters.split('').map(l =>
+    lettereDisp.has(l)
+      ? `<a class="toc-letter" href="#lt-${l}">${l}</a>`
+      : `<span class="toc-letter disabled">${l}</span>`
+  ).join('');
+
+  // Render voci
+  let lastLetter = '';
+  elenco.innerHTML = GLOSSARIO.map(v => {
+    const l = v.sigla[0].toUpperCase();
+    const anchor = (l !== lastLetter) ? `<span id="lt-${l}"></span>` : '';
+    lastLetter = l;
+    return anchor + `<article class="voce" data-search="${escHtml((v.sigla + ' ' + v.nome + ' ' + v.desc).toLowerCase())}">
+      <h2>${escHtml(v.sigla)} <span class="nome-esteso">${escHtml(v.nome)}</span></h2>
+      <span class="cat ${v.cat}">${v.cat === 'ente' ? 'Ente / Erogatore' : v.cat === 'regime' ? 'Regime di aiuto' : v.cat === 'programma' ? 'Programma / Strumento' : 'Classificazione'}</span>
+      <p>${escHtml(v.desc)}</p>
+      ${v.esempio ? `<div class="esempio">💡 ${escHtml(v.esempio)}</div>` : ''}
+    </article>`;
+  }).join('');
+
+  // Ricerca live
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    let visibili = 0;
+    document.querySelectorAll('.voce').forEach(el => {
+      const match = !q || el.dataset.search.includes(q);
+      el.classList.toggle('hidden', !match);
+      if (match) visibili++;
+    });
+    noRes.style.display = visibili === 0 ? '' : 'none';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-05-25T08:02:58Z",
+  "aziende": [
+    {
+      "idAzienda": "az-1779394390646",
+      "generatedAt": "2026-05-25T08:02:58Z",
+      "raccomandazioni": [
+        {
+          "id": "ER-2026-001",
+          "rilevanza": "molto_alta",
+          "motivazione": "Microimpresa ER nel digitale: fino a €200K a fondo perduto. Scadenza 30/06.",
+          "scadenza": "2026-06-30",
+          "importoMax": 200000
+        },
+        {
+          "id": "IT-2026-019",
+          "rilevanza": "molto_alta",
+          "motivazione": "Impresa Benefit a Rimini: premio economia circolare a Ecomondo, visibilità.",
+          "scadenza": "2026-06-30"
+        },
+        {
+          "id": "IT-2026-001",
+          "rilevanza": "molto_alta",
+          "motivazione": "Finanziamento agevolato beni strumentali 4.0 per crescita operativa PMI.",
+          "importoMax": 4000000
+        },
+        {
+          "id": "ER-2025-002",
+          "rilevanza": "alta",
+          "motivazione": "Investimenti R&S e digitale per PMI ER: fondo perduto fino a settembre.",
+          "scadenza": "2026-09-30"
+        },
+        {
+          "id": "IT-2026-025",
+          "rilevanza": "alta",
+          "motivazione": "Finanzia piani formativi + assunzioni TI: ideale per crescere la struttura.",
+          "scadenza": "2026-12-31",
+          "importoMax": 150000
+        },
+        {
+          "id": "IT-2026-006",
+          "rilevanza": "alta",
+          "motivazione": "Credito imposta 10-20% su sviluppo software e innovazione tecnologica."
+        },
+        {
+          "id": "EU-2026-005",
+          "rilevanza": "alta",
+          "motivazione": "Voucher 75% per registrare marchio UE: strategico per farsi conoscere.",
+          "scadenza": "2026-12-04"
+        }
+      ]
+    }
+  ]
+}

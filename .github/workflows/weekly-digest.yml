@@ -11,10 +11,10 @@
 
 name: Digest Settimanale Email
 
+# Disattivato lo schedule: il digest email richiederebbe SMTP non configurato.
+# Lascio solo l'avvio manuale (workflow_dispatch).
 on:
-  schedule:
-    - cron: '0 6 * * 1'   # ogni lunedì alle 07:00 ora italiana (06:00 UTC)
-  workflow_dispatch:        # avvio manuale per testare
+  workflow_dispatch:
 
 jobs:
   digest:

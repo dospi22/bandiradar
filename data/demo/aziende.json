@@ -1,0 +1,32 @@
+{
+  "_schema": "Versione 2 — Anonimizzata DEMO. Dati FITTIZI a scopo dimostrativo.",
+  "exportedAt": "2026-05-28T08:00:00.000Z",
+  "aziende": [
+    {
+      "id": "az-demo-acme",
+      "codice": "AC-2020-BO",
+      "settore": "Tecnologia / Software demo",
+      "ateco": "62.01",
+      "provincia": "BO",
+      "regione": "Emilia Romagna",
+      "tipoAzienda": "PMI tradizionale",
+      "dimensione": "Piccola impresa (10–49 add., < 10M €)",
+      "hasDipendenti": "Sì",
+      "addetti": "25",
+      "fatturato": "1.500.000€",
+      "annoFondazione": "2020",
+      "formaSociale": "Srl",
+      "fasiCrescita": "Scaleup",
+      "modelloBusiness": "B2B",
+      "clientiTarget": "PMI e Pubblica Amministrazione",
+      "mercati": "Italia 80%, EU 20%",
+      "puntiForza": "Sviluppo software custom, AI applicata",
+      "sfide": "Espansione internazionale, accesso a talenti tech",
+      "deMinimisResiduo": "150.000 €",
+      "investimentiPrevisti": "R&S su AI 200K, formazione team 30K, partecipazione a fiere internazionali",
+      "flagSpeciali": ["PMI"],
+      "obiettivi": ["R&S / Innovazione", "Espansione internazionale", "Digitalizzazione"],
+      "updatedAt": "2026-05-28T08:00:00.000Z"
+    }
+  ]
+}

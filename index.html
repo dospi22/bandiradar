@@ -1626,6 +1626,11 @@
             <label class="form-label">Anno fondazione</label>
             <input id="fp-annoFondazione" class="form-control" type="text" placeholder="Es. 2018">
           </div>
+          <div class="form-group">
+            <label class="form-label">Email cliente <span style="font-size:10px;color:var(--text-muted);font-weight:400">(per digest settimanale)</span></label>
+            <input id="fp-email" class="form-control" type="email" placeholder="Es. mario@azienda.it">
+            <div class="form-hint" id="fp-email-error" style="color:var(--red);display:none">Formato email non valido</div>
+          </div>
         </div>
       </div>
 
@@ -1693,6 +1698,17 @@
               <option value="Sì — tra 10 e 49">Sì — tra 10 e 49</option>
               <option value="Sì — tra 50 e 249">Sì — tra 50 e 249</option>
               <option value="Sì — 250 o più">Sì — 250 o più</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipologia forza lavoro</label>
+            <select id="fp-forzaLavoro" class="form-control">
+              <option value="">— Seleziona —</option>
+              <option value="Solo titolari/soci">Solo titolari/soci</option>
+              <option value="Dipendenti a tempo indeterminato">Dipendenti a tempo indeterminato</option>
+              <option value="Dipendenti a tempo determinato">Dipendenti a tempo determinato</option>
+              <option value="Collaboratori a P.IVA">Collaboratori a P.IVA</option>
+              <option value="Misto — dipendenti + P.IVA">Misto — dipendenti + P.IVA</option>
             </select>
           </div>
         </div>
@@ -2765,13 +2781,34 @@ function saveAziende() {
 }
 
 async function loadRaccomandazioni() {
-  try {
-    const resp = await fetch('./data/raccomandazioni.json', { cache: 'no-cache' });
-    if (!resp.ok) return;
-    const data = await resp.json();
-    raccomandazioniData = {};
-    (data.aziende || []).forEach(a => { raccomandazioniData[a.idAzienda] = a; });
-  } catch(e) { raccomandazioniData = {}; }
+  // Carica tutti i file raccomandazioni_*.json presenti nella cartella data/
+  // Per compatibilità, tenta anche il vecchio raccomandazioni.json (migrazione graduale)
+  raccomandazioniData = {};
+
+  // Lista dei file da provare: prima i per-cliente, poi il vecchio per retrocompatibilità
+  const fileDaCaricare = [];
+
+  // Costruiamo la lista dai profili aziende caricati (ogni azienda con codice mnemonico)
+  aziende.forEach(az => {
+    if (az.codiceMnemonico) fileDaCaricare.push(`./data/raccomandazioni_${az.codiceMnemonico}.json`);
+  });
+  // Fallback: vecchio file singolo per retrocompatibilità durante migrazione
+  fileDaCaricare.push('./data/raccomandazioni.json');
+
+  for (const url of fileDaCaricare) {
+    try {
+      const resp = await fetch(url, { cache: 'no-cache' });
+      if (!resp.ok) continue;
+      const data = await resp.json();
+      // Nuovo formato per-cliente: ha codice_cliente + aziende[]
+      if (data.codice_cliente) {
+        (data.aziende || []).forEach(a => { raccomandazioniData[a.idAzienda] = a; });
+      } else {
+        // Vecchio formato: solo aziende[]
+        (data.aziende || []).forEach(a => { raccomandazioniData[a.idAzienda] = a; });
+      }
+    } catch(e) { /* file assente: normale */ }
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -2986,15 +3023,20 @@ function openProfileForm(id) {
    'modelloBusiness','prodottiServizi','clientiTarget','mercati',
    'puntiForza','sfide','addetti','fatturato',
    'annoFondazione','formaSociale','deMinimisResiduo',
-   'investimentiPrevisti','noteClaudeExtra'].forEach(f => {
+   'investimentiPrevisti','noteClaudeExtra','email'].forEach(f => {
     const el = document.getElementById('fp-' + f);
     if (el) el.value = az ? (az[f] || '') : '';
   });
 
-  ['tipoAzienda','fasiCrescita','hasDipendenti','dimensione'].forEach(f => {
+  ['tipoAzienda','fasiCrescita','hasDipendenti','forzaLavoro','dimensione'].forEach(f => {
     const el = document.getElementById('fp-' + f);
     if (el) el.value = az ? (az[f] || '') : '';
   });
+  // Email
+  const emailEl = document.getElementById('fp-email');
+  if (emailEl) emailEl.value = az ? (az.email || '') : '';
+  const emailErr = document.getElementById('fp-email-error');
+  if (emailErr) emailErr.style.display = 'none';
 
   buildCheckgroups(az);
 
@@ -3063,6 +3105,16 @@ function saveProfile() {
     return;
   }
 
+  // Validazione email (opzionale ma se inserita deve essere valida)
+  const emailVal = (document.getElementById('fp-email')?.value || '').trim();
+  const emailErrEl = document.getElementById('fp-email-error');
+  if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+    if (emailErrEl) emailErrEl.style.display = 'block';
+    document.getElementById('fp-email')?.focus();
+    return;
+  }
+  if (emailErrEl) emailErrEl.style.display = 'none';
+
   const profile = {
     id:                  editingProfileId || ('az-' + Date.now()),
     nomeProfilo:         get('nomeProfilo'),
@@ -3075,6 +3127,7 @@ function saveProfile() {
     tipoAzienda:         get('tipoAzienda'),
     dimensione:          get('dimensione'),
     hasDipendenti:       get('hasDipendenti'),
+    forzaLavoro:         get('forzaLavoro'),
     addetti:             get('addetti'),
     fatturato:           get('fatturato'),
     annoFondazione:      get('annoFondazione'),
@@ -3089,6 +3142,7 @@ function saveProfile() {
     deMinimisResiduo:    get('deMinimisResiduo'),
     investimentiPrevisti: get('investimentiPrevisti'),
     noteClaudeExtra:     get('noteClaudeExtra'),
+    email:               emailVal,
     flagSpeciali:        getChecked('fp-flags-container'),
     obiettivi:           getChecked('fp-obiettivi-container'),
     updatedAt:           new Date().toISOString(),
@@ -3113,11 +3167,61 @@ function saveProfile() {
 function deleteProfile(id) {
   const az = aziende.find(a => a.id === id);
   if (!az) return;
-  if (!confirm(`Eliminare il profilo "${displayNomeBreveAzienda(az)}"?`)) return;
+  if (!confirm(`Eliminare il profilo "${displayNomeBreveAzienda(az)}"?\n\nSe esiste un file raccomandazioni per questo cliente, verrà marcato per la pulizia locale.`)) return;
+
+  // Marca il codice cliente per la pulizia file locale
+  if (az.codiceMnemonico) {
+    try {
+      const existing = JSON.parse(localStorage.getItem('bandiradar_da_eliminare') || '[]');
+      if (!existing.includes(az.codiceMnemonico)) {
+        existing.push(az.codiceMnemonico);
+        localStorage.setItem('bandiradar_da_eliminare', JSON.stringify(existing));
+      }
+      aggiornaBarraPulizia();
+    } catch(e) {}
+  }
+
   aziende = aziende.filter(a => a.id !== id);
   saveAziende();
   if (selectedProfileId === id) selectedProfileId = null;
   renderProfili();
+}
+
+// Mostra/nasconde il banner pulizia file locali
+function aggiornaBarraPulizia() {
+  const pending = JSON.parse(localStorage.getItem('bandiradar_da_eliminare') || '[]');
+  let banner = document.getElementById('banner-pulizia');
+  if (pending.length === 0) {
+    if (banner) banner.remove();
+    return;
+  }
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'banner-pulizia';
+    banner.style.cssText = 'background:#fef9c3;color:#713f12;border:1px solid #fde047;border-left:4px solid #d97706;padding:10px 16px;margin:0 28px 14px;border-radius:6px;font-size:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap';
+    const main = document.querySelector('.main');
+    if (main) main.insertBefore(banner, main.firstChild);
+  }
+  banner.innerHTML = `<span style="flex:1">⚠️ <strong>${pending.length} profilo${pending.length>1?'i':''} eliminato${pending.length>1?'i':''}</strong> — esegui <strong>🧹 Pulizia.bat</strong> per rimuovere i file locali (${pending.map(c=>`raccomandazioni_${c}.json`).join(', ')})</span>
+    <button onclick="scaricaDaEliminare()" style="background:#d97706;color:white;border:none;padding:5px 12px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600">💾 Scarica da_eliminare.json</button>
+    <button onclick="resetDaEliminare()" style="background:none;border:1px solid #d97706;color:#713f12;padding:5px 10px;border-radius:4px;cursor:pointer;font-size:11px">✕ Già fatto</button>`;
+}
+
+function scaricaDaEliminare() {
+  const pending = JSON.parse(localStorage.getItem('bandiradar_da_eliminare') || '[]');
+  if (!pending.length) return;
+  const payload = { generatedAt: new Date().toISOString(), codici_da_eliminare: pending };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'da_eliminare.json';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function resetDaEliminare() {
+  localStorage.removeItem('bandiradar_da_eliminare');
+  aggiornaBarraPulizia();
 }
 
 // ─────────────────────────────────────────────
@@ -3365,6 +3469,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadLinkStatus();
   loadLastSync();   // Fase 1.2 — indicatore freschezza dati
   loadPratiche();   // Fase 3.3 — CRM pratiche
+  aggiornaBarraPulizia(); // Mostra banner se ci sono file da eliminare in sospeso
 });
 </script>
 <script>

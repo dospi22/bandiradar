@@ -6,6 +6,9 @@
 # Vedi data/aziende.json per lo schema pubblico anonimizzato
 data/dati_clienti_privati.json
 
+# File pulizia locale — contiene codici cliente da eliminare, non va su GitHub
+data/da_eliminare.json
+
 # Secrets locali (mai committarli)
 .bandiradar_secrets
 *.env

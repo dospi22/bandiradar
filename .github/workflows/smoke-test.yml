@@ -115,9 +115,15 @@ jobs:
                   except Exception:
                       pass
 
-                  # 5. Errori console
-                  if console_errors:
-                      FAILS.append(f"Errori console JS: {len(console_errors)} (primo: {console_errors[0][:200]})")
+                  # 5. Errori console (ignora 404 su file opzionali noti)
+                  OPTIONAL_FILES = ['link_status.json', 'last_sync.json', 'pratiche.csv',
+                                    'raccomandazioni.json', 'aziende.json']
+                  real_errors = [
+                      e for e in console_errors
+                      if not any(f in e for f in OPTIONAL_FILES)
+                  ]
+                  if real_errors:
+                      FAILS.append(f"Errori console JS: {len(real_errors)} (primo: {real_errors[0][:200]})")
                   else:
                       PASSES.append("Nessun errore console JS")
 

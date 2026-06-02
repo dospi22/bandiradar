@@ -2785,15 +2785,12 @@ async function loadRaccomandazioni() {
   // Per compatibilità, tenta anche il vecchio raccomandazioni.json (migrazione graduale)
   raccomandazioniData = {};
 
-  // Lista dei file da provare: prima i per-cliente, poi il vecchio per retrocompatibilità
+  // Lista dei file per-cliente (uno per codice mnemonico)
+  // Il vecchio raccomandazioni.json è stato migrato — nessun fallback per evitare 404 in console
   const fileDaCaricare = [];
-
-  // Costruiamo la lista dai profili aziende caricati (ogni azienda con codice mnemonico)
   aziende.forEach(az => {
     if (az.codiceMnemonico) fileDaCaricare.push(`./data/raccomandazioni_${az.codiceMnemonico}.json`);
   });
-  // Fallback: vecchio file singolo per retrocompatibilità durante migrazione
-  fileDaCaricare.push('./data/raccomandazioni.json');
 
   for (const url of fileDaCaricare) {
     try {

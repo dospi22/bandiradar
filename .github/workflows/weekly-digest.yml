@@ -281,10 +281,6 @@ jobs:
               sys.exit(1)   # fa fallire il workflow → GitHub notifica Alex
           EOF
 
-      - name: Commit ultimo_digest.json
-        run: |
-          git config user.name  "BandiRadar Bot"
-          git config user.email "bot@bandiradar"
-          git add data/ultimo_digest.json || true
-          git diff --cached --quiet || git commit -m "chore: aggiorna ultimo_digest.json [$(date +%Y-%m-%d)]"
-          git push || true
+      # Nota: ultimo_digest.json NON viene committato automaticamente
+      # per evitare loop infiniti (push → trigger workflow → push → ...).
+      # Viene aggiornato manualmente da Alex con il file .bat insieme agli altri file.

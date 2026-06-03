@@ -1375,18 +1375,18 @@
     if (!azienda) return '—';
     const privato = datiPrivatiMap[azienda.id];
     if (datiPrivatiCaricati && privato) {
-      return privato.ragioneSociale || privato.nomeProfilo || azienda.codice || azienda.id;
+      return privato.ragioneSociale || privato.nomeProfilo || azienda.nomeProfilo || azienda.ragioneSociale || azienda.codiceMnemonico || '—';
     }
-    return azienda.codice || azienda.id || '—';
+    return azienda.nomeProfilo || azienda.ragioneSociale || azienda.codiceMnemonico || '—';
   }
 
   function displayNomeBreveAzienda(azienda) {
     if (!azienda) return '—';
     const privato = datiPrivatiMap[azienda.id];
     if (datiPrivatiCaricati && privato) {
-      return privato.nomeProfilo || privato.ragioneSociale || azienda.codice;
+      return privato.nomeProfilo || privato.ragioneSociale || azienda.nomeProfilo || azienda.ragioneSociale || azienda.codiceMnemonico;
     }
-    return azienda.codice || azienda.id;
+    return azienda.nomeProfilo || azienda.ragioneSociale || azienda.codiceMnemonico;
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -3112,8 +3112,27 @@ function saveProfile() {
   }
   if (emailErrEl) emailErrEl.style.display = 'none';
 
+  // Genera codiceMnemonico automaticamente se non esiste già
+  // Formato: INIZIALI-ANNO-PROVINCIA (es. FC-2017-RN)
+  // Se il profilo esiste già e ha già un codice, lo preserva
+  let codiceMnemonico = '';
+  if (editingProfileId) {
+    const existing = aziende.find(a => a.id === editingProfileId);
+    codiceMnemonico = existing?.codiceMnemonico || '';
+  }
+  if (!codiceMnemonico) {
+    // Genera dalle iniziali del nome profilo + anno fondazione + comune/provincia
+    const nomeRaw   = (get('nomeProfilo') || get('ragioneSociale') || '').toUpperCase();
+    const anno      = get('annoFondazione') || new Date().getFullYear().toString();
+    const comune    = (get('comune') || '').toUpperCase().slice(0, 2);
+    // Iniziali: prende le prime lettere di ogni parola (max 3 chars)
+    const iniziali  = nomeRaw.split(/\s+/).map(w => w[0]).filter(Boolean).join('').slice(0, 3) || 'XX';
+    codiceMnemonico = `${iniziali}-${anno}-${comune || 'IT'}`;
+  }
+
   const profile = {
     id:                  editingProfileId || ('az-' + Date.now()),
+    codiceMnemonico:     codiceMnemonico,
     nomeProfilo:         get('nomeProfilo'),
     ragioneSociale:      get('ragioneSociale'),
     piva:                get('piva'),

@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-05-29T08:30:09.794730",
+  "aziende": [
+    {
+      "idAzienda": "az-1779394390646",
+      "nomeProfilo": "PMI Innovazione Software Benefit ER",
+      "raccomandazioni": [
+        {
+          "id": "IT-2026-012",
+          "nome": "Smart&Start Italia — Sostegno startup innovative ad alto contenuto tecnologico",
+          "rilevanza": "molto_alta",
+          "motivazione": "PMI innovativa in ER: fino a €1,5M tasso zero, ideale per crescita",
+          "tipoAgev": "Finanziamento agevolato",
+          "scadenza": null,
+          "importoMax": 1500000
+        },
+        {
+          "id": "IT-2026-004",
+          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
+          "rilevanza": "molto_alta",
+          "motivazione": "Startup/micro: voucher brevettazione fino a €8k, de minimis, sportello",
+          "tipoAgev": "Voucher",
+          "scadenza": null,
+          "importoMax": 8000
+        },
+        {
+          "id": "EU-2026-001",
+          "nome": "EIC Accelerator — Fase Open",
+          "rilevanza": "alta",
+          "motivazione": "PMI innovativa: fino a €2,5M + equity, cut-off luglio e novembre 2026",
+          "tipoAgev": "Contributo a fondo perduto",
+          "scadenza": "2026-11-04",
+          "importoMax": 2500000
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "rilevanza": "alta",
+          "motivazione": "Voucher PI europeo (brevetti V3/V4) aperto, adatto PMI innovativa",
+          "tipoAgev": "Voucher",
+          "scadenza": "2026-12-04",
+          "importoMax": null
+        },
+        {
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "alta",
+          "motivazione": "Impresa Benefit + obiettivo economia circolare: premio visibilità ESG",
+          "tipoAgev": "Premio",
+          "scadenza": "2026-06-30",
+          "importoMax": null
+        },
+        {
+          "id": "IT-2026-022",
+          "nome": "Autoimpiego Centro-Nord — Invitalia (under 35)",
+          "rilevanza": "media",
+          "motivazione": "Startup Centro-Nord: fino a €200k fondo perduto se titolare under 35",
+          "tipoAgev": "Contributo a fondo perduto",
+          "scadenza": null,
+          "importoMax": 200000
+        }
+      ]
+    }
+  ],
+  "codice_cliente": "FC-2017-RN"
+}

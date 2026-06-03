@@ -1,121 +1,207 @@
 """
 valida_raccomandazioni.py
 =========================
-Legge bandi.csv e raccomandazioni.json, verifica che ogni ID raccomandato
-esista nel CSV, rimuove quelli inesistenti e salva il JSON pulito.
+Legge bandi.csv e tutti i file raccomandazioni_*.json, verifica che:
+  - ogni ID raccomandato esista nel CSV
+  - nessun bando raccomandato sia scaduto
+  - nessun bando abbia link rotto (se link_status.json disponibile)
+
+Rimuove automaticamente i record non validi e salva i JSON puliti.
 
 Uso:
     python scripts/valida_raccomandazioni.py
-
-Oppure importato da altri script:
-    from scripts.valida_raccomandazioni import valida
 """
 
 import csv
 import json
 import sys
+import glob
+from datetime import date
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent.parent
-CSV_PATH = BASE_DIR / "data" / "bandi.csv"
-JSON_PATH = BASE_DIR / "data" / "raccomandazioni.json"
+_script_dir = Path(__file__).resolve().parent
+_cwd        = Path.cwd()
+
+if (_cwd / "data" / "bandi.csv").exists():
+    BASE_DIR = _cwd
+else:
+    BASE_DIR = _script_dir.parent
+
+CSV_PATH  = BASE_DIR / "data" / "bandi.csv"
+LINK_PATH = BASE_DIR / "data" / "link_status.json"
+TODAY     = date.today()
 
 
-def carica_id_validi(csv_path: Path) -> set:
-    """Legge bandi.csv e restituisce l'insieme degli ID presenti."""
-    id_validi = set()
+def carica_bandi(csv_path):
+    bandi = {}
     with open(csv_path, encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
+        for row in csv.DictReader(f):
             bid = row.get("ID", "").strip()
             if bid:
-                id_validi.add(bid)
-    return id_validi
+                bandi[bid] = row
+    return bandi
 
 
-def valida(
-    json_path: Path = JSON_PATH,
-    csv_path: Path = CSV_PATH,
-    salva: bool = True,
-) -> dict:
-    """
-    Valida raccomandazioni.json contro bandi.csv.
+def carica_link_ko(link_path):
+    if not link_path.exists():
+        return set()
+    try:
+        with open(link_path, encoding="utf-8") as f:
+            data = json.load(f)
+        bandi_status = data.get("bandi", data)
+        return {bid for bid, info in bandi_status.items()
+                if isinstance(info, dict) and info.get("status") not in (None, "OK", "ok")}
+    except Exception:
+        return set()
 
-    Restituisce un dict con:
-        ok        : bool — True se nessun ID è stato rimosso
-        rimossi   : list — ID rimossi perché inesistenti nel CSV
-        mantenuti : list — ID validi rimasti
-        dati      : dict — contenuto JSON aggiornato (se salva=True, già scritto su disco)
-    """
-    if not csv_path.exists():
-        raise FileNotFoundError(f"CSV non trovato: {csv_path}")
+
+def valida_file(json_path, bandi_map, link_ko, salva=True):
     if not json_path.exists():
-        raise FileNotFoundError(f"JSON non trovato: {json_path}")
-
-    id_validi = carica_id_validi(csv_path)
+        raise FileNotFoundError(f"File non trovato: {json_path}")
 
     with open(json_path, encoding="utf-8") as f:
         dati = json.load(f)
 
-    rimossi_totali = []
-    mantenuti_totali = []
+    rimossi    = []
+    scaduti    = []
+    link_rotti = []
+    mantenuti  = []
+    modificato = False
 
     for azienda in dati.get("aziende", []):
+        az_id = azienda.get("idAzienda", "?")
         racc_originali = azienda.get("raccomandazioni", [])
         racc_valide = []
+
         for r in racc_originali:
             bid = r.get("id", "")
-            if bid in id_validi:
-                racc_valide.append(r)
-                mantenuti_totali.append(bid)
-            else:
-                rimossi_totali.append(bid)
-                print(
-                    f"  [RIMOSSO] ID '{bid}' non trovato in bandi.csv "
-                    f"(azienda: {azienda.get('idAzienda', '?')})"
-                )
+
+            # 1. ID inesistente nel CSV
+            if bid not in bandi_map:
+                rimossi.append(bid)
+                modificato = True
+                print(f"  [RIMOSSO - ID inesistente] {bid} (azienda: {az_id})")
+                continue
+
+            bando = bandi_map[bid]
+
+            # 2. Bando scaduto
+            scad_str = bando.get("Scadenza", "").strip()
+            if scad_str:
+                try:
+                    scad_date = date.fromisoformat(scad_str)
+                    if scad_date < TODAY:
+                        scaduti.append(bid)
+                        modificato = True
+                        print(f"  [RIMOSSO - scaduto il {scad_str}] {bid} | {bando.get('Nome bando','')[:50]}")
+                        continue
+                except ValueError:
+                    pass
+
+            # 3. Link rotto
+            if bid in link_ko:
+                link_rotti.append(bid)
+                modificato = True
+                print(f"  [RIMOSSO - link rotto] {bid} | {bando.get('Nome bando','')[:50]}")
+                continue
+
+            racc_valide.append(r)
+            mantenuti.append(bid)
+
         azienda["raccomandazioni"] = racc_valide
 
-    if salva and rimossi_totali:
+    if salva and modificato:
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(dati, f, ensure_ascii=False, indent=2)
-        print(f"\n  File aggiornato: {json_path}")
+        print(f"  -> File aggiornato: {json_path.name}")
 
     return {
-        "ok": len(rimossi_totali) == 0,
-        "rimossi": rimossi_totali,
-        "mantenuti": mantenuti_totali,
-        "dati": dati,
+        "ok":         not (rimossi or scaduti or link_rotti),
+        "rimossi":    rimossi,
+        "scaduti":    scaduti,
+        "link_rotti": link_rotti,
+        "mantenuti":  mantenuti,
+        "dati":       dati,
     }
 
 
-def main():
-    print("=" * 55)
-    print("  BandiRadar — Validazione raccomandazioni.json")
-    print("=" * 55)
+def trova_file_raccomandazioni(base_dir):
+    pattern = str(base_dir / "data" / "raccomandazioni_*.json")
+    files = [Path(p) for p in glob.glob(pattern)]
+    legacy = base_dir / "data" / "raccomandazioni.json"
+    if legacy.exists():
+        files.append(legacy)
+    return sorted(files)
 
-    try:
-        risultato = valida()
-    except FileNotFoundError as e:
-        print(f"\nERRORE: {e}")
+
+def main():
+    print("=" * 60)
+    print("  BandiRadar -- Validazione raccomandazioni per-cliente")
+    print("=" * 60)
+
+    if not CSV_PATH.exists():
+        print(f"\nERRORE: {CSV_PATH} non trovato")
         sys.exit(1)
 
-    n_rimossi = len(risultato["rimossi"])
-    n_ok = len(risultato["mantenuti"])
+    bandi_map = carica_bandi(CSV_PATH)
+    link_ko   = carica_link_ko(LINK_PATH)
+    files     = trova_file_raccomandazioni(BASE_DIR)
 
-    print(f"\n  ID validi mantenuti : {n_ok}")
-    print(f"  ID rimossi (falsi)  : {n_rimossi}")
+    if not files:
+        print("\n  Nessun file raccomandazioni trovato in data/")
+        sys.exit(0)
 
-    if risultato["ok"]:
-        print("\n  OK — Nessun ID inesistente trovato.")
+    print(f"\n  Bandi nel CSV   : {len(bandi_map)}")
+    print(f"  Link KO noti    : {len(link_ko)}")
+    print(f"  File da validare: {len(files)}")
+    print(f"  Data oggi       : {TODAY}")
+    print()
+
+    totale_ok       = True
+    tot_rimossi     = 0
+    tot_scaduti     = 0
+    tot_rotti       = 0
+    tot_mantenuti   = 0
+
+    for json_path in files:
+        print(f"-- {json_path.name} --")
+        try:
+            res = valida_file(json_path, bandi_map, link_ko)
+        except FileNotFoundError as e:
+            print(f"  ERRORE: {e}")
+            continue
+
+        n_ok  = len(res["mantenuti"])
+        n_rim = len(res["rimossi"])
+        n_sca = len(res["scaduti"])
+        n_rot = len(res["link_rotti"])
+
+        tot_mantenuti += n_ok
+        tot_rimossi   += n_rim
+        tot_scaduti   += n_sca
+        tot_rotti     += n_rot
+
+        if res["ok"]:
+            print(f"  OK -- {n_ok} raccomandazioni valide")
+        else:
+            totale_ok = False
+            if n_rim: print(f"  RIMOSSI {n_rim} ID inesistenti")
+            if n_sca: print(f"  RIMOSSI {n_sca} bandi scaduti")
+            if n_rot: print(f"  RIMOSSI {n_rot} bandi con link rotto")
+            print(f"  Rimaste valide: {n_ok}")
+        print()
+
+    print("=" * 60)
+    print(f"  Mantenuti : {tot_mantenuti}")
+    print(f"  Rimossi   : {tot_rimossi + tot_scaduti + tot_rotti}  "
+          f"(inesistenti:{tot_rimossi} scaduti:{tot_scaduti} link-rotti:{tot_rotti})")
+    if totale_ok:
+        print("\n  OK -- Tutti i file sono validi.")
     else:
-        print(f"\n  ATTENZIONE — Rimossi {n_rimossi} ID non presenti nel CSV:")
-        for bid in risultato["rimossi"]:
-            print(f"    - {bid}")
-        print("\n  raccomandazioni.json aggiornato e salvato.")
+        print("\n  ATTENZIONE -- Alcuni file sono stati corretti.")
+    print("=" * 60)
 
-    print("=" * 55)
-    return 0 if risultato["ok"] else 1
+    return 0 if totale_ok else 1
 
 
 if __name__ == "__main__":

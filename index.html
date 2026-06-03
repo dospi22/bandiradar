@@ -2785,8 +2785,27 @@ async function loadRaccomandazioni() {
   // Per compatibilità, tenta anche il vecchio raccomandazioni.json (migrazione graduale)
   raccomandazioniData = {};
 
+  // Se un'azienda nel localStorage non ha codiceMnemonico, prova a leggerlo
+  // dal file aziende.json sul server (aggiornato più di recente del localStorage)
+  const azSenzaCodice = aziende.filter(az => !az.codiceMnemonico);
+  if (azSenzaCodice.length > 0) {
+    try {
+      const ra = await fetch('./data/aziende.json', { cache: 'no-cache' });
+      if (ra.ok) {
+        const remoto = await ra.json();
+        const remoteMap = {};
+        (remoto.aziende || []).forEach(a => { if (a.id) remoteMap[a.id] = a; });
+        // Aggiorna codiceMnemonico in memoria (non salva nel localStorage)
+        aziende.forEach(az => {
+          if (!az.codiceMnemonico && remoteMap[az.id]?.codiceMnemonico) {
+            az.codiceMnemonico = remoteMap[az.id].codiceMnemonico;
+          }
+        });
+      }
+    } catch(e) { /* file remoto non raggiungibile */ }
+  }
+
   // Lista dei file per-cliente (uno per codice mnemonico)
-  // Il vecchio raccomandazioni.json è stato migrato — nessun fallback per evitare 404 in console
   const fileDaCaricare = [];
   aziende.forEach(az => {
     if (az.codiceMnemonico) fileDaCaricare.push(`./data/raccomandazioni_${az.codiceMnemonico}.json`);

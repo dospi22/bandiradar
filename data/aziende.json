@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-05-29T14:24:47.428Z",
+  "exportedAt": "2026-06-03T08:58:33.242Z",
   "aziende": [
     {
       "id": "az-1779394390646",
@@ -38,8 +38,7 @@
         "Accesso al credito",
         "Economia circolare"
       ],
-      "updatedAt": "2026-05-29T14:24:32.896Z",
-      "codiceMnemonico": "FC-2017-RN"
+      "updatedAt": "2026-05-29T14:24:32.896Z"
     }
   ]
 }

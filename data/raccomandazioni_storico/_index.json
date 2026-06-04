@@ -13,7 +13,14 @@
       "aziende": 1,
       "raccomandazioni": 6,
       "bytes": 2410
+    },
+    {
+      "data": "2026-06-04",
+      "file": "2026-06-04.json",
+      "aziende": 1,
+      "raccomandazioni": 6,
+      "bytes": 4666
     }
   ],
-  "generatedAt": "2026-06-03T09:00:16.691005+00:00"
+  "generatedAt": "2026-06-04T07:23:08.127110+00:00"
 }

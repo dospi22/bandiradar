@@ -1,5 +1,5 @@
 {
-  "exportedAt": "2026-06-03T08:58:33.242Z",
+  "exportedAt": "2026-06-04T07:20:54.334Z",
   "aziende": [
     {
       "id": "az-1779394390646",
@@ -40,6 +40,49 @@
       ],
       "updatedAt": "2026-05-29T14:24:32.896Z",
       "codiceMnemonico": "FC-2017-RN"
+    },
+    {
+      "id": "az-1780557651248",
+      "codiceMnemonico": "JC-1997-RI",
+      "nomeProfilo": "Japan Car",
+      "ragioneSociale": "Japan Car srl",
+      "piva": "",
+      "settore": "Commercio auto Suzuki B2C",
+      "ateco": "",
+      "comune": "Rimini",
+      "regione": "Emilia Romagna",
+      "tipoAzienda": "PMI tradizionale",
+      "dimensione": "Piccola impresa (< 50 add., < 10M €)",
+      "hasDipendenti": "Sì — tra 10 e 49",
+      "forzaLavoro": "Dipendenti a tempo indeterminato",
+      "addetti": "16",
+      "fatturato": "12.000.000€",
+      "annoFondazione": "1997",
+      "formaSociale": "S.r.l",
+      "fasiCrescita": "Matura / stabile",
+      "modelloBusiness": "Vendita di auto Suzuki ai privati. Officina ufficiale Suzuki",
+      "prodottiServizi": "Auto Suzuki, Officina Suzuki.",
+      "clientiTarget": "Persone fisiche o aziende, nella provincia di Rimini.",
+      "mercati": "Provincia di Rimini 100%",
+      "puntiForza": "Unico Rivenditore in tutta la Provincia di Rimini.",
+      "sfide": "Innovare, costi alti di gestione.",
+      "deMinimisResiduo": "",
+      "investimentiPrevisti": "Acquisto macchinari per l'officina, integrare l'Ia nell'operatività del lavoro dei venditori.",
+      "noteClaudeExtra": "L'azienda ora ha comprato un capannone, per spostare la concessionaria, ed ingrandirsi, quindi stanno ricostruendo tutto da capo, sia il salone, l'officina, le app, i software, tutto da capo.",
+      "email": "federico.gori@square42.eu",
+      "flagSpeciali": [
+        "PMI"
+      ],
+      "obiettivi": [
+        "Crescita fatturato",
+        "Digitalizzazione",
+        "Sostenibilità / Green",
+        "Assunzioni / Lavoro",
+        "Formazione dipendenti",
+        "Accesso al credito",
+        "Investimenti produttivi"
+      ],
+      "updatedAt": "2026-06-04T07:20:51.248Z"
     }
   ]
 }

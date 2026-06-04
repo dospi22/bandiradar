@@ -1,160 +1,76 @@
 {
   "codice_cliente": "JC-1997-RI",
-  "generatedAt": "2026-06-04T07:37:28Z",
+  "generatedAt": "2026-06-04T08:07:21.806562",
   "aziende": [
     {
       "idAzienda": "az-1780557651248",
-      "generatedAt": "2026-06-04T07:37:28Z",
+      "generatedAt": "2026-06-04T08:07:21.806562",
       "raccomandazioni": [
         {
-          "id": "IT-2026-015",
-          "nome": "MIMIT — Sviluppo Competenze Specialistiche PMI Mezzogiorno",
+          "id": "ER-2026-015",
+          "nome": "FESR ER — Sostegno innovazione commercio vicinato, pubblici esercizi e attività polifunzionali 2026",
           "rilevanza": "molto_alta",
-          "motivazione": "Formazione; scadenza imminente",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | de minimis | 50%",
-          "scadenza": "2026-06-23",
-          "importoMax": 30000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "IT-2026-019",
-          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità; scadenza imminente",
-          "motivazioneEstesa": "Bando Nazionale | Premio | non applicabile | %",
-          "scadenza": "2026-06-30",
-          "importoMax": 0,
-          "tipoAgev": "Premio"
-        },
-        {
-          "id": "IT-2026-018",
-          "nome": "PN RIC FTV SUD — Fotovoltaico per l'autoconsumo delle PMI del Mezzogiorno",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità; scadenza imminente; fino a €1,700,000",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | gber esenzione | 60%%",
-          "scadenza": "2026-07-03",
-          "importoMax": 1700000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-002",
-          "nome": "LIFE Programme 2026 — Natura e Biodiversità",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità; fino a €5,000,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 60%",
-          "scadenza": "2026-09-19",
-          "importoMax": 5000000,
-          "tipoAgev": "Contributo a fondo perduto"
+          "motivazione": "Contributo per PMI commercio ER: ideale per investimenti nuova sede e innovazione punto vendita.",
+          "motivazioneEstesa": "Il bando FESR ER sostiene PMI del commercio in Emilia-Romagna con contributi a fondo perduto fino a €50.000 per innovazione digitale e ammodernamento. Perfettamente allineato con la ristrutturazione della nuova concessionaria e l'integrazione di strumenti digitali per i venditori.",
+          "scadenza": "2026-07-21",
+          "importoMax": 50000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
         },
         {
           "id": "ER-2025-002",
           "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
           "rilevanza": "molto_alta",
-          "motivazione": "R&s; Digitalizzazione",
-          "motivazioneEstesa": "Bando Regionale ER | Contributo a fondo perduto | gber esenzione | %",
+          "motivazione": "Contributo ER per investimenti produttivi e digitalizzazione: adatto all'acquisto macchinari officina.",
+          "motivazioneEstesa": "Il bando FESR ER STEP 2025 finanzia investimenti produttivi e tecnologie strategiche per PMI in Emilia-Romagna. Particolarmente rilevante per l'acquisto di macchinari per la nuova officina e per l'integrazione di soluzioni digitali nel processo di vendita.",
           "scadenza": "2026-09-30",
           "importoMax": 0,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-004",
-          "nome": "EIC Transition 2026",
-          "rilevanza": "alta",
-          "motivazione": "R&s; fino a €2,500,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 70%",
-          "scadenza": "2026-09-16",
-          "importoMax": 2500000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-001",
-          "nome": "EIC Accelerator — Fase Open",
-          "rilevanza": "alta",
-          "motivazione": "R&s; Startup; fino a €2,500,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | notificato | 70%",
-          "scadenza": "2026-11-04",
-          "importoMax": 2500000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-005",
-          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
-          "rilevanza": "alta",
-          "motivazione": "Internazionalizzazione",
-          "motivazioneEstesa": "Bando Europeo | Voucher | de minimis | 75%",
-          "scadenza": "2026-12-04",
-          "importoMax": 0,
-          "tipoAgev": "Voucher"
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
         },
         {
           "id": "IT-2026-025",
           "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
           "rilevanza": "alta",
-          "motivazione": "Formazione",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | de minimis | 100% spese formazione%",
+          "motivazione": "Finanzia formazione dipendenti PMI: ideale per aggiornamento personale vendite e officina.",
+          "motivazioneEstesa": "Fondimpresa sostiene la formazione continua nelle PMI con contributi a fondo perduto fino a €150.000. Utile per formare il personale di vendita all'uso degli strumenti digitali e aggiornare i tecnici dell'officina sulle nuove tecnologie automotive.",
           "scadenza": "2026-12-31",
           "importoMax": 150000,
-          "tipoAgev": "Contributo a fondo perduto"
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
         },
         {
-          "id": "IT-2026-026",
-          "nome": "SIMEST — Misura Energia per la Competitività Internazionale 2026",
-          "rilevanza": "alta",
-          "motivazione": "Internazionalizzazione",
-          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato | de minimis | 30%",
-          "scadenza": "2026-12-31",
-          "importoMax": 0,
-          "tipoAgev": "Finanziamento agevolato"
-        },
-        {
-          "id": "IT-2026-012",
-          "nome": "Smart&Start Italia — Sostegno startup innovative ad alto contenuto tecnologico",
-          "rilevanza": "alta",
-          "motivazione": "Startup; R&s; Digitalizzazione",
-          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato | gber esenzione | 80%",
-          "scadenza": "",
-          "importoMax": 1500000,
-          "tipoAgev": "Finanziamento agevolato"
-        },
-        {
-          "id": "IT-2026-004",
-          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
-          "rilevanza": "alta",
-          "motivazione": "R&s",
-          "motivazioneEstesa": "Bando Nazionale | Voucher | de minimis | 80%",
-          "scadenza": "",
-          "importoMax": 8000,
-          "tipoAgev": "Voucher"
-        },
-        {
-          "id": "IT-2026-023",
-          "nome": "SIMEST — Misura Stati Uniti (internazionalizzazione USA)",
-          "rilevanza": "alta",
-          "motivazione": "Internazionalizzazione",
-          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato|Contributo a fondo perduto | fondo 394 maeci | fino al 10% fondo perduto + finanziamento agevolato%",
-          "scadenza": "",
-          "importoMax": 0,
-          "tipoAgev": "Finanziamento agevolato|Contributo a fondo perduto"
-        },
-        {
-          "id": "IT-2026-010",
-          "nome": "Avviso Vita e Opportunita 2026",
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
           "rilevanza": "media",
-          "motivazione": "Altro; fino a €3,000,000",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | non aiuto di stato | 95%",
-          "scadenza": "2026-08-29",
-          "importoMax": 3000000,
-          "tipoAgev": "Contributo a fondo perduto"
+          "motivazione": "Voucher UE per PMI su marchi e IP: utile per proteggere il brand della concessionaria.",
+          "motivazioneEstesa": "L'EUIPO SME Fund eroga voucher alle PMI per la registrazione e tutela di marchi e proprietà intellettuale. Può essere utile per rafforzare l'identità del brand nel mercato locale della provincia di Rimini.",
+          "scadenza": "2026-12-04",
+          "importoMax": 0,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
         },
         {
-          "id": "EU-2025-001",
-          "nome": "Horizon Europe — EIC Pathfinder",
+          "id": "EU-2026-002",
+          "nome": "LIFE Programme 2026 — Natura e Biodiversità",
           "rilevanza": "media",
-          "motivazione": "R&s; fino a €4,000,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 100%",
-          "scadenza": "2026-09-05",
-          "importoMax": 4000000,
-          "tipoAgev": "Contributo a fondo perduto"
+          "motivazione": "Fondo UE per sostenibilità: pertinente per proiettare l'officina verso mobilità green.",
+          "motivazioneEstesa": "Il programma LIFE 2026 finanzia progetti di sostenibilità ambientale per PMI. Può supportare iniziative legate alla mobilità sostenibile, all'efficienza energetica della nuova sede o all'introduzione di soluzioni eco-compatibili nell'officina.",
+          "scadenza": "2026-09-19",
+          "importoMax": 5000000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
+        },
+        {
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "media",
+          "motivazione": "Premio nazionale sostenibilità: visibilità per iniziative green della concessionaria.",
+          "motivazioneEstesa": "Il Premio per lo Sviluppo Sostenibile premia imprese con iniziative ambientali eccellenti. Scadenza imminente (30 giugno). Può valorizzare investimenti green previsti per la nuova sede e officina.",
+          "scadenza": "2026-06-30",
+          "importoMax": 0,
+          "tipoAgev": "Premio",
+          "priorita": "Media"
         }
       ],
       "in_arrivo": [],
@@ -162,20 +78,42 @@
         {
           "id": "IT-2026-002",
           "nome": "Credito d'imposta Transizione 5.0",
-          "stato": "Sospeso",
-          "motivazione": "Sospeso alta priorità — da seguire"
+          "motivazione": "Credito d'imposta Transizione 5.0: agevolazione per investimenti green e digitali, fondamentale per nuova sede.",
+          "scadenza": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta"
         },
         {
-          "id": "IT-2026-003",
-          "nome": "SIMEST — Fondo 394 Internazionalizzazione PMI",
-          "stato": "Sospeso",
-          "motivazione": "Sospeso alta priorità — da seguire"
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "motivazione": "Voucher Cloud & Cybersecurity: digitalizzazione PMI con voucher per cloud e sicurezza informatica.",
+          "scadenza": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
         },
         {
-          "id": "IT-2026-005",
-          "nome": "Contratti di Sviluppo — PNRR Missione 4",
-          "stato": "Sospeso",
-          "motivazione": "Sospeso alta priorità — da seguire"
+          "id": "ER-2026-012",
+          "nome": "FESR ER — STEP 2026: investimenti produttivi e R&S in tecnologie strategiche (II Bando)",
+          "motivazione": "FESR ER STEP 2026: investimenti produttivi e R&S in ER, continuazione naturale di STEP 2025.",
+          "scadenza": "2026-09-30",
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "ER-2026-003",
+          "nome": "Bando internazionalizzazione ART-ER 2026",
+          "motivazione": "Bando internazionalizzazione ART-ER: supporto export PMI emiliano-romagnole.",
+          "scadenza": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "ER-2026-011",
+          "nome": "FESR ER — PreciseU Bando Integrativo Regionale 2026 (Deep Tech Salute)",
+          "motivazione": "FESR ER PreciseU: bando integrativo regionale per innovazione PMI in ER.",
+          "scadenza": "2026-06-18",
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
         }
       ]
     }

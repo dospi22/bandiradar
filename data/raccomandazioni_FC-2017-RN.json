@@ -1,37 +1,77 @@
 {
   "codice_cliente": "FC-2017-RN",
-  "generatedAt": "2026-06-04T07:26:31.420456+00:00",
+  "generatedAt": "2026-06-04T07:37:28Z",
   "aziende": [
     {
       "idAzienda": "az-1779394390646",
-      "generatedAt": "2026-06-04T07:26:31.420456+00:00",
+      "generatedAt": "2026-06-04T07:37:28Z",
       "raccomandazioni": [
         {
           "id": "IT-2026-019",
           "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
           "rilevanza": "molto_alta",
-          "motivazione": "Premio Sviluppo Sostenibile: visibilità nazionale. Benefit + economia circolare, candidatura naturale.",
-          "motivazioneEstesa": "Il Premio valorizza imprese con pratiche sostenibili e di economia circolare. Impresa Benefit nel digitale è candidatura ideale: alto ritorno reputazionale, nessun costo diretto, scadenza 30 giugno 2026.",
+          "motivazione": "Sostenibilità; scadenza imminente",
+          "motivazioneEstesa": "Bando Nazionale | Premio | non applicabile | %",
           "scadenza": "2026-06-30",
-          "importoMax": null,
+          "importoMax": 0,
           "tipoAgev": "Premio"
+        },
+        {
+          "id": "IT-2026-018",
+          "nome": "PN RIC FTV SUD — Fotovoltaico per l'autoconsumo delle PMI del Mezzogiorno",
+          "rilevanza": "molto_alta",
+          "motivazione": "Sostenibilità; scadenza imminente; fino a €1,700,000",
+          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | gber esenzione | 60%%",
+          "scadenza": "2026-07-03",
+          "importoMax": 1700000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "EU-2026-002",
+          "nome": "LIFE Programme 2026 — Natura e Biodiversità",
+          "rilevanza": "molto_alta",
+          "motivazione": "Sostenibilità; fino a €5,000,000",
+          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 60%",
+          "scadenza": "2026-09-19",
+          "importoMax": 5000000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "IT-2026-015",
+          "nome": "MIMIT — Sviluppo Competenze Specialistiche PMI Mezzogiorno",
+          "rilevanza": "alta",
+          "motivazione": "Formazione; scadenza imminente",
+          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | de minimis | 50%",
+          "scadenza": "2026-06-23",
+          "importoMax": 30000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "EU-2026-004",
+          "nome": "EIC Transition 2026",
+          "rilevanza": "alta",
+          "motivazione": "R&s; fino a €2,500,000",
+          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 70%",
+          "scadenza": "2026-09-16",
+          "importoMax": 2500000,
+          "tipoAgev": "Contributo a fondo perduto"
         },
         {
           "id": "ER-2025-002",
           "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
-          "rilevanza": "molto_alta",
-          "motivazione": "Bando ER R&S+investimenti in tech strategici. PMI benefit ER nel digitale: fit molto alto, scad. set 2026.",
-          "motivazioneEstesa": "FESR ER STEP 2025 finanzia investimenti produttivi e R&S in tecnologie strategiche per PMI emiliano-romagnole. La microimpresa benefit nel digitale rientra pienamente nel perimetro. Regime GBER, importo non cap.",
+          "rilevanza": "alta",
+          "motivazione": "R&s; Digitalizzazione",
+          "motivazioneEstesa": "Bando Regionale ER | Contributo a fondo perduto | gber esenzione | %",
           "scadenza": "2026-09-30",
-          "importoMax": null,
+          "importoMax": 0,
           "tipoAgev": "Contributo a fondo perduto"
         },
         {
           "id": "EU-2026-001",
           "nome": "EIC Accelerator — Fase Open",
-          "rilevanza": "molto_alta",
-          "motivazione": "EIC Accelerator: fino a €2,5M per PMI innovative. Impresa Benefit nel digitale ER, forte candidatura.",
-          "motivazioneEstesa": "EIC Accelerator finanzia PMI ad alto potenziale con grant+equity. La qualifica Impresa Benefit e il focus su innovazione digitale/sociale rafforzano la candidatura. Scadenza novembre 2026, preparazione strategica necessaria.",
+          "rilevanza": "alta",
+          "motivazione": "R&s; Startup; fino a €2,500,000",
+          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | notificato | 70%",
           "scadenza": "2026-11-04",
           "importoMax": 2500000,
           "tipoAgev": "Contributo a fondo perduto"
@@ -39,61 +79,81 @@
         {
           "id": "EU-2026-005",
           "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
-          "rilevanza": "molto_alta",
-          "motivazione": "Rimborso 75% tasse marchi/design EU/IT. Microimpresa digitale ER: costo basso, ritorno immediato.",
-          "motivazioneEstesa": "EUIPO SME Fund rimborsa fino al 75% delle tasse per marchi e design a livello UE e nazionale. Per una microimpresa nel digitale è un'opportunità a basso sforzo con impatto diretto sul brand.",
+          "rilevanza": "alta",
+          "motivazione": "Internazionalizzazione",
+          "motivazioneEstesa": "Bando Europeo | Voucher | de minimis | 75%",
           "scadenza": "2026-12-04",
-          "importoMax": null,
+          "importoMax": 0,
           "tipoAgev": "Voucher"
         },
         {
-          "id": "IT-2026-004",
-          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
-          "rilevanza": "molto_alta",
-          "motivazione": "Rimborso 80% spese brevettazione, perfetto per microimpresa digitale ER con innovazione software.",
-          "motivazioneEstesa": "Il Voucher 3I copre fino a €8.000 (80%) per brevetti e tutela IP. Ideale per proteggere le soluzioni digitali sviluppate. Sportello aperto, nessuna scadenza fissa: presentare subito.",
-          "scadenza": null,
-          "importoMax": 8000,
-          "tipoAgev": "Voucher"
-        },
-        {
-          "id": "EU-2026-004",
-          "nome": "EIC Transition 2026",
+          "id": "IT-2026-025",
+          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
           "rilevanza": "alta",
-          "motivazione": "EIC Transition: €2,5M per scale-up di ricerche esistenti. Se c'è un proof of concept digitale, da valutare.",
-          "motivazioneEstesa": "EIC Transition scala risultati di ricerca esistenti verso il mercato. Per la microimpresa benefit nel digitale è rilevante solo se ha tecnologie con background scientifico. Scadenza settembre 2026, valutare con anticipo.",
-          "scadenza": "2026-09-16",
-          "importoMax": 2500000,
+          "motivazione": "Formazione",
+          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | de minimis | 100% spese formazione%",
+          "scadenza": "2026-12-31",
+          "importoMax": 150000,
           "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-002",
-          "nome": "LIFE Programme 2026 — Natura e Biodiversità",
-          "rilevanza": "alta",
-          "motivazione": "LIFE Biodiversità: €5M a 60% per progetti sostenibilità. Rilevante se attività include economia circolare.",
-          "motivazioneEstesa": "LIFE Programme finanzia progetti natura/sostenibilità con 60% di contributo. Per una Benefit con obiettivo economia circolare può essere una finestra interessante, ma richiede partenariato e approccio progettuale strutturato.",
-          "scadenza": "2026-09-19",
-          "importoMax": 5000000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "IT-2026-022",
-          "nome": "Autoimpiego Centro-Nord — Invitalia (under 35)",
-          "rilevanza": "alta",
-          "motivazione": "Autoimpiego Centro-Nord: €200K a 65% per nuovi progetti imprenditoriali. ER inclusa, valutare requisiti.",
-          "motivazioneEstesa": "Misura Invitalia per imprenditorialità in Centro-Nord (ER inclusa). Agevolazione significativa per avvio/sviluppo attività. Verificare requisiti età e forma giuridica applicabili alla situazione specifica.",
-          "scadenza": null,
-          "importoMax": 200000,
-          "tipoAgev": "Contributo a fondo perduto|Voucher"
         },
         {
           "id": "IT-2026-026",
           "nome": "SIMEST — Misura Energia per la Competitività Internazionale 2026",
-          "rilevanza": "media",
-          "motivazione": "SIMEST Energia: agevolazione per internazionalizzazione. Utile se si punta a espandere mercati esteri.",
-          "motivazioneEstesa": "SIMEST Energia supporta PMI esportatrici nella competitività internazionale. Per la microimpresa attualmente solo-Italia potrebbe essere uno strumento futuro se si avvia un percorso export digitale.",
+          "rilevanza": "alta",
+          "motivazione": "Internazionalizzazione",
+          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato | de minimis | 30%",
           "scadenza": "2026-12-31",
-          "importoMax": null,
+          "importoMax": 0,
+          "tipoAgev": "Finanziamento agevolato"
+        },
+        {
+          "id": "IT-2026-004",
+          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
+          "rilevanza": "alta",
+          "motivazione": "R&s",
+          "motivazioneEstesa": "Bando Nazionale | Voucher | de minimis | 80%",
+          "scadenza": "",
+          "importoMax": 8000,
+          "tipoAgev": "Voucher"
+        },
+        {
+          "id": "IT-2026-023",
+          "nome": "SIMEST — Misura Stati Uniti (internazionalizzazione USA)",
+          "rilevanza": "alta",
+          "motivazione": "Internazionalizzazione",
+          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato|Contributo a fondo perduto | fondo 394 maeci | fino al 10% fondo perduto + finanziamento agevolato%",
+          "scadenza": "",
+          "importoMax": 0,
+          "tipoAgev": "Finanziamento agevolato|Contributo a fondo perduto"
+        },
+        {
+          "id": "IT-2026-010",
+          "nome": "Avviso Vita e Opportunita 2026",
+          "rilevanza": "media",
+          "motivazione": "Altro; fino a €3,000,000",
+          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | non aiuto di stato | 95%",
+          "scadenza": "2026-08-29",
+          "importoMax": 3000000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "EU-2025-001",
+          "nome": "Horizon Europe — EIC Pathfinder",
+          "rilevanza": "media",
+          "motivazione": "R&s; fino a €4,000,000",
+          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 100%",
+          "scadenza": "2026-09-05",
+          "importoMax": 4000000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "IT-2026-012",
+          "nome": "Smart&Start Italia — Sostegno startup innovative ad alto contenuto tecnologico",
+          "rilevanza": "media",
+          "motivazione": "Startup; R&s; Digitalizzazione",
+          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato | gber esenzione | 80%",
+          "scadenza": "",
+          "importoMax": 1500000,
           "tipoAgev": "Finanziamento agevolato"
         }
       ],
@@ -102,20 +162,20 @@
         {
           "id": "IT-2026-002",
           "nome": "Credito d'imposta Transizione 5.0",
-          "motivazione": "Transizione 5.0: credito imposta fino a 50% per digitale ed energie rinnovabili. Microimpresa ER inclusa.",
-          "nota": "Bando sospeso — monitorare la riapertura"
+          "stato": "Sospeso",
+          "motivazione": "Sospeso alta priorità — da seguire"
         },
         {
-          "id": "IT-2026-007",
-          "nome": "Voucher Cloud & Cybersecurity",
-          "motivazione": "Voucher Cloud & Cybersecurity: supporto digitale per PMI/microimprese. Perfetto per software company.",
-          "nota": "Bando sospeso — monitorare la riapertura"
+          "id": "IT-2026-003",
+          "nome": "SIMEST — Fondo 394 Internazionalizzazione PMI",
+          "stato": "Sospeso",
+          "motivazione": "Sospeso alta priorità — da seguire"
         },
         {
-          "id": "ER-2026-014",
-          "nome": "FESR ER — Certificazioni aziendali per competitività 2026 (nuova edizione)",
-          "motivazione": "Certificazioni ER: contributo per certificazioni aziendali competitività. Benefit e PMI ammesse.",
-          "nota": "Bando sospeso — monitorare la riapertura"
+          "id": "IT-2026-005",
+          "nome": "Contratti di Sviluppo — PNRR Missione 4",
+          "stato": "Sospeso",
+          "motivazione": "Sospeso alta priorità — da seguire"
         }
       ]
     }

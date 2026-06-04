@@ -3194,6 +3194,31 @@ function saveProfile() {
   closeProfileForm();
   selectedProfileId = profile.id;
   renderProfili();
+
+  // Banner promemoria: ricorda di esportare e caricare su GitHub
+  const isNuovo = !editingProfileId;
+  const bannerMsg = isNuovo
+    ? `Profilo <strong>${escHtml(profile.nomeProfilo)}</strong> aggiunto (codice: <code>${escHtml(profile.codiceMnemonico)}</code>).<br>
+       Ora: <strong>1)</strong> clicca <em>Esporta aziende.json</em> e salvalo in data/ &nbsp;
+       <strong>2)</strong> esegui ⬆️ Carica su GitHub.bat &nbsp;
+       <strong>3)</strong> avvia l'agente abbinamento per generare le raccomandazioni`
+    : `Profilo <strong>${escHtml(profile.nomeProfilo)}</strong> aggiornato.<br>
+       Ricorda di <em>Esportare aziende.json</em> e caricare su GitHub con il .bat`;
+  mostraBannerInfo(bannerMsg);
+}
+
+function mostraBannerInfo(msg) {
+  let banner = document.getElementById('banner-info-profilo');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'banner-info-profilo';
+    banner.style.cssText = 'background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;border-left:4px solid #2563eb;padding:10px 16px;margin:0 0 14px;border-radius:6px;font-size:12px;display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap';
+    const main = document.querySelector('.main');
+    if (main) main.insertBefore(banner, main.firstChild);
+  }
+  banner.innerHTML = `<span style="flex:1">ℹ️ ${msg}</span>
+    <button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;font-size:16px;color:#1e40af;padding:0 4px;flex-shrink:0">✕</button>`;
+  banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ─────────────────────────────────────────────

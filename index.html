@@ -2890,6 +2890,26 @@ function renderProfilSidebar() {
   });
 
   html += `<button class="btn-add-profilo" onclick="openProfileForm(null)">➕ Aggiungi profilo aziendale</button>`;
+
+  // Sezione abbinamento bandi
+  if (aziende.length > 0) {
+    html += `<div style="margin-top:18px;padding:14px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:var(--radius)">
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px">🤖 Abbina bandi</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">Seleziona le aziende da analizzare, scarica il file config e salvalo in <code>data/</code>, poi avvia l'agente.</div>
+      <div id="abbinamento-checkboxes" style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">
+        ${aziende.map(az => `
+        <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:5px 8px;border-radius:4px;border:1px solid var(--border);background:white">
+          <input type="checkbox" class="abbinamento-check" value="${escAttr(az.codiceMnemonico||az.id)}" style="accent-color:var(--blue)">
+          ${escHtml(displayNomeBreveAzienda(az))}
+          <span style="font-size:10px;color:var(--text-muted);margin-left:auto;font-family:monospace">${escHtml(az.codiceMnemonico||'')}</span>
+        </label>`).join('')}
+      </div>
+      <button class="btn btn-primary btn-sm" style="width:100%" onclick="scaricaAbbinamentoConfig()">
+        💾 Scarica abbinamento_config.json
+      </button>
+    </div>`;
+  }
+
   sb.innerHTML = html;
 }
 
@@ -2971,6 +2991,36 @@ function renderRaccomandazioni(az) {
         <p>Claude non ha trovato bandi idonei per questo profilo al momento. Aggiorna il CSV e riavvia l'agente.</p>
       </div>`;
     } else {
+      // ── Barra filtri ─────────────────────────────────────────────────────
+      html += `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center">
+        <span style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Filtra:</span>
+        <select id="racc-filter-rilevanza" onchange="filtraRaccomandazioni('${escAttr(az.id)}')" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:4px;background:white;cursor:pointer">
+          <option value="">⭐ Tutte le rilevanze</option>
+          <option value="molto_alta">⭐ Solo Molto alta</option>
+          <option value="alta">🔵 Solo Alta</option>
+          <option value="media">🟡 Solo Media</option>
+        </select>
+        <select id="racc-filter-scadenza" onchange="filtraRaccomandazioni('${escAttr(az.id)}')" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:4px;background:white;cursor:pointer">
+          <option value="">📅 Tutte le scadenze</option>
+          <option value="30">⚡ Entro 30 giorni</option>
+          <option value="60">🔜 Entro 60 giorni</option>
+          <option value="90">📆 Entro 90 giorni</option>
+          <option value="strutturale">♾️ Strutturali / Sportello</option>
+        </select>
+        <select id="racc-filter-tipo" onchange="filtraRaccomandazioni('${escAttr(az.id)}')" style="font-size:12px;padding:4px 8px;border:1px solid var(--border);border-radius:4px;background:white;cursor:pointer">
+          <option value="">💰 Tutti i tipi</option>
+          <option value="fondo perduto">🎯 Fondo perduto</option>
+          <option value="credito d'imposta">🏦 Credito d'imposta</option>
+          <option value="finanziamento">📋 Finanziamento agevolato</option>
+          <option value="voucher">🎟️ Voucher</option>
+          <option value="premio">🏆 Premio</option>
+        </select>
+        <span id="racc-filter-count" style="font-size:11px;color:var(--text-muted);margin-left:4px">${items.length} bandi</span>
+        <button onclick="resetFiltriRacc('${escAttr(az.id)}')" id="racc-filter-reset" style="display:none;font-size:11px;padding:3px 8px;border:1px solid var(--border);border-radius:4px;background:white;cursor:pointer;color:var(--text-muted)">✕ Azzera</button>
+      </div>`;
+
+      // ── Lista raccomandazioni ─────────────────────────────────────────────
+      html += `<div id="racc-lista-${escAttr(az.id)}">`;
       items.forEach(item => {
         const relClass = item.rilevanza === 'molto_alta' ? 'molto-alta'
                        : item.rilevanza === 'alta'       ? 'alta' : 'media';
@@ -2981,24 +3031,32 @@ function renderRaccomandazioni(az) {
                       : (b ? scadDisplay(b, urgency(b)).label : '—');
         const impStr  = item.importoMax ? formatEuro(item.importoMax)
                       : (b ? formatEuro(b.importoMax) : '—');
-        // Se il bando non è nel bandiMap (ID inesistente nel CSV), mostra warning visivo prominente
         const mancante = !b;
         const clickable = b ? `onclick="openModal('${item.id}')" style="cursor:pointer"` : '';
-        const cardStyle = mancante
-          ? 'border:1.5px solid #f87171;background:#fef2f2;opacity:0.85;'
-          : '';
-        html += `<div class="racc-item" ${clickable} style="${cardStyle}">
+        const cardStyle = mancante ? 'border:1.5px solid #f87171;background:#fef2f2;opacity:0.85;' : '';
+
+        // Data attributes per il filtro lato client
+        const scadGiorni = item.scadenza ? Math.floor((new Date(item.scadenza) - new Date()) / 86400000) : 9999;
+        const tipoAgev   = (item.tipoAgev || '').toLowerCase();
+        const bPriority  = b ? (b.priorita || '').toLowerCase() : '';
+
+        html += `<div class="racc-item" ${clickable} style="${cardStyle}"
+          data-rilevanza="${item.rilevanza || ''}"
+          data-scad-giorni="${scadGiorni}"
+          data-tipo="${escAttr(tipoAgev)}"
+          data-priorita="${escAttr(bPriority)}"
+          data-tipo-scad="${escAttr(b ? (b.tipoScadenza||'') : '')}">
           <div class="racc-item-top">
             <div class="racc-item-nome">${escHtml(item.nome || item.id)}</div>
             ${mancante
-              ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#fca5a5;color:#7f1d1d;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:0.3px">⚠ ID non nel CSV</span>`
+              ? `<span style="display:inline-flex;align-items:center;gap:4px;background:#fca5a5;color:#7f1d1d;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap">⚠ ID non nel CSV</span>`
               : `<span class="racc-badge ${relClass}">${relLabel}</span>`
             }
           </div>
           ${mancante
             ? `<div style="font-size:11px;color:#b91c1c;margin-bottom:4px;font-family:monospace">${escHtml(item.id)}</div>
                <div style="font-size:11px;color:#7f1d1d;background:#fee2e2;border-radius:4px;padding:6px 8px;line-height:1.5">
-                 Questo ID non esiste nel file <strong>bandi.csv</strong>. Il bando potrebbe essere stato rimosso o l'ID potrebbe essere stato generato per errore. Riesegui l'abbinamento per aggiornare le raccomandazioni.
+                 Questo ID non esiste nel file <strong>bandi.csv</strong>. Riesegui l'abbinamento per aggiornare le raccomandazioni.
                </div>`
             : `<div class="racc-motivazione">"${escHtml(item.motivazione)}"</div>
                ${b ? criteriMatchHtml(b, az) : ''}
@@ -3010,11 +3068,91 @@ function renderRaccomandazioni(az) {
           }
         </div>`;
       });
+      html += `</div>`; // fine racc-lista
+
+      // Sezione In arrivo
+      const inArrivo = racc.in_arrivo || [];
+      if (inArrivo.length > 0) {
+        html += `<div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px">🔜 In arrivo (${inArrivo.length})</div>`;
+        inArrivo.forEach(item => {
+          html += `<div class="racc-item" style="background:#f0f9ff;border-color:#bae6fd">
+            <div class="racc-item-top">
+              <div class="racc-item-nome">${escHtml(item.nome || item.id)}</div>
+              <span style="font-size:10px;font-weight:700;background:#dbeafe;color:#1e40af;padding:2px 7px;border-radius:20px">🔜 In arrivo</span>
+            </div>
+            <div class="racc-motivazione">"${escHtml(item.motivazione || '')}"</div>
+            <div style="font-size:11px;color:#0369a1;margin-top:4px">${escHtml(item.nota || '')}</div>
+          </div>`;
+        });
+        html += `</div>`;
+      }
+
+      // Sezione Da monitorare
+      const daMonitorare = racc.da_monitorare || [];
+      if (daMonitorare.length > 0) {
+        html += `<div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px">👁️ Da monitorare — sospesi (${daMonitorare.length})</div>`;
+        daMonitorare.forEach(item => {
+          html += `<div class="racc-item" style="background:#fafafa;border-color:#e5e7eb;opacity:0.85">
+            <div class="racc-item-top">
+              <div class="racc-item-nome">${escHtml(item.nome || item.id)}</div>
+              <span style="font-size:10px;font-weight:700;background:#f3f4f6;color:#6b7280;padding:2px 7px;border-radius:20px">⏸️ Sospeso</span>
+            </div>
+            <div class="racc-motivazione">"${escHtml(item.motivazione || '')}"</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px">${escHtml(item.nota || '')}</div>
+          </div>`;
+        });
+        html += `</div>`;
+      }
     }
   }
 
   html += `</div></div>`;
   main.innerHTML = html;
+}
+
+function filtraRaccomandazioni(azId) {
+  const filRilev  = document.getElementById('racc-filter-rilevanza')?.value || '';
+  const filScad   = document.getElementById('racc-filter-scadenza')?.value  || '';
+  const filTipo   = document.getElementById('racc-filter-tipo')?.value      || '';
+  const lista     = document.getElementById('racc-lista-' + azId);
+  const countEl   = document.getElementById('racc-filter-count');
+  const resetBtn  = document.getElementById('racc-filter-reset');
+  if (!lista) return;
+
+  const items = lista.querySelectorAll('.racc-item');
+  let visibili = 0;
+
+  items.forEach(el => {
+    const rilev     = el.dataset.rilevanza  || '';
+    const giorni    = parseInt(el.dataset.scadGiorni) || 9999;
+    const tipo      = el.dataset.tipo       || '';
+    const tipoScad  = el.dataset.tipoScad   || '';
+
+    let ok = true;
+
+    if (filRilev && rilev !== filRilev) ok = false;
+
+    if (filScad === '30'  && giorni > 30)  ok = false;
+    if (filScad === '60'  && giorni > 60)  ok = false;
+    if (filScad === '90'  && giorni > 90)  ok = false;
+    if (filScad === 'strutturale' && !tipoScad.toLowerCase().includes('strutturale') && !tipoScad.toLowerCase().includes('sportello')) ok = false;
+
+    if (filTipo && !tipo.includes(filTipo)) ok = false;
+
+    el.style.display = ok ? '' : 'none';
+    if (ok) visibili++;
+  });
+
+  if (countEl) countEl.textContent = visibili + ' bandi';
+  if (resetBtn) resetBtn.style.display = (filRilev || filScad || filTipo) ? '' : 'none';
+}
+
+function resetFiltriRacc(azId) {
+  const sel = ['racc-filter-rilevanza','racc-filter-scadenza','racc-filter-tipo'];
+  sel.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  filtraRaccomandazioni(azId);
 }
 
 // ─────────────────────────────────────────────
@@ -3287,6 +3425,37 @@ function resetDaEliminare() {
 // ─────────────────────────────────────────────
 // EXPORT aziende.json
 // ─────────────────────────────────────────────
+function scaricaAbbinamentoConfig() {
+  // Raccoglie le checkbox selezionate
+  const checks = document.querySelectorAll('.abbinamento-check:checked');
+  const codici = Array.from(checks).map(c => c.value).filter(Boolean);
+
+  if (codici.length === 0) {
+    alert('Seleziona almeno un\'azienda da analizzare.');
+    return;
+  }
+
+  const payload = {
+    "_istruzioni": "Codici delle aziende da elaborare. L'agente legge questo file prima di iniziare.",
+    "generatedAt": new Date().toISOString(),
+    "aziende_da_elaborare": codici.join(',')
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url;
+  a.download = 'abbinamento_config.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  // Mostra conferma
+  mostraBannerInfo(`Config scaricata per: <strong>${codici.join(', ')}</strong>.<br>
+    Salva il file in <code>data/</code> e avvia l'agente abbinamento.`);
+}
+
 function exportAziende() {
   if (aziende.length === 0) { alert('Nessun profilo da esportare.'); return; }
   const payload = { exportedAt: new Date().toISOString(), aziende };

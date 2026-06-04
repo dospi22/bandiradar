@@ -1,0 +1,93 @@
+{
+  "codice_cliente": "FC-2017-RN",
+  "generatedAt": "2026-06-03T09:08:51Z",
+  "aziende": [
+    {
+      "idAzienda": "az-1779394390646",
+      "generatedAt": "2026-06-03T09:08:51Z",
+      "raccomandazioni": [
+        {
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "molto_alta",
+          "motivazione": "Premio sostenibilità gratuito — valorizza identità benefit dell'impresa",
+          "motivazioneEstesa": "Premio, contributo variabile, importo max da definire. Scadenza: 2026-06-30. Compatibile con profilo microimpresa benefit in crescita, obiettivi innovazione e accesso al credito.",
+          "scadenza": "2026-06-30",
+          "importoMax": null,
+          "tipoAgev": "Premio"
+        },
+        {
+          "id": "EU-2026-004",
+          "nome": "EIC Transition 2026",
+          "rilevanza": "molto_alta",
+          "motivazione": "Contributo UE 70% fino a €2.500.000 per PMI con risultati R&S da valorizzare",
+          "motivazioneEstesa": "Contributo a fondo perduto, contributo 70%, importo max €2.500.000. Scadenza: 2026-09-16. Compatibile con profilo microimpresa benefit in crescita, obiettivi innovazione e accesso al credito.",
+          "scadenza": "2026-09-16",
+          "importoMax": 2500000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "EU-2026-002",
+          "nome": "LIFE Programme 2026 — Natura e Biodiversità",
+          "rilevanza": "molto_alta",
+          "motivazione": "Grant UE sostenibilità 60% fino a €5.000.000 — coerente missione benefit",
+          "motivazioneEstesa": "Contributo a fondo perduto, contributo 60%, importo max €5.000.000. Scadenza: 2026-09-19. Compatibile con profilo microimpresa benefit in crescita, obiettivi innovazione e accesso al credito.",
+          "scadenza": "2026-09-19",
+          "importoMax": 5000000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "molto_alta",
+          "motivazione": "FESR ER: contributo R&S/investimenti per PMI benefit in Emilia-Romagna",
+          "motivazioneEstesa": "Contributo a fondo perduto, contributo variabile, importo max da definire. Scadenza: 2026-09-30. Compatibile con profilo microimpresa benefit in crescita, obiettivi innovazione e accesso al credito.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "EU-2026-001",
+          "nome": "EIC Accelerator — Fase Open",
+          "rilevanza": "molto_alta",
+          "motivazione": "Grant+equity UE fino a €2.500.000 per PMI innovativa in crescita accelerata",
+          "motivazioneEstesa": "Contributo a fondo perduto, contributo 70%, importo max €2.500.000. Scadenza: 2026-11-04. Compatibile con profilo microimpresa benefit in crescita, obiettivi innovazione e accesso al credito.",
+          "scadenza": "2026-11-04",
+          "importoMax": 2500000,
+          "tipoAgev": "Contributo a fondo perduto"
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "rilevanza": "molto_alta",
+          "motivazione": "Voucher proprietà intellettuale PMI 75% fondo perduto",
+          "motivazioneEstesa": "Voucher, contributo 75%, importo max da definire. Scadenza: 2026-12-04. Compatibile con profilo microimpresa benefit in crescita, obiettivi innovazione e accesso al credito.",
+          "scadenza": "2026-12-04",
+          "importoMax": null,
+          "tipoAgev": "Voucher"
+        }
+      ],
+      "in_arrivo": [],
+      "da_monitorare": [
+        {
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "motivazione": "Alta priorità per microimpresa benefit ER: Credito d'imposta Transizione 5.0",
+          "nota": "Bando sospeso — monitorare la riapertura"
+        },
+        {
+          "id": "ER-2026-003",
+          "nome": "Bando internazionalizzazione ART-ER 2026",
+          "motivazione": "Alta priorità per microimpresa benefit ER: Bando internazionalizzazione ART-ER 2026",
+          "nota": "Bando sospeso — monitorare la riapertura"
+        },
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "motivazione": "Alta priorità per microimpresa benefit ER: Voucher Cloud & Cybersecurity",
+          "nota": "Bando sospeso — monitorare la riapertura"
+        }
+      ]
+    }
+  ]
+}

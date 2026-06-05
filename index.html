@@ -88,58 +88,154 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ── HEADER ── */
-    .header {
-      background: linear-gradient(135deg, #0d1224 0%, #111827 100%);
-      color: white;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-top {
+    /* ── APP SHELL: SIDEBAR + CONTENT ── */
+    .app-shell {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 28px;
-      flex-wrap: wrap;
-      gap: 12px;
+      min-height: 100vh;
     }
 
-    .logo { display: flex; align-items: center; gap: 14px; }
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 72px;
+      background: linear-gradient(180deg, #0d1224 0%, #0b0f1a 100%);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0 24px;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+      gap: 4px;
+    }
 
-    .logo-icon {
+    .sidebar-logo {
       width: 44px; height: 44px;
       background: rgba(129,140,248,0.15);
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       font-size: 22px;
       border: 1px solid rgba(129,140,248,0.25);
+      margin-bottom: 20px;
+      cursor: pointer;
     }
 
-    .logo-text h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; font-family: var(--font-display); }
-    .logo-text p  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      width: 100%;
+      padding: 0 8px;
+    }
 
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+      padding: 10px 4px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: all 0.15s;
+      text-align: center;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .nav-item.active { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+    .nav-item.active .nav-icon { filter: none; }
+
+    .nav-icon { font-size: 20px; line-height: 1; }
+
+    .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 0 8px;
+      width: 100%;
+    }
+
+    .sidebar-badge {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sidebar-badge:hover { background: rgba(255,255,255,0.1); }
+    .sidebar-badge.riservato { background: rgba(248,113,113,0.12); border-color: rgba(248,113,113,0.25); }
+
+    /* ── CONTENT AREA ── */
+    .content-area {
+      margin-left: 72px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: linear-gradient(135deg, #0d1224 0%, #111827 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-title {
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar-title h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; font-family: var(--font-display); }
+    .topbar-title p  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
     .header-meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.7; }
 
-    /* ── STATS ── */
+    /* ── STATS (card in alto) ── */
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--border);
-      background: rgba(0,0,0,0.25);
+      gap: 14px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
     }
 
     .stat-card {
-      padding: 18px 24px;
-      border-right: 1px solid var(--border);
-      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.15s;
     }
-    .stat-card:last-child { border-right: none; }
+    .stat-card:hover { border-color: rgba(129,140,248,0.2); }
 
-    .stat-value { font-size: 26px; font-weight: 700; display: block; font-family: var(--font-mono); color: #818cf8; }
-    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 3px; }
+    .stat-icon { font-size: 20px; opacity: 0.8; }
+    .stat-value { font-size: 28px; font-weight: 700; display: block; font-family: var(--font-mono); color: #818cf8; line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 2px; }
 
     /* ── MAIN ── */
-    .main { max-width: 1440px; margin: 0 auto; padding: 24px 28px 56px; }
+    .main { padding: 20px 24px 56px; }
 
     /* ── CONTROLS ── */
     .controls {
@@ -638,19 +734,8 @@
     }
 
     /* ══════════ SECTION NAVIGATION ══════════ */
-    .section-nav {
-      display: flex; gap: 0; margin-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-tab {
-      padding: 10px 22px; font-size: 14px; font-weight: 600;
-      cursor: pointer; border: none; background: none; color: var(--text-muted);
-      border-bottom: 2px solid transparent; margin-bottom: -1px;
-      transition: all 0.15s; letter-spacing: -0.1px;
-      font-family: var(--font-display);
-    }
-    .section-tab.active { color: #818cf8; border-bottom-color: #818cf8; }
-    .section-tab:hover:not(.active) { color: var(--text); background: rgba(255,255,255,0.03); }
+    /* section-nav nascosta — navigazione ora nella sidebar */
+    .section-nav { display: none; }
 
     /* ══════════ PROFILI LAYOUT ══════════ */
     .profili-layout {
@@ -832,53 +917,94 @@
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
-<!-- ══════════════ HEADER ══════════════ -->
-<header class="header">
-  <div class="header-top">
-    <div class="logo">
-      <div class="logo-icon">📡</div>
-      <div class="logo-text">
-        <h1>BandiRadar</h1>
-        <p>Monitoraggio bandi · Emilia-Romagna, Italia, Europa</p>
-      </div>
-    </div>
-    <div class="header-meta">
-      <div>📍 Rimini, Emilia-Romagna</div>
-      <div id="freshness" class="freshness" onclick="openFreshnessModal()" title="Clicca per il dettaglio stato dati">
-        <span class="fresh-dot"></span>
-        <span><span id="fresh-label">Caricamento…</span> <span class="freshness-sub" id="fresh-sub"></span></span>
-      </div>
-    </div>
+<div class="app-shell">
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav class="sidebar" aria-label="Navigazione principale">
+  <div class="sidebar-logo" title="BandiRadar">📡</div>
+
+  <div class="sidebar-nav" role="tablist">
+    <button class="nav-item active" id="tab-bandi" role="tab" aria-selected="true" aria-controls="section-bandi" onclick="switchSection('bandi')">
+      <span class="nav-icon">📡</span>
+      Bandi
+    </button>
+    <button class="nav-item" id="tab-scadenze" role="tab" aria-selected="false" aria-controls="section-scadenze" onclick="switchSection('scadenze')">
+      <span class="nav-icon">📅</span>
+      Scadenze
+    </button>
+    <button class="nav-item" id="tab-profili" role="tab" aria-selected="false" aria-controls="section-profili" onclick="switchSection('profili')">
+      <span class="nav-icon">🏢</span>
+      Aziende
+    </button>
+    <button class="nav-item" id="tab-pratiche" role="tab" aria-selected="false" aria-controls="section-pratiche" onclick="switchSection('pratiche')">
+      <span class="nav-icon">📂</span>
+      Pratiche
+    </button>
   </div>
+
+  <div class="sidebar-bottom">
+    <div id="freshness" class="sidebar-badge freshness" onclick="openFreshnessModal()" title="Aggiornamento dati — clicca per dettaglio">
+      <span class="fresh-dot" id="fresh-label-icon">🟢</span>
+    </div>
+    <div class="sidebar-badge riservato" onclick="openPrivacyBanner()" title="Modalità riservata">🔒</div>
+  </div>
+</nav>
+
+<!-- ══════════════ CONTENT AREA ══════════════ -->
+<div class="content-area">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-title">
+      <h1>Esplora Bandi</h1>
+      <p>Monitoraggio bandi · Emilia-Romagna, Italia, Europa</p>
+    </div>
+    <div class="topbar-right">
+      <div class="header-meta">
+        <div id="freshness-label" class="freshness" onclick="openFreshnessModal()" title="Clicca per il dettaglio stato dati" style="cursor:pointer;display:flex;align-items:center;gap:6px">
+          <span class="fresh-dot"></span>
+          <span><span id="fresh-label">Caricamento…</span> <span class="freshness-sub" id="fresh-sub"></span></span>
+        </div>
+        <div style="text-align:right;margin-top:2px">📍 Rimini, Emilia-Romagna</div>
+      </div>
+      <div class="sidebar-badge riservato" id="btn-riservato" onclick="openPrivacyBanner()" title="Modalità riservata" style="width:36px;height:36px">🔒</div>
+      <div class="sidebar-badge" id="btn-account" style="width:36px;height:36px;background:rgba(129,140,248,0.15);border-color:rgba(129,140,248,0.25);font-weight:700;font-family:var(--font-display)">A</div>
+    </div>
+  </header>
+
+  <!-- STATS -->
   <div class="stats">
     <div class="stat-card">
+      <span class="stat-icon">🎯</span>
       <span class="stat-value" id="stat-aperti">—</span>
       <div class="stat-label">Bandi aperti</div>
     </div>
     <div class="stat-card">
+      <span class="stat-icon">⏰</span>
       <span class="stat-value" id="stat-scadenza">—</span>
-      <div class="stat-label">⚠️ In scadenza 30gg</div>
+      <div class="stat-label">In scadenza 30gg</div>
     </div>
     <div class="stat-card">
+      <span class="stat-icon">💰</span>
       <span class="stat-value" id="stat-dotazione">—</span>
-      <div class="stat-label">Dotazione disponibile</div>
+      <div class="stat-label">Dotazione totale</div>
     </div>
     <div class="stat-card">
+      <span class="stat-icon">✨</span>
       <span class="stat-value" id="stat-nuovi">—</span>
-      <div class="stat-label">Nuovi (ultimi 30gg)</div>
+      <div class="stat-label">Nuovi ultimi 30gg</div>
     </div>
   </div>
-</header>
 
 <!-- ══════════════ MAIN ══════════════ -->
 <main class="main" id="main-content" role="main">
 
-  <!-- Section Nav -->
-  <div class="section-nav" role="tablist" aria-label="Sezioni della dashboard">
-    <button class="section-tab active" id="tab-bandi" role="tab" aria-selected="true" aria-controls="section-bandi" onclick="switchSection('bandi')">📡 Bandi</button>
-    <button class="section-tab" id="tab-scadenze" role="tab" aria-selected="false" aria-controls="section-scadenze" onclick="switchSection('scadenze')">📅 Scadenze</button>
-    <button class="section-tab" id="tab-profili" role="tab" aria-selected="false" aria-controls="section-profili" onclick="switchSection('profili')">🏢 Profili Aziende</button>
-    <button class="section-tab" id="tab-pratiche" role="tab" aria-selected="false" aria-controls="section-pratiche" onclick="switchSection('pratiche')">📂 Le mie pratiche</button>
+  <!-- Section Nav (nascosta, navigazione nella sidebar) -->
+  <div class="section-nav" role="tablist" aria-label="Sezioni della dashboard" aria-hidden="true">
+    <button class="section-tab active" id="tab-bandi-hidden" role="tab" aria-selected="true" aria-controls="section-bandi">📡 Bandi</button>
+    <button class="section-tab" id="tab-scadenze-hidden" role="tab">📅 Scadenze</button>
+    <button class="section-tab" id="tab-profili-hidden" role="tab">🏢 Profili</button>
+    <button class="section-tab" id="tab-pratiche-hidden" role="tab">📂 Pratiche</button>
   </div>
 
   <!-- ══════════════ SEZIONE BANDI ══════════════ -->
@@ -1148,6 +1274,9 @@
   </style>
 
 </main>
+
+</div><!-- /content-area -->
+</div><!-- /app-shell -->
 
 <!-- ══════════════ FOOTER (Fase 1.6) ══════════════ -->
 <footer style="max-width:1440px;margin:0 auto;padding:28px;border-top:1px solid var(--border);background:var(--card);color:var(--text-muted);font-size:12px;line-height:1.65">

@@ -68,11 +68,20 @@ jobs:
                   console_errors = []
                   page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
 
-                  # Network: monitor del fetch di bandi.csv
+                  # Network: monitor risposte (bandi.csv status + 404 per file non opzionali)
+                  OPTIONAL_FILES = [
+                      'link_status.json', 'last_sync', 'pratiche.csv',
+                      'raccomandazioni', 'aziende.json', 'dati_clienti_privati',
+                      'abbinamento_config', 'ultima_ricerca', 'ultimo_diff', 'ultimo_digest',
+                  ]
                   csv_status = {'code': None}
+                  unexpected_404s = []
                   async def handle_response(resp):
                       if 'bandi.csv' in resp.url:
                           csv_status['code'] = resp.status
+                      elif resp.status == 404:
+                          if not any(f in resp.url for f in OPTIONAL_FILES):
+                              unexpected_404s.append(resp.url)
                   page.on("response", lambda r: asyncio.create_task(handle_response(r)))
 
                   # 1. Page loads
@@ -115,23 +124,16 @@ jobs:
                   except Exception:
                       pass
 
-                  # 5. Errori console (ignora 404 su file opzionali/privati noti)
-                  # Copre: file esclusi da .gitignore, generati localmente, dati cliente
-                  OPTIONAL_FILES = [
-                      'link_status.json',
-                      'last_sync',
-                      'pratiche.csv',
-                      'raccomandazioni',       # copre raccomandazioni.json, storico, per-cliente
-                      'aziende.json',
-                      'dati_clienti_privati',  # escluso da .gitignore, mai nel repo
-                      'abbinamento_config',
-                      'ultima_ricerca',
-                      'ultimo_diff',
-                      'ultimo_digest',
-                  ]
+                  # 5a. 404 inattesi (URL completo disponibile tramite network handler)
+                  if unexpected_404s:
+                      FAILS.append(f"404 inattesi: {len(unexpected_404s)} (primo: {unexpected_404s[0]})")
+                  else:
+                      PASSES.append("Nessun 404 inatteso")
+
+                  # 5b. Errori console JS (escludi i generici "Failed to load resource" — già coperti da 5a)
                   real_errors = [
                       e for e in console_errors
-                      if not any(f in e for f in OPTIONAL_FILES)
+                      if 'Failed to load resource' not in e
                   ]
                   if real_errors:
                       FAILS.append(f"Errori console JS: {len(real_errors)} (primo: {real_errors[0][:200]})")

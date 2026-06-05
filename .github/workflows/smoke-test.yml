@@ -115,9 +115,20 @@ jobs:
                   except Exception:
                       pass
 
-                  # 5. Errori console (ignora 404 su file opzionali noti)
-                  OPTIONAL_FILES = ['link_status.json', 'last_sync.json', 'pratiche.csv',
-                                    'raccomandazioni.json', 'aziende.json']
+                  # 5. Errori console (ignora 404 su file opzionali/privati noti)
+                  # Copre: file esclusi da .gitignore, generati localmente, dati cliente
+                  OPTIONAL_FILES = [
+                      'link_status.json',
+                      'last_sync',
+                      'pratiche.csv',
+                      'raccomandazioni',       # copre raccomandazioni.json, storico, per-cliente
+                      'aziende.json',
+                      'dati_clienti_privati',  # escluso da .gitignore, mai nel repo
+                      'abbinamento_config',
+                      'ultima_ricerca',
+                      'ultimo_diff',
+                      'ultimo_digest',
+                  ]
                   real_errors = [
                       e for e in console_errors
                       if not any(f in e for f in OPTIONAL_FILES)

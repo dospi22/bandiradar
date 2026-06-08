@@ -51,6 +51,7 @@
     --c-popup: #161b2e;
     --c-popup-border: rgba(255,255,255,0.08);
     --c-fg-mid: rgba(255,255,255,0.4);
+    --c-fg-sub: rgba(255,255,255,0.3);
     --c-fg-lo: rgba(255,255,255,0.25);
     --c-fg-faint: rgba(255,255,255,0.2);
     --c-fg-ghost: rgba(255,255,255,0.1);
@@ -63,16 +64,17 @@
     --c-border: rgba(0,0,0,0.07);
     --c-border-hi: rgba(0,0,0,0.12);
     --c-border-lo: rgba(0,0,0,0.05);
-    --c-surface: rgba(255,255,255,0.85);
-    --c-surface-hi: rgba(255,255,255,0.95);
-    --c-surface-lo: rgba(255,255,255,0.6);
-    --c-panel: rgba(255,255,255,0.6);
+    --c-surface: #ffffff;
+    --c-surface-hi: rgba(0,0,0,0.04);
+    --c-surface-lo: rgba(0,0,0,0.02);
+    --c-panel: rgba(255,255,255,0.7);
     --c-input: #ffffff;
     --c-hover: rgba(0,0,0,0.04);
     --c-scroll: rgba(0,0,0,0.15);
     --c-popup: #ffffff;
     --c-popup-border: rgba(0,0,0,0.1);
     --c-fg-mid: rgba(0,0,0,0.55);
+    --c-fg-sub: rgba(0,0,0,0.45);
     --c-fg-lo: rgba(0,0,0,0.35);
     --c-fg-faint: rgba(0,0,0,0.25);
     --c-fg-ghost: rgba(0,0,0,0.15);
@@ -100,6 +102,10 @@
   body[data-theme="light"] input { color: #1e293b; }
   body[data-theme="light"] input::placeholder { color: rgba(0,0,0,0.35); }
   body[data-theme="light"] select { color: #1e293b; background-color: white; }
+
+  body[data-theme="light"] .v2-card-surface {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
 
   @keyframes v2SlideUp {
     from { opacity: 0; transform: translateY(16px) scale(0.98); }
@@ -794,7 +800,7 @@ function v2FormatFull(n) { return "€ " + n.toLocaleString("it-IT"); }
 /* ── BADGE / TAG ──────────────────────────────────────── */
 const V2Badge = ({ children, variant = "default", style: s = {} }) => {
   const vars = {
-    default: { bg:"rgba(255,255,255,0.06)", color:"rgba(255,255,255,0.5)", border:"rgba(255,255,255,0.08)" },
+    default: { bg:"var(--c-surface-hi)", color:"var(--c-fg-mid)", border:"var(--c-border-hi)" },
     eu: { bg:"rgba(99,102,241,0.15)", color:"#a5b4fc", border:"rgba(99,102,241,0.2)" },
     it: { bg:"rgba(52,211,153,0.12)", color:"#6ee7b7", border:"rgba(52,211,153,0.2)" },
     er: { bg:"rgba(251,191,36,0.12)", color:"#fcd34d", border:"rgba(251,191,36,0.2)" },
@@ -830,11 +836,11 @@ const V2PriDot = ({ priorita }) => {
 };
 
 const V2Tag = ({ label }) => (
-  <span style={{display:"inline-flex",padding:"2px 8px",borderRadius:6,fontSize:10,fontWeight:500,background:"rgba(255,255,255,0.04)",color:"rgba(255,255,255,0.4)",border:"1px solid rgba(255,255,255,0.06)"}}>{label}</span>
+  <span style={{display:"inline-flex",padding:"2px 8px",borderRadius:6,fontSize:10,fontWeight:500,background:"var(--c-surface-hi)",color:"var(--c-fg-mid)",border:"1px solid var(--c-border-hi)"}}>{label}</span>
 );
 
 const V2PraticaColors = {
-  "da-valutare": { bg:"rgba(255,255,255,0.06)", color:"rgba(255,255,255,0.5)" },
+  "da-valutare": { bg:"rgba(255,255,255,0.06)", color:"var(--c-fg-mid)" },
   "in-corso": { bg:"rgba(99,102,241,0.15)", color:"#a5b4fc" },
   "presentata": { bg:"rgba(251,191,36,0.12)", color:"#fcd34d" },
   "ammessa": { bg:"rgba(52,211,153,0.12)", color:"#6ee7b7" },
@@ -865,22 +871,22 @@ function V2Modal({ bando, onClose }) {
     <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.6)",backdropFilter:"blur(12px)"}} onClick={onClose}>
       <div onClick={e=>e.stopPropagation()} style={{
         width:"100%",maxWidth:660,maxHeight:"85vh",borderRadius:20,overflow:"hidden",display:"flex",flexDirection:"column",
-        background:"linear-gradient(180deg,#1a1f35 0%,#111827 100%)",border:"1px solid rgba(255,255,255,0.08)",
+        background:"linear-gradient(180deg,#1a1f35 0%,#111827 100%)",border:"1px solid var(--c-border-hi)",
         boxShadow:"0 32px 80px rgba(0,0,0,0.5)",animation:"v2SlideUp .25s ease-out"
       }}>
         {/* Header */}
-        <div style={{padding:"22px 26px 18px",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
+        <div style={{padding:"22px 26px 18px",borderBottom:"1px solid var(--c-border-hi)"}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
             <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:12}}>
               <V2LivBadge livello={bando.livello} />
               <V2StatoBadge stato={bando.stato} scadenza={bando.scadenza} />
             </div>
-            <button onClick={onClose} style={{width:32,height:32,borderRadius:8,border:"1px solid rgba(255,255,255,0.08)",background:"rgba(255,255,255,0.04)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"rgba(255,255,255,0.4)",flexShrink:0}}>
+            <button onClick={onClose} style={{width:32,height:32,borderRadius:8,border:"1px solid var(--c-border-hi)",background:"rgba(255,255,255,0.04)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"var(--c-fg-mid)",flexShrink:0}}>
               <V2Icon name="x" size={14} />
             </button>
           </div>
-          <h2 style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:20,color:"#f1f5f9",letterSpacing:"-0.025em",lineHeight:1.2,margin:0}}>{bando.nome}</h2>
-          <p style={{marginTop:6,fontSize:12,color:"rgba(255,255,255,0.4)",display:"flex",alignItems:"center",gap:5}}>
+          <h2 style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:20,color:"var(--fg-hi)",letterSpacing:"-0.025em",lineHeight:1.2,margin:0}}>{bando.nome}</h2>
+          <p style={{marginTop:6,fontSize:12,color:"var(--c-fg-mid)",display:"flex",alignItems:"center",gap:5}}>
             <V2Icon name="building" size={12} color="rgba(255,255,255,0.3)" /> {bando.ente}
           </p>
         </div>
@@ -894,8 +900,8 @@ function V2Modal({ bando, onClose }) {
               { label:"Contributo", value:bando.percContributo+"%", color:"#34d399" },
               { label:"Scadenza", value:v2FormatDate(bando.scadenza), color: urg?"#f87171":"#fbbf24" },
             ].map(({label,value,color})=>(
-              <div key={label} style={{padding:"16px",borderRadius:14,background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.06)"}}>
-                <div style={{fontSize:10,fontWeight:600,color:"rgba(255,255,255,0.35)",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:8}}>{label}</div>
+              <div key={label} style={{padding:"16px",borderRadius:14,background:"var(--c-input)",border:"1px solid var(--c-border-hi)"}}>
+                <div style={{fontSize:10,fontWeight:600,color:"var(--c-fg-sub)",textTransform:"uppercase",letterSpacing:"0.08em",marginBottom:8}}>{label}</div>
                 <div style={{fontFamily:"var(--v2-font-num)",fontWeight:700,fontSize:20,color,letterSpacing:"-0.02em"}}>{value}</div>
               </div>
             ))}
@@ -909,9 +915,9 @@ function V2Modal({ bando, onClose }) {
               {l:"Beneficiari",v:bando.beneficiari.replace(/\|/g,", ")},
               {l:"Dotazione",v:bando.dotazione ? v2FormatImporto(bando.dotazione) : "N/D"},
             ].map(({l,v})=>(
-              <div key={l} style={{padding:"10px 14px",borderRadius:10,background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.05)"}}>
-                <div style={{fontSize:10,color:"rgba(255,255,255,0.3)",fontWeight:500,marginBottom:3}}>{l}</div>
-                <div style={{fontSize:12,fontWeight:600,color:"#e2e8f0"}}>{v}</div>
+              <div key={l} style={{padding:"10px 14px",borderRadius:10,background:"var(--c-surface-lo)",border:"1px solid var(--c-border)"}}>
+                <div style={{fontSize:10,color:"var(--c-fg-sub)",fontWeight:500,marginBottom:3}}>{l}</div>
+                <div style={{fontSize:12,fontWeight:600,color:"var(--fg)"}}>{v}</div>
               </div>
             ))}
           </div>
@@ -928,18 +934,18 @@ function V2Modal({ bando, onClose }) {
           <div style={{display:"flex",gap:5,flexWrap:"wrap",marginBottom:8}}>
             {bando.tags.map(t=><V2Tag key={t} label={t} />)}
           </div>
-          <div style={{fontSize:10,fontFamily:"var(--v2-font-num)",color:"rgba(255,255,255,0.2)"}}>{bando.id}</div>
+          <div style={{fontSize:10,fontFamily:"var(--v2-font-num)",color:"var(--c-fg-faint)"}}>{bando.id}</div>
         </div>
 
         {/* Footer */}
-        <div style={{padding:"14px 26px",borderTop:"1px solid rgba(255,255,255,0.06)",display:"flex",gap:10}}>
+        <div style={{padding:"14px 26px",borderTop:"1px solid var(--c-border-hi)",display:"flex",gap:10}}>
           <a href={bando.link} style={{
             flex:1,display:"flex",alignItems:"center",justifyContent:"center",gap:8,padding:"12px",borderRadius:12,textDecoration:"none",
             background:"linear-gradient(135deg,#6366f1,#818cf8)",color:"white",fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:13
           }}>
             <V2Icon name="arrowUpRight" size={14} color="white" /> Vai al bando ufficiale
           </a>
-          <button onClick={onClose} style={{padding:"12px 20px",borderRadius:12,border:"1px solid rgba(255,255,255,0.08)",background:"transparent",color:"rgba(255,255,255,0.5)",fontSize:12,fontWeight:500,cursor:"pointer"}}>Chiudi</button>
+          <button onClick={onClose} style={{padding:"12px 20px",borderRadius:12,border:"1px solid var(--c-border-hi)",background:"transparent",color:"var(--c-fg-mid)",fontSize:12,fontWeight:500,cursor:"pointer"}}>Chiudi</button>
         </div>
       </div>
     </div>
@@ -956,18 +962,18 @@ function V2BandoCard({ bando, onClick, view }) {
   if (view === "list") return (
     <div onClick={()=>onClick(bando)} className="v2-hover" style={{
       display:"flex",alignItems:"center",gap:14,padding:"12px 16px",borderRadius:12,cursor:"pointer",
-      background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.04)",
+      background:"var(--c-surface-lo)",border:"1px solid var(--c-border-lo)",
       transition:"all .2s"
     }}>
       <V2PriDot priorita={bando.priorita} />
       <div style={{flex:1,minWidth:0}}>
-        <div style={{fontFamily:"var(--v2-font-display)",fontWeight:600,fontSize:13,color:"#e2e8f0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{bando.nome}</div>
-        <div style={{fontSize:11,color:"rgba(255,255,255,0.3)",marginTop:1}}>{bando.ente}</div>
+        <div style={{fontFamily:"var(--v2-font-display)",fontWeight:600,fontSize:13,color:"var(--fg)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{bando.nome}</div>
+        <div style={{fontSize:11,color:"var(--c-fg-sub)",marginTop:1}}>{bando.ente}</div>
       </div>
       <V2LivBadge livello={bando.livello} />
       <div style={{textAlign:"right",minWidth:80}}>
         <div style={{fontFamily:"var(--v2-font-num)",fontWeight:700,fontSize:13,color: urg?"#f87171":presto?"#fbbf24":"#e2e8f0"}}>{v2FormatDate(bando.scadenza)}</div>
-        <div style={{fontSize:11,fontFamily:"var(--v2-font-num)",color:"rgba(255,255,255,0.3)"}}>{v2FormatImporto(bando.importoMax)}</div>
+        <div style={{fontSize:11,fontFamily:"var(--v2-font-num)",color:"var(--c-fg-sub)"}}>{v2FormatImporto(bando.importoMax)}</div>
       </div>
     </div>
   );
@@ -975,7 +981,7 @@ function V2BandoCard({ bando, onClick, view }) {
   return (
     <div onClick={()=>onClick(bando)} className="v2-hover" style={{
       borderRadius:16,cursor:"pointer",overflow:"hidden",
-      background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.05)",
+      background:"var(--c-surface)",border:"1px solid var(--c-border)",
       borderLeft: urg ? "3px solid #f87171" : presto ? "3px solid #fbbf24" : "3px solid transparent",
       transition:"all .2s"
     }}>
@@ -991,28 +997,28 @@ function V2BandoCard({ bando, onClick, view }) {
 
       {/* Title */}
       <div style={{padding:"0 18px 12px"}}>
-        <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:14,color:"#f1f5f9",lineHeight:1.3,marginBottom:4,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{bando.nome}</div>
-        <div style={{fontSize:11,color:"rgba(255,255,255,0.3)",display:"flex",alignItems:"center",gap:4}}>
+        <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:14,color:"var(--fg-hi)",lineHeight:1.3,marginBottom:4,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{bando.nome}</div>
+        <div style={{fontSize:11,color:"var(--c-fg-sub)",display:"flex",alignItems:"center",gap:4}}>
           <V2Icon name="building" size={10} color="rgba(255,255,255,0.2)" /> {bando.ente}
         </div>
       </div>
 
       {/* Metrics */}
-      <div style={{margin:"0 18px",padding:"10px 14px",borderRadius:12,background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.04)",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px 20px"}}>
+      <div style={{margin:"0 18px",padding:"10px 14px",borderRadius:12,background:"var(--c-surface-lo)",border:"1px solid var(--c-border-lo)",display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px 20px"}}>
         <div>
-          <div style={{fontSize:9,color:"rgba(255,255,255,0.25)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Scadenza</div>
+          <div style={{fontSize:9,color:"var(--c-fg-lo)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Scadenza</div>
           <div style={{fontFamily:"var(--v2-font-num)",fontSize:13,fontWeight:700,color: urg?"#f87171":presto?"#fbbf24":"#e2e8f0",marginTop:2}}>{v2FormatDate(bando.scadenza)}</div>
         </div>
         <div>
-          <div style={{fontSize:9,color:"rgba(255,255,255,0.25)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Importo max</div>
+          <div style={{fontSize:9,color:"var(--c-fg-lo)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Importo max</div>
           <div style={{fontFamily:"var(--v2-font-num)",fontSize:13,fontWeight:700,color:"#818cf8",marginTop:2}}>{v2FormatFull(bando.importoMax)}</div>
         </div>
         <div>
-          <div style={{fontSize:9,color:"rgba(255,255,255,0.25)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Tipo</div>
+          <div style={{fontSize:9,color:"var(--c-fg-lo)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Tipo</div>
           <div style={{fontSize:12,fontWeight:500,color:"rgba(255,255,255,0.6)",marginTop:2}}>{bando.tipoAgev}</div>
         </div>
         <div>
-          <div style={{fontSize:9,color:"rgba(255,255,255,0.25)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Beneficiari</div>
+          <div style={{fontSize:9,color:"var(--c-fg-lo)",fontWeight:600,textTransform:"uppercase",letterSpacing:"0.06em"}}>Beneficiari</div>
           <div style={{fontSize:12,fontWeight:500,color:"rgba(255,255,255,0.6)",marginTop:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{bando.beneficiari.replace(/\|/g,", ")}</div>
         </div>
       </div>
@@ -1021,11 +1027,11 @@ function V2BandoCard({ bando, onClick, view }) {
       <div style={{padding:"10px 18px",display:"flex",gap:4,flexWrap:"wrap"}}>
         {bando.tags.slice(0,3).map(t=><V2Tag key={t} label={t} />)}
       </div>
-      <div style={{padding:"8px 18px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",borderTop:"1px solid rgba(255,255,255,0.04)"}}>
+      <div style={{padding:"8px 18px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",borderTop:"1px solid var(--c-border-lo)"}}>
         <span style={{fontSize:11,color:"#818cf8",fontWeight:600,display:"flex",alignItems:"center",gap:4}}>
           Dettaglio <V2Icon name="arrowRight" size={11} color="#818cf8" />
         </span>
-        <span style={{fontSize:10,fontFamily:"var(--v2-font-num)",color:"rgba(255,255,255,0.15)"}}>{bando.id}</span>
+        <span style={{fontSize:10,fontFamily:"var(--v2-font-num)",color:"var(--c-fg-ghost)"}}>{bando.id}</span>
       </div>
     </div>
   );
@@ -1042,8 +1048,8 @@ function V2EvidenzaCard({ bando, onClick }) {
       border: urg ? "1px solid rgba(248,113,113,0.15)" : "1px solid rgba(251,191,36,0.12)",
       transition:"all .2s"
     }}>
-      <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:13,color:"#f1f5f9",lineHeight:1.3,marginBottom:6}}>{bando.nome}</div>
-      <div style={{fontSize:11,color:"rgba(255,255,255,0.35)",marginBottom:10}}>{bando.ente}</div>
+      <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:13,color:"var(--fg-hi)",lineHeight:1.3,marginBottom:6}}>{bando.nome}</div>
+      <div style={{fontSize:11,color:"var(--c-fg-sub)",marginBottom:10}}>{bando.ente}</div>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         <span style={{fontFamily:"var(--v2-font-num)",fontSize:12,fontWeight:700,color: urg?"#f87171":"#fbbf24"}}>{days}gg · {v2FormatDate(bando.scadenza)}</span>
         <span style={{fontFamily:"var(--v2-font-num)",fontSize:12,fontWeight:700,color:"#818cf8"}}>{v2FormatImporto(bando.importoMax)}</span>
@@ -1072,18 +1078,18 @@ function V2BandiSection({ onOpen }) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:20}}>
       {/* Filter bar */}
-      <div style={{padding:"16px 20px",borderRadius:16,background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.05)"}}>
+      <div style={{padding:"16px 20px",borderRadius:16,background:"var(--c-surface)",border:"1px solid var(--c-border)"}}>
         <div style={{display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
           <div style={{position:"relative",flex:"1 1 220px",minWidth:180}}>
             <div style={{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",pointerEvents:"none"}}><V2Icon name="search" size={14} color="rgba(255,255,255,0.25)" /></div>
             <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Cerca bando, ente, keyword..."
-              style={{width:"100%",padding:"10px 12px 10px 34px",borderRadius:10,border:"1px solid rgba(255,255,255,0.08)",background:"rgba(255,255,255,0.03)",fontFamily:"var(--v2-font-body)",fontSize:13,color:"#e2e8f0",outline:"none"}}
+              style={{width:"100%",padding:"10px 12px 10px 34px",borderRadius:10,border:"1px solid var(--c-border-hi)",background:"var(--c-input)",fontFamily:"var(--v2-font-body)",fontSize:13,color:"var(--fg)",outline:"none"}}
             />
           </div>
           {[{v:liv,s:setLiv,o:V2_LIVELLI,p:"Livello"},{v:cat,s:setCat,o:V2_CATEGORIE,p:"Categoria"}].map(({v,s,o,p})=>(
             <select key={p} value={v} onChange={e=>s(e.target.value)} style={{
-              padding:"10px 30px 10px 12px",borderRadius:10,border:"1px solid rgba(255,255,255,0.08)",
-              background:"rgba(255,255,255,0.03)",fontSize:12,color: v?"#e2e8f0":"rgba(255,255,255,0.35)",
+              padding:"10px 30px 10px 12px",borderRadius:10,border:"1px solid var(--c-border-hi)",
+              background:"var(--c-input)",fontSize:12,color: v?"var(--fg)":"var(--c-fg-sub)",
               cursor:"pointer",outline:"none",fontFamily:"var(--v2-font-body)",minWidth:120
             }}>
               <option value="" style={{background:"#1e293b"}}>{p}</option>
@@ -1092,7 +1098,7 @@ function V2BandiSection({ onOpen }) {
           ))}
           <button onClick={()=>setShowAdv(!showAdv)} style={{
             display:"flex",alignItems:"center",gap:5,padding:"10px 14px",borderRadius:10,
-            border:"1px solid rgba(255,255,255,0.08)",background: showAdv?"rgba(99,102,241,0.15)":"rgba(255,255,255,0.03)",
+            border:"1px solid var(--c-border-hi)",background: showAdv?"rgba(99,102,241,0.15)":"rgba(255,255,255,0.03)",
             color: showAdv?"#a5b4fc":"rgba(255,255,255,0.4)",fontSize:12,fontWeight:500,cursor:"pointer"
           }}>
             <V2Icon name="filter" size={13} /> Avanzati
@@ -1102,9 +1108,9 @@ function V2BandiSection({ onOpen }) {
           </button>}
         </div>
         {showAdv && (
-          <div style={{marginTop:14,paddingTop:14,borderTop:"1px solid rgba(255,255,255,0.05)",display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(150px,1fr))",gap:8}}>
+          <div style={{marginTop:14,paddingTop:14,borderTop:"1px solid var(--c-border)",display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(150px,1fr))",gap:8}}>
             {["Beneficiari","Tipo agevolazione","Regime aiuto","Ambito","Tipo scadenza","Priorità"].map(l=>(
-              <select key={l} style={{padding:"8px 10px",borderRadius:8,border:"1px solid rgba(255,255,255,0.06)",background:"rgba(255,255,255,0.02)",fontSize:11,color:"rgba(255,255,255,0.35)",cursor:"pointer",outline:"none"}}>
+              <select key={l} style={{padding:"8px 10px",borderRadius:8,border:"1px solid var(--c-border-hi)",background:"var(--c-surface-lo)",fontSize:11,color:"var(--c-fg-sub)",cursor:"pointer",outline:"none"}}>
                 <option style={{background:"#1e293b"}}>{l}</option>
               </select>
             ))}
@@ -1115,11 +1121,11 @@ function V2BandiSection({ onOpen }) {
       {/* Results bar */}
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
-          <span style={{fontFamily:"var(--v2-font-num)",fontSize:24,fontWeight:800,color:"#f1f5f9"}}>{fil.length}</span>
-          <span style={{fontSize:13,color:"rgba(255,255,255,0.35)"}}>bandi trovati</span>
+          <span style={{fontFamily:"var(--v2-font-num)",fontSize:24,fontWeight:800,color:"var(--fg-hi)"}}>{fil.length}</span>
+          <span style={{fontSize:13,color:"var(--c-fg-sub)"}}>bandi trovati</span>
           {hasF && <V2Badge variant="accent">{[q,liv,cat].filter(Boolean).length} filtri</V2Badge>}
         </div>
-        <div style={{display:"flex",borderRadius:10,border:"1px solid rgba(255,255,255,0.06)",overflow:"hidden"}}>
+        <div style={{display:"flex",borderRadius:10,border:"1px solid var(--c-border-hi)",overflow:"hidden"}}>
           {[{v:"grid",i:"grid"},{v:"list",i:"list"}].map(({v,i})=>(
             <button key={v} onClick={()=>setView(v)} style={{padding:"7px 12px",border:"none",cursor:"pointer",background: view===v?"rgba(99,102,241,0.2)":"transparent",color: view===v?"#a5b4fc":"rgba(255,255,255,0.25)"}}>
               <V2Icon name={i} size={14} />
@@ -1131,7 +1137,7 @@ function V2BandiSection({ onOpen }) {
       {/* In Evidenza */}
       {evidenza.length > 0 && (
         <div>
-          <div style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,0.3)",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:10,display:"flex",alignItems:"center",gap:6}}>
+          <div style={{fontSize:10,fontWeight:700,color:"var(--c-fg-sub)",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:10,display:"flex",alignItems:"center",gap:6}}>
             <V2Icon name="lightning" size={12} color="#fbbf24" /> In evidenza
           </div>
           <div style={{display:"flex",gap:12,overflowX:"auto",paddingBottom:4}}>
@@ -1142,9 +1148,9 @@ function V2BandiSection({ onOpen }) {
 
       {/* Grid / List */}
       {fil.length === 0 ? (
-        <div style={{textAlign:"center",padding:60,color:"rgba(255,255,255,0.2)"}}>
+        <div style={{textAlign:"center",padding:60,color:"var(--c-fg-faint)"}}>
           <V2Icon name="search" size={40} color="rgba(255,255,255,0.1)" />
-          <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:16,marginTop:12,color:"rgba(255,255,255,0.3)"}}>Nessun risultato</div>
+          <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:16,marginTop:12,color:"var(--c-fg-sub)"}}>Nessun risultato</div>
         </div>
       ) : view === "grid" ? (
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(330px,1fr))",gap:14}}>
@@ -1203,9 +1209,9 @@ function V2ScadenzeSection({ onOpen }) {
       {mesi.map(k => {
         const bandi = mesiMap[k].sort((a,b) => new Date(a.scadenza) - new Date(b.scadenza));
         return (
-          <div key={k} style={{borderRadius:16,overflow:"hidden",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.05)"}}>
-            <div style={{padding:"14px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:"1px solid rgba(255,255,255,0.04)"}}>
-              <span style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:15,color:"#e2e8f0",textTransform:"capitalize"}}>{meseNome(k)}</span>
+          <div key={k} style={{borderRadius:16,overflow:"hidden",background:"var(--c-surface-lo)",border:"1px solid var(--c-border)"}}>
+            <div style={{padding:"14px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:"1px solid var(--c-border-lo)"}}>
+              <span style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:15,color:"var(--fg)",textTransform:"capitalize"}}>{meseNome(k)}</span>
               <V2Badge variant="default">{bandi.length}</V2Badge>
             </div>
             {bandi.map(b => {
@@ -1221,15 +1227,15 @@ function V2ScadenzeSection({ onOpen }) {
                   <div style={{
                     width:50,height:50,borderRadius:12,flexShrink:0,
                     background: urg?"rgba(248,113,113,0.1)":presto?"rgba(251,191,36,0.08)":"rgba(255,255,255,0.03)",
-                    border: urg?"1px solid rgba(248,113,113,0.15)":presto?"1px solid rgba(251,191,36,0.1)":"1px solid rgba(255,255,255,0.05)",
+                    border: urg?"1px solid rgba(248,113,113,0.15)":presto?"1px solid rgba(251,191,36,0.1)":"1px solid var(--c-border)",
                     display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"
                   }}>
                     <span style={{fontFamily:"var(--v2-font-num)",fontWeight:800,fontSize:18,lineHeight:1,color: urg?"#f87171":presto?"#fbbf24":"#e2e8f0"}}>{d.getDate()}</span>
-                    <span style={{fontSize:9,fontWeight:600,color:"rgba(255,255,255,0.3)",textTransform:"uppercase"}}>{d.toLocaleDateString("it-IT",{month:"short"})}</span>
+                    <span style={{fontSize:9,fontWeight:600,color:"var(--c-fg-sub)",textTransform:"uppercase"}}>{d.toLocaleDateString("it-IT",{month:"short"})}</span>
                   </div>
                   <div style={{flex:1,minWidth:0}}>
-                    <div style={{fontFamily:"var(--v2-font-display)",fontWeight:600,fontSize:13,color:"#e2e8f0",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.nome}</div>
-                    <div style={{fontSize:11,color:"rgba(255,255,255,0.3)",marginTop:1}}>{b.ente}</div>
+                    <div style={{fontFamily:"var(--v2-font-display)",fontWeight:600,fontSize:13,color:"var(--fg)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.nome}</div>
+                    <div style={{fontSize:11,color:"var(--c-fg-sub)",marginTop:1}}>{b.ente}</div>
                   </div>
                   <div style={{display:"flex",alignItems:"center",gap:8,flexShrink:0}}>
                     <V2LivBadge livello={b.livello} />
@@ -1256,10 +1262,10 @@ function V2ProfiliSection({ onOpen }) {
   return (
     <div style={{display:"flex",flex:1,overflow:"hidden",margin:"-24px -28px",height:"calc(100% + 48px)"}}>
       {/* Sidebar */}
-      <div style={{width:280,flexShrink:0,borderRight:"1px solid rgba(255,255,255,0.05)",overflow:"auto",display:"flex",flexDirection:"column",padding:"16px 0"}}>
+      <div style={{width:280,flexShrink:0,borderRight:"1px solid var(--c-border)",overflow:"auto",display:"flex",flexDirection:"column",padding:"16px 0"}}>
         <div style={{padding:"0 16px 14px"}}>
-          <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:14,color:"#e2e8f0",marginBottom:2}}>Aziende</div>
-          <div style={{fontSize:11,color:"rgba(255,255,255,0.3)"}}>{V2_AZIENDE.length} profili</div>
+          <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:14,color:"var(--fg)",marginBottom:2}}>Aziende</div>
+          <div style={{fontSize:11,color:"var(--c-fg-sub)"}}>{V2_AZIENDE.length} profili</div>
         </div>
         {V2_AZIENDE.map(a => (
           <div key={a.id} onClick={()=>setSelId(a.id)} style={{
@@ -1269,12 +1275,12 @@ function V2ProfiliSection({ onOpen }) {
             transition:"all .15s"
           }}>
             <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
-              <div style={{width:36,height:36,borderRadius:10,background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.06)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontFamily:"var(--v2-font-display)",fontWeight:800,fontSize:14,color:"#818cf8"}}>
+              <div style={{width:36,height:36,borderRadius:10,background:"rgba(255,255,255,0.04)",border:"1px solid var(--c-border-hi)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,fontFamily:"var(--v2-font-display)",fontWeight:800,fontSize:14,color:"#818cf8"}}>
                 {a.nome.charAt(0)}
               </div>
               <div>
                 <div style={{fontFamily:"var(--v2-font-display)",fontWeight:600,fontSize:13,color: selId===a.id?"#a5b4fc":"#e2e8f0"}}>{a.nome}</div>
-                <div style={{fontSize:11,color:"rgba(255,255,255,0.3)"}}>{a.settore}</div>
+                <div style={{fontSize:11,color:"var(--c-fg-sub)"}}>{a.settore}</div>
               </div>
             </div>
             <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
@@ -1283,8 +1289,8 @@ function V2ProfiliSection({ onOpen }) {
           </div>
         ))}
         <button style={{
-          margin:"12px 16px",padding:12,borderRadius:12,border:"1px dashed rgba(255,255,255,0.1)",
-          background:"transparent",cursor:"pointer",color:"rgba(255,255,255,0.3)",fontSize:12,fontWeight:600,
+          margin:"12px 16px",padding:12,borderRadius:12,border:"1px dashed var(--c-border-hi)",
+          background:"transparent",cursor:"pointer",color:"var(--c-fg-sub)",fontSize:12,fontWeight:600,
           display:"flex",alignItems:"center",justifyContent:"center",gap:6
         }}>
           <V2Icon name="plus" size={14} /> Aggiungi
@@ -1300,16 +1306,16 @@ function V2ProfiliSection({ onOpen }) {
                 <image-slot id={`v2-logo-${sel.id}`} shape="rounded" radius="14" placeholder={`Logo ${sel.nome}`}
                   style={{width:52,height:52,flexShrink:0}}></image-slot>
                 <div>
-                  <h2 style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:18,color:"#f1f5f9",margin:0,letterSpacing:"-0.02em"}}>{sel.nome}</h2>
-                  <p style={{fontSize:12,color:"rgba(255,255,255,0.35)",margin:"3px 0 0"}}>{sel.settore} · {sel.citta}</p>
+                  <h2 style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:18,color:"var(--fg-hi)",margin:0,letterSpacing:"-0.02em"}}>{sel.nome}</h2>
+                  <p style={{fontSize:12,color:"var(--c-fg-sub)",margin:"3px 0 0"}}>{sel.settore} · {sel.citta}</p>
                 </div>
               </div>
-              <button style={{display:"flex",alignItems:"center",gap:6,padding:"9px 16px",borderRadius:10,border:"1px solid rgba(255,255,255,0.08)",background:"transparent",cursor:"pointer",fontSize:12,fontWeight:500,color:"rgba(255,255,255,0.4)"}}>
+              <button style={{display:"flex",alignItems:"center",gap:6,padding:"9px 16px",borderRadius:10,border:"1px solid var(--c-border-hi)",background:"transparent",cursor:"pointer",fontSize:12,fontWeight:500,color:"var(--c-fg-mid)"}}>
                 <V2Icon name="download" size={13} /> Esporta
               </button>
             </div>
 
-            <div style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,0.25)",textTransform:"uppercase",letterSpacing:"0.1em"}}>
+            <div style={{fontSize:10,fontWeight:700,color:"var(--c-fg-lo)",textTransform:"uppercase",letterSpacing:"0.1em"}}>
               {raccs.length} bandi raccomandati
             </div>
 
@@ -1324,16 +1330,16 @@ function V2ProfiliSection({ onOpen }) {
               return (
                 <div key={r.bandoId} onClick={()=>onOpen(b)} className="v2-hover" style={{
                   padding:"16px 20px",borderRadius:14,cursor:"pointer",
-                  background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.05)",transition:"all .2s"
+                  background:"var(--c-surface-lo)",border:"1px solid var(--c-border)",transition:"all .2s"
                 }}>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
                     <div>
-                      <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:14,color:"#e2e8f0",marginBottom:3}}>{b.nome}</div>
-                      <div style={{fontSize:11,color:"rgba(255,255,255,0.3)"}}>{b.ente}</div>
+                      <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:14,color:"var(--fg)",marginBottom:3}}>{b.nome}</div>
+                      <div style={{fontSize:11,color:"var(--c-fg-sub)"}}>{b.ente}</div>
                     </div>
                     <V2Badge variant={cv.v}>{cv.l}</V2Badge>
                   </div>
-                  <div style={{fontSize:12,fontStyle:"italic",color:"rgba(255,255,255,0.4)",marginBottom:10,lineHeight:1.5}}>{r.motivo}</div>
+                  <div style={{fontSize:12,fontStyle:"italic",color:"var(--c-fg-mid)",marginBottom:10,lineHeight:1.5}}>{r.motivo}</div>
                   <div style={{display:"flex",gap:8}}>
                     <V2Badge><V2Icon name="clock" size={10} style={{marginRight:3}} />{v2FormatDate(b.scadenza)}</V2Badge>
                     <V2Badge><V2Icon name="euro" size={10} style={{marginRight:3}} />{v2FormatImporto(b.importoMax)}</V2Badge>
@@ -1344,9 +1350,9 @@ function V2ProfiliSection({ onOpen }) {
             })}
           </div>
         ) : (
-          <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:60,color:"rgba(255,255,255,0.15)"}}>
+          <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:60,color:"var(--c-fg-ghost)"}}>
             <V2Icon name="users" size={40} />
-            <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:15,color:"rgba(255,255,255,0.3)"}}>Seleziona un profilo</div>
+            <div style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:15,color:"var(--c-fg-sub)"}}>Seleziona un profilo</div>
           </div>
         )}
       </div>
@@ -1359,7 +1365,7 @@ function V2ProfiliSection({ onOpen }) {
    ══════════════════════════════════════════════════════════ */
 function V2PraticheSection({ onOpen }) {
   const stats = [
-    {label:"Da valutare",count:V2_PRATICHE.filter(p=>p.stato==="da-valutare").length,color:"rgba(255,255,255,0.5)",icon:"eye"},
+    {label:"Da valutare",count:V2_PRATICHE.filter(p=>p.stato==="da-valutare").length,color:"var(--c-fg-mid)",icon:"eye"},
     {label:"In corso",count:V2_PRATICHE.filter(p=>p.stato==="in-corso").length,color:"#818cf8",icon:"edit"},
     {label:"Presentate",count:V2_PRATICHE.filter(p=>p.stato==="presentata").length,color:"#fbbf24",icon:"arrowUpRight"},
     {label:"Ammesse",count:V2_PRATICHE.filter(p=>p.stato==="ammessa").length,color:"#34d399",icon:"check"},
@@ -1372,21 +1378,21 @@ function V2PraticheSection({ onOpen }) {
       {/* Stats */}
       <div style={{display:"grid",gridTemplateColumns:"repeat(6,1fr)",gap:10}}>
         {stats.map(({label,count,color,icon})=>(
-          <div key={label} style={{padding:"18px 16px",borderRadius:14,background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.05)",textAlign:"center"}}>
+          <div key={label} style={{padding:"18px 16px",borderRadius:14,background:"var(--c-surface)",border:"1px solid var(--c-border)",textAlign:"center"}}>
             <div style={{width:32,height:32,borderRadius:8,background:`${color}15`,display:"inline-flex",alignItems:"center",justifyContent:"center",marginBottom:10}}>
               <V2Icon name={icon} size={14} color={color} />
             </div>
             <div style={{fontFamily:"var(--v2-font-num)",fontWeight:800,fontSize:28,color,letterSpacing:"-0.03em"}}>{count}</div>
-            <div style={{fontSize:10,color:"rgba(255,255,255,0.3)",fontWeight:500,marginTop:4}}>{label}</div>
+            <div style={{fontSize:10,color:"var(--c-fg-sub)",fontWeight:500,marginTop:4}}>{label}</div>
           </div>
         ))}
       </div>
 
       {/* Table */}
-      <div style={{borderRadius:16,overflow:"hidden",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.05)"}}>
-        <div style={{display:"grid",gridTemplateColumns:"1.2fr 1.5fr 0.8fr 0.7fr 0.7fr 1.5fr",padding:"11px 20px",borderBottom:"1px solid rgba(255,255,255,0.05)",background:"rgba(255,255,255,0.02)"}}>
+      <div style={{borderRadius:16,overflow:"hidden",background:"var(--c-surface-lo)",border:"1px solid var(--c-border)"}}>
+        <div style={{display:"grid",gridTemplateColumns:"1.2fr 1.5fr 0.8fr 0.7fr 0.7fr 1.5fr",padding:"11px 20px",borderBottom:"1px solid var(--c-border)",background:"var(--c-surface-lo)"}}>
           {["Cliente","Bando","Stato","Importo","Data","Note"].map(h=>(
-            <div key={h} style={{fontSize:10,fontWeight:700,color:"rgba(255,255,255,0.25)",textTransform:"uppercase",letterSpacing:"0.08em"}}>{h}</div>
+            <div key={h} style={{fontSize:10,fontWeight:700,color:"var(--c-fg-lo)",textTransform:"uppercase",letterSpacing:"0.08em"}}>{h}</div>
           ))}
         </div>
         {V2_PRATICHE.map((p,i)=>{
@@ -1397,12 +1403,12 @@ function V2PraticheSection({ onOpen }) {
               padding:"13px 20px",borderBottom:"1px solid rgba(255,255,255,0.03)",
               cursor:"pointer",transition:"background .15s",alignItems:"center"
             }}>
-              <div style={{fontSize:13,fontWeight:600,color:"#e2e8f0"}}>{p.cliente}</div>
-              <div style={{fontSize:12,color:"rgba(255,255,255,0.4)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",paddingRight:8}}>{p.bando}</div>
+              <div style={{fontSize:13,fontWeight:600,color:"var(--fg)"}}>{p.cliente}</div>
+              <div style={{fontSize:12,color:"var(--c-fg-mid)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",paddingRight:8}}>{p.bando}</div>
               <div><span style={{display:"inline-flex",padding:"3px 10px",borderRadius:8,fontSize:11,fontWeight:600,background:sc.bg,color:sc.color,textTransform:"capitalize"}}>{p.stato.replace("-"," ")}</span></div>
               <div style={{fontFamily:"var(--v2-font-num)",fontSize:12,fontWeight:700,color:"#818cf8"}}>{v2FormatImporto(p.importo)}</div>
-              <div style={{fontSize:12,color:"rgba(255,255,255,0.3)"}}>{p.data}</div>
-              <div style={{fontSize:11,color:"rgba(255,255,255,0.25)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.note}</div>
+              <div style={{fontSize:12,color:"var(--c-fg-sub)"}}>{p.data}</div>
+              <div style={{fontSize:11,color:"var(--c-fg-lo)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.note}</div>
             </div>
           );
         })}
@@ -1447,9 +1453,13 @@ function Sidebar({ active, setActive, isDark, setDark }) {
       background:"var(--c-panel)"
     }}>
       {/* Logo */}
-      <div style={{marginBottom:20,position:"relative"}}>
-        <image-slot id="sidebar-logo" shape="rounded" radius="14" placeholder="Logo"
-          style={{width:44,height:44}}></image-slot>
+      <div style={{marginBottom:20}}>
+        <div style={{
+          width:44,height:44,borderRadius:14,
+          background:"linear-gradient(135deg,#6366f1,#818cf8)",
+          display:"flex",alignItems:"center",justifyContent:"center",
+          fontSize:22,flexShrink:0
+        }}>📡</div>
       </div>
 
       {/* Nav */}
@@ -1622,7 +1632,7 @@ function StatsStrip() {
       ].map(({label,value,icon,color})=>(
         <div key={label} style={{
           padding:"18px 20px",borderRadius:16,position:"relative",overflow:"hidden",
-          background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.05)"
+          background:"var(--c-surface-lo)",border:"1px solid var(--c-border)"
         }}>
           {/* Glow */}
           <div style={{position:"absolute",top:-20,right:-20,width:80,height:80,borderRadius:"50%",background:color,opacity:0.04,filter:"blur(24px)"}}></div>
@@ -1631,8 +1641,8 @@ function StatsStrip() {
               <V2Icon name={icon} size={16} color={color} />
             </div>
           </div>
-          <div style={{fontFamily:"var(--v2-font-num)",fontWeight:700,fontSize:28,color:"#f1f5f9",letterSpacing:"-0.04em",lineHeight:1,position:"relative"}}>{value}</div>
-          <div style={{fontSize:11,color:"rgba(255,255,255,0.3)",fontWeight:500,marginTop:6,position:"relative"}}>{label}</div>
+          <div style={{fontFamily:"var(--v2-font-num)",fontWeight:700,fontSize:28,color:"var(--fg-hi)",letterSpacing:"-0.04em",lineHeight:1,position:"relative"}}>{value}</div>
+          <div style={{fontSize:11,color:"var(--c-fg-sub)",fontWeight:500,marginTop:6,position:"relative"}}>{label}</div>
         </div>
       ))}
     </div>

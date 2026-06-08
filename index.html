@@ -35,25 +35,71 @@
     --v2-font-display: 'Space Grotesk', sans-serif;
     --v2-font-body: 'DM Sans', sans-serif;
     --v2-font-num: 'JetBrains Mono', 'Space Grotesk', monospace;
+    --bg: #0b0f1a;
+    --fg: #e2e8f0;
+    --fg-hi: #f1f5f9;
+    --c-border: rgba(255,255,255,0.05);
+    --c-border-hi: rgba(255,255,255,0.08);
+    --c-border-lo: rgba(255,255,255,0.04);
+    --c-surface: rgba(255,255,255,0.025);
+    --c-surface-hi: rgba(255,255,255,0.04);
+    --c-surface-lo: rgba(255,255,255,0.02);
+    --c-panel: rgba(255,255,255,0.01);
+    --c-input: rgba(255,255,255,0.03);
+    --c-hover: rgba(255,255,255,0.04);
+    --c-scroll: rgba(255,255,255,0.08);
+    --c-popup: #161b2e;
+    --c-popup-border: rgba(255,255,255,0.08);
+    --c-fg-mid: rgba(255,255,255,0.4);
+    --c-fg-lo: rgba(255,255,255,0.25);
+    --c-fg-faint: rgba(255,255,255,0.2);
+    --c-fg-ghost: rgba(255,255,255,0.1);
+  }
+
+  body[data-theme="light"] {
+    --bg: #f1f5f9;
+    --fg: #1e293b;
+    --fg-hi: #0f172a;
+    --c-border: rgba(0,0,0,0.07);
+    --c-border-hi: rgba(0,0,0,0.12);
+    --c-border-lo: rgba(0,0,0,0.05);
+    --c-surface: rgba(255,255,255,0.85);
+    --c-surface-hi: rgba(255,255,255,0.95);
+    --c-surface-lo: rgba(255,255,255,0.6);
+    --c-panel: rgba(255,255,255,0.6);
+    --c-input: #ffffff;
+    --c-hover: rgba(0,0,0,0.04);
+    --c-scroll: rgba(0,0,0,0.15);
+    --c-popup: #ffffff;
+    --c-popup-border: rgba(0,0,0,0.1);
+    --c-fg-mid: rgba(0,0,0,0.55);
+    --c-fg-lo: rgba(0,0,0,0.35);
+    --c-fg-faint: rgba(0,0,0,0.25);
+    --c-fg-ghost: rgba(0,0,0,0.15);
   }
 
   body {
     font-family: var(--v2-font-body);
-    background: #0b0f1a;
-    color: #e2e8f0;
+    background: var(--bg);
+    color: var(--fg);
     height: 100vh;
     overflow: hidden;
     font-size: 14px;
     line-height: 1.5;
+    transition: background .25s, color .2s;
   }
 
   #root { height: 100vh; }
 
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb { background: var(--c-scroll); border-radius: 99px; }
 
-  .v2-hover:hover { background: rgba(255,255,255,0.04) !important; }
+  .v2-hover:hover { background: var(--c-hover) !important; }
+
+  body[data-theme="light"] input { color: #1e293b; }
+  body[data-theme="light"] input::placeholder { color: rgba(0,0,0,0.35); }
+  body[data-theme="light"] select { color: #1e293b; background-color: white; }
 
   @keyframes v2SlideUp {
     from { opacity: 0; transform: translateY(16px) scale(0.98); }
@@ -1380,12 +1426,25 @@ const NAV_ITEMS = [
 ];
 
 /* ── SIDEBAR ──────────────────────────────────────────── */
-function Sidebar({ active, setActive }) {
+function Sidebar({ active, setActive, isDark, setDark }) {
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const settingsRef = useRef(null);
+
+  useEffect(() => {
+    if (!settingsOpen) return;
+    const handler = (e) => {
+      if (settingsRef.current && !settingsRef.current.contains(e.target))
+        setSettingsOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [settingsOpen]);
+
   return (
     <div style={{
       width:72,flexShrink:0,display:"flex",flexDirection:"column",alignItems:"center",
-      padding:"16px 0",gap:4,borderRight:"1px solid rgba(255,255,255,0.04)",
-      background:"rgba(255,255,255,0.01)"
+      padding:"16px 0",gap:4,borderRight:"1px solid var(--c-border-lo)",
+      background:"var(--c-panel)"
     }}>
       {/* Logo */}
       <div style={{marginBottom:20,position:"relative"}}>
@@ -1399,7 +1458,7 @@ function Sidebar({ active, setActive }) {
           width:48,height:48,borderRadius:12,border:"none",cursor:"pointer",
           display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:3,
           background: active===id ? "rgba(99,102,241,0.15)" : "transparent",
-          color: active===id ? "#a5b4fc" : "rgba(255,255,255,0.25)",
+          color: active===id ? "#a5b4fc" : "var(--c-fg-lo)",
           transition:"all .15s",position:"relative"
         }}>
           {active===id && <div style={{position:"absolute",left:-1,top:10,bottom:10,width:3,borderRadius:"0 3px 3px 0",background:"#818cf8"}}></div>}
@@ -1408,43 +1467,139 @@ function Sidebar({ active, setActive }) {
         </button>
       ))}
 
-      {/* Bottom */}
+      {/* Bottom — Settings */}
       <div style={{flex:1}}></div>
-      <button style={{width:48,height:48,borderRadius:12,border:"none",background:"transparent",cursor:"pointer",color:"rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <V2Icon name="settings" size={18} />
-      </button>
+      <div ref={settingsRef} style={{position:"relative"}}>
+        <button onClick={()=>setSettingsOpen(o=>!o)} title="Impostazioni" style={{
+          width:48,height:48,borderRadius:12,border:"none",cursor:"pointer",
+          display:"flex",alignItems:"center",justifyContent:"center",
+          background: settingsOpen ? "var(--c-surface-hi)" : "transparent",
+          color: settingsOpen ? "var(--fg)" : "var(--c-fg-faint)",
+          transition:"all .15s"
+        }}>
+          <V2Icon name="settings" size={18} />
+        </button>
+        {settingsOpen && (
+          <div style={{
+            position:"absolute",bottom:"calc(100% + 8px)",left:8,
+            width:200,borderRadius:14,
+            background:"var(--c-popup)",border:"1px solid var(--c-popup-border)",
+            boxShadow:"0 16px 48px rgba(0,0,0,0.35)",zIndex:9000,
+            padding:"6px",animation:"v2FadeIn .15s ease-out"
+          }}>
+            <div style={{padding:"8px 12px 6px",fontSize:10,fontWeight:700,color:"var(--c-fg-mid)",textTransform:"uppercase",letterSpacing:"0.08em"}}>Aspetto</div>
+            {[
+              {label:"Tema Scuro",  value:true,  icon:"🌙"},
+              {label:"Tema Chiaro", value:false, icon:"☀️"},
+            ].map(({label,value,icon})=>(
+              <button key={label} onClick={()=>{setDark(value);setSettingsOpen(false);}} style={{
+                width:"100%",display:"flex",alignItems:"center",gap:10,padding:"9px 12px",
+                borderRadius:10,border:"none",textAlign:"left",
+                background: isDark===value ? "rgba(99,102,241,0.15)" : "transparent",
+                color: isDark===value ? "#a5b4fc" : "var(--fg)",
+                fontSize:13,fontWeight:500,cursor:"pointer",fontFamily:"var(--v2-font-body)"
+              }}>
+                <span style={{fontSize:15}}>{icon}</span>
+                {label}
+                {isDark===value && <span style={{marginLeft:"auto",width:6,height:6,borderRadius:"50%",background:"#818cf8"}}></span>}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
 
 /* ── TOP BAR ──────────────────────────────────────────── */
-function TopBar({ title, subtitle }) {
+function TopBar({ title, subtitle, user, setUser }) {
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef(null);
+
+  useEffect(() => {
+    if (!userMenuOpen) return;
+    const handler = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target))
+        setUserMenuOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [userMenuOpen]);
+
   return (
     <div style={{
       height:64,display:"flex",alignItems:"center",justifyContent:"space-between",
-      padding:"0 28px",borderBottom:"1px solid rgba(255,255,255,0.04)",flexShrink:0
+      padding:"0 28px",borderBottom:"1px solid var(--c-border-lo)",flexShrink:0
     }}>
       <div>
-        <h1 style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:18,color:"#f1f5f9",letterSpacing:"-0.025em",margin:0}}>{title}</h1>
-        {subtitle && <p style={{fontSize:11,color:"rgba(255,255,255,0.3)",marginTop:1}}>{subtitle}</p>}
+        <h1 style={{fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:18,color:"var(--fg-hi)",letterSpacing:"-0.025em",margin:0}}>{title}</h1>
+        {subtitle && <p style={{fontSize:11,color:"var(--c-fg-lo)",marginTop:1}}>{subtitle}</p>}
       </div>
       <div style={{display:"flex",alignItems:"center",gap:10}}>
         {/* Freshness */}
-        <div style={{display:"flex",alignItems:"center",gap:6,padding:"6px 12px",borderRadius:10,background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.06)",fontSize:11,color:"rgba(255,255,255,0.4)"}}>
+        <div style={{display:"flex",alignItems:"center",gap:6,padding:"6px 12px",borderRadius:10,background:"var(--c-input)",border:"1px solid var(--c-border-hi)",fontSize:11,color:"var(--c-fg-mid)"}}>
           <span style={{width:6,height:6,borderRadius:"50%",background:"#34d399"}}></span>
           Aggiornato 2h fa
         </div>
         {/* Lock */}
-        <button style={{display:"flex",alignItems:"center",gap:5,padding:"6px 12px",borderRadius:10,border:"1px solid rgba(255,255,255,0.06)",background:"rgba(255,255,255,0.03)",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.35)",cursor:"pointer"}}>
+        <button style={{display:"flex",alignItems:"center",gap:5,padding:"6px 12px",borderRadius:10,border:"1px solid var(--c-border-hi)",background:"var(--c-input)",fontSize:11,fontWeight:600,color:"var(--c-fg-lo)",cursor:"pointer"}}>
           <V2Icon name="lock" size={12} /> Riservato
         </button>
         {/* Bell */}
-        <button style={{width:36,height:36,borderRadius:10,border:"1px solid rgba(255,255,255,0.06)",background:"rgba(255,255,255,0.03)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"rgba(255,255,255,0.3)",position:"relative"}}>
+        <button style={{width:36,height:36,borderRadius:10,border:"1px solid var(--c-border-hi)",background:"var(--c-input)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"var(--c-fg-faint)",position:"relative"}}>
           <V2Icon name="bell" size={15} />
-          <span style={{position:"absolute",top:6,right:6,width:6,height:6,borderRadius:"50%",background:"#f87171",border:"2px solid #0b0f1a"}}></span>
+          <span style={{position:"absolute",top:6,right:6,width:6,height:6,borderRadius:"50%",background:"#f87171",border:"2px solid var(--bg)"}}></span>
         </button>
-        {/* Avatar */}
-        <div style={{width:34,height:34,borderRadius:10,background:"linear-gradient(135deg,#6366f1,#818cf8)",display:"flex",alignItems:"center",justifyContent:"center",color:"white",fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:13}}>A</div>
+        {/* User avatar + dropdown */}
+        <div ref={userMenuRef} style={{position:"relative"}}>
+          <button onClick={()=>setUserMenuOpen(o=>!o)} style={{
+            width:34,height:34,borderRadius:10,border:"none",cursor:"pointer",
+            background:"linear-gradient(135deg,#6366f1,#818cf8)",
+            display:"flex",alignItems:"center",justifyContent:"center",
+            color:"white",fontFamily:"var(--v2-font-display)",fontWeight:700,fontSize:13
+          }}>
+            {user ? user.charAt(0).toUpperCase() : "?"}
+          </button>
+          {userMenuOpen && (
+            <div style={{
+              position:"absolute",top:"calc(100% + 8px)",right:0,
+              width:210,borderRadius:14,
+              background:"var(--c-popup)",border:"1px solid var(--c-popup-border)",
+              boxShadow:"0 16px 48px rgba(0,0,0,0.3)",zIndex:9000,
+              padding:"6px",animation:"v2FadeIn .15s ease-out"
+            }}>
+              {user ? (
+                <>
+                  <div style={{padding:"10px 14px 8px",borderBottom:"1px solid var(--c-border)",marginBottom:4}}>
+                    <div style={{fontSize:13,fontWeight:700,color:"var(--fg)"}}>{user}</div>
+                    <div style={{fontSize:11,color:"var(--c-fg-mid)",marginTop:1}}>Account attivo</div>
+                  </div>
+                  <button onClick={()=>{setUser(null);setUserMenuOpen(false);}} style={{
+                    width:"100%",display:"flex",alignItems:"center",gap:10,padding:"9px 12px",
+                    borderRadius:10,border:"none",background:"transparent",textAlign:"left",
+                    color:"#f87171",fontSize:13,fontWeight:500,cursor:"pointer",fontFamily:"var(--v2-font-body)"
+                  }}>
+                    <V2Icon name="lock" size={14} color="#f87171" /> Esci
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div style={{padding:"10px 14px 8px",borderBottom:"1px solid var(--c-border)",marginBottom:4}}>
+                    <div style={{fontSize:13,fontWeight:700,color:"var(--fg)"}}>Ospite</div>
+                    <div style={{fontSize:11,color:"var(--c-fg-mid)",marginTop:1}}>Non autenticato</div>
+                  </div>
+                  <button onClick={()=>{setUser("Utente");setUserMenuOpen(false);}} style={{
+                    width:"100%",display:"flex",alignItems:"center",gap:10,padding:"9px 12px",
+                    borderRadius:10,border:"none",background:"transparent",textAlign:"left",
+                    color:"var(--fg)",fontSize:13,fontWeight:500,cursor:"pointer",fontFamily:"var(--v2-font-body)"
+                  }}>
+                    <V2Icon name="arrowRight" size={14} /> Accedi
+                  </button>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -1501,6 +1656,8 @@ function App() {
   const [tweaks, setTweak] = useTweaks(V2_DEFAULTS);
   const [active, setActive] = useState("bandi");
   const [modal, setModal] = useState(null);
+  const [isDark, setIsDark] = useState(true);
+  const [user, setUser] = useState(null);
   const info = TITLES[active];
 
   useEffect(() => {
@@ -1508,12 +1665,16 @@ function App() {
     document.documentElement.style.setProperty("--v2-accent-hue", h);
   }, [tweaks]);
 
+  useEffect(() => {
+    document.body.setAttribute("data-theme", isDark ? "dark" : "light");
+  }, [isDark]);
+
   return (
     <div style={{display:"flex",height:"100vh",overflow:"hidden"}}>
-      <Sidebar active={active} setActive={setActive} />
+      <Sidebar active={active} setActive={setActive} isDark={isDark} setDark={setIsDark} />
 
       <div style={{flex:1,display:"flex",flexDirection:"column",overflow:"hidden"}}>
-        <TopBar title={info.title} subtitle={info.sub} />
+        <TopBar title={info.title} subtitle={info.sub} user={user} setUser={setUser} />
 
         <main style={{flex:1,overflow:"auto",padding:"24px 28px"}}>
           {active === "bandi" && (
@@ -1529,8 +1690,8 @@ function App() {
 
         {/* Footer */}
         <div style={{
-          padding:"10px 28px",borderTop:"1px solid rgba(255,255,255,0.04)",
-          display:"flex",justifyContent:"space-between",fontSize:11,color:"rgba(255,255,255,0.2)",flexShrink:0
+          padding:"10px 28px",borderTop:"1px solid var(--c-border-lo)",
+          display:"flex",justifyContent:"space-between",fontSize:11,color:"var(--c-fg-faint)",flexShrink:0
         }}>
           <span style={{fontFamily:"var(--v2-font-display)",fontWeight:600}}>BandiRadar</span>
           <span>⚠️ Dati indicativi · verificare fonti ufficiali</span>

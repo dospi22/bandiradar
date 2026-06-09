@@ -67,9 +67,54 @@
       --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
       --shadow-md: 0 4px 20px rgba(0,0,0,0.5);
       --radius: 14px;
-      --radius-sm: 8px;
       --radius-sm: 6px;
+      /* sidebar vars */
+      --sidebar-bg: #0d1020;
+      --sidebar-border: rgba(255,255,255,0.06);
+      --nav-active-bg: rgba(99,102,241,0.18);
+      --nav-active-color: #a5b4fc;
+      --nav-active-border: rgba(99,102,241,0.4);
+      --nav-hover-bg: rgba(255,255,255,0.06);
     }
+
+    /* ── LIGHT THEME OVERRIDE ── */
+    [data-theme="light"] {
+      --bg: #f0f2f8;
+      --card: #ffffff;
+      --card2: #f8f9fc;
+      --text: #1a1f35;
+      --text-muted: #6b7280;
+      --border: rgba(0,0,0,0.08);
+      --gray-light: rgba(0,0,0,0.03);
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.1);
+      --blue: #6366f1;
+      --blue-light: rgba(99,102,241,0.1);
+      --green: #059669;
+      --green-light: rgba(5,150,105,0.1);
+      --orange: #d97706;
+      --orange-light: rgba(217,119,6,0.1);
+      --red: #dc2626;
+      --red-light: rgba(220,38,38,0.1);
+      --purple: #7c3aed;
+      --purple-light: rgba(124,58,237,0.1);
+      --cyan: #0891b2;
+      --cyan-light: rgba(8,145,178,0.1);
+      --sidebar-bg: #1e2235;
+      --sidebar-border: rgba(255,255,255,0.08);
+      --nav-active-bg: rgba(99,102,241,0.22);
+      --nav-active-color: #c7d2fe;
+      --nav-active-border: rgba(99,102,241,0.45);
+      --nav-hover-bg: rgba(255,255,255,0.1);
+    }
+    [data-theme="light"] body::after { opacity: 0; }
+    [data-theme="light"] .topbar {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
+    }
+    [data-theme="light"] .stats {
+      background: rgba(0,0,0,0.03);
+    }
+    [data-theme="light"] .stat-value { color: #6366f1; }
 
     body {
       font-family: var(--font-body);
@@ -88,58 +133,216 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ── HEADER ── */
-    .header {
-      background: linear-gradient(135deg, #0d1224 0%, #111827 100%);
-      color: white;
-      border-bottom: 1px solid var(--border);
+    /* ── APP SHELL: SIDEBAR + CONTENT ── */
+    .app-shell {
+      display: flex;
+      min-height: 100vh;
     }
 
-    .header-top {
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 76px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--sidebar-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 0 20px;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.3) 0%, rgba(99,102,241,0.15) 100%);
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(99,102,241,0.35);
+      margin-bottom: 24px;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(99,102,241,0.2);
+    }
+    .sidebar-logo svg { width: 20px; height: 20px; }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+      padding: 11px 6px;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgba(255,255,255,0.35);
+      font-size: 9.5px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      transition: all 0.18s ease;
+      text-align: center;
+      position: relative;
+    }
+    .nav-item .nav-icon {
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.18s ease;
+    }
+    .nav-item .nav-icon svg {
+      width: 20px; height: 20px;
+      stroke: currentColor;
+    }
+    .nav-item:hover {
+      background: var(--nav-hover-bg);
+      color: rgba(255,255,255,0.75);
+      transform: none;
+    }
+    .nav-item:hover .nav-icon { transform: scale(1.08); }
+    .nav-item.active {
+      background: var(--nav-active-bg);
+      color: var(--nav-active-color);
+      border-color: var(--nav-active-border);
+    }
+    .nav-item.active .nav-icon { transform: scale(1.05); }
+    /* Active indicator bar */
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 50%; transform: translateY(-50%);
+      width: 3px; height: 24px;
+      background: #818cf8;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .sidebar-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--sidebar-border);
+      margin: 8px 0;
+    }
+
+    .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0 10px;
+      width: 100%;
+    }
+
+    .sidebar-badge {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: all 0.15s;
+      color: rgba(255,255,255,0.45);
+    }
+    .sidebar-badge svg { width: 16px; height: 16px; stroke: currentColor; }
+    .sidebar-badge:hover {
+      background: rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .sidebar-badge.riservato { color: #f87171; border-color: rgba(248,113,113,0.25); background: rgba(248,113,113,0.08); }
+    .sidebar-badge.riservato:hover { background: rgba(248,113,113,0.15); }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+      color: rgba(255,255,255,0.45);
+    }
+    .theme-toggle svg { width: 16px; height: 16px; stroke: currentColor; }
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.15);
+    }
+    [data-theme="light"] .theme-toggle { color: #fbbf24; border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.1); }
+
+    /* ── CONTENT AREA ── */
+    .content-area {
+      margin-left: 76px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: linear-gradient(135deg, #0d1224 0%, #111827 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 28px;
-      flex-wrap: wrap;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .logo { display: flex; align-items: center; gap: 14px; }
-
-    .logo-icon {
-      width: 44px; height: 44px;
-      background: rgba(129,140,248,0.15);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      border: 1px solid rgba(129,140,248,0.25);
+    .topbar-title {
+      display: flex;
+      flex-direction: column;
     }
+    .topbar-title h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; font-family: var(--font-display); }
+    .topbar-title p  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 
-    .logo-text h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; font-family: var(--font-display); }
-    .logo-text p  { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-
+    .topbar-right { display: flex; align-items: center; gap: 12px; }
     .header-meta { font-size: 12px; color: var(--text-muted); text-align: right; line-height: 1.7; }
 
-    /* ── STATS ── */
+    /* ── STATS (card in alto) ── */
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--border);
-      background: rgba(0,0,0,0.25);
+      gap: 14px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
     }
 
     .stat-card {
-      padding: 18px 24px;
-      border-right: 1px solid var(--border);
-      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.15s;
     }
-    .stat-card:last-child { border-right: none; }
+    .stat-card:hover { border-color: rgba(129,140,248,0.2); }
 
-    .stat-value { font-size: 26px; font-weight: 700; display: block; font-family: var(--font-mono); color: #818cf8; }
-    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 3px; }
+    .stat-icon { font-size: 20px; opacity: 0.8; }
+    .stat-value { font-size: 28px; font-weight: 700; display: block; font-family: var(--font-mono); color: #818cf8; line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 2px; }
 
     /* ── MAIN ── */
-    .main { max-width: 1440px; margin: 0 auto; padding: 24px 28px 56px; }
+    .main { padding: 20px 24px 56px; }
 
     /* ── CONTROLS ── */
     .controls {
@@ -638,19 +841,8 @@
     }
 
     /* ══════════ SECTION NAVIGATION ══════════ */
-    .section-nav {
-      display: flex; gap: 0; margin-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-tab {
-      padding: 10px 22px; font-size: 14px; font-weight: 600;
-      cursor: pointer; border: none; background: none; color: var(--text-muted);
-      border-bottom: 2px solid transparent; margin-bottom: -1px;
-      transition: all 0.15s; letter-spacing: -0.1px;
-      font-family: var(--font-display);
-    }
-    .section-tab.active { color: #818cf8; border-bottom-color: #818cf8; }
-    .section-tab:hover:not(.active) { color: var(--text); background: rgba(255,255,255,0.03); }
+    /* section-nav nascosta — navigazione ora nella sidebar */
+    .section-nav { display: none; }
 
     /* ══════════ PROFILI LAYOUT ══════════ */
     .profili-layout {
@@ -832,53 +1024,154 @@
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
-<!-- ══════════════ HEADER ══════════════ -->
-<header class="header">
-  <div class="header-top">
-    <div class="logo">
-      <div class="logo-icon">📡</div>
-      <div class="logo-text">
-        <h1>BandiRadar</h1>
-        <p>Monitoraggio bandi · Emilia-Romagna, Italia, Europa</p>
-      </div>
+<div class="app-shell">
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav class="sidebar" aria-label="Navigazione principale">
+
+  <!-- Logo -->
+  <div class="sidebar-logo" title="BandiRadar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10" opacity=".3"/>
+      <circle cx="12" cy="12" r="6" opacity=".55"/>
+      <circle cx="12" cy="12" r="2" fill="#a5b4fc" stroke="none"/>
+      <line x1="12" y1="2" x2="12" y2="12" stroke="#a5b4fc"/>
+    </svg>
+  </div>
+
+  <!-- Nav items -->
+  <div class="sidebar-nav" role="tablist">
+    <button class="nav-item active" id="tab-bandi" role="tab" aria-selected="true" aria-controls="section-bandi" onclick="switchSection('bandi')" title="Bandi">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" opacity=".35"/>
+          <circle cx="12" cy="12" r="6" opacity=".6"/>
+          <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+          <line x1="12" y1="2" x2="12" y2="12"/>
+        </svg>
+      </span>
+      Bandi
+    </button>
+    <button class="nav-item" id="tab-scadenze" role="tab" aria-selected="false" aria-controls="section-scadenze" onclick="switchSection('scadenze')" title="Scadenze">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+          <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" stroke-width="2.5"/>
+        </svg>
+      </span>
+      Scadenze
+    </button>
+    <button class="nav-item" id="tab-profili" role="tab" aria-selected="false" aria-controls="section-profili" onclick="switchSection('profili')" title="Aziende">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="2" width="16" height="20" rx="2"/>
+          <path d="M9 22v-4h6v4"/>
+          <path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" stroke-width="2.2"/>
+        </svg>
+      </span>
+      Aziende
+    </button>
+    <button class="nav-item" id="tab-pratiche" role="tab" aria-selected="false" aria-controls="section-pratiche" onclick="switchSection('pratiche')" title="Pratiche">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+      </span>
+      Pratiche
+    </button>
+  </div>
+
+  <div class="sidebar-divider"></div>
+
+  <div class="sidebar-bottom">
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" title="Cambia tema chiaro/scuro">
+      <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <!-- Freshness -->
+    <div id="freshness" class="sidebar-badge freshness" onclick="openFreshnessModal()" title="Aggiornamento dati — clicca per dettaglio">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23,4 23,10 17,10"/><polyline points="1,20 1,14 7,14"/>
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+      </svg>
     </div>
-    <div class="header-meta">
-      <div>📍 Rimini, Emilia-Romagna</div>
-      <div id="freshness" class="freshness" onclick="openFreshnessModal()" title="Clicca per il dettaglio stato dati">
-        <span class="fresh-dot"></span>
-        <span><span id="fresh-label">Caricamento…</span> <span class="freshness-sub" id="fresh-sub"></span></span>
-      </div>
+    <!-- Riservato -->
+    <div class="sidebar-badge riservato" onclick="openPrivacyBanner()" title="Modalità riservata">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
     </div>
   </div>
+</nav>
+
+<!-- ══════════════ CONTENT AREA ══════════════ -->
+<div class="content-area">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-title">
+      <h1>Esplora Bandi</h1>
+      <p>Monitoraggio bandi · Emilia-Romagna, Italia, Europa</p>
+    </div>
+    <div class="topbar-right">
+      <div class="header-meta">
+        <div id="freshness-label" class="freshness" onclick="openFreshnessModal()" title="Clicca per il dettaglio stato dati" style="cursor:pointer;display:flex;align-items:center;gap:6px">
+          <span class="fresh-dot"></span>
+          <span><span id="fresh-label">Caricamento…</span> <span class="freshness-sub" id="fresh-sub"></span></span>
+        </div>
+        <div style="text-align:right;margin-top:2px">📍 Rimini, Emilia-Romagna</div>
+      </div>
+      <div class="sidebar-badge riservato" id="btn-riservato" onclick="openPrivacyBanner()" title="Modalità riservata" style="width:36px;height:36px">🔒</div>
+      <div class="sidebar-badge" id="btn-account" style="width:36px;height:36px;background:rgba(129,140,248,0.15);border-color:rgba(129,140,248,0.25);font-weight:700;font-family:var(--font-display)">A</div>
+    </div>
+  </header>
+
+  <!-- STATS -->
   <div class="stats">
     <div class="stat-card">
+      <span class="stat-icon">🎯</span>
       <span class="stat-value" id="stat-aperti">—</span>
       <div class="stat-label">Bandi aperti</div>
     </div>
     <div class="stat-card">
+      <span class="stat-icon">⏰</span>
       <span class="stat-value" id="stat-scadenza">—</span>
-      <div class="stat-label">⚠️ In scadenza 30gg</div>
+      <div class="stat-label">In scadenza 30gg</div>
     </div>
     <div class="stat-card">
+      <span class="stat-icon">💰</span>
       <span class="stat-value" id="stat-dotazione">—</span>
-      <div class="stat-label">Dotazione disponibile</div>
+      <div class="stat-label">Dotazione totale</div>
     </div>
     <div class="stat-card">
+      <span class="stat-icon">✨</span>
       <span class="stat-value" id="stat-nuovi">—</span>
-      <div class="stat-label">Nuovi (ultimi 30gg)</div>
+      <div class="stat-label">Nuovi ultimi 30gg</div>
     </div>
   </div>
-</header>
 
 <!-- ══════════════ MAIN ══════════════ -->
 <main class="main" id="main-content" role="main">
 
-  <!-- Section Nav -->
-  <div class="section-nav" role="tablist" aria-label="Sezioni della dashboard">
-    <button class="section-tab active" id="tab-bandi" role="tab" aria-selected="true" aria-controls="section-bandi" onclick="switchSection('bandi')">📡 Bandi</button>
-    <button class="section-tab" id="tab-scadenze" role="tab" aria-selected="false" aria-controls="section-scadenze" onclick="switchSection('scadenze')">📅 Scadenze</button>
-    <button class="section-tab" id="tab-profili" role="tab" aria-selected="false" aria-controls="section-profili" onclick="switchSection('profili')">🏢 Profili Aziende</button>
-    <button class="section-tab" id="tab-pratiche" role="tab" aria-selected="false" aria-controls="section-pratiche" onclick="switchSection('pratiche')">📂 Le mie pratiche</button>
+  <!-- Section Nav (nascosta, navigazione nella sidebar) -->
+  <div class="section-nav" role="tablist" aria-label="Sezioni della dashboard" aria-hidden="true">
+    <button class="section-tab active" id="tab-bandi-hidden" role="tab" aria-selected="true" aria-controls="section-bandi">📡 Bandi</button>
+    <button class="section-tab" id="tab-scadenze-hidden" role="tab">📅 Scadenze</button>
+    <button class="section-tab" id="tab-profili-hidden" role="tab">🏢 Profili</button>
+    <button class="section-tab" id="tab-pratiche-hidden" role="tab">📂 Pratiche</button>
   </div>
 
   <!-- ══════════════ SEZIONE BANDI ══════════════ -->
@@ -1149,6 +1442,9 @@
 
 </main>
 
+</div><!-- /content-area -->
+</div><!-- /app-shell -->
+
 <!-- ══════════════ FOOTER (Fase 1.6) ══════════════ -->
 <footer style="max-width:1440px;margin:0 auto;padding:28px;border-top:1px solid var(--border);background:var(--card);color:var(--text-muted);font-size:12px;line-height:1.65">
   <div style="display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start">
@@ -1166,7 +1462,7 @@
     </div>
   </div>
   <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);text-align:center;font-size:11px;opacity:0.8">
-    © BandiRadar · Aggiornato automaticamente · <a href="glossario.html" style="color:inherit;text-decoration:underline">📖 Glossario</a> · <a href="status.html" style="color:inherit;text-decoration:underline">📊 Stato sistema</a> · Nessun dato personale viene raccolto da chi consulta la dashboard
+    © BandiRadar · Aggiornato automaticamente · <a href="glossario.html" style="color:inherit;text-decoration:underline">📖 Glossario</a> · <a href="status.html" style="color:inherit;text-decoration:underline">📊 Stato sistema</a> · <a href="#" onclick="event.preventDefault();openFontiModal()" style="color:inherit;text-decoration:underline">📡 Fonti usate</a> · Nessun dato personale viene raccolto da chi consulta la dashboard
   </div>
 </footer>
 
@@ -2622,17 +2918,25 @@ function calcolaCriteri(b, az) {
   const dgeo = (b.dettaglioGeo || '').toLowerCase();
   let geoOk = false;
   if (liv.includes('europeo') || liv.includes('nazionale')) geoOk = true;
-  else if (amb.includes('ue') || amb.includes('italia')) geoOk = true;
-  else if ((amb.includes('er') || amb.includes('emilia') || dgeo.includes('emilia')) && reg.includes('emilia')) geoOk = true;
+  if (amb.includes('ue') || amb.includes('italia')) geoOk = true;
+  if ((amb.includes('er') || amb.includes('emilia') || dgeo.includes('emilia')) && reg.includes('emilia')) geoOk = true;
+  // Se Dettaglio geografico elenca regioni specifiche (es. Mezzogiorno), verifica che la regione azienda sia inclusa
+  if (geoOk && dgeo.length > 0) {
+    const regMezz = ['molise','basilicata','calabria','campania','puglia','sardegna','sicilia'];
+    const haRegMezz = regMezz.some(r => dgeo.includes(r));
+    if (haRegMezz && !regMezz.some(r => reg.includes(r))) geoOk = false;
+  }
   criteri.push({ label: 'Ambito geografico compatibile', ok: geoOk });
 
   // 3. Codice ATECO ammesso
   const ateco   = (b.ateco || '').toLowerCase();
   const azAteco = (az.ateco || '').toLowerCase().trim();
   let atecoOk = false;
+  let atecoNonVerificabile = false;
   if (!ateco || ateco.includes('tutti')) atecoOk = true;
+  else if (!azAteco) { atecoOk = false; atecoNonVerificabile = true; }
   else if (azAteco && ateco.includes(azAteco)) atecoOk = true;
-  criteri.push({ label: 'Codice ATECO ammesso', ok: atecoOk });
+  criteri.push({ label: atecoNonVerificabile ? 'ATECO non verificabile (dato mancante)' : 'Codice ATECO ammesso', ok: atecoOk });
 
   // 4. Coerenza con obiettivi aziendali
   const cat  = ((b.categoria || '') + ' ' + (b.categoriaPrincipale || '')).toLowerCase();
@@ -2884,6 +3188,47 @@ async function loadRaccomandazioni() {
 }
 
 // ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
+// THEME TOGGLE (light / dark)
+// ─────────────────────────────────────────────
+(function() {
+  const saved = localStorage.getItem('br-theme');
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const isLight = root.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  if (next === 'dark') {
+    root.removeAttribute('data-theme');
+    localStorage.setItem('br-theme', 'dark');
+  } else {
+    root.setAttribute('data-theme', 'light');
+    localStorage.setItem('br-theme', 'light');
+  }
+  // Swap icons
+  const moon = document.getElementById('theme-icon-moon');
+  const sun  = document.getElementById('theme-icon-sun');
+  if (moon && sun) {
+    moon.style.display = (next === 'light') ? 'none' : '';
+    sun.style.display  = (next === 'light') ? '' : 'none';
+  }
+}
+
+// Sync icon on load
+document.addEventListener('DOMContentLoaded', function() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const moon = document.getElementById('theme-icon-moon');
+  const sun  = document.getElementById('theme-icon-sun');
+  if (moon && sun) {
+    moon.style.display = isLight ? 'none' : '';
+    sun.style.display  = isLight ? '' : 'none';
+  }
+});
+
 // SEZIONE SWITCH
 // ─────────────────────────────────────────────
 function switchSection(name) {
@@ -3030,7 +3375,7 @@ function renderRaccomandazioni(az) {
     if (racc.generatedAt) {
       const d    = new Date(racc.generatedAt);
       const age  = Math.floor((Date.now() - d) / 86400000); // giorni
-      const stale = age > 14;
+      const stale = age > 7;
       if (stale) {
         html += `<div class="racc-notice" style="background:rgba(251,191,36,0.08);color:#fcd34d;border-left:3px solid #fbbf24">
           ⏰ Raccomandazioni generate ${age} giorni fa. Potrebbero esserci nuovi bandi — ri-esporta e avvia BandiRadar-Bot per aggiornarle.
@@ -3716,6 +4061,97 @@ function openFreshnessModal() {
 
 function closeFreshnessModal() {
   const m = document.getElementById('fresh-modal-overlay');
+  if (m) m.remove();
+}
+
+// ─────────────────────────────────────────────
+// MODALE FONTI USATE
+// ─────────────────────────────────────────────
+function openFontiModal() {
+  closeFontiModal();
+  const fonti = [
+    { cat: '🇪🇺 Fonti Europee', items: [
+      { nome: 'EU Funding & Tenders Portal', url: 'https://ec.europa.eu/info/funding-tenders/opportunities/portal/', desc: 'Portale ufficiale bandi UE (Horizon, LIFE, Interreg, EIC...)' },
+      { nome: 'EIC Accelerator', url: 'https://eic.ec.europa.eu/', desc: 'European Innovation Council — grant e equity per startup/PMI' },
+      { nome: 'EISMEA (ex EASME)', url: 'https://eismea.ec.europa.eu/', desc: 'Agenzia esecutiva PMI, COSME, SMP, Digital Europe' },
+      { nome: 'EUIPO SME Fund', url: 'https://euipo.europa.eu/', desc: 'Fondo brevetti e marchi per PMI' },
+      { nome: 'CINEA', url: 'https://cinea.ec.europa.eu/', desc: 'Agenzia clima, infrastrutture, ambiente (LIFE, CEF)' },
+      { nome: 'Interreg Italy-Croatia', url: 'https://www.italy-croatia.eu/', desc: 'Programma cooperazione transfrontaliera' },
+    ]},
+    { cat: '🇮🇹 Fonti Nazionali', items: [
+      { nome: 'Incentivi.gov.it', url: 'https://www.incentivi.gov.it/', desc: 'Catalogo unico nazionale degli incentivi' },
+      { nome: 'MIMIT', url: 'https://www.mimit.gov.it/it/incentivi', desc: 'Ministero Imprese e Made in Italy — incentivi e agevolazioni' },
+      { nome: 'Invitalia', url: 'https://www.invitalia.it/', desc: 'Agenzia nazionale sviluppo — Smart&Start, ON, Resto al Sud' },
+      { nome: 'SIMEST', url: 'https://www.simest.it/', desc: 'Fondo 394, finanziamenti internazionalizzazione' },
+      { nome: 'Agenzia delle Entrate', url: 'https://www.agenziaentrate.gov.it/', desc: 'Crediti d\'imposta (R&S, Transizione 5.0, ZES)' },
+      { nome: 'INAIL', url: 'https://www.inail.it/', desc: 'Bandi ISI sicurezza sul lavoro' },
+      { nome: 'PNRR / Italia Domani', url: 'https://www.italiadomani.gov.it/', desc: 'Bandi PNRR per imprese e innovazione' },
+      { nome: 'Gazzetta Ufficiale', url: 'https://www.gazzettaufficiale.it/', desc: 'Pubblicazioni ufficiali nuovi decreti e bandi' },
+      { nome: 'Fondimpresa', url: 'https://www.fondimpresa.it/', desc: 'Fondo interprofessionale formazione dipendenti' },
+      { nome: 'Fondirigenti', url: 'https://www.fondirigenti.it/', desc: 'Fondo formazione dirigenti' },
+      { nome: 'Bandi.gov.it', url: 'https://bandi.gov.it/', desc: 'Portale nazionale bandi pubblici' },
+    ]},
+    { cat: '🏛️ Fonti Regionali Emilia-Romagna', items: [
+      { nome: 'Imprese Regione ER', url: 'https://imprese.regione.emilia-romagna.it/', desc: 'Portale imprese — bandi FESR, FSE+, regionali' },
+      { nome: 'FESR Emilia-Romagna', url: 'https://fesr.regione.emilia-romagna.it/', desc: 'Fondo Europeo Sviluppo Regionale ER' },
+      { nome: 'ART-ER', url: 'https://www.art-er.it/', desc: 'Attrattività Ricerca Territorio — bandi innovazione e internazionalizzazione' },
+      { nome: 'Formazione Lavoro ER', url: 'https://formazionelavoro.regione.emilia-romagna.it/', desc: 'FSE+ formazione continua e politiche attive' },
+    ]},
+    { cat: '🏢 Camere di Commercio ER', items: [
+      { nome: 'CCIAA Bologna', url: 'https://bo.camcom.it/', desc: 'Bandi e voucher Camera Commercio Bologna' },
+      { nome: 'CCIAA Modena', url: 'https://mo.camcom.it/', desc: 'Bandi e voucher Camera Commercio Modena' },
+      { nome: 'CCIAA Reggio Emilia', url: 'https://re.camcom.it/', desc: 'Bandi e voucher Camera Commercio Reggio Emilia' },
+      { nome: 'CCIAA Parma', url: 'https://pr.camcom.it/', desc: 'Bandi e voucher Camera Commercio Parma' },
+      { nome: 'CCIAA Rimini', url: 'https://rn.camcom.it/', desc: 'Bandi e voucher Camera Commercio Rimini' },
+      { nome: 'CCIAA Ferrara', url: 'https://fe.camcom.it/', desc: 'Bandi e voucher Camera Commercio Ferrara' },
+      { nome: 'CCIAA Ravenna', url: 'https://ra.camcom.it/', desc: 'Bandi e voucher Camera Commercio Ravenna' },
+      { nome: 'CCIAA Forlì-Cesena', url: 'https://fc.camcom.it/', desc: 'Bandi e voucher Camera Commercio Forlì-Cesena' },
+      { nome: 'CCIAA Piacenza', url: 'https://pc.camcom.it/', desc: 'Bandi e voucher Camera Commercio Piacenza' },
+    ]},
+  ];
+
+  let html = `
+    <div class="modal-overlay open" id="fonti-modal-overlay" onclick="if(event.target===this)closeFontiModal()">
+      <div class="modal" style="max-width:720px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column">
+        <div class="modal-header">
+          <div>
+            <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:600">Trasparenza</div>
+            <div style="font-size:18px;font-weight:700;margin-top:4px">📡 Fonti monitorate da BandiRadar</div>
+          </div>
+          <button class="modal-close" onclick="closeFontiModal()">&times;</button>
+        </div>
+        <div class="modal-body" style="overflow-y:auto;flex:1">
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.6">
+            BandiRadar monitora le seguenti fonti pubbliche per individuare bandi e agevolazioni rilevanti per le PMI. I dati vengono aggiornati con scansioni periodiche (settimanali o più frequenti).
+          </div>`;
+
+  fonti.forEach(cat => {
+    html += `<div style="margin-bottom:18px">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)">${cat.cat}</div>`;
+    cat.items.forEach(f => {
+      html += `<div style="display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03)">
+        <div style="flex:1;min-width:0">
+          <a href="${f.url}" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:var(--blue);text-decoration:none">${f.nome} ↗</a>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:2px">${f.desc}</div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += `
+          <div style="margin-top:12px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:11px;color:var(--text-muted);line-height:1.5">
+            <strong>Nota:</strong> BandiRadar non è affiliato a nessuno degli enti elencati. I dati sono raccolti da fonti pubbliche e verificati prima dell'inserimento. Verifica sempre la versione ufficiale del bando sul sito dell'ente erogatore.
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
+function closeFontiModal() {
+  const m = document.getElementById('fonti-modal-overlay');
   if (m) m.remove();
 }
 

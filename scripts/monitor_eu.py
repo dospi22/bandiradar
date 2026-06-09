@@ -183,8 +183,8 @@ def main():
         print(f"\n💾 Salvato in: {args.output}")
 
     print(f"\n✅ ISTRUZIONE: verifica ciascuno dei {len(relevant)} bandi sopra.")
-    print("   Per ogni bando reale, inserisci una nuova riga nel Google Sheet.")
-    print("   Per i falsi positivi, annotali nel foglio 'Scartati'.")
+    print("   Per ogni bando reale, aggiungi una riga in data/bandi.csv.")
+    print("   Per i falsi positivi, annota per escluderli dalle prossime scansioni.")
 
 
 if __name__ == "__main__":

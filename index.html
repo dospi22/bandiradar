@@ -169,10 +169,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 4px;
       flex: 1;
       width: 100%;
-      padding: 0 10px;
+      padding: 0 8px;
     }
 
     .nav-item {
@@ -240,8 +240,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      padding: 0 10px;
+      gap: 8px;
+      padding: 0 10px 4px;
       width: 100%;
     }
 
@@ -1107,6 +1107,10 @@
         <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
       </svg>
     </div>
+    <!-- Fonti -->
+    <div class="sidebar-badge fonti" onclick="event.preventDefault();openFontiModal()" title="Fonti monitorate" style="font-size:15px;cursor:pointer;">
+      📡
+    </div>
     <!-- Riservato -->
     <div class="sidebar-badge riservato" onclick="openPrivacyBanner()" title="Modalità riservata">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1489,20 +1493,23 @@
   .privacy-banner .btn { padding: 4px 10px; font-size: 11px; background: rgba(255,255,255,0.08); border: 1px solid currentColor; color: inherit; cursor: pointer; border-radius: 6px; font-weight: 600; }
   .privacy-banner .btn:hover { background: rgba(0,0,0,0.04); }
 
-  /* Pulsante header */
+  /* Pulsante header — sidebar icon-only */
   .btn-privacy-header {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 10px; border-radius: 14px;
-    font-size: 11px; font-weight: 600;
+    width: 38px; height: 38px;
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; line-height: 1;
     cursor: pointer; transition: all 0.15s;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.12); color: white;
-    margin-left: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45);
+    padding: 0; margin: 0;
   }
-  .btn-privacy-header:hover { background: rgba(255,255,255,0.22); }
+  .btn-privacy-header span { display: none; }
+  .btn-privacy-header:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.15); }
   .btn-privacy-header.attivo {
-    background: rgba(34,197,94,0.28);
-    border-color: rgba(34,197,94,0.6);
+    background: rgba(34,197,94,0.15);
+    border-color: rgba(34,197,94,0.4);
+    color: #4ade80;
   }
 
   /* Modal Gestione clienti */
@@ -4480,16 +4487,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   body.presentation-mode .header-presenter strong { font-weight: 700; }
 
-  /* Pulsante "Presenta" nell'header */
+  /* Pulsante "Presenta" — sidebar icon-only */
   .btn-presenta-header {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 10px; border-radius: 14px; font-size: 11px; font-weight: 600;
+    width: 38px; height: 38px;
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; line-height: 1;
     cursor: pointer; transition: all 0.15s;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.12); color: white;
-    margin-left: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45);
+    padding: 0; margin: 0;
   }
-  .btn-presenta-header:hover { background: rgba(255,255,255,0.22); }
+  .btn-presenta-header:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.15); }
 
   /* Pulsante "Esci da presentazione" floating */
   .btn-esci-presenta {
@@ -4559,7 +4568,7 @@ document.addEventListener('DOMContentLoaded', () => {
     aggiornaHeaderPresenter();
     const btn = document.getElementById('btn-presenta-header');
     if (btn) {
-      btn.textContent = isOn ? '✕ Modalità lavoro' : '📺 Presenta';
+      btn.textContent = isOn ? '✕' : '📺';
       btn.title = isOn
         ? 'Torna alla modalità di lavoro normale'
         : 'Modalità vetrina: nasconde i dettagli tecnici, ingrandisce, ideale davanti al cliente';
@@ -4595,7 +4604,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.createElement('button');
     btn.id        = 'btn-presenta-header';
     btn.className = 'btn-presenta-header internal-only';   // in presentation mode, viene sostituito col btn-esci floating
-    btn.innerHTML = '📺 Presenta';
+    btn.innerHTML = '📺';
     btn.title     = 'Modalità vetrina per il cliente';
     btn.onclick   = () => togglePresentationMode();
     fresh.parentNode.insertBefore(btn, fresh);

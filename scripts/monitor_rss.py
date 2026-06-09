@@ -275,8 +275,8 @@ def main():
     print("─" * 65)
     print("✅ PROSSIMI PASSI:")
     print("   1. Per ogni risultato: apri il link e verifica che sia un bando reale")
-    print("   2. Se è un bando reale → inserisci nel Google Sheet")
-    print("   3. Se è un falso positivo → annota nel foglio 'Scartati'")
+    print("   2. Se è un bando reale → aggiungi una riga in data/bandi.csv")
+    print("   3. Se è un falso positivo → annota per escluderlo dalle prossime scansioni")
     print("   4. Per i check manuali → visita il sito e scansiona i bandi recenti")
     print("─" * 65)
 

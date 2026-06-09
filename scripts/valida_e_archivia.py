@@ -4,10 +4,9 @@
 BandiRadar — Validazione + auto-archiviazione + freschezza (FLUSSO LOCALE)
 ═══════════════════════════════════════════════════════════════════════════
 
-Questo script SOSTITUISCE il vecchio sync notturno da Google Sheet, che non
-viene usato. Va eseguito in LOCALE sul file data/bandi.csv, tipicamente
-dall'agente Claude subito dopo aver aggiornato i bandi, PRIMA di caricare
-su GitHub con il file .bat.
+Va eseguito in LOCALE sul file data/bandi.csv, tipicamente dall'agente Claude
+subito dopo aver aggiornato i bandi, PRIMA di caricare su GitHub con
+Carica su GitHub.ps1.
 
 Cosa fa:
   1. VALIDA data/bandi.csv (stessi controlli di qualità):

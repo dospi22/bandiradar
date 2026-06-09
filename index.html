@@ -263,6 +263,23 @@
       border-color: rgba(255,255,255,0.15);
     }
 
+    /* Account menu items */
+    .acct-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 16px; font-size: 13px; font-weight: 500;
+      transition: background 0.1s; position: relative;
+    }
+    .acct-disabled {
+      opacity: 0.55; cursor: not-allowed;
+    }
+    .acct-logout { color: #f87171; }
+    .acct-badge {
+      margin-left: auto; font-size: 9px; font-weight: 700;
+      background: rgba(99,102,241,0.2); color: #a5b4fc;
+      border: 1px solid rgba(99,102,241,0.3);
+      padding: 1px 6px; border-radius: 20px; text-transform: uppercase;
+    }
+
     /* Theme toggle button */
     .theme-toggle {
       width: 38px; height: 38px;
@@ -1134,7 +1151,57 @@
         </div>
         <div style="text-align:right;margin-top:2px">📍 Rimini, Emilia-Romagna</div>
       </div>
-      <div class="sidebar-badge" id="btn-account" style="width:36px;height:36px;background:rgba(129,140,248,0.15);border-color:rgba(129,140,248,0.25);font-weight:700;font-family:var(--font-display)">A</div>
+      <div class="sidebar-badge" id="btn-account" onclick="toggleAccountMenu(event)" style="width:36px;height:36px;background:#818cf8;border-color:#6366f1;color:#fff;font-weight:700;font-family:var(--font-display);font-size:15px;cursor:pointer;position:relative;">A</div>
+      <!-- Account dropdown -->
+      <div id="account-menu" style="
+        display:none; position:fixed; z-index:9999;
+        background:linear-gradient(180deg,#1a1f35 0%,#111827 100%);
+        border:1px solid rgba(255,255,255,0.12); border-radius:12px;
+        min-width:220px; box-shadow:0 16px 48px rgba(0,0,0,0.5);
+        padding:8px 0; overflow:hidden;
+        --text:#e2e8f0; --text-muted:#94a3b8; color:#e2e8f0;
+      ">
+        <!-- Intestazione profilo -->
+        <div style="padding:12px 16px 10px; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:36px;height:36px;background:#818cf8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0;">A</div>
+            <div>
+              <div style="font-weight:700;font-size:13px;">Alex</div>
+              <div style="font-size:11px;color:#94a3b8;">dospi22@gmail.com</div>
+            </div>
+          </div>
+        </div>
+        <!-- Voci menu (non cliccabili) -->
+        <div style="padding:6px 0;">
+          <div class="acct-item acct-disabled" title="Funzione non ancora disponibile">
+            <span style="font-size:15px;">👤</span> Info profilo
+            <span class="acct-badge">Presto</span>
+          </div>
+          <div class="acct-item acct-disabled" title="Funzione non ancora disponibile">
+            <span style="font-size:15px;">⚙️</span> Impostazioni
+            <span class="acct-badge">Presto</span>
+          </div>
+          <div class="acct-item acct-disabled" title="Funzione non ancora disponibile">
+            <span style="font-size:15px;">🔔</span> Notifiche
+            <span class="acct-badge">Presto</span>
+          </div>
+          <div class="acct-item acct-disabled" title="Funzione non ancora disponibile">
+            <span style="font-size:15px;">📊</span> Report personale
+            <span class="acct-badge">Presto</span>
+          </div>
+        </div>
+        <!-- Logout (visivo, non funzionale) -->
+        <div style="padding:6px 0; border-top:1px solid rgba(255,255,255,0.08);">
+          <div class="acct-item acct-disabled acct-logout" title="Funzione non ancora disponibile">
+            <span style="font-size:15px;">🚪</span> Logout
+            <span class="acct-badge">Presto</span>
+          </div>
+        </div>
+        <!-- Versione -->
+        <div style="padding:8px 16px 4px;font-size:10px;color:#475569;text-align:center;border-top:1px solid rgba(255,255,255,0.05);">
+          BandiRadar · v3.0 · © 2026
+        </div>
+      </div>
     </div>
   </header>
 
@@ -2739,6 +2806,26 @@ async function loadRaccomandazioni() {
     document.documentElement.setAttribute('data-theme', 'light');
   }
 })();
+
+function toggleAccountMenu(e) {
+  e.stopPropagation();
+  const menu = document.getElementById('account-menu');
+  const btn = document.getElementById('btn-account');
+  if (menu.style.display === 'none' || !menu.style.display) {
+    const rect = btn.getBoundingClientRect();
+    menu.style.top = (rect.bottom + 8) + 'px';
+    menu.style.right = (window.innerWidth - rect.right) + 'px';
+    menu.style.display = 'block';
+  } else {
+    menu.style.display = 'none';
+  }
+}
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('account-menu');
+  if (menu && !menu.contains(e.target) && e.target.id !== 'btn-account') {
+    menu.style.display = 'none';
+  }
+});
 
 function toggleTheme() {
   const root = document.documentElement;

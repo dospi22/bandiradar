@@ -770,6 +770,11 @@
       box-shadow: 0 32px 80px rgba(0,0,0,0.6);
       border: 1px solid rgba(255,255,255,0.08);
       animation: modalIn 0.22s ease;
+      /* Forza sempre colori dark indipendentemente dal tema */
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      color: #e2e8f0;
     }
     @keyframes modalIn { from { transform: translateY(16px) scale(0.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
     .modal-header {

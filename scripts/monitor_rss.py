@@ -32,99 +32,10 @@ except ImportError:
 
 
 # ─────────────────────────────────────────────────────────────
-# FONTI CONFIGURATE (da documento BandiRadar v3.0)
+# FONTI E KEYWORD — definite UNA SOLA VOLTA in scripts/fonti.py
+# Le fonti senza RSS sono monitorate da monitor_pagine.py (diff).
 # ─────────────────────────────────────────────────────────────
-
-FONTI_RSS = [
-    {
-        "nome": "Invitalia — Incentivi imprese",
-        "livello": "Nazionale",
-        "url_rss": "https://www.invitalia.it/rss/news.xml",
-        "url_web": "https://www.invitalia.it",
-        "metodo": "RSS",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "MIMIT — Comunicati stampa",
-        "livello": "Nazionale",
-        "url_rss": "https://www.mimit.gov.it/it/rss/comunicati",
-        "url_web": "https://www.mimit.gov.it/it/incentivi",
-        "metodo": "RSS",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "Incentivi.gov — Catalogo nazionale",
-        "livello": "Nazionale",
-        "url_rss": "",  # nessun RSS disponibile — check manuale
-        "url_web": "https://www.incentivi.gov.it/it/catalogo",
-        "metodo": "Check manuale",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "Bandi.gov.it — Portale nazionale",
-        "livello": "Nazionale",
-        "url_rss": "https://bandi.gov.it/rss/bandi.xml",
-        "url_web": "https://bandi.gov.it",
-        "metodo": "RSS",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "Euknow — Bandi UE e nazionali",
-        "livello": "Nazionale/UE",
-        "url_rss": "https://euknow.it/feed/",
-        "url_web": "https://euknow.it",
-        "metodo": "RSS",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "Regione Emilia-Romagna — Finanziamenti imprese",
-        "livello": "Regionale ER",
-        "url_rss": "https://imprese.regione.emilia-romagna.it/rss",
-        "url_web": "https://imprese.regione.emilia-romagna.it/bandi",
-        "metodo": "RSS",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "Regione ER — Sociale e Terzo Settore",
-        "livello": "Regionale ER",
-        "url_rss": "",
-        "url_web": "https://sociale.regione.emilia-romagna.it/bandi",
-        "metodo": "Check manuale",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "ART-ER — Bandi e opportunità",
-        "livello": "Regionale ER",
-        "url_rss": "https://www.art-er.it/feed/",
-        "url_web": "https://www.art-er.it/bandi/",
-        "metodo": "RSS",
-        "frequenza": "settimanale",
-    },
-    {
-        "nome": "INFOBANDI CSVNET — Terzo Settore",
-        "livello": "Nazionale",
-        "url_rss": "https://infobandi.csvnet.it/feed",
-        "url_web": "https://infobandi.csvnet.it",
-        "metodo": "RSS",
-        "frequenza": "bisettimanale",
-    },
-]
-
-# Parole chiave per filtrare i contenuti rilevanti
-KEYWORDS_POSITIVI = [
-    "bando", "agevolazione", "incentivo", "contributo", "finanziamento",
-    "credito d'imposta", "voucher", "fondo perduto", "sportello", "aperto",
-    "pmi", "impresa", "startup", "innovazione", "digitale", "sostenibilità",
-    "internazionalizzazione", "ricerca", "sviluppo", "emilia-romagna",
-    "mimit", "invitalia", "simest", "regione er", "por-fesr", "fse",
-    "horizon", "eic", "life", "interreg", "pnrr", "fesr"
-]
-
-KEYWORDS_NEGATIVI = [
-    "webinar", "evento", "conferenza", "formazione", "seminario",
-    "consultazione pubblica", "bozza", "in arrivo", "annuncio generico",
-    "comunicato stampa", "nota stampa"
-]
+from fonti import FONTI_RSS, KEYWORDS_POSITIVI, KEYWORDS_NEGATIVI
 
 
 # ─────────────────────────────────────────────────────────────

@@ -2924,19 +2924,11 @@ function renderProfilSidebar() {
   // Sezione abbinamento bandi
   if (aziende.length > 0) {
     html += `<div style="margin-top:18px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius)">
-      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px">🤖 Abbina bandi</div>
-      <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">Seleziona le aziende da analizzare, scarica il file config e salvalo in <code>data/</code>, poi avvia l'agente.</div>
-      <div id="abbinamento-checkboxes" style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px">
-        ${aziende.map(az => `
-        <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,0.04)">
-          <input type="checkbox" class="abbinamento-check" value="${escAttr(az.codiceMnemonico||az.id)}" style="accent-color:var(--blue)">
-          ${escHtml(displayNomeBreveAzienda(az))}
-          <span style="font-size:10px;color:var(--text-muted);margin-left:auto;font-family:monospace">${escHtml(az.codiceMnemonico||'')}</span>
-        </label>`).join('')}
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px">🤖 Abbina bandi</div>
+      <div style="font-size:11px;color:var(--text-muted);line-height:1.5">
+        L'agente elabora <strong>tutte le aziende</strong> automaticamente.<br>
+        Vai in <strong>Scheduled</strong> → <em>Bandiradar abbinamento bandi</em> → <strong>Esegui ora</strong>.
       </div>
-      <button class="btn btn-primary btn-sm" style="width:100%" onclick="scaricaAbbinamentoConfig()">
-        💾 Scarica abbinamento_config.json
-      </button>
     </div>`;
   }
 

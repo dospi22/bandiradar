@@ -2921,18 +2921,47 @@ function renderProfilSidebar() {
 
   html += `<button class="btn-add-profilo" onclick="openProfileForm(null)">➕ Aggiungi profilo aziendale</button>`;
 
-  // Sezione abbinamento bandi
+  // ─── Sezione abbinamento bandi: SELEZIONE MULTIPLA AZIENDE ────────────
   if (aziende.length > 0) {
+    const aziendeOk = aziende.filter(a => a.codiceMnemonico);
     html += `<div style="margin-top:18px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius)">
-      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px">🤖 Abbina bandi</div>
-      <div style="font-size:11px;color:var(--text-muted);line-height:1.5">
-        L'agente elabora <strong>tutte le aziende</strong> automaticamente.<br>
-        Vai in <strong>Scheduled</strong> → <em>Bandiradar abbinamento bandi</em> → <strong>Esegui ora</strong>.
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">🤖 Abbina bandi — seleziona aziende</div>
+      <div style="font-size:11px;color:var(--text-muted);line-height:1.5;margin-bottom:10px">
+        Spunta le aziende, scarica il file e incollalo in <code>data/</code>. L'agente Schedule analizzerà solo quelle.
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <button class="btn btn-sm" onclick="toggleAllAbbinamento(true)" style="font-size:11px;padding:4px 10px">✓ Tutte</button>
+        <button class="btn btn-sm" onclick="toggleAllAbbinamento(false)" style="font-size:11px;padding:4px 10px">✕ Nessuna</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;margin-bottom:12px;padding:4px">`;
+    aziendeOk.forEach(az => {
+      const nome = escHtml(displayNomeBreveAzienda(az));
+      const cod  = escHtml(az.codiceMnemonico);
+      html += `<label style="display:flex;align-items:center;gap:8px;padding:6px 8px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px">
+        <input type="checkbox" class="abbinamento-check" value="${cod}" style="accent-color:#818cf8;cursor:pointer">
+        <span style="flex:1;font-weight:600">${nome}</span>
+        <span style="color:var(--text-muted);font-size:10px">${cod}</span>
+      </label>`;
+    });
+    if (aziendeOk.length === 0) {
+      html += `<div style="font-size:11px;color:var(--text-muted);font-style:italic">Nessuna azienda con codice mnemonico. Aggiungi un profilo con codice per abilitare l'abbinamento.</div>`;
+    }
+    html += `</div>
+      <button class="btn btn-sm btn-primary" onclick="scaricaAbbinamentoConfig()" style="width:100%;font-size:12px;padding:8px" ${aziendeOk.length === 0 ? 'disabled' : ''}>
+        💾 Scarica abbinamento_config.json
+      </button>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:8px;line-height:1.5">
+        Poi: incolla in <code>data/</code> → Schedule → <em>Bandiradar abbinamento bandi</em> → <strong>Esegui ora</strong> → doppio click su <strong>⬆️ Push Associazioni.bat</strong>.
       </div>
     </div>`;
   }
 
   sb.innerHTML = html;
+}
+
+// ─── Helper: spunta o desplunta tutte le aziende dell'abbinamento ────────
+function toggleAllAbbinamento(state) {
+  document.querySelectorAll('.abbinamento-check').forEach(c => { c.checked = state; });
 }
 
 function renderProfiliPlaceholder() {

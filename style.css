@@ -76,6 +76,23 @@
     [data-theme="light"] .topbar {
       background: linear-gradient(135deg, #ffffff 0%, #f8f9fc 100%);
     }
+    [data-theme="light"] .freshness {
+      color: #1e293b;
+      background: rgba(0,0,0,0.06);
+      border-color: rgba(0,0,0,0.12);
+    }
+    [data-theme="light"] .freshness:hover {
+      background: rgba(0,0,0,0.1);
+    }
+    [data-theme="light"] .header-meta {
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .header-meta span,
+    [data-theme="light"] .header-meta div {
+      color: #0f172a !important;
+    }
+    [data-theme="light"] .topbar-title h1 { color: #0f172a; }
+    [data-theme="light"] .topbar-title p  { color: #475569; }
     [data-theme="light"] .stats {
       background: rgba(0,0,0,0.03);
     }

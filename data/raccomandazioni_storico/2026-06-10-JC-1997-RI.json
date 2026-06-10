@@ -1,0 +1,180 @@
+{
+  "codice_cliente": "JC-1997-RI",
+  "generatedAt": "2026-06-04T08:28:27Z",
+  "aziende": [
+    {
+      "idAzienda": "az-1780557651248",
+      "generatedAt": "2026-06-04T08:28:27Z",
+      "raccomandazioni": [
+        {
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "molto_alta",
+          "motivazione": "Premio nazionale per aziende con progetti di sviluppo sostenibile ed eco-innovazione.",
+          "motivazioneEstesa": "Il Premio Sviluppo Sostenibile premia aziende con progetti eco-innovativi. Progettare il nuovo capannone con criteri green (fotovoltaico, efficienza energetica) può qualificare Japan Car per questa riconoscimento nazionale.",
+          "scadenza": "2026-06-30",
+          "importoMax": null,
+          "tipoAgev": "Premio",
+          "priorita": "Media"
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "molto_alta",
+          "motivazione": "Fondo perduto FESR ER per investimenti produttivi e tecnologie strategiche in Emilia-Romagna.",
+          "motivazioneEstesa": "FESR ER STEP finanzia investimenti produttivi e tecnologici per PMI emiliano-romagnole. Coerente con la ristrutturazione del capannone, nuovi impianti officina e digitalizzazione complessiva.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "rilevanza": "molto_alta",
+          "motivazione": "Voucher EU fino 1.500€ per registrazione marchi e brevetti PMI europee.",
+          "motivazioneEstesa": "EUIPO SME Fund copre il 75% delle tasse per registrare marchi e design comunitari. Utile per proteggere il brand in fase di espansione e apertura della nuova sede.",
+          "scadenza": "2026-12-04",
+          "importoMax": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-025",
+          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
+          "rilevanza": "molto_alta",
+          "motivazione": "Contributo fondo perduto Fondimpresa per formazione dipendenti fino 150k€.",
+          "motivazioneEstesa": "Fondimpresa Avviso 1/2026 finanzia piani formativi aziendali. Con 16 addetti, Japan Car può attivare percorsi su digitalizzazione, vendita e competenze tecniche officina.",
+          "scadenza": "2026-12-31",
+          "importoMax": 150000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
+        },
+        {
+          "id": "IT-2026-026",
+          "nome": "SIMEST — Misura Energia per la Competitività Internazionale 2026",
+          "rilevanza": "molto_alta",
+          "motivazione": "Finanziamento agevolato SIMEST per efficienza energetica e competitività delle PMI.",
+          "motivazioneEstesa": "SIMEST Energia 2026 sostiene PMI con finanziamenti agevolati per efficienza energetica. Applicabile in ottica riqualificazione energetica del nuovo capannone della concessionaria.",
+          "scadenza": "2026-12-31",
+          "importoMax": null,
+          "tipoAgev": "Finanziamento agevolato",
+          "priorita": "Media"
+        },
+        {
+          "id": "IT-2026-004",
+          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
+          "rilevanza": "molto_alta",
+          "motivazione": "Voucher fino 8.000€ per deposito brevetti e tutela proprietà intellettuale.",
+          "motivazioneEstesa": "Voucher 3I copre le spese per il deposito di brevetti italiani ed europei. Utile se Japan Car sviluppa soluzioni software o digitali proprietarie nell'ambito della trasformazione in corso.",
+          "scadenza": "",
+          "importoMax": 8000,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-001",
+          "nome": "EIC Accelerator — Fase Open",
+          "rilevanza": "alta",
+          "motivazione": "Contributo UE fino 2,5M€ per PMI con tecnologie innovative scalabili.",
+          "motivazioneEstesa": "EIC Accelerator finanzia PMI con soluzioni tecnologiche altamente innovative. Rilevante solo se Japan Car sviluppa tecnologia digitale proprietaria scalabile; profilo attuale di concessionaria difficilmente ammissibile.",
+          "scadenza": "2026-11-04",
+          "importoMax": 2500000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-004",
+          "nome": "EIC Transition 2026",
+          "rilevanza": "alta",
+          "motivazione": "Finanziamento UE per PMI che sviluppano tecnologie prototipali da ricerca EIC.",
+          "motivazioneEstesa": "EIC Transition 2026 sostiene lo sviluppo di tecnologie emergenti. Adatto solo in caso di R&S strutturata; da valutare se Japan Car intende brevettare soluzioni digitali sviluppate internamente.",
+          "scadenza": "2026-09-16",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-002",
+          "nome": "LIFE Programme 2026 — Natura e Biodiversità",
+          "rilevanza": "media",
+          "motivazione": "Contributo fondo perduto LIFE per progetti ambientali su larga scala.",
+          "motivazioneEstesa": "LIFE Programme finanzia progetti ambientali complessi. Adatto principalmente a enti/grandi imprese con progetti nature-based; la rilevanza per Japan Car dipende da eventuale progetto green strutturato.",
+          "scadenza": "2026-09-19",
+          "importoMax": 5000000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
+        },
+        {
+          "id": "EU-2025-001",
+          "nome": "Horizon Europe — EIC Pathfinder",
+          "rilevanza": "media",
+          "motivazione": "Finanziamento Horizon Europe per ricerca su tecnologie emergenti; requisiti elevati.",
+          "motivazioneEstesa": "EIC Pathfinder finanzia ricerca visionaria su tecnologie future. Profilo prevalentemente accademico/deeptech; possibile solo in partnership con enti di ricerca. Monitorare per opportunità collaborative.",
+          "scadenza": "2026-09-05",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        }
+      ],
+      "in_arrivo": [],
+      "da_monitorare": [
+        {
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "rilevanza": "molto_alta",
+          "motivazione": "Credito d'imposta per investimenti che combinano digitalizzazione e risparmio energetico.",
+          "motivazioneEstesa": "Transizione 5.0 prevede credito d'imposta per investimenti che combinano digitale e risparmio energetico. Ideale per allestimento nuovo capannone con macchinari efficienti e sistemi digitali integrati.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "rilevanza": "molto_alta",
+          "motivazione": "Voucher per adozione servizi cloud e cybersecurity per PMI italiane.",
+          "motivazioneEstesa": "Il voucher Cloud & Cybersecurity finanzia l'adozione di cloud e sicurezza informatica. Molto rilevante per Japan Car che sta digitalizzando completamente processi vendita, officina e gestione clienti.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "ER-2026-006",
+          "nome": "Fondo Multiscopo ER — Sezione Energia 2026",
+          "rilevanza": "molto_alta",
+          "motivazione": "Finanziamento agevolato ER per investimenti in efficienza energetica PMI.",
+          "motivazioneEstesa": "Il Fondo Multiscopo ER Energia sostiene investimenti in efficienza energetica e rinnovabili per PMI emiliano-romagnole. Ideale per dotare il nuovo capannone di impianti fotovoltaici e sistemi efficienti.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Finanziamento agevolato",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-016",
+          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali",
+          "rilevanza": "alta",
+          "motivazione": "Maxi-deduzione fiscale per acquisto beni strumentali materiali e immateriali 4.0.",
+          "motivazioneEstesa": "L'iperammortamento 2026-2028 consente una maxi-deduzione per macchinari e software 4.0. Molto utile per Japan Car nell'allestimento del nuovo capannone con attrezzature e sistemi moderni.",
+          "scadenza": "2028-09-30",
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta"
+        },
+        {
+          "id": "ER-2026-012",
+          "nome": "FESR ER — STEP 2026: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "alta",
+          "motivazione": "Fondo perduto ER per investimenti produttivi e R&S in tecnologie strategiche 2026.",
+          "motivazioneEstesa": "FESR ER STEP 2026 finanzia PMI emiliano-romagnole per investimenti produttivi avanzati. Da monitorare per apertura bando: rilevante per il rinnovo completo degli impianti della concessionaria.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        }
+      ]
+    }
+  ]
+}

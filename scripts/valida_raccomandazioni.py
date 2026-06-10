@@ -12,7 +12,6 @@ Uso:
     python scripts/valida_raccomandazioni.py
 """
 
-import csv
 import json
 import sys
 import glob
@@ -27,19 +26,18 @@ if (_cwd / "data" / "bandi.csv").exists():
 else:
     BASE_DIR = _script_dir.parent
 
+# Helper condivisi (scripts/schema.py = unica fonte di verità per lo schema)
+sys.path.insert(0, str(_script_dir))
+from schema import leggi_csv
+
 CSV_PATH  = BASE_DIR / "data" / "bandi.csv"
 LINK_PATH = BASE_DIR / "data" / "link_status.json"
 TODAY     = date.today()
 
 
 def carica_bandi(csv_path):
-    bandi = {}
-    with open(csv_path, encoding="utf-8-sig") as f:
-        for row in csv.DictReader(f):
-            bid = row.get("ID", "").strip()
-            if bid:
-                bandi[bid] = row
-    return bandi
+    rows, _ = leggi_csv(str(csv_path))
+    return {row["ID"].strip(): row for row in rows if row.get("ID", "").strip()}
 
 
 def carica_link_ko(link_path):

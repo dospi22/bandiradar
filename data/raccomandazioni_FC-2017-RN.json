@@ -1,160 +1,65 @@
 {
   "codice_cliente": "FC-2017-RN",
-  "generatedAt": "2026-06-04T07:37:28Z",
+  "generatedAt": "2026-06-10T19:15:20.107531",
   "aziende": [
     {
       "idAzienda": "az-1779394390646",
-      "generatedAt": "2026-06-04T07:37:28Z",
+      "generatedAt": "2026-06-10T19:15:20.107531",
       "raccomandazioni": [
         {
-          "id": "IT-2026-019",
-          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità; scadenza imminente",
-          "motivazioneEstesa": "Bando Nazionale | Premio | non applicabile | %",
-          "scadenza": "2026-06-30",
-          "importoMax": 0,
-          "tipoAgev": "Premio"
-        },
-        {
-          "id": "IT-2026-018",
-          "nome": "PN RIC FTV SUD — Fotovoltaico per l'autoconsumo delle PMI del Mezzogiorno",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità; scadenza imminente; fino a €1,700,000",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | gber esenzione | 60%%",
-          "scadenza": "2026-07-03",
-          "importoMax": 1700000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-002",
-          "nome": "LIFE Programme 2026 — Natura e Biodiversità",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità; fino a €5,000,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 60%",
-          "scadenza": "2026-09-19",
-          "importoMax": 5000000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "IT-2026-015",
-          "nome": "MIMIT — Sviluppo Competenze Specialistiche PMI Mezzogiorno",
+          "id": "IT-2026-004",
+          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
           "rilevanza": "alta",
-          "motivazione": "Formazione; scadenza imminente",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | de minimis | 50%",
-          "scadenza": "2026-06-23",
-          "importoMax": 30000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-004",
-          "nome": "EIC Transition 2026",
-          "rilevanza": "alta",
-          "motivazione": "R&s; fino a €2,500,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 70%",
-          "scadenza": "2026-09-16",
-          "importoMax": 2500000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "ER-2025-002",
-          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
-          "rilevanza": "alta",
-          "motivazione": "R&s; Digitalizzazione",
-          "motivazioneEstesa": "Bando Regionale ER | Contributo a fondo perduto | gber esenzione | %",
-          "scadenza": "2026-09-30",
-          "importoMax": 0,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2026-001",
-          "nome": "EIC Accelerator — Fase Open",
-          "rilevanza": "alta",
-          "motivazione": "R&s; Startup; fino a €2,500,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | notificato | 70%",
-          "scadenza": "2026-11-04",
-          "importoMax": 2500000,
-          "tipoAgev": "Contributo a fondo perduto"
+          "motivazione": "Voucher per brevetti e proprietà intellettuale, ideale per PMI innovativa nel software",
+          "motivazioneEstesa": "Voucher fino a 8.000€ (80% a fondo perduto) per la tutela brevettuale. Essendo un'impresa di innovazione e software, potrebbe proteggere soluzioni proprietarie sviluppate per i vostri clienti.",
+          "scadenza": null,
+          "importoMax": 8000,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
         },
         {
           "id": "EU-2026-005",
           "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
           "rilevanza": "alta",
-          "motivazione": "Internazionalizzazione",
-          "motivazioneEstesa": "Bando Europeo | Voucher | de minimis | 75%",
+          "motivazione": "Rimborso fino al 75% per registrazione marchi e brevetti UE, procedure semplici",
+          "motivazioneEstesa": "Fondo UE per PMI che rimborsa fino al 75% dei costi di registrazione marchi, brevetti e design a livello europeo. Procedura online semplice e veloce, utile per tutelare il brand Fattor Comune.",
           "scadenza": "2026-12-04",
-          "importoMax": 0,
-          "tipoAgev": "Voucher"
+          "importoMax": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
         },
         {
-          "id": "IT-2026-025",
-          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
           "rilevanza": "alta",
-          "motivazione": "Formazione",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | de minimis | 100% spese formazione%",
-          "scadenza": "2026-12-31",
-          "importoMax": 150000,
-          "tipoAgev": "Contributo a fondo perduto"
+          "motivazione": "Premio per eco-innovazione ed economia circolare, in linea con status di Impresa Benefit",
+          "motivazioneEstesa": "Premio nazionale per innovazione sostenibile e economia circolare, con cerimonia a Ecomondo Rimini. In quanto Impresa Benefit con obiettivo di economia circolare, è un'opportunità di visibilità e networking.",
+          "scadenza": "2026-06-30",
+          "importoMax": null,
+          "tipoAgev": "Premio",
+          "priorita": "Media"
         },
         {
-          "id": "IT-2026-026",
-          "nome": "SIMEST — Misura Energia per la Competitività Internazionale 2026",
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
           "rilevanza": "alta",
-          "motivazione": "Internazionalizzazione",
-          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato | de minimis | 30%",
-          "scadenza": "2026-12-31",
-          "importoMax": 0,
-          "tipoAgev": "Finanziamento agevolato"
+          "motivazione": "Contributo ER per R&S e investimenti in tecnologie strategiche, PMI emiliano-romagnole",
+          "motivazioneEstesa": "Bando FESR regionale per investimenti produttivi e R&S in tecnologie strategiche. Come PMI innovativa nel settore software in Emilia-Romagna, potreste finanziare progetti di sviluppo tecnologico. Scadenza settembre 2026.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
         },
         {
-          "id": "IT-2026-004",
-          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
-          "rilevanza": "alta",
-          "motivazione": "R&s",
-          "motivazioneEstesa": "Bando Nazionale | Voucher | de minimis | 80%",
-          "scadenza": "",
-          "importoMax": 8000,
-          "tipoAgev": "Voucher"
-        },
-        {
-          "id": "IT-2026-023",
-          "nome": "SIMEST — Misura Stati Uniti (internazionalizzazione USA)",
-          "rilevanza": "alta",
-          "motivazione": "Internazionalizzazione",
-          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato|Contributo a fondo perduto | fondo 394 maeci | fino al 10% fondo perduto + finanziamento agevolato%",
-          "scadenza": "",
-          "importoMax": 0,
-          "tipoAgev": "Finanziamento agevolato|Contributo a fondo perduto"
-        },
-        {
-          "id": "IT-2026-010",
-          "nome": "Avviso Vita e Opportunita 2026",
+          "id": "EU-2026-002",
+          "nome": "LIFE Programme 2026 — Standard Action Projects (Environment & Climate)",
           "rilevanza": "media",
-          "motivazione": "Altro; fino a €3,000,000",
-          "motivazioneEstesa": "Bando Nazionale | Contributo a fondo perduto | non aiuto di stato | 95%",
-          "scadenza": "2026-08-29",
-          "importoMax": 3000000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "EU-2025-001",
-          "nome": "Horizon Europe — EIC Pathfinder",
-          "rilevanza": "media",
-          "motivazione": "R&s; fino a €4,000,000",
-          "motivazioneEstesa": "Bando Europeo | Contributo a fondo perduto | non aiuto di stato | 100%",
-          "scadenza": "2026-09-05",
-          "importoMax": 4000000,
-          "tipoAgev": "Contributo a fondo perduto"
-        },
-        {
-          "id": "IT-2026-012",
-          "nome": "Smart&Start Italia — Sostegno startup innovative ad alto contenuto tecnologico",
-          "rilevanza": "media",
-          "motivazione": "Startup; R&s; Digitalizzazione",
-          "motivazioneEstesa": "Bando Nazionale | Finanziamento agevolato | gber esenzione | 80%",
-          "scadenza": "",
-          "importoMax": 1500000,
-          "tipoAgev": "Finanziamento agevolato"
+          "motivazione": "Programma UE per progetti ambientali, match con obiettivo economia circolare",
+          "motivazioneEstesa": "Contributo UE fino al 60% per progetti ambientali e climatici. Match con il vostro obiettivo di economia circolare, ma richiede progetti di ampio respiro e partenariati europei. Da valutare se avete un progetto strutturato.",
+          "scadenza": "2026-09-22",
+          "importoMax": 5000000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
         }
       ],
       "in_arrivo": [],
@@ -162,20 +67,57 @@
         {
           "id": "IT-2026-002",
           "nome": "Credito d'imposta Transizione 5.0",
-          "stato": "Sospeso",
-          "motivazione": "Sospeso alta priorità — da seguire"
+          "rilevanza": "alta",
+          "motivazione": "Credito d'imposta 35% per investimenti in digitalizzazione e sostenibilità",
+          "motivazioneEstesa": "Credito d'imposta strutturale per investimenti in beni 4.0 con efficientamento energetico. Attualmente sospeso in attesa della campagna 2026 su GSE. Da monitorare per investimenti tecnologici futuri.",
+          "scadenza": null,
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta"
         },
         {
-          "id": "IT-2026-003",
-          "nome": "SIMEST — Fondo 394 Internazionalizzazione PMI",
-          "stato": "Sospeso",
-          "motivazione": "Sospeso alta priorità — da seguire"
+          "id": "ER-2026-003",
+          "nome": "Bando internazionalizzazione ART-ER 2026",
+          "rilevanza": "alta",
+          "motivazione": "Voucher ER per internazionalizzazione, utile se si intende espandere oltre l'Italia",
+          "motivazioneEstesa": "Voucher ART-ER fino a 15.000€ (80%) per attività di internazionalizzazione. Attualmente sospeso. Da monitorare se intendete espandere i servizi all'estero.",
+          "scadenza": null,
+          "importoMax": 15000,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
         },
         {
-          "id": "IT-2026-005",
-          "nome": "Contratti di Sviluppo — PNRR Missione 4",
-          "stato": "Sospeso",
-          "motivazione": "Sospeso alta priorità — da seguire"
+          "id": "ER-2026-012",
+          "nome": "FESR ER — STEP 2026: investimenti produttivi e R&S in tecnologie strategiche (II Bando)",
+          "rilevanza": "alta",
+          "motivazione": "Secondo bando STEP per R&S deep tech e tecnologie pulite, PMI ER",
+          "motivazioneEstesa": "Secondo bando FESR ER per investimenti in deep tech, tecnologie pulite e biotecnologie. Finestra settembre 2026 ancora aperta. Da monitorare come complemento al bando STEP 2025.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-016",
+          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
+          "rilevanza": "alta",
+          "motivazione": "Maxi-deduzione fino al 180% per beni 4.0, piattaforma GSE attesa a giugno",
+          "motivazioneEstesa": "Nuova agevolazione fiscale: maxi-deduzione fino al 180% per investimenti in beni strumentali 4.0. Decreto firmato, piattaforma GSE attesa giugno 2026. Interessante per acquisto di hardware e software innovativi.",
+          "scadenza": "2028-09-30",
+          "importoMax": null,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-021",
+          "nome": "Benefit Competition MIMIT 2026 — Competizione Società Benefit",
+          "rilevanza": "alta",
+          "motivazione": "Competizione MIMIT per Società Benefit, visibilità istituzionale — tappe 4-5 in arrivo",
+          "motivazioneEstesa": "Competizione MIMIT per Società Benefit con tappe territoriali e finale nazionale. Essendo Impresa Benefit, è un'opportunità di visibilità istituzionale. Tappe 4 e 5 ancora da annunciare.",
+          "scadenza": "2026-12-31",
+          "importoMax": null,
+          "tipoAgev": "Premio",
+          "priorita": "Media"
         }
       ]
     }

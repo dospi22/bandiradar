@@ -12,10 +12,12 @@
 // per forzare la rigenerazione del cache.
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'bandiradar-v1';
+const CACHE_VERSION = 'bandiradar-v2'; // v2: split index.html -> style.css + app.js
 const PRECACHE = [
   './',
   './index.html',
+  './style.css',
+  './app.js',
   './glossario.html',
   './status.html',
   './report.html',

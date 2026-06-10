@@ -1,0 +1,96 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# BandiRadar — Monitoraggio fonti settimanale
+#
+# Ogni lunedì alle 06:30 (ora italiana = 05:30 UTC), dopo la verifica link:
+#   1. Health-check di TUTTE le fonti (RSS + pagine) -> data/fonti_status.json
+#      La dashboard legge questo file per l'avviso "fonte cieca".
+#   2. Diff delle pagine senza RSS (CCIAA Romagna, FESR ER, SIMEST, INAIL,
+#      GSE, EUIPO) -> segnala novità e aggiorna data/pagine_snapshot.json
+#   3. Commit dei due file di stato
+#   4. Email a NOTIFY_EMAIL se ci sono novità dalle pagine o fonti in errore
+#
+# Avvio manuale: Actions → Monitoraggio Fonti → Run workflow
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Monitoraggio Fonti
+
+on:
+  schedule:
+    - cron: '30 5 * * 1'   # ogni lunedì alle 06:30 ora italiana (05:30 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write           # per commit di fonti_status.json e pagine_snapshot.json
+
+jobs:
+  monitor:
+    name: Health-check fonti + diff pagine senza RSS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installa dipendenze
+        run: pip install requests feedparser beautifulsoup4
+
+      - name: Health-check fonti (RSS + pagine)
+        run: python scripts/verifica_fonti.py | tee /tmp/fonti_report.txt
+
+      - name: Diff pagine senza RSS
+        run: python scripts/monitor_pagine.py | tee /tmp/pagine_report.txt
+
+      - name: Prepara riepilogo email
+        id: riepilogo
+        run: |
+          NOVITA=$(grep -c '^      •' /tmp/pagine_report.txt || true)
+          ERRORI=$(python -c "import json; d=json.load(open('data/fonti_status.json')); print(d['errore']+d['stantio'])")
+          echo "novita=$NOVITA"  >> "$GITHUB_OUTPUT"
+          echo "errori=$ERRORI"  >> "$GITHUB_OUTPUT"
+          {
+            echo 'REPORT<<EOF'
+            echo "── NOVITÀ DALLE PAGINE MONITORATE ──"
+            cat /tmp/pagine_report.txt
+            echo ""
+            echo "── STATO FONTI ──"
+            cat /tmp/fonti_report.txt
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Commit e push stato fonti
+        run: |
+          git config user.name  "BandiRadar Bot"
+          git config user.email "actions@github.com"
+          git add data/fonti_status.json data/pagine_snapshot.json
+          if git diff --staged --quiet; then
+            echo "ℹ️  Nessuna modifica allo stato fonti"
+          else
+            git commit -m "🩺 Monitoraggio fonti settimanale — $(date '+%Y-%m-%d')"
+            git push
+            echo "✅ fonti_status.json e pagine_snapshot.json aggiornati"
+          fi
+
+      - name: Email se novità o fonti in errore
+        if: steps.riepilogo.outputs.novita != '0' || steps.riepilogo.outputs.errori != '0'
+        continue-on-error: true   # senza SMTP configurato non blocca il workflow
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: BandiRadar <${{ secrets.SMTP_USER }}>
+          subject: "📡 BandiRadar — ${{ steps.riepilogo.outputs.novita }} novità dalle fonti, ${{ steps.riepilogo.outputs.errori }} fonti da controllare"
+          body: |
+            Monitoraggio fonti settimanale BandiRadar:
+
+            ${{ steps.riepilogo.outputs.REPORT }}
+
+            Log completo:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}

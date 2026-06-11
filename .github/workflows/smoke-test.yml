@@ -73,6 +73,7 @@ jobs:
                       'link_status.json', 'last_sync', 'pratiche.csv',
                       'raccomandazioni', 'aziende.json', 'dati_clienti_privati',
                       'abbinamento_config', 'ultima_ricerca', 'ultimo_diff', 'ultimo_digest',
+                      'fonti_status', 'pagine_snapshot',
                   ]
                   csv_status = {'code': None}
                   unexpected_404s = []

@@ -1,0 +1,47 @@
+{
+  "cciaa-romagna": {
+    "nome": "CCIAA Romagna (Forlì-Cesena e Rimini) — Finanziamenti",
+    "url": "https://www.romagna.camcom.it/it/opportunita/finanziamenti-1",
+    "ultimo_check": "2026-06-11T07:33:51.249148+00:00",
+    "voci": {
+      "https://www.romagna.camcom.it/it/opportunita/sviluppo-imprese-innovative": "Sviluppo startup e PMI innovative",
+      "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa": "Servizi per l'avvio e lo sviluppo d'impresa",
+      "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa/sportello-microcredito": "Sportello Microcredito",
+      "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa/sostegno-allimprenditoria-reti-di-supporto-dellavvio-dimpresa": "Sostegno all’imprenditoria. Reti di supporto dell’avvio d’impresa",
+      "https://www.romagna.camcom.it/it/opportunita/servizi-per-supportare-le-imprese-in-situazioni-di-crisi": "Servizi per supportare le imprese in situazioni di crisi",
+      "https://www.romagna.camcom.it/it/opportunita/servizi-per-supportare-le-imprese-in-situazioni-di-crisi/composizione-negoziata-della-crisi-dimpresa": "Composizione negoziata della crisi d'impresa",
+      "https://www.romagna.camcom.it/it/opportunita/servizi-per-supportare-le-imprese-in-situazioni-di-crisi/ocri-organismo-di-composizione-della-crisi-dimpresa": "OCRI - Organismo di composizione della crisi d’impresa",
+      "https://www.romagna.camcom.it/it/opportunita/internazionalizzazione": "Internazionalizzazione",
+      "https://www.romagna.camcom.it/it/opportunita/internazionalizzazione/contributi-per-linternazionalizzazione-delle-imprese": "Contributi per l'internazionalizzazione delle imprese",
+      "https://www.romagna.camcom.it/it/opportunita/internazionalizzazione/formazione-dedicata-allinternazionalizzazione-di-impresa": "Formazione dedicata all'internazionalizzazione di impresa",
+      "https://www.romagna.camcom.it/it/opportunita/pid-punto-impresa-digitale": "PID Punto Impresa Digitale",
+      "https://www.romagna.camcom.it/it/opportunita/pid-punto-impresa-digitale/assessment-checkup-sicurezza-it-per-la-tua-mpmi-1": "Assessment Checkup Sicurezza IT per la tua MPMI",
+      "https://www.romagna.camcom.it/it/opportunita/pid-punto-impresa-digitale/digitalizzazione-e-sostenibilita-una-transizione-duale-e-sinergica": "Digitalizzazione e sostenibilità: una transizione duale e sinergica",
+      "https://www.romagna.camcom.it/it/opportunita/pid-punto-impresa-digitale/strumenti-per-lautovalutazione-digitale": "Strumenti per l'autovalutazione digitale",
+      "https://www.romagna.camcom.it/it/opportunita/pid-punto-impresa-digitale/strumenti-per-lautovalutazione-digitale/self-assessment-impresa-40-selfi40": "Self assessment - Impresa 4.0 \"SELFI4.0\"",
+      "https://www.romagna.camcom.it/it/opportunita/strumenti-per-limpresa-digitale": "Strumenti per l'impresa digitale",
+      "https://www.romagna.camcom.it/it/opportunita/strumenti-per-limpresa-digitale/il-cassetto-digitale-dellimprenditore-nuove-funzionalita": "Impresa.Italia.it | Cassetto digitale dell’Imprenditore",
+      "https://www.romagna.camcom.it/it/opportunita/responsabilita-sociale-dimpresa": "Responsabilità sociale d'impresa",
+      "https://www.romagna.camcom.it/it/opportunita/progetti-e-iniziative-per-lo-sviluppo-del-territorio": "Progetti e iniziative per lo sviluppo del territorio",
+      "https://www.ciseonweb.it": "CISE - Centro per l'innovazione e lo sviluppo economico",
+      "https://www.romagna.camcom.it/it/transizione-digitale": "Transizione digitale"
+    }
+  },
+  "fesr-er": {
+    "nome": "FESR Emilia-Romagna — Bandi 2021-2027",
+    "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
+    "ultimo_check": "2026-06-11T07:33:52.014247+00:00",
+    "voci": {
+      "https://www.regione.emilia-romagna.it": "Regione Emilia-Romagna",
+      "https://fesr.regione.emilia-romagna.it/": "Programma regionale Fondo europeo di sviluppo regionale - Fesr",
+      "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento": "Opportunità di finanziamento",
+      "https://fesr.regione.emilia-romagna.it/servizi/sportello-imprese": "Sportello Imprese",
+      "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/bandi-priorita-1": "Ricerca, innovazione e competitività",
+      "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/bandi-priorita-2": "Sostenibilità, decarbonizzazione, biodiversità e resilienza",
+      "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/attrattivita-coesione-e-sviluppo-territoriale": "Attrattività coesione e sviluppo territoriale",
+      "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/investimenti-e-ricerca-per-le-tecnologie-strategiche-step": "Investimenti e ricerca per le tecnologie strategiche Step",
+      "Mailto:sportelloimprese@regione.emilia-romagna.it": "sportelloimprese@regione.emilia-romagna.it",
+      "http://www.regione.emilia-romagna.it/urp/": "www.regione.emilia-romagna.it/urp"
+    }
+  }
+}

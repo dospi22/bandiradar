@@ -1,0 +1,150 @@
+{
+  "timestamp": "2026-06-11T07:33:49.808619+00:00",
+  "data": "2026-06-11",
+  "ok": 4,
+  "errore": 9,
+  "stantio": 0,
+  "manuale": 2,
+  "totale": 15,
+  "fonti": [
+    {
+      "id": "invitalia",
+      "nome": "Invitalia — Incentivi imprese",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.invitalia.it/rss/news.xml",
+      "status": "ERRORE",
+      "dettaglio": "HTTP 404"
+    },
+    {
+      "id": "mimit",
+      "nome": "MIMIT — Comunicati stampa",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.mimit.gov.it/it/rss/comunicati",
+      "status": "ERRORE",
+      "dettaglio": "HTTP 404"
+    },
+    {
+      "id": "incentivi-gov",
+      "nome": "Incentivi.gov — Catalogo nazionale",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.incentivi.gov.it/it/catalogo",
+      "status": "MANUALE",
+      "dettaglio": "Fonte a check manuale (nessun RSS)"
+    },
+    {
+      "id": "bandi-gov",
+      "nome": "Bandi.gov.it — Portale nazionale",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://bandi.gov.it/rss/bandi.xml",
+      "status": "ERRORE",
+      "dettaglio": "HTTPSConnectionPool(host='bandi.gov.it', port=443): Max retries exceeded with url: /rss/bandi.xml (Caused by NameResolutionError(\"HTTPSConnection(host"
+    },
+    {
+      "id": "euknow",
+      "nome": "Euknow — Bandi UE e nazionali",
+      "livello": "Nazionale/UE",
+      "tipo": "RSS",
+      "url": "https://euknow.it/feed/",
+      "voci": 10,
+      "ultima_voce": "2026-06-05",
+      "status": "OK",
+      "dettaglio": "10 voci"
+    },
+    {
+      "id": "regione-er-imprese",
+      "nome": "Regione Emilia-Romagna — Finanziamenti imprese",
+      "livello": "Regionale ER",
+      "tipo": "RSS",
+      "url": "https://imprese.regione.emilia-romagna.it/rss",
+      "status": "ERRORE",
+      "dettaglio": "HTTP 404"
+    },
+    {
+      "id": "regione-er-sociale",
+      "nome": "Regione ER — Sociale e Terzo Settore",
+      "livello": "Regionale ER",
+      "tipo": "RSS",
+      "url": "https://sociale.regione.emilia-romagna.it/bandi",
+      "status": "MANUALE",
+      "dettaglio": "Fonte a check manuale (nessun RSS)"
+    },
+    {
+      "id": "art-er",
+      "nome": "ART-ER — Bandi e opportunità",
+      "livello": "Regionale ER",
+      "tipo": "RSS",
+      "url": "https://www.art-er.it/feed/",
+      "status": "ERRORE",
+      "dettaglio": "HTTP 404"
+    },
+    {
+      "id": "infobandi-csvnet",
+      "nome": "INFOBANDI CSVNET — Terzo Settore",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://infobandi.csvnet.it/feed",
+      "voci": 10,
+      "ultima_voce": "2026-06-02",
+      "status": "OK",
+      "dettaglio": "10 voci"
+    },
+    {
+      "id": "cciaa-romagna",
+      "nome": "CCIAA Romagna (Forlì-Cesena e Rimini) — Finanziamenti",
+      "livello": "Regionale ER",
+      "tipo": "Diff pagina",
+      "url": "https://www.romagna.camcom.it/it/opportunita/finanziamenti-1",
+      "status": "OK",
+      "dettaglio": "104 KB"
+    },
+    {
+      "id": "fesr-er",
+      "nome": "FESR Emilia-Romagna — Bandi 2021-2027",
+      "livello": "Regionale ER",
+      "tipo": "Diff pagina",
+      "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
+      "status": "OK",
+      "dettaglio": "660 KB"
+    },
+    {
+      "id": "simest",
+      "nome": "SIMEST — Comunicati (Fondo 394 e internazionalizzazione)",
+      "livello": "Nazionale",
+      "tipo": "Diff pagina",
+      "url": "https://www.simest.it/media/comunicati-stampa/",
+      "status": "ERRORE",
+      "dettaglio": "HTTP 403"
+    },
+    {
+      "id": "inail-isi",
+      "nome": "INAIL — Incentivi alle imprese (Bando ISI)",
+      "livello": "Nazionale",
+      "tipo": "Diff pagina",
+      "url": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/incentivi-alle-imprese.html",
+      "status": "ERRORE",
+      "dettaglio": "HTTPSConnectionPool(host='www.inail.it', port=443): Max retries exceeded with url: /portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanzi"
+    },
+    {
+      "id": "gse-imprese",
+      "nome": "GSE — Servizi e incentivi per le imprese",
+      "livello": "Nazionale",
+      "tipo": "Diff pagina",
+      "url": "https://www.gse.it/servizi-per-te/imprese",
+      "status": "ERRORE",
+      "dettaglio": "HTTP 403"
+    },
+    {
+      "id": "euipo-sme-fund",
+      "nome": "EUIPO — SME Fund (voucher marchi e brevetti)",
+      "livello": "Europeo",
+      "tipo": "Diff pagina",
+      "url": "https://www.euipo.europa.eu/it/sme-corner/sme-fund",
+      "status": "ERRORE",
+      "dettaglio": "HTTP 403"
+    }
+  ]
+}

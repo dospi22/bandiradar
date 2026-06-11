@@ -1,200 +1,117 @@
 {
   "codice_cliente": "FC-2017-RN",
-  "generatedAt": "2026-06-11T07:38:40.332345",
+  "generatedAt": "2026-06-11T08:11:30.669106Z",
   "aziende": [
     {
       "idAzienda": "az-1779394390646",
-      "generatedAt": "2026-06-11T07:38:40.332354",
+      "generatedAt": "2026-06-11T08:11:30.669106Z",
+      "atecoInterpretato": "ATECO 823003 → Sez. N, Div. 82.30 — Organizzazione di convegni, fiere ed eventi",
       "raccomandazioni": [
-        {
-          "id": "ER-2026-016",
-          "nome": "FESR ER — Bando integrativo PRECISEU: innovazione deep tech nel settore salute",
-          "rilevanza": "molto_alta",
-          "motivazione": "R&S — Contributo a fondo perduto — fino a 200k€ — al 70%%",
-          "motivazioneEstesa": "FESR ER — Bando integrativo PRECISEU: innovazione deep tech nel settore salute (Contributo a fondo perduto) fino a 200k€ con copertura al 70%%",
-          "scadenza": "2026-06-18",
-          "importoMax": 200000,
-          "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Media"
-        },
         {
           "id": "IT-2026-019",
           "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità — Premio",
-          "motivazioneEstesa": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione (Premio)",
+          "rilevanza": "alta",
+          "motivazione": "Premio eco-innovazione: Impresa Benefit con obiettivo economia circolare, scadenza 30/06",
+          "motivazioneEstesa": "Premio riconoscimento per eco-innovazione ed economia circolare. Perfetto per Impresa Benefit con obiettivo sostenibilità. Visibilità a Ecomondo Rimini nov 2026. Scadenza candidature 30 giugno.",
           "scadenza": "2026-06-30",
           "importoMax": null,
           "tipoAgev": "Premio",
           "priorita": "Media"
         },
         {
-          "id": "EU-2026-004",
-          "nome": "EIC Transition 2026",
-          "rilevanza": "molto_alta",
-          "motivazione": "R&S — Contributo a fondo perduto — fino a 2M€ — al 70%",
-          "motivazioneEstesa": "EIC Transition 2026 (Contributo a fondo perduto) fino a 2.5M€ con copertura al 70%",
-          "scadenza": "2026-09-16",
-          "importoMax": 2500000,
-          "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Media"
-        },
-        {
-          "id": "EU-2026-002",
-          "nome": "LIFE Programme 2026 — Standard Action Projects (Environment & Climate)",
-          "rilevanza": "molto_alta",
-          "motivazione": "Sostenibilità — Contributo a fondo perduto — fino a 5M€ — al 60%",
-          "motivazioneEstesa": "LIFE Programme 2026 — Standard Action Projects (Environment & Climate) (Contributo a fondo perduto) fino a 5.0M€ con copertura al 60%",
-          "scadenza": "2026-09-22",
-          "importoMax": 5000000,
-          "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Media"
-        },
-        {
           "id": "ER-2025-002",
           "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
-          "rilevanza": "molto_alta",
-          "motivazione": "R&S — Contributo a fondo perduto",
-          "motivazioneEstesa": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche (Contributo a fondo perduto)",
+          "rilevanza": "media",
+          "motivazione": "FESR ER per investimenti produttivi e R&S in tecnologie strategiche, fino a set 2026",
+          "motivazioneEstesa": "Bando regionale ER per investimenti in R&S e tecnologie strategiche. Rilevante se si prevedono investimenti in software/digitalizzazione. Richiede progetto di R&S strutturato.",
           "scadenza": "2026-09-30",
           "importoMax": null,
           "tipoAgev": "Contributo a fondo perduto",
           "priorita": "Alta"
         },
         {
-          "id": "EU-2026-001",
-          "nome": "EIC Accelerator — Fase Open",
-          "rilevanza": "molto_alta",
-          "motivazione": "R&S — Contributo a fondo perduto — fino a 2M€ — al 70%",
-          "motivazioneEstesa": "EIC Accelerator — Fase Open (Contributo a fondo perduto) fino a 2.5M€ con copertura al 70%",
-          "scadenza": "2026-11-04",
-          "importoMax": 2500000,
-          "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Alta"
-        },
-        {
           "id": "EU-2026-005",
           "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
-          "rilevanza": "molto_alta",
-          "motivazione": "Internazionalizzazione — Voucher — al 75%",
-          "motivazioneEstesa": "EUIPO SME Fund 2026 — Fondo per le PMI (Voucher) con copertura al 75%",
+          "rilevanza": "media",
+          "motivazione": "Voucher UE per protezione marchio/brevetti PMI, rimborso 75%, fino a dic 2026",
+          "motivazioneEstesa": "Fondo EUIPO per PMI: voucher fino al 75% per registrazione marchi e brevetti in UE. Utile per proteggere il brand. Sportello aperto fino a dicembre 2026.",
           "scadenza": "2026-12-04",
           "importoMax": null,
           "tipoAgev": "Voucher",
           "priorita": "Alta"
         },
         {
-          "id": "IT-2026-026",
-          "nome": "SIMEST — Misura Energia per la Competitività Internazionale 2026",
-          "rilevanza": "molto_alta",
-          "motivazione": "Internazionalizzazione — Finanziamento agevolato — al 30%",
-          "motivazioneEstesa": "SIMEST — Misura Energia per la Competitività Internazionale 2026 (Finanziamento agevolato) con copertura al 30%",
+          "id": "IT-2026-025",
+          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
+          "rilevanza": "media",
+          "motivazione": "Fondimpresa: formazione per nuove assunzioni, 100% copertura, richiede adesione",
+          "motivazioneEstesa": "Finanzia piani formativi per disoccupati con obbligo assunzione ≥90% a tempo indeterminato. Interessante per crescita strutturale. Requisito: adesione a Fondimpresa.",
           "scadenza": "2026-12-31",
-          "importoMax": null,
-          "tipoAgev": "Finanziamento agevolato",
-          "priorita": "Media"
-        },
-        {
-          "id": "IT-2026-004",
-          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
-          "rilevanza": "molto_alta",
-          "motivazione": "R&S — Voucher — fino a 8k€ — al 80%",
-          "motivazioneEstesa": "Voucher 3I — Brevetti+ (Investire in Innovazione) (Voucher) fino a 8k€ con copertura al 80%",
-          "scadenza": null,
-          "importoMax": 8000,
-          "tipoAgev": "Voucher",
-          "priorita": "Alta"
-        },
-        {
-          "id": "IT-2026-023",
-          "nome": "SIMEST — Misura Stati Uniti (internazionalizzazione USA)",
-          "rilevanza": "molto_alta",
-          "motivazione": "Internazionalizzazione — Finanziamento agevolato — al fino al 10% fondo perduto + finanziamento agevolato%",
-          "motivazioneEstesa": "SIMEST — Misura Stati Uniti (internazionalizzazione USA) (Finanziamento agevolato|Contributo a fondo perduto) con copertura al fino al 10% fondo perduto + finanziamento agevolato%",
-          "scadenza": null,
-          "importoMax": null,
-          "tipoAgev": "Finanziamento agevolato|Contributo a fondo perduto",
-          "priorita": "Alta"
-        },
-        {
-          "id": "ER-2026-015",
-          "nome": "FESR ER — Sostegno innovazione commercio vicinato, pubblici esercizi e attività polifunzionali 2026",
-          "rilevanza": "alta",
-          "motivazione": "Commercio — Contributo a fondo perduto — fino a 50k€ — al 40%",
-          "motivazioneEstesa": "FESR ER — Sostegno innovazione commercio vicinato, pubblici esercizi e attività polifunzionali 2026 (Contributo a fondo perduto) fino a 50k€ con copertura al 40%",
-          "scadenza": "2026-07-21",
-          "importoMax": 50000,
+          "importoMax": 150000,
           "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Alta"
-        },
-        {
-          "id": "IT-2026-012",
-          "nome": "Smart&Start Italia — Sostegno startup innovative ad alto contenuto tecnologico",
-          "rilevanza": "alta",
-          "motivazione": "Startup — Finanziamento agevolato — fino a 2M€ — al 80%",
-          "motivazioneEstesa": "Smart&Start Italia — Sostegno startup innovative ad alto contenuto tecnologico (Finanziamento agevolato) fino a 1.5M€ con copertura al 80%",
-          "scadenza": null,
-          "importoMax": 1500000,
-          "tipoAgev": "Finanziamento agevolato",
-          "priorita": "Alta"
+          "priorita": "Media"
         }
       ],
-      "in_arrivo": [],
+      "in_arrivo": [
+        {
+          "id": "ER-2026-002",
+          "nome": "FSE+ ER — Formazione continua per le imprese",
+          "motivazione": "Formazione continua ER fino al 70%. Monitorare riapertura sportello.",
+          "scadenza": ""
+        },
+        {
+          "id": "IT-2026-021",
+          "nome": "Benefit Competition MIMIT 2026 — Competizione Società Benefit",
+          "motivazione": "Competizione MIMIT per Società Benefit — FC è Impresa Benefit. Tappe 4-5 in arrivo.",
+          "scadenza": "2026-12-31"
+        }
+      ],
       "da_monitorare": [
         {
-          "id": "ER-2026-011",
-          "nome": "FESR ER — PreciseU Bando Integrativo Regionale 2026 (Deep Tech Salute)",
-          "rilevanza": "molto_alta",
-          "motivazione": "R&S — Contributo a fondo perduto — fino a 200k€ — al 70%",
-          "motivazioneEstesa": "FESR ER — PreciseU Bando Integrativo Regionale 2026 (Deep Tech Salute) (Contributo a fondo perduto) fino a 200k€ con copertura al 70%",
-          "scadenza": "2026-06-18",
-          "importoMax": 200000,
-          "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Alta"
-        },
-        {
-          "id": "EU-2026-003",
-          "nome": "Interreg Italy-Croatia 2026",
-          "rilevanza": "molto_alta",
-          "motivazione": "Internazionalizzazione — Contributo a fondo perduto — fino a 500k€ — al 85%",
-          "motivazioneEstesa": "Interreg Italy-Croatia 2026 (Contributo a fondo perduto) fino a 500k€ con copertura al 85%",
-          "scadenza": "2026-07-15",
-          "importoMax": 500000,
-          "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Media"
-        },
-        {
-          "id": "IT-2026-016",
-          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
-          "rilevanza": "molto_alta",
-          "motivazione": "Digitalizzazione — Agevolazione fiscale — al 180% fino a 2,5M; 100% tra 2,5-10M; 50% tra 10-20M (maxi-deduzione)%",
-          "motivazioneEstesa": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0 (Agevolazione fiscale) con copertura al 180% fino a 2,5M; 100% tra 2,5-10M; 50% tra 10-20M (maxi-deduzione)% — in linea con obiettivo: Digitalizzazione",
-          "scadenza": "2028-09-30",
-          "importoMax": null,
-          "tipoAgev": "Agevolazione fiscale",
-          "priorita": "Alta"
-        },
-        {
-          "id": "IT-2026-007",
-          "nome": "Voucher Cloud & Cybersecurity",
-          "rilevanza": "molto_alta",
-          "motivazione": "Digitalizzazione — Voucher — fino a 20k€ — al 50%",
-          "motivazioneEstesa": "Voucher Cloud & Cybersecurity (Voucher) fino a 20k€ con copertura al 50% — in linea con obiettivo: Digitalizzazione",
-          "scadenza": null,
-          "importoMax": 20000,
-          "tipoAgev": "Voucher",
-          "priorita": "Alta"
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "rilevanza": "alta",
+          "motivazione": "Credito imposta per investimenti digitali+energetici. Attendere apertura campagna 2026 su GSE.",
+          "scadenza": "",
+          "stato": "Sospeso — Alta priorità"
         },
         {
           "id": "ER-2026-003",
           "nome": "Bando internazionalizzazione ART-ER 2026",
-          "rilevanza": "molto_alta",
-          "motivazione": "Internazionalizzazione — Voucher — fino a 15k€ — al 80%",
-          "motivazioneEstesa": "Bando internazionalizzazione ART-ER 2026 (Voucher) fino a 15k€ con copertura al 80%",
-          "scadenza": null,
-          "importoMax": 15000,
-          "tipoAgev": "Voucher",
-          "priorita": "Alta"
+          "rilevanza": "media",
+          "motivazione": "Voucher internazionalizzazione ER. Rilevante solo se piani export.",
+          "scadenza": "",
+          "stato": "Sospeso — Alta priorità"
+        },
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "rilevanza": "alta",
+          "motivazione": "Voucher fino a 20k per cloud/cybersecurity, 50%. Attesa apertura sportello.",
+          "scadenza": "",
+          "stato": "Sospeso — Alta priorità"
+        },
+        {
+          "id": "IT-2026-016",
+          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
+          "rilevanza": "alta",
+          "motivazione": "Maxi-deduzione 180% per beni strumentali 4.0. Piattaforma GSE attesa giugno 2026.",
+          "scadenza": "2028-09-30",
+          "stato": "Sospeso — Alta priorità"
+        }
+      ],
+      "esclusi_per_ateco": [
+        {
+          "id": "ER-2026-005",
+          "nome": "Fondo EuReCa — Investimenti offerta turistica ricettiva ER",
+          "ateco_bando": "55",
+          "motivo": "ATECO azienda 823003 (div 82) non in 55"
+        },
+        {
+          "id": "ER-2026-015",
+          "nome": "FESR ER — Sostegno innovazione commercio vicinato, pubblici esercizi e attività polifunzionali 2026",
+          "ateco_bando": "47 (commercio al dettaglio), 56 (somministrazione), 93 (pubblico intrattenimento)",
+          "motivo": "ATECO azienda 823003 (div 82) non in 47 (commercio al dettaglio), 56 (somministrazione), 93 (pubblico intrattenimento)"
         }
       ]
     }

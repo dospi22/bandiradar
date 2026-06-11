@@ -1764,7 +1764,7 @@ async function loadData() {
     const resp = await fetch(CSV_URL, { cache: 'no-cache' });
     if (!resp.ok) throw new Error('CSV non trovato');
     const text = await resp.text();
-    const result = Papa.parse(text, { header: true, skipEmptyLines: true });
+    const result = Papa.parse(text, { header: true, skipEmptyLines: true, transformHeader: h => h.replace(/^﻿/, '') });
     init(result.data.map(csvRowToBando));
   } catch (e) {
     console.info('📋 Uso dati campione (CSV non trovato in locale)');
@@ -2210,7 +2210,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const resp = await fetch('data/pratiche.csv', { cache: 'no-cache' });
       if (!resp.ok) { praticheCaricate = false; return; }
       const text = await resp.text();
-      const result = Papa.parse(text, { header: true, skipEmptyLines: true });
+      const result = Papa.parse(text, { header: true, skipEmptyLines: true, transformHeader: h => h.replace(/^﻿/, '') });
       pratiche = (result.data || []).map(r => ({
         idPratica:    r['ID Pratica'] || r['ID pratica'] || r['IdPratica'] || '',
         idBando:      r['ID Bando']   || r['ID bando']   || r['IdBando']   || '',

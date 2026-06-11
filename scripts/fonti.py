@@ -26,19 +26,10 @@ Campi:
 # ─────────────────────────────────────────────────────────────────
 FONTI_RSS = [
     {
-        "id": "invitalia",
-        "nome": "Invitalia — Incentivi imprese",
-        "livello": "Nazionale",
-        "url_rss": "https://www.invitalia.it/rss/news.xml",
-        "url_web": "https://www.invitalia.it",
-        "metodo": "RSS",
-        "frequenza": "settimanale",
-    },
-    {
         "id": "mimit",
-        "nome": "MIMIT — Comunicati stampa",
+        "nome": "MIMIT — Aggiornamenti sugli incentivi",
         "livello": "Nazionale",
-        "url_rss": "https://www.mimit.gov.it/it/rss/comunicati",
+        "url_rss": "https://www.mimit.gov.it/index.php/it/incentivi-aggiornamenti?format=feed&type=rss",
         "url_web": "https://www.mimit.gov.it/it/incentivi",
         "metodo": "RSS",
         "frequenza": "settimanale",
@@ -54,11 +45,11 @@ FONTI_RSS = [
     },
     {
         "id": "bandi-gov",
-        "nome": "Bandi.gov.it — Portale nazionale",
+        "nome": "Bandi.gov.it — Portale nazionale (DOMINIO NON RAGGIUNGIBILE)",
         "livello": "Nazionale",
-        "url_rss": "https://bandi.gov.it/rss/bandi.xml",
+        "url_rss": "",  # dominio non risolvibile al 2026-06-11 -> probabilmente dismesso, valutare rimozione
         "url_web": "https://bandi.gov.it",
-        "metodo": "RSS",
+        "metodo": "Check manuale",
         "frequenza": "settimanale",
     },
     {
@@ -74,7 +65,7 @@ FONTI_RSS = [
         "id": "regione-er-imprese",
         "nome": "Regione Emilia-Romagna — Finanziamenti imprese",
         "livello": "Regionale ER",
-        "url_rss": "https://imprese.regione.emilia-romagna.it/rss",
+        "url_rss": "https://imprese.regione.emilia-romagna.it/RSS",
         "url_web": "https://imprese.regione.emilia-romagna.it/bandi",
         "metodo": "RSS",
         "frequenza": "settimanale",
@@ -92,9 +83,9 @@ FONTI_RSS = [
         "id": "art-er",
         "nome": "ART-ER — Bandi e opportunità",
         "livello": "Regionale ER",
-        "url_rss": "https://www.art-er.it/feed/",
+        "url_rss": "",  # feed morto (404, verificato 2026-06-11); vedi anche fonte er-startup
         "url_web": "https://www.art-er.it/bandi/",
-        "metodo": "RSS",
+        "metodo": "Check manuale",
         "frequenza": "settimanale",
     },
     {
@@ -106,6 +97,33 @@ FONTI_RSS = [
         "metodo": "RSS",
         "frequenza": "bisettimanale",
     },
+    {
+        "id": "apre",
+        "nome": "APRE — Punto di contatto nazionale Horizon Europe",
+        "livello": "Europeo",
+        "url_rss": "https://apre.it/feed/",
+        "url_web": "https://apre.it",
+        "metodo": "RSS",
+        "frequenza": "settimanale",
+    },
+    {
+        "id": "fondimpresa",
+        "nome": "Fondimpresa — Avvisi formazione finanziata",
+        "livello": "Nazionale",
+        "url_rss": "",  # sito renderizzato in JS -> check manuale
+        "url_web": "https://www.fondimpresa.it/fondimpresa-per-le-aziende/avvisi",
+        "metodo": "Check manuale",
+        "frequenza": "mensile",
+    },
+    {
+        "id": "gazzetta-ufficiale",
+        "nome": "Gazzetta Ufficiale — Serie Generale (nuovi decreti)",
+        "livello": "Nazionale",
+        "url_rss": "",  # nessun feed affidabile, pagina cambia ogni giorno -> check manuale
+        "url_web": "https://www.gazzettaufficiale.it",
+        "metodo": "Check manuale",
+        "frequenza": "settimanale",
+    },
 ]
 
 # ─────────────────────────────────────────────────────────────────
@@ -113,6 +131,15 @@ FONTI_RSS = [
 # (lette da monitor_pagine.py; URL verificati il 2026-06-10)
 # ─────────────────────────────────────────────────────────────────
 FONTI_PAGINE = [
+    {
+        "id": "invitalia",
+        "nome": "Invitalia — Incentivi e strumenti",
+        "livello": "Nazionale",
+        "url_web": "https://www.invitalia.it/per-le-imprese/incentivi-e-strumenti",
+        "metodo": "Diff pagina",
+        "frequenza": "settimanale",
+        "note": "Feed RSS dismesso (404) -> diff sul catalogo incentivi; URL verificato 2026-06-11",
+    },
     {
         "id": "cciaa-romagna",
         "nome": "CCIAA Romagna (Forlì-Cesena e Rimini) — Finanziamenti",
@@ -166,6 +193,15 @@ FONTI_PAGINE = [
         "metodo": "Diff pagina",
         "frequenza": "mensile",
         "note": "Finestra annuale: nel 2026 dal 2 feb al 4 dic",
+    },
+    {
+        "id": "er-startup",
+        "nome": "EmiliaRomagnaStartUp (ART-ER) — Bandi e call",
+        "livello": "Regionale ER",
+        "url_web": "https://www.emiliaromagnastartup.it/it/bandi",
+        "metodo": "Diff pagina",
+        "frequenza": "settimanale",
+        "note": "Bandi/call per startup e PMI innovative ER (ER2DIGIT, Start Cup, call internazionali) — URL verificato 2026-06-11",
     },
 ]
 

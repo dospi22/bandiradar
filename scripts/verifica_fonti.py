@@ -44,7 +44,7 @@ ROOT   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT = os.path.join(ROOT, 'data', 'fonti_status.json')
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; BandiRadar/1.0; monitoraggio bandi PMI)",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
     "Accept-Language": "it-IT,it;q=0.9,en;q=0.5",
 }
 TIMEOUT = 30

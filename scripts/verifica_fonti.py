@@ -14,6 +14,7 @@ Stati possibili per fonte:
   OK        funziona e ha contenuti recenti
   STANTIO   feed raggiungibile ma ultima voce > 90 giorni (sospetto feed morto)
   ERRORE    irraggiungibile / non parsabile / vuoto
+  BLOCCATO  HTTP 403 da protezione anti-bot (WAF): fonte probabilmente attiva, check dal browser
   MANUALE   fonte a check manuale (non testabile automaticamente)
 
 USO:
@@ -62,6 +63,10 @@ def check_rss(fonte: dict) -> dict:
         return rec
     try:
         resp = requests.get(fonte["url_rss"], headers=HEADERS, timeout=TIMEOUT)
+        if resp.status_code == 403:
+            rec.update(status="BLOCCATO",
+                       dettaglio="HTTP 403 — protezione anti-bot (WAF): la fonte è quasi certamente attiva, verificare dal browser")
+            return rec
         if resp.status_code != 200:
             rec.update(status="ERRORE", dettaglio=f"HTTP {resp.status_code}")
             return rec
@@ -100,7 +105,10 @@ def check_pagina(fonte: dict) -> dict:
     }
     try:
         resp = requests.get(fonte["url_web"], headers=HEADERS, timeout=TIMEOUT)
-        if resp.status_code != 200:
+        if resp.status_code == 403:
+            rec.update(status="BLOCCATO",
+                       dettaglio="HTTP 403 — protezione anti-bot (WAF): la pagina è quasi certamente attiva, verificare dal browser")
+        elif resp.status_code != 200:
             rec.update(status="ERRORE", dettaglio=f"HTTP {resp.status_code}")
         elif len(resp.text) < 500:
             rec.update(status="ERRORE", dettaglio=f"Contenuto sospetto ({len(resp.text)} byte)")
@@ -121,23 +129,25 @@ def main():
     for f in FONTI_RSS:
         rec = check_rss(f)
         risultati.append(rec)
-        icona = {"OK": "✅", "STANTIO": "🟡", "ERRORE": "❌", "MANUALE": "📋"}[rec["status"]]
+        icona = {"OK": "✅", "STANTIO": "🟡", "ERRORE": "❌", "MANUALE": "📋", "BLOCCATO": "🛡️"}.get(rec["status"], "❓")
         print(f"{icona} [{rec['status']:7}] {rec['nome']} — {rec['dettaglio']}")
     for f in FONTI_PAGINE:
         rec = check_pagina(f)
         risultati.append(rec)
-        icona = {"OK": "✅", "ERRORE": "❌"}.get(rec["status"], "❓")
+        icona = {"OK": "✅", "ERRORE": "❌", "BLOCCATO": "🛡️"}.get(rec["status"], "❓")
         print(f"{icona} [{rec['status']:7}] {rec['nome']} — {rec['dettaglio']}")
 
-    n_ok      = sum(1 for r in risultati if r["status"] == "OK")
-    n_errore  = sum(1 for r in risultati if r["status"] == "ERRORE")
-    n_stantio = sum(1 for r in risultati if r["status"] == "STANTIO")
-    n_manuale = sum(1 for r in risultati if r["status"] == "MANUALE")
+    n_ok       = sum(1 for r in risultati if r["status"] == "OK")
+    n_errore   = sum(1 for r in risultati if r["status"] == "ERRORE")
+    n_stantio  = sum(1 for r in risultati if r["status"] == "STANTIO")
+    n_manuale  = sum(1 for r in risultati if r["status"] == "MANUALE")
+    n_bloccato = sum(1 for r in risultati if r["status"] == "BLOCCATO")
 
     out = {
         "timestamp": datetime.now().astimezone().isoformat(),
         "data": datetime.now().strftime("%Y-%m-%d"),
         "ok": n_ok, "errore": n_errore, "stantio": n_stantio, "manuale": n_manuale,
+        "bloccato": n_bloccato,
         "totale": len(risultati),
         "fonti": risultati,
     }
@@ -145,7 +155,7 @@ def main():
         json.dump(out, f, ensure_ascii=False, indent=2)
 
     print("\n" + "=" * 65)
-    print(f"📊 {n_ok} OK | {n_stantio} stantii | {n_errore} in errore | {n_manuale} manuali")
+    print(f"📊 {n_ok} OK | {n_stantio} stantii | {n_errore} in errore | {n_bloccato} bloccate (WAF) | {n_manuale} manuali")
     print(f"💾 Salvato: data/fonti_status.json")
     print("=" * 65)
     if n_errore or n_stantio:

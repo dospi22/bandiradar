@@ -12,7 +12,7 @@
 // per forzare la rigenerazione del cache.
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'bandiradar-v2'; // v2: split index.html -> style.css + app.js
+const CACHE_VERSION = 'bandiradar-v3'; // v3 (2026-06-12): sezioni esclusi/temi-senza-match/diagnostica + badge ATECO da verificare
 const PRECACHE = [
   './',
   './index.html',

@@ -1,18 +1,18 @@
 {
   "codice_cliente": "FC-2017-RN",
-  "generatedAt": "2026-06-12T07:52:10.040979Z",
+  "generatedAt": "2026-06-12T08:48:02+00:00",
   "aziende": [
     {
       "idAzienda": "az-1779394390646",
-      "generatedAt": "2026-06-12T07:52:10.040979Z",
-      "atecoInterpretato": "ATECO 823003 → Sez. N, Div. 82.30 — Organizzazione di convegni, fiere ed eventi",
+      "generatedAt": "2026-06-12T08:48:02+00:00",
+      "atecoInterpretato": "ATECO 823003 → Sez. N, Div. 82.30 — Organizzazione di convegni, fiere ed eventi (servizi di supporto alle imprese). Nota: settore dichiarato 'Innovazione/software/benefit' diverge dal codice — possibile codice ATECO secondario.",
       "raccomandazioni": [
         {
           "id": "IT-2026-019",
           "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
-          "rilevanza": "alta",
-          "motivazione": "Premio eco-innovazione ed economia circolare, ideale per Impresa Benefit. Cerimonia a Ecomondo Rimini",
-          "motivazioneEstesa": "Premio per eco-innovazione, economia circolare e resilienza climatica. Perfetto per Impresa Benefit con obiettivo economia circolare. Cerimonia a Ecomondo Rimini (sede dell'azienda). Scadenza candidature 30 giugno 2026.",
+          "rilevanza": "molto_alta",
+          "motivazione": "Premio eco-innovazione/economia circolare a Ecomondo Rimini, ideale per Impresa Benefit",
+          "motivazioneEstesa": "Premio nazionale per eco-innovazione, economia circolare e resilienza climatica. Combinazione ottima: obiettivo Economia circolare + status Impresa Benefit + cerimonia a Ecomondo Rimini (stessa città). Candidatura entro 30 giugno 2026.",
           "scadenza": "2026-06-30",
           "importoMax": null,
           "tipoAgev": "Premio",
@@ -21,9 +21,9 @@
         {
           "id": "ER-2025-002",
           "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
-          "rilevanza": "media",
-          "motivazione": "FESR ER per investimenti produttivi e R&S in tecnologie strategiche. Rilevante per digitalizzazione",
-          "motivazioneEstesa": "Contributo regionale ER per investimenti in R&S e tecnologie strategiche. Potenzialmente utile per progetti di digitalizzazione e innovazione dei servizi. Richiede progetto strutturato. Scadenza 30 settembre 2026.",
+          "rilevanza": "alta",
+          "motivazione": "FESR ER per R&S e digitalizzazione tecnologie strategiche, regione Emilia-Romagna",
+          "motivazioneEstesa": "Contributo a fondo perduto FESR regionale per investimenti produttivi e R&S in tecnologie strategiche. Allineato a obiettivo Digitalizzazione e profilo software/innovazione. Bando regionale dedicato a imprese ER come Fattor Comune. Scadenza 30 settembre 2026.",
           "scadenza": "2026-09-30",
           "importoMax": null,
           "tipoAgev": "Contributo a fondo perduto",
@@ -32,37 +32,103 @@
         {
           "id": "EU-2026-005",
           "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
-          "rilevanza": "media",
-          "motivazione": "Voucher UE per protezione marchi/brevetti PMI, rimborso fino al 75%. Sportello fino a dic 2026",
-          "motivazioneEstesa": "Fondo EUIPO per PMI: voucher fino al 75% per registrazione marchi e brevetti in UE e internazionale. Utile per proteggere il brand. Sportello aperto fino a dicembre 2026.",
+          "rilevanza": "alta",
+          "motivazione": "Voucher UE per marchi/brevetti PMI, rimborso fino 75%. Utile per proteggere brand",
+          "motivazioneEstesa": "Fondo EUIPO per PMI: voucher fino al 75% per registrazione marchi e brevetti UE/internazionale. Utile per Fattor Comune per proteggere il marchio e i prodotti software. Sportello sequenziale aperto fino a dicembre 2026.",
           "scadenza": "2026-12-04",
           "importoMax": null,
           "tipoAgev": "Voucher",
           "priorita": "Alta"
         },
         {
-          "id": "IT-2026-025",
-          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
+          "id": "IT-2026-004",
+          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
+          "rilevanza": "alta",
+          "motivazione": "Voucher brevetti per microimprese, fino 8k. Iter snello, allineato a digitalizzazione",
+          "motivazioneEstesa": "Voucher Brevetti+ per microimprese e PMI: contributo a copertura spese consulenza brevettuale. Strumento snello per asset IP su software/servizi innovativi. Compatibile con profilo microimpresa Fattor Comune.",
+          "scadenza": "",
+          "importoMax": 8000,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-002",
+          "nome": "LIFE Programme 2026 — Standard Action Projects (Environment & Climate)",
           "rilevanza": "media",
-          "motivazione": "Fondimpresa: formazione per assunzione dipendenti, copertura 100%. Richiede adesione a Fondimpresa",
-          "motivazioneEstesa": "Finanzia piani formativi per disoccupati/inoccupati con obbligo assunzione ≥90% a tempo indeterminato. Interessante per crescita strutturale. Prerequisiti: adesione Fondimpresa e piano assunzionale.",
-          "scadenza": "2026-12-31",
-          "importoMax": 150000,
+          "motivazione": "Programma UE LIFE Ambiente/Clima per progetti sostenibilità. Richiede consorzio strutturato",
+          "motivazioneEstesa": "LIFE Programme UE per progetti standard su ambiente e clima. Bando sfidante che richiede partenariato europeo e progettualità solida. Potenziale fit con obiettivo Economia circolare e attività con scuole/comuni, ma serve struttura adeguata.",
+          "scadenza": "2026-09-22",
+          "importoMax": 5000000,
           "tipoAgev": "Contributo a fondo perduto",
           "priorita": "Media"
+        },
+        {
+          "id": "EU-2026-001",
+          "nome": "EIC Accelerator — Fase Open",
+          "rilevanza": "media",
+          "motivazione": "EIC Accelerator per PMI/startup innovative. Sfidante, richiede tecnologia deep tech",
+          "motivazioneEstesa": "EIC Accelerator UE per PMI con tecnologie innovative ad alto impatto. Bando estremamente competitivo, più adatto a startup deep-tech. Da considerare solo se Fattor Comune ha un prodotto tech scalabile a livello UE. Scadenza 4 novembre 2026.",
+          "scadenza": "2026-11-04",
+          "importoMax": 2500000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-004",
+          "nome": "EIC Transition 2026",
+          "rilevanza": "media",
+          "motivazione": "EIC Transition per maturazione tecnologie da TRL 4-6 a 7-8. Richiede base R&D solida",
+          "motivazioneEstesa": "EIC Transition UE per portare tecnologie dalla validazione laboratorio al mercato. Fit possibile se l'attività software ha base R&S identificabile. Bando complesso, valutare consorzio. Scadenza 16 settembre 2026.",
+          "scadenza": "2026-09-16",
+          "importoMax": 2500000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
+        },
+        {
+          "id": "IT-2026-023",
+          "nome": "SIMEST — Misura Stati Uniti (internazionalizzazione USA)",
+          "rilevanza": "media",
+          "motivazione": "SIMEST USA per internazionalizzazione. FC opera 100% Italia: utile solo se espansione USA pianificata",
+          "motivazioneEstesa": "Strumento SIMEST/MAECI per supportare investimenti commerciali in USA. Fattor Comune oggi opera solo in Italia, quindi rilevanza condizionata a un eventuale piano di espansione internazionale. Da valutare se non in roadmap.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Finanziamento agevolato|Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-022",
+          "nome": "Autoimpiego Centro-Nord — Invitalia (under 35)",
+          "rilevanza": "media",
+          "motivazione": "Autoimpiego under 35 Invitalia. Utile solo per nuove imprese collegate o liberi prof. under 35",
+          "motivazioneEstesa": "Bando Invitalia per autoimpiego under 35 nel Centro-Nord. Fattor Comune è del 2018 e non è nuova iniziativa, ma può essere strumento per collaboratori P.IVA giovani che vogliono costituirsi. Da valutare in funzione del piano risorse.",
+          "scadenza": "",
+          "importoMax": 200000,
+          "tipoAgev": "Contributo a fondo perduto|Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-012",
+          "nome": "Smart&Start Italia — Sostegno startup innovative ad alto contenuto tecnologico",
+          "rilevanza": "media",
+          "motivazione": "Smart&Start per startup innovative. Verificare iscrizione FC al Registro startup innovative",
+          "motivazioneEstesa": "Smart&Start Italia per startup innovative ad alto contenuto tecnologico. Fattor Comune (fondata 2018, Srl) può accedere solo se iscritta alla sezione speciale startup innovative del Registro Imprese. Da verificare lo status formale.",
+          "scadenza": "",
+          "importoMax": 1500000,
+          "tipoAgev": "Finanziamento agevolato",
+          "priorita": "Alta"
         }
       ],
       "in_arrivo": [
         {
           "id": "ER-2026-002",
           "nome": "FSE+ ER — Formazione continua per le imprese",
-          "motivazione": "Formazione continua ER fino al 70%. Monitorare riapertura sportello.",
+          "motivazione": "Formazione continua ER. Sospeso in attesa riapertura sportello: monitorare aggiornamenti FSE+",
           "scadenza": ""
         },
         {
           "id": "IT-2026-021",
           "nome": "Benefit Competition MIMIT 2026 — Competizione Società Benefit",
-          "motivazione": "Competizione MIMIT per Società Benefit — azienda è Impresa Benefit. Tappe 4-5 in arrivo.",
+          "motivazione": "Riservato a Società Benefit — FC ha lo status. Monitorare prossime tappe",
           "scadenza": "2026-12-31"
         }
       ],
@@ -71,7 +137,7 @@
           "id": "IT-2026-002",
           "nome": "Credito d'imposta Transizione 5.0",
           "rilevanza": "alta",
-          "motivazione": "Credito imposta per investimenti digitali+energetici. Attendere apertura campagna 2026 su GSE.",
+          "motivazione": "Credito imposta Transizione 5.0 (digital+energy). Attendere apertura GSE 2026",
           "scadenza": "",
           "stato": "Sospeso — Alta priorità"
         },
@@ -79,16 +145,32 @@
           "id": "IT-2026-007",
           "nome": "Voucher Cloud & Cybersecurity",
           "rilevanza": "alta",
-          "motivazione": "Voucher fino a 20k per cloud/cybersecurity, 50%. Attesa apertura sportello.",
+          "motivazione": "Voucher Cloud & Cybersecurity per PMI. Attesa apertura sportello",
           "scadenza": "",
           "stato": "Sospeso — Alta priorità"
         },
         {
-          "id": "IT-2026-016",
-          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
+          "id": "ER-2026-008",
+          "nome": "FESR ER — Contributi R&S mediante inserimento di nuovi talenti qualificati",
           "rilevanza": "alta",
-          "motivazione": "Maxi-deduzione 180% per beni strumentali 4.0. Piattaforma GSE attesa giugno 2026.",
-          "scadenza": "2028-09-30",
+          "motivazione": "FESR ER R&S con nuovi talenti qualificati. Sospeso in attesa nuova edizione",
+          "scadenza": "2026-05-18",
+          "stato": "Sospeso — Alta priorità"
+        },
+        {
+          "id": "IT-2026-014",
+          "nome": "Fondo Impresa Femminile — Startup e Sviluppo imprese a prevalenza femminile",
+          "rilevanza": "alta",
+          "motivazione": "Fondo Impresa Femminile. Rilevante se compagine FC ha prevalenza femminile",
+          "scadenza": "",
+          "stato": "Sospeso — Alta priorità"
+        },
+        {
+          "id": "ER-2026-014",
+          "nome": "FESR ER — Certificazioni aziendali per competitività 2026 (nuova edizione)",
+          "rilevanza": "alta",
+          "motivazione": "FESR ER Certificazioni aziendali (es. ISO). Sospeso in attesa nuova edizione",
+          "scadenza": "2026-05-15",
           "stato": "Sospeso — Alta priorità"
         }
       ],
@@ -97,37 +179,31 @@
           "id": "ER-2026-015",
           "nome": "FESR ER — Sostegno innovazione commercio vicinato 2026",
           "ateco_bando": "47, 56, 93",
-          "motivo": "ATECO azienda 823003 (div 82) non in 47, 56, 93"
-        },
-        {
-          "id": "ER-2026-004",
-          "nome": "POR-FESR ER — Sostenibilità energetica imprese 2026",
-          "ateco_bando": "35|43|46|47|62",
-          "motivo": "ATECO azienda 823003 (div 82) non in 35, 43, 46, 47, 62"
-        },
-        {
-          "id": "IT-2026-011",
-          "nome": "Credito d'imposta Agricoltura 4.0 2026",
-          "ateco_bando": "A01|A02|A03",
-          "motivo": "ATECO azienda sez. N (servizi supporto imprese) non in sez. A (agricoltura)"
-        },
-        {
-          "id": "ER-2026-016",
-          "nome": "FESR ER — Bando integrativo PRECISEU: deep tech salute",
-          "ateco_bando": "tutti (con focus salute/deep tech)",
-          "motivo": "Settore azienda (eventi/project management) non compatibile con deep tech salute"
-        },
-        {
-          "id": "ER-2026-012",
-          "nome": "FESR ER — STEP 2026 II Bando (Deep Tech)",
-          "ateco_bando": "Deep tech, tecnologie pulite, biotecnologie",
-          "motivo": "ATECO 823003 (organizzazione eventi) non rientra in deep tech/biotech"
+          "motivo": "ATECO 823003 (div 82, servizi) non rientra in commercio dettaglio/somministrazione/intrattenimento"
         },
         {
           "id": "ER-2026-005",
           "nome": "Fondo EuReCa — Investimenti turismo ricettivo ER",
           "ateco_bando": "55",
-          "motivo": "ATECO azienda 823003 (div 82) non in 55 (alloggio turistico)"
+          "motivo": "ATECO 823003 non in 55 (alloggio turistico) — FC non gestisce strutture ricettive"
+        },
+        {
+          "id": "ER-2026-016",
+          "nome": "FESR ER — Bando integrativo PRECISEU deep tech salute",
+          "ateco_bando": "tutti (con focus salute/deep tech)",
+          "motivo": "Settore FC (eventi/project management/software benefit) non rientra in deep tech salute"
+        },
+        {
+          "id": "IT-2026-025",
+          "nome": "Fondimpresa — Avviso 1/2026",
+          "ateco_bando": "tutti (aziende aderenti Fondimpresa)",
+          "motivo": "FC ha solo collaboratori P.IVA: nessun dipendente per aderire a Fondimpresa"
+        },
+        {
+          "id": "IT-2026-026",
+          "nome": "SIMEST — Misura Energia Competitività Internazionale",
+          "ateco_bando": "tutti (escluse attività non esportatrici)",
+          "motivo": "FC opera 100% in Italia: non rientra tra le aziende esportatrici"
         }
       ]
     }

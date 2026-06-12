@@ -43,15 +43,7 @@ FONTI_RSS = [
         "metodo": "Check manuale",
         "frequenza": "settimanale",
     },
-    {
-        "id": "bandi-gov",
-        "nome": "Bandi.gov.it — Portale nazionale (DOMINIO NON RAGGIUNGIBILE)",
-        "livello": "Nazionale",
-        "url_rss": "",  # dominio non risolvibile al 2026-06-11 -> probabilmente dismesso, valutare rimozione
-        "url_web": "https://bandi.gov.it",
-        "metodo": "Check manuale",
-        "frequenza": "settimanale",
-    },
+    # bandi.gov.it RIMOSSO il 2026-06-12: dominio non più risolvibile (dismesso).
     {
         "id": "euknow",
         "nome": "Euknow — Bandi UE e nazionali",
@@ -124,6 +116,46 @@ FONTI_RSS = [
         "metodo": "Check manuale",
         "frequenza": "settimanale",
     },
+    {
+        "id": "simest",
+        "nome": "SIMEST — Comunicati (Fondo 394 e internazionalizzazione)",
+        "livello": "Nazionale",
+        "url_rss": "https://www.simest.it/media/comunicati-stampa/feed",  # feed WordPress verificato 2026-06-12
+        "url_web": "https://www.simest.it/media/comunicati-stampa/",
+        "metodo": "RSS",
+        "frequenza": "settimanale",
+        "note": "Aperture/chiusure Fondo 394 annunciate qui. Il sito può rispondere 403 (WAF) da GitHub Actions: in tal caso lo stato atteso è BLOCCATO, non rotto.",
+    },
+    {
+        "id": "inail-isi",
+        "nome": "INAIL — Incentivi alle imprese (Bando ISI)",
+        "livello": "Nazionale",
+        "url_rss": "",  # portale interamente JS dal restyling: HTML vuoto via fetch (verificato 2026-06-12) -> check manuale
+        "url_web": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/incentivi-alle-imprese.html",
+        "metodo": "Check manuale",
+        "frequenza": "mensile",
+        "note": "Bando ISI annuale. Per la ricerca automatica usare Google: \"bando ISI\" site:inail.it (già nella skill di ricerca).",
+    },
+    {
+        "id": "agricoltura-er",
+        "nome": "Regione ER — Agricoltura (PSR/CSR, agroalimentare)",
+        "livello": "Regionale ER",
+        "url_rss": "https://agricoltura.regione.emilia-romagna.it/RSS",  # feed Plone verificato 2026-06-12
+        "url_web": "https://agricoltura.regione.emilia-romagna.it/bandi",
+        "metodo": "RSS",
+        "frequenza": "settimanale",
+        "note": "Bandi Sviluppo Rurale CSR 2023-2027, agroalimentare, agriturismo. Il feed copre tutto il sito: filtrare con le keywords.",
+    },
+    {
+        "id": "ministero-turismo",
+        "nome": "Ministero del Turismo — Avvisi e incentivi",
+        "livello": "Nazionale",
+        "url_rss": "https://www.ministeroturismo.gov.it/feed/",  # feed WordPress verificato 2026-06-12
+        "url_web": "https://www.ministeroturismo.gov.it/",
+        "metodo": "RSS",
+        "frequenza": "settimanale",
+        "note": "Avvisi e incentivi turismo/HORECA (clienti Livello 2). Il feed copre tutte le news: filtrare con le keywords.",
+    },
 ]
 
 # ─────────────────────────────────────────────────────────────────
@@ -158,24 +190,8 @@ FONTI_PAGINE = [
         "frequenza": "settimanale",
         "note": "Digitalizzazione, R&S, internazionalizzazione, energia",
     },
-    {
-        "id": "simest",
-        "nome": "SIMEST — Comunicati (Fondo 394 e internazionalizzazione)",
-        "livello": "Nazionale",
-        "url_web": "https://www.simest.it/media/comunicati-stampa/",
-        "metodo": "Diff pagina",
-        "frequenza": "settimanale",
-        "note": "Aperture/chiusure Fondo 394 annunciate qui",
-    },
-    {
-        "id": "inail-isi",
-        "nome": "INAIL — Incentivi alle imprese (Bando ISI)",
-        "livello": "Nazionale",
-        "url_web": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/incentivi-alle-imprese.html",
-        "metodo": "Diff pagina",
-        "frequenza": "mensile",
-        "note": "Bando ISI annuale, sicurezza sul lavoro",
-    },
+    # simest spostato in FONTI_RSS il 2026-06-12 (trovato feed WordPress nativo).
+    # inail-isi spostato in FONTI_RSS come Check manuale il 2026-06-12 (portale JS, diff impossibile).
     {
         "id": "gse-imprese",
         "nome": "GSE — Servizi e incentivi per le imprese",
@@ -183,7 +199,7 @@ FONTI_PAGINE = [
         "url_web": "https://www.gse.it/servizi-per-te/imprese",
         "metodo": "Diff pagina",
         "frequenza": "mensile",
-        "note": "Incentivi energia (FER, CER, efficienza)",
+        "note": "Incentivi energia (FER, CER, efficienza). Può rispondere 403 (WAF anti-bot) da GitHub Actions: pagina raggiungibile da browser, stato atteso BLOCCATO.",
     },
     {
         "id": "euipo-sme-fund",
@@ -192,7 +208,25 @@ FONTI_PAGINE = [
         "url_web": "https://www.euipo.europa.eu/it/sme-corner/sme-fund",
         "metodo": "Diff pagina",
         "frequenza": "mensile",
-        "note": "Finestra annuale: nel 2026 dal 2 feb al 4 dic",
+        "note": "Finestra 2026: 2 feb - 4 dic. Può rispondere 403 (WAF anti-bot) da GitHub Actions: pagina raggiungibile da browser, stato atteso BLOCCATO.",
+    },
+    {
+        "id": "eber-artigianato",
+        "nome": "EBER — Ente Bilaterale Artigianato ER (sviluppo imprenditoriale)",
+        "livello": "Regionale ER",
+        "url_web": "https://www.eber.org/Attivita/sviluppo-imprenditoriale",
+        "metodo": "Diff pagina",
+        "frequenza": "mensile",
+        "note": "Contributi e attività per imprese artigiane ER (clienti Livello 2 artigianato). Sito server-side, verificato 2026-06-12.",
+    },
+    {
+        "id": "artigiancredito",
+        "nome": "Artigiancredito — News (Fondo Starter, Energia, EuReCa, Microcredito ER)",
+        "livello": "Regionale ER",
+        "url_web": "https://www.artigiancredito.it/it-it/news",
+        "metodo": "Diff pagina",
+        "frequenza": "settimanale",
+        "note": "Gestore dei fondi multiscopo Regione ER: riaperture Fondo Starter/Energia/EuReCa annunciate qui. Verificato 2026-06-12.",
     },
     {
         "id": "er-startup",
@@ -214,6 +248,10 @@ KEYWORDS_POSITIVI = [
     "mimit", "invitalia", "simest", "regione er", "por-fesr", "fse",
     "horizon", "eic", "life", "interreg", "pnrr", "fesr", "sme fund",
     "doppia transizione", "fiere", "isi",
+    # settori clienti Livello 2 (aggiunti 2026-06-12)
+    "turismo", "horeca", "ristorazione", "ricettiv", "agriturismo",
+    "artigian", "agroalimentare", "psr", "csr", "commercio",
+    "fondo starter", "fondo energia", "eureca", "microcredito",
 ]
 
 KEYWORDS_NEGATIVI = [

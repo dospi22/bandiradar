@@ -1317,10 +1317,13 @@ function renderRaccomandazioni(az) {
           data-tipo-scad="${escAttr(b ? (b.tipoScadenza||'') : '')}">
           <div class="racc-item-top">
             <div class="racc-item-nome">${escHtml(item.nome || item.id)}</div>
-            ${mancante
-              ? `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(248,113,113,0.15);color:#fca5a5;border:1px solid rgba(248,113,113,0.25);font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap">⚠ ID non nel CSV</span>`
-              : `<span class="racc-badge ${relClass}">${relLabel}</span>`
-            }
+            <div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center">
+              ${item.atecoDaVerificare ? `<span class="racc-badge ateco-verifica" title="Match per descrizione/tag impliciti ma ATECO formale non corrisponde — verificare ATECO secondario o integrazione visura">⚠️ ATECO da verificare</span>` : ''}
+              ${mancante
+                ? `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(248,113,113,0.15);color:#fca5a5;border:1px solid rgba(248,113,113,0.25);font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;white-space:nowrap">⚠ ID non nel CSV</span>`
+                : `<span class="racc-badge ${relClass}">${relLabel}</span>`
+              }
+            </div>
           </div>
           ${mancante
             ? `<div style="font-size:11px;color:#fca5a5;margin-bottom:4px;font-family:var(--font-mono,monospace)">${escHtml(item.id)}</div>
@@ -1372,6 +1375,111 @@ function renderRaccomandazioni(az) {
             <div style="font-size:11px;color:var(--text-muted);margin-top:4px">${escHtml(item.nota || '')}</div>
           </div>`;
         });
+        html += `</div>`;
+      }
+
+      // ── Sezione Temi cercati senza match (buchi fonti) ──────────────────────
+      // Opzionale: prodotta dalla skill aggiornata 2026-06-12. Retrocompatibile.
+      const temiSenza = racc.temi_cercati_senza_match || [];
+      if (temiSenza.length > 0) {
+        html += `<div class="temi-senza-match">
+          <div class="temi-senza-match-header">
+            <span>🔎 Temi cercati senza match (${temiSenza.length})</span>
+            <span class="temi-senza-match-hint">possibili buchi di copertura fonti</span>
+          </div>
+          <div class="temi-senza-match-body">`;
+        temiSenza.forEach(t => {
+          html += `<div class="tema-card">
+            <div class="tema-titolo">${escHtml(t.tema || '')}</div>
+            ${t.motivo_interesse ? `<div class="tema-riga"><strong>Perché interessa:</strong> ${escHtml(t.motivo_interesse)}</div>` : ''}
+            ${t.esito ? `<div class="tema-riga"><strong>Esito:</strong> ${escHtml(t.esito)}</div>` : ''}
+            ${t.suggerimento_fonti ? `<div class="tema-riga tema-suggerimento"><strong>💡 Fonti da valutare:</strong> ${escHtml(t.suggerimento_fonti)}</div>` : ''}
+          </div>`;
+        });
+        html += `</div></div>`;
+      }
+
+      // ── Sezione Bandi esclusi (espandibile) ─────────────────────────────────
+      // Opzionale: prodotta dalla skill aggiornata 2026-06-12. Retrocompatibile.
+      // Supporta anche il vecchio formato esclusi_per_ateco come fallback.
+      let esclusi = racc.esclusi || [];
+      const esclusiAtecoLegacy = racc.aziende_esclusi_legacy || [];
+      // Fallback legacy: alcune raccomandazioni vecchie hanno esclusi_per_ateco
+      // direttamente sotto azienda (gestiamo entrambi i formati)
+      if (esclusi.length === 0 && Array.isArray(racc.esclusi_per_ateco) && racc.esclusi_per_ateco.length > 0) {
+        esclusi = racc.esclusi_per_ateco.map(e => ({
+          id: e.id, nome: e.nome,
+          categoria: 'ATECO',
+          motivo: e.motivo || (e.ateco_bando ? `ATECO bando: ${e.ateco_bando}` : '')
+        }));
+      }
+      if (esclusi.length > 0) {
+        // Raggruppa per categoria
+        const grouped = {};
+        esclusi.forEach(e => {
+          const cat = e.categoria || 'altro';
+          (grouped[cat] = grouped[cat] || []).push(e);
+        });
+        const catOrder = ['ATECO','tema','anzianita_azienda','dimensione','geografia','dipendenti','compagine','link_rotto','scaduto','altro'];
+        const catLabels = {
+          'ATECO': '🏷️ ATECO',
+          'tema': '🎯 Tema non compatibile',
+          'anzianita_azienda': '📅 Anzianità azienda',
+          'dimensione': '📏 Dimensione',
+          'geografia': '📍 Geografia',
+          'dipendenti': '👥 Dipendenti richiesti',
+          'compagine': '👤 Compagine (femm./giov.)',
+          'link_rotto': '🔗 Link rotto',
+          'scaduto': '⏰ Scaduto',
+          'altro': '❓ Altro'
+        };
+        html += `<details class="esclusi-section">
+          <summary class="esclusi-summary">
+            <span>🚫 Bandi esclusi (${esclusi.length})</span>
+            <span class="esclusi-hint">clicca per vedere cosa è stato valutato e scartato</span>
+          </summary>
+          <div class="esclusi-body">`;
+        catOrder.forEach(cat => {
+          if (!grouped[cat]) return;
+          html += `<div class="esclusi-categoria">
+            <div class="esclusi-categoria-label">${catLabels[cat] || cat} <span class="esclusi-cat-count">(${grouped[cat].length})</span></div>`;
+          grouped[cat].forEach(e => {
+            html += `<div class="escluso-item">
+              <div class="escluso-nome">${escHtml(e.nome || e.id || '')} <span class="escluso-id">${escHtml(e.id || '')}</span></div>
+              ${e.motivo ? `<div class="escluso-motivo">${escHtml(e.motivo)}</div>` : ''}
+            </div>`;
+          });
+          html += `</div>`;
+        });
+        // Categorie non previste
+        Object.keys(grouped).forEach(cat => {
+          if (catOrder.includes(cat)) return;
+          html += `<div class="esclusi-categoria">
+            <div class="esclusi-categoria-label">${escHtml(cat)} <span class="esclusi-cat-count">(${grouped[cat].length})</span></div>`;
+          grouped[cat].forEach(e => {
+            html += `<div class="escluso-item">
+              <div class="escluso-nome">${escHtml(e.nome || e.id || '')} <span class="escluso-id">${escHtml(e.id || '')}</span></div>
+              ${e.motivo ? `<div class="escluso-motivo">${escHtml(e.motivo)}</div>` : ''}
+            </div>`;
+          });
+          html += `</div>`;
+        });
+        html += `</div></details>`;
+      }
+
+      // ── Footer diagnostico: ATECO interpretato + Tag impliciti ──────────────
+      // Opzionale: prodotti dalla skill aggiornata 2026-06-12. Retrocompatibile.
+      const atecoInterp = racc.atecoInterpretato || '';
+      const tagImpl = Array.isArray(racc.tagImpliciti) ? racc.tagImpliciti : [];
+      if (atecoInterp || tagImpl.length > 0) {
+        html += `<div class="diagnostica-agente">
+          <div class="diagnostica-label">🤖 Come l'agente ha interpretato il profilo</div>`;
+        if (atecoInterp) {
+          html += `<div class="diagnostica-riga"><strong>ATECO:</strong> ${escHtml(atecoInterp)}</div>`;
+        }
+        if (tagImpl.length > 0) {
+          html += `<div class="diagnostica-riga"><strong>Tag impliciti estratti:</strong> ${tagImpl.map(t => `<span class="tag-chip">${escHtml(t)}</span>`).join(' ')}</div>`;
+        }
         html += `</div>`;
       }
     }

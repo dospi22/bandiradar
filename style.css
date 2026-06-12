@@ -934,6 +934,137 @@
     .racc-empty-icon { font-size: 42px; margin-bottom: 12px; }
     .racc-empty h3 { font-size: 16px; color: var(--text); margin-bottom: 8px; font-family: var(--font-display); }
 
+    /* ══════════ Badge "ATECO da verificare" (skill 2026-06-12) ══════════ */
+    .racc-badge.ateco-verifica {
+      background: rgba(251,146,60,0.15);
+      color: #fdba74;
+      border-color: rgba(251,146,60,0.3);
+      cursor: help;
+    }
+
+    /* ══════════ Sezione "Temi cercati senza match" ══════════ */
+    .temi-senza-match {
+      margin-top: 18px;
+      padding: 12px 14px;
+      background: rgba(56,189,248,0.05);
+      border: 1px solid rgba(56,189,248,0.18);
+      border-radius: var(--radius-sm);
+    }
+    .temi-senza-match-header {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      color: #7dd3fc; margin-bottom: 10px;
+    }
+    .temi-senza-match-hint {
+      font-size: 10px; font-weight: 500; text-transform: none; letter-spacing: 0;
+      color: var(--text-muted); font-style: italic;
+    }
+    .tema-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px; padding: 10px 12px; margin-bottom: 8px;
+    }
+    .tema-card:last-child { margin-bottom: 0; }
+    .tema-titolo {
+      font-size: 13px; font-weight: 700; color: var(--text);
+      font-family: var(--font-display); margin-bottom: 6px;
+    }
+    .tema-riga {
+      font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 3px;
+    }
+    .tema-riga strong { color: #cbd5e1; font-weight: 600; }
+    .tema-suggerimento {
+      margin-top: 6px; padding: 6px 8px;
+      background: rgba(52,211,153,0.08);
+      border-left: 2px solid rgba(52,211,153,0.4);
+      border-radius: 4px;
+    }
+    .tema-suggerimento strong { color: #6ee7b7; }
+
+    /* ══════════ Sezione "Bandi esclusi" espandibile ══════════ */
+    .esclusi-section {
+      margin-top: 18px;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.015);
+    }
+    .esclusi-summary {
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text-muted);
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+      user-select: none;
+    }
+    .esclusi-summary::-webkit-details-marker { display: none; }
+    .esclusi-summary:hover { color: var(--text); }
+    .esclusi-section[open] .esclusi-summary {
+      border-bottom: 1px solid var(--border);
+    }
+    .esclusi-hint {
+      font-size: 10px; font-weight: 500; text-transform: none; letter-spacing: 0;
+      color: var(--text-muted); font-style: italic; opacity: 0.7;
+    }
+    .esclusi-body { padding: 12px 14px; }
+    .esclusi-categoria { margin-bottom: 14px; }
+    .esclusi-categoria:last-child { margin-bottom: 0; }
+    .esclusi-categoria-label {
+      font-size: 11px; font-weight: 700;
+      color: #cbd5e1; margin-bottom: 6px;
+      text-transform: uppercase; letter-spacing: 0.4px;
+    }
+    .esclusi-cat-count { color: var(--text-muted); font-weight: 500; }
+    .escluso-item {
+      padding: 6px 10px; margin-bottom: 4px;
+      background: rgba(255,255,255,0.02);
+      border-left: 2px solid rgba(255,255,255,0.08);
+      border-radius: 3px;
+      font-size: 12px; line-height: 1.4;
+    }
+    .escluso-item:last-child { margin-bottom: 0; }
+    .escluso-nome {
+      font-weight: 600; color: var(--text); font-size: 12px;
+    }
+    .escluso-id {
+      font-family: var(--font-mono, monospace);
+      font-size: 10px; color: var(--text-muted); font-weight: 500;
+      margin-left: 4px;
+    }
+    .escluso-motivo {
+      font-size: 11px; color: var(--text-muted); font-style: italic;
+      margin-top: 3px; line-height: 1.45;
+    }
+
+    /* ══════════ Diagnostica agente (ATECO interpretato + tag impliciti) ══════════ */
+    .diagnostica-agente {
+      margin-top: 16px;
+      padding: 10px 14px;
+      background: rgba(129,140,248,0.04);
+      border: 1px dashed rgba(129,140,248,0.2);
+      border-radius: var(--radius-sm);
+    }
+    .diagnostica-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      color: #a5b4fc; margin-bottom: 6px;
+    }
+    .diagnostica-riga {
+      font-size: 12px; color: var(--text-muted); line-height: 1.6;
+      margin-bottom: 3px;
+    }
+    .diagnostica-riga strong { color: #cbd5e1; font-weight: 600; }
+    .tag-chip {
+      display: inline-block;
+      font-size: 11px; font-weight: 600;
+      background: rgba(129,140,248,0.12);
+      color: #c7d2fe;
+      border: 1px solid rgba(129,140,248,0.25);
+      padding: 1px 7px; border-radius: 8px;
+      margin: 2px 2px 2px 0;
+      font-family: var(--font-mono, monospace);
+    }
+
     .profili-placeholder {
       background: var(--card); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 72px 20px; text-align: center; color: var(--text-muted);

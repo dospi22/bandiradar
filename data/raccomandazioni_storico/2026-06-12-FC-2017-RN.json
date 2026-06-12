@@ -1,0 +1,119 @@
+{
+  "codice_cliente": "FC-2017-RN",
+  "generatedAt": "2026-06-11T08:11:30.669106Z",
+  "aziende": [
+    {
+      "idAzienda": "az-1779394390646",
+      "generatedAt": "2026-06-11T08:11:30.669106Z",
+      "atecoInterpretato": "ATECO 823003 → Sez. N, Div. 82.30 — Organizzazione di convegni, fiere ed eventi",
+      "raccomandazioni": [
+        {
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "alta",
+          "motivazione": "Premio eco-innovazione: Impresa Benefit con obiettivo economia circolare, scadenza 30/06",
+          "motivazioneEstesa": "Premio riconoscimento per eco-innovazione ed economia circolare. Perfetto per Impresa Benefit con obiettivo sostenibilità. Visibilità a Ecomondo Rimini nov 2026. Scadenza candidature 30 giugno.",
+          "scadenza": "2026-06-30",
+          "importoMax": null,
+          "tipoAgev": "Premio",
+          "priorita": "Media"
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "media",
+          "motivazione": "FESR ER per investimenti produttivi e R&S in tecnologie strategiche, fino a set 2026",
+          "motivazioneEstesa": "Bando regionale ER per investimenti in R&S e tecnologie strategiche. Rilevante se si prevedono investimenti in software/digitalizzazione. Richiede progetto di R&S strutturato.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "rilevanza": "media",
+          "motivazione": "Voucher UE per protezione marchio/brevetti PMI, rimborso 75%, fino a dic 2026",
+          "motivazioneEstesa": "Fondo EUIPO per PMI: voucher fino al 75% per registrazione marchi e brevetti in UE. Utile per proteggere il brand. Sportello aperto fino a dicembre 2026.",
+          "scadenza": "2026-12-04",
+          "importoMax": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-025",
+          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
+          "rilevanza": "media",
+          "motivazione": "Fondimpresa: formazione per nuove assunzioni, 100% copertura, richiede adesione",
+          "motivazioneEstesa": "Finanzia piani formativi per disoccupati con obbligo assunzione ≥90% a tempo indeterminato. Interessante per crescita strutturale. Requisito: adesione a Fondimpresa.",
+          "scadenza": "2026-12-31",
+          "importoMax": 150000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
+        }
+      ],
+      "in_arrivo": [
+        {
+          "id": "ER-2026-002",
+          "nome": "FSE+ ER — Formazione continua per le imprese",
+          "motivazione": "Formazione continua ER fino al 70%. Monitorare riapertura sportello.",
+          "scadenza": ""
+        },
+        {
+          "id": "IT-2026-021",
+          "nome": "Benefit Competition MIMIT 2026 — Competizione Società Benefit",
+          "motivazione": "Competizione MIMIT per Società Benefit — FC è Impresa Benefit. Tappe 4-5 in arrivo.",
+          "scadenza": "2026-12-31"
+        }
+      ],
+      "da_monitorare": [
+        {
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "rilevanza": "alta",
+          "motivazione": "Credito imposta per investimenti digitali+energetici. Attendere apertura campagna 2026 su GSE.",
+          "scadenza": "",
+          "stato": "Sospeso — Alta priorità"
+        },
+        {
+          "id": "ER-2026-003",
+          "nome": "Bando internazionalizzazione ART-ER 2026",
+          "rilevanza": "media",
+          "motivazione": "Voucher internazionalizzazione ER. Rilevante solo se piani export.",
+          "scadenza": "",
+          "stato": "Sospeso — Alta priorità"
+        },
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "rilevanza": "alta",
+          "motivazione": "Voucher fino a 20k per cloud/cybersecurity, 50%. Attesa apertura sportello.",
+          "scadenza": "",
+          "stato": "Sospeso — Alta priorità"
+        },
+        {
+          "id": "IT-2026-016",
+          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
+          "rilevanza": "alta",
+          "motivazione": "Maxi-deduzione 180% per beni strumentali 4.0. Piattaforma GSE attesa giugno 2026.",
+          "scadenza": "2028-09-30",
+          "stato": "Sospeso — Alta priorità"
+        }
+      ],
+      "esclusi_per_ateco": [
+        {
+          "id": "ER-2026-005",
+          "nome": "Fondo EuReCa — Investimenti offerta turistica ricettiva ER",
+          "ateco_bando": "55",
+          "motivo": "ATECO azienda 823003 (div 82) non in 55"
+        },
+        {
+          "id": "ER-2026-015",
+          "nome": "FESR ER — Sostegno innovazione commercio vicinato, pubblici esercizi e attività polifunzionali 2026",
+          "ateco_bando": "47 (commercio al dettaglio), 56 (somministrazione), 93 (pubblico intrattenimento)",
+          "motivo": "ATECO azienda 823003 (div 82) non in 47 (commercio al dettaglio), 56 (somministrazione), 93 (pubblico intrattenimento)"
+        }
+      ]
+    }
+  ]
+}

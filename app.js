@@ -2142,7 +2142,7 @@ async function loadFontiStatus() {
     const resp = await fetch('data/fonti_status.json', { cache: 'no-cache' });
     if (!resp.ok) return;  // file non ancora generato: nessun avviso
     const data = await resp.json();
-    const problemi = (data.fonti || []).filter(f => f.status === 'ERRORE' || f.status === 'STANTIO');
+    const problemi = (data.fonti || []).filter(f => f.status === 'ERRORE' || f.status === 'STANTIO' || f.status === 'BLOCCATO');
     if (!problemi.length) return;
     const main = document.getElementById('main-content');
     if (!main || document.getElementById('fonti-alert')) return;
@@ -2150,7 +2150,7 @@ async function loadFontiStatus() {
     el.id = 'fonti-alert';
     el.style.cssText = 'margin:0 0 14px;padding:10px 14px;border:1px solid rgba(245,158,11,0.45);background:rgba(245,158,11,0.08);border-radius:10px;font-size:12px;line-height:1.6;color:var(--text)';
     const elenco = problemi.map(f =>
-      `<li><strong>${f.nome}</strong> — ${f.status === 'STANTIO' ? 'feed fermo' : 'irraggiungibile'} (${f.dettaglio || ''})</li>`
+      `<li><strong>${f.nome}</strong> — ${f.status === 'STANTIO' ? 'feed fermo' : f.status === 'BLOCCATO' ? 'protetta da anti-bot: controllala dal browser' : 'irraggiungibile'} (${f.dettaglio || ''})</li>`
     ).join('');
     el.innerHTML = `⚠️ <strong>${problemi.length} font${problemi.length === 1 ? 'e' : 'i'} di monitoraggio con problemi</strong>
       <span style="color:var(--text-muted)">(controllo del ${data.data || '—'}) — possibili bandi non rilevati:</span>

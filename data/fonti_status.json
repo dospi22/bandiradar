@@ -1,29 +1,23 @@
 {
-  "timestamp": "2026-06-11T07:33:49.808619+00:00",
-  "data": "2026-06-11",
-  "ok": 4,
-  "errore": 9,
+  "timestamp": "2026-06-15T11:30:50.144850+00:00",
+  "data": "2026-06-15",
+  "ok": 15,
+  "errore": 0,
   "stantio": 0,
-  "manuale": 2,
-  "totale": 15,
+  "manuale": 6,
+  "bloccato": 1,
+  "totale": 22,
   "fonti": [
     {
-      "id": "invitalia",
-      "nome": "Invitalia — Incentivi imprese",
-      "livello": "Nazionale",
-      "tipo": "RSS",
-      "url": "https://www.invitalia.it/rss/news.xml",
-      "status": "ERRORE",
-      "dettaglio": "HTTP 404"
-    },
-    {
       "id": "mimit",
-      "nome": "MIMIT — Comunicati stampa",
+      "nome": "MIMIT — Aggiornamenti sugli incentivi",
       "livello": "Nazionale",
       "tipo": "RSS",
-      "url": "https://www.mimit.gov.it/it/rss/comunicati",
-      "status": "ERRORE",
-      "dettaglio": "HTTP 404"
+      "url": "https://www.mimit.gov.it/index.php/it/incentivi-aggiornamenti?format=feed&type=rss",
+      "voci": 10,
+      "ultima_voce": "2026-06-10",
+      "status": "OK",
+      "dettaglio": "10 voci"
     },
     {
       "id": "incentivi-gov",
@@ -35,22 +29,13 @@
       "dettaglio": "Fonte a check manuale (nessun RSS)"
     },
     {
-      "id": "bandi-gov",
-      "nome": "Bandi.gov.it — Portale nazionale",
-      "livello": "Nazionale",
-      "tipo": "RSS",
-      "url": "https://bandi.gov.it/rss/bandi.xml",
-      "status": "ERRORE",
-      "dettaglio": "HTTPSConnectionPool(host='bandi.gov.it', port=443): Max retries exceeded with url: /rss/bandi.xml (Caused by NameResolutionError(\"HTTPSConnection(host"
-    },
-    {
       "id": "euknow",
       "nome": "Euknow — Bandi UE e nazionali",
       "livello": "Nazionale/UE",
       "tipo": "RSS",
       "url": "https://euknow.it/feed/",
       "voci": 10,
-      "ultima_voce": "2026-06-05",
+      "ultima_voce": "2026-06-11",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -59,9 +44,11 @@
       "nome": "Regione Emilia-Romagna — Finanziamenti imprese",
       "livello": "Regionale ER",
       "tipo": "RSS",
-      "url": "https://imprese.regione.emilia-romagna.it/rss",
-      "status": "ERRORE",
-      "dettaglio": "HTTP 404"
+      "url": "https://imprese.regione.emilia-romagna.it/RSS",
+      "voci": 15,
+      "ultima_voce": "2026-06-15",
+      "status": "OK",
+      "dettaglio": "15 voci"
     },
     {
       "id": "regione-er-sociale",
@@ -77,9 +64,9 @@
       "nome": "ART-ER — Bandi e opportunità",
       "livello": "Regionale ER",
       "tipo": "RSS",
-      "url": "https://www.art-er.it/feed/",
-      "status": "ERRORE",
-      "dettaglio": "HTTP 404"
+      "url": "https://www.art-er.it/bandi/",
+      "status": "MANUALE",
+      "dettaglio": "Fonte a check manuale (nessun RSS)"
     },
     {
       "id": "infobandi-csvnet",
@@ -91,6 +78,86 @@
       "ultima_voce": "2026-06-02",
       "status": "OK",
       "dettaglio": "10 voci"
+    },
+    {
+      "id": "apre",
+      "nome": "APRE — Punto di contatto nazionale Horizon Europe",
+      "livello": "Europeo",
+      "tipo": "RSS",
+      "url": "https://apre.it/feed/",
+      "voci": 10,
+      "ultima_voce": "2026-06-15",
+      "status": "OK",
+      "dettaglio": "10 voci"
+    },
+    {
+      "id": "fondimpresa",
+      "nome": "Fondimpresa — Avvisi formazione finanziata",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.fondimpresa.it/fondimpresa-per-le-aziende/avvisi",
+      "status": "MANUALE",
+      "dettaglio": "Fonte a check manuale (nessun RSS)"
+    },
+    {
+      "id": "gazzetta-ufficiale",
+      "nome": "Gazzetta Ufficiale — Serie Generale (nuovi decreti)",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.gazzettaufficiale.it",
+      "status": "MANUALE",
+      "dettaglio": "Fonte a check manuale (nessun RSS)"
+    },
+    {
+      "id": "simest",
+      "nome": "SIMEST — Comunicati (Fondo 394 e internazionalizzazione)",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.simest.it/media/comunicati-stampa/feed",
+      "voci": 10,
+      "ultima_voce": "2026-06-15",
+      "status": "OK",
+      "dettaglio": "10 voci"
+    },
+    {
+      "id": "inail-isi",
+      "nome": "INAIL — Incentivi alle imprese (Bando ISI)",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/incentivi-alle-imprese.html",
+      "status": "MANUALE",
+      "dettaglio": "Fonte a check manuale (nessun RSS)"
+    },
+    {
+      "id": "agricoltura-er",
+      "nome": "Regione ER — Agricoltura (PSR/CSR, agroalimentare)",
+      "livello": "Regionale ER",
+      "tipo": "RSS",
+      "url": "https://agricoltura.regione.emilia-romagna.it/RSS",
+      "voci": 15,
+      "ultima_voce": "2026-06-28",
+      "status": "OK",
+      "dettaglio": "15 voci"
+    },
+    {
+      "id": "ministero-turismo",
+      "nome": "Ministero del Turismo — Avvisi e incentivi",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.ministeroturismo.gov.it/feed/",
+      "voci": 10,
+      "ultima_voce": "2026-06-15",
+      "status": "OK",
+      "dettaglio": "10 voci"
+    },
+    {
+      "id": "invitalia",
+      "nome": "Invitalia — Incentivi e strumenti",
+      "livello": "Nazionale",
+      "tipo": "Diff pagina",
+      "url": "https://www.invitalia.it/per-le-imprese/incentivi-e-strumenti",
+      "status": "OK",
+      "dettaglio": "596 KB"
     },
     {
       "id": "cciaa-romagna",
@@ -108,25 +175,7 @@
       "tipo": "Diff pagina",
       "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
       "status": "OK",
-      "dettaglio": "660 KB"
-    },
-    {
-      "id": "simest",
-      "nome": "SIMEST — Comunicati (Fondo 394 e internazionalizzazione)",
-      "livello": "Nazionale",
-      "tipo": "Diff pagina",
-      "url": "https://www.simest.it/media/comunicati-stampa/",
-      "status": "ERRORE",
-      "dettaglio": "HTTP 403"
-    },
-    {
-      "id": "inail-isi",
-      "nome": "INAIL — Incentivi alle imprese (Bando ISI)",
-      "livello": "Nazionale",
-      "tipo": "Diff pagina",
-      "url": "https://www.inail.it/portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/incentivi-alle-imprese.html",
-      "status": "ERRORE",
-      "dettaglio": "HTTPSConnectionPool(host='www.inail.it', port=443): Max retries exceeded with url: /portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanzi"
+      "dettaglio": "656 KB"
     },
     {
       "id": "gse-imprese",
@@ -134,8 +183,8 @@
       "livello": "Nazionale",
       "tipo": "Diff pagina",
       "url": "https://www.gse.it/servizi-per-te/imprese",
-      "status": "ERRORE",
-      "dettaglio": "HTTP 403"
+      "status": "BLOCCATO",
+      "dettaglio": "HTTP 403 — protezione anti-bot (WAF): la pagina è quasi certamente attiva, verificare dal browser"
     },
     {
       "id": "euipo-sme-fund",
@@ -143,8 +192,35 @@
       "livello": "Europeo",
       "tipo": "Diff pagina",
       "url": "https://www.euipo.europa.eu/it/sme-corner/sme-fund",
-      "status": "ERRORE",
-      "dettaglio": "HTTP 403"
+      "status": "OK",
+      "dettaglio": "365 KB"
+    },
+    {
+      "id": "eber-artigianato",
+      "nome": "EBER — Ente Bilaterale Artigianato ER (sviluppo imprenditoriale)",
+      "livello": "Regionale ER",
+      "tipo": "Diff pagina",
+      "url": "https://www.eber.org/Attivita/sviluppo-imprenditoriale",
+      "status": "OK",
+      "dettaglio": "24 KB"
+    },
+    {
+      "id": "artigiancredito",
+      "nome": "Artigiancredito — News (Fondo Starter, Energia, EuReCa, Microcredito ER)",
+      "livello": "Regionale ER",
+      "tipo": "Diff pagina",
+      "url": "https://www.artigiancredito.it/it-it/news",
+      "status": "OK",
+      "dettaglio": "55 KB"
+    },
+    {
+      "id": "er-startup",
+      "nome": "EmiliaRomagnaStartUp (ART-ER) — Bandi e call",
+      "livello": "Regionale ER",
+      "tipo": "Diff pagina",
+      "url": "https://www.emiliaromagnastartup.it/it/bandi",
+      "status": "OK",
+      "dettaglio": "124 KB"
     }
   ]
 }

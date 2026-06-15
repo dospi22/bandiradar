@@ -2,7 +2,7 @@
   "cciaa-romagna": {
     "nome": "CCIAA Romagna (Forlì-Cesena e Rimini) — Finanziamenti",
     "url": "https://www.romagna.camcom.it/it/opportunita/finanziamenti-1",
-    "ultimo_check": "2026-06-11T07:33:51.249148+00:00",
+    "ultimo_check": "2026-06-15T11:30:52.597962+00:00",
     "voci": {
       "https://www.romagna.camcom.it/it/opportunita/sviluppo-imprese-innovative": "Sviluppo startup e PMI innovative",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa": "Servizi per l'avvio e lo sviluppo d'impresa",
@@ -30,7 +30,7 @@
   "fesr-er": {
     "nome": "FESR Emilia-Romagna — Bandi 2021-2027",
     "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
-    "ultimo_check": "2026-06-11T07:33:52.014247+00:00",
+    "ultimo_check": "2026-06-15T11:30:53.316340+00:00",
     "voci": {
       "https://www.regione.emilia-romagna.it": "Regione Emilia-Romagna",
       "https://fesr.regione.emilia-romagna.it/": "Programma regionale Fondo europeo di sviluppo regionale - Fesr",
@@ -39,9 +39,117 @@
       "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/bandi-priorita-1": "Ricerca, innovazione e competitività",
       "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/bandi-priorita-2": "Sostenibilità, decarbonizzazione, biodiversità e resilienza",
       "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/attrattivita-coesione-e-sviluppo-territoriale": "Attrattività coesione e sviluppo territoriale",
-      "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/investimenti-e-ricerca-per-le-tecnologie-strategiche-step": "Investimenti e ricerca per le tecnologie strategiche Step",
-      "Mailto:sportelloimprese@regione.emilia-romagna.it": "sportelloimprese@regione.emilia-romagna.it",
-      "http://www.regione.emilia-romagna.it/urp/": "www.regione.emilia-romagna.it/urp"
+      "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27/investimenti-e-ricerca-per-le-tecnologie-strategiche-step": "Investimenti e ricerca per le tecnologie strategiche Step"
+    }
+  },
+  "invitalia": {
+    "nome": "Invitalia — Incentivi e strumenti",
+    "url": "https://www.invitalia.it/per-le-imprese/incentivi-e-strumenti",
+    "ultimo_check": "2026-06-15T11:30:51.178660+00:00",
+    "voci": {
+      "https://www.invitalia.it/per-chi-vuole-fare-impresa": "Vai alla pagina Per chi vuole fare impresa",
+      "https://www.invitalia.it/per-chi-vuole-fare-impresa/scegli-lincentivo-te": "Scegli l'incentivo o strumento per te",
+      "https://www.invitalia.it/per-chi-vuole-fare-impresa/servizi": "Servizi per chi vuole fare impresa",
+      "https://www.invitalia.it/per-le-imprese/scegli-lincentivostrumento-te": "Scegli l'incentivo o strumento per te",
+      "https://www.invitalia.it/servizi/invitalia-gli-investimenti-pubblici": "Invitalia per gli investimenti pubblici",
+      "https://www.invitalia.it/incentivi-e-strumenti/voucher-il-sostegno-dei-piccoli-editori": "Leggi tutto su Voucher per il sostegno dei piccoli editori",
+      "https://www.invitalia.it/incentivi-e-strumenti/sviluppo-competenze-specialistiche-delle-pmi": "Leggi tutto su Sviluppo competenze specialistiche delle Pmi",
+      "https://www.invitalia.it/incentivi-e-strumenti/contratto-di-sviluppo": "Contratto di sviluppo"
+    }
+  },
+  "euipo-sme-fund": {
+    "nome": "EUIPO — SME Fund (voucher marchi e brevetti)",
+    "url": "https://www.euipo.europa.eu/it/sme-corner/sme-fund",
+    "ultimo_check": "2026-06-15T11:30:54.181353+00:00",
+    "voci": {
+      "https://euipo.europa.eu/eSearchCLW/": "Giurisprudenza su eSearch Decisioni dell’Ufficio, sentenze del Tribunale, della Corte di giustizia e dei tribunali nazionali competenti in materia di DPI",
+      "https://www.euipo.europa.eu/it/search-ip": "Ricerche Effettua una ricerca nelle nostre banche dati per tutte le tue esigenze in materia di PI",
+      "https://www.euipo.europa.eu/it/trade-marks/how-to-apply/apply-now": "Presenta una domanda di marchio Tutte le informazioni relative alla disponibilità del marchio e alle modalità di ricerca",
+      "https://www.euipo.europa.eu/it/gi-hub/ci-regulation": "Informazioni sulle indicazioni geografiche Prodotti artigianali e industriali, prodotti agricoli, vini e bevande spiritose",
+      "https://www.euipo.europa.eu/it/law": "Diritto e giurisprudenza Scopri la legislazione relativa ai marchi dell’UE, ai disegni e modelli dell’UE registrati e alle IG per i prodotti artigianali e industriali, nonché i principali accordi inte",
+      "https://www.euipo.europa.eu/it/guidelines": "Direttive Le Direttive dell’EUIPO relative all’esame di marchi, disegni e modelli e indicazioni geografiche per i prodotti artigianali e industriali",
+      "https://www.euipo.europa.eu/it/sme-corner": "Area PMI Potenzia la tua attività con una vasta gamma di risorse selezionate e ideate per il successo delle PMI",
+      "https://www.euipo.europa.eu/it/learning-corner": "Angolo dell’apprendimento L’Accademia dell’EUIPO è il nostro centro di apprendimento e di condivisione delle conoscenze",
+      "https://www.euipo.europa.eu/it/observatory/awareness/ideas-powered/ip-in-education": "La PI nell’istruzione Una rete che mira a promuovere l’imprenditorialità e la partecipazione digitale responsabile tra i giovani europei",
+      "https://www.euipo.europa.eu/it/boards-of-appeal": "Commissioni di ricorso Competenti a deliberare sui ricorsi avverso le decisioni di primo grado adottate dall’EUIPO",
+      "https://www.euipo.europa.eu/it/about-us/the-office": "L’Ufficio Siamo responsabili della gestione dei marchi dell’UE, dei disegni e modelli dell’UE registrati e delle indicazioni geografiche dell’UE per i prodotti artigianali e industriali",
+      "https://www.euipo.europa.eu/it/about-us/governance/strategic-plan": "Piano strategico 2030 Il PS 2030 è la tabella di marcia strategica dell’EUIPO, che delinea le priorità e gli obiettivi principali per migliorare l’innovazione, i servizi di proprietà intellettuale e l",
+      "https://www.euipo.europa.eu/it/info/legal-notices": "Avvisi legali arrow_forward",
+      "https://www.euipo.europa.eu/sme-corner/sme-fund/2026": "Il Fondo per le PMI 2026 è ora aperto!"
+    }
+  },
+  "eber-artigianato": {
+    "nome": "EBER — Ente Bilaterale Artigianato ER (sviluppo imprenditoriale)",
+    "url": "https://www.eber.org/Attivita/sviluppo-imprenditoriale",
+    "ultimo_check": "2026-06-15T11:30:55.123135+00:00",
+    "voci": {
+      "https://www.eber.org/Attivita/sviluppo-imprenditoriale": "Sviluppo imprenditoriale",
+      "https://www.eber.org/Fondartigianato": "Fondartigianato"
+    }
+  },
+  "artigiancredito": {
+    "nome": "Artigiancredito — News (Fondo Starter, Energia, EuReCa, Microcredito ER)",
+    "url": "https://www.artigiancredito.it/it-it/news",
+    "ultimo_check": "2026-06-15T11:30:55.842850+00:00",
+    "voci": {
+      "https://www.artigiancredito.it/it-it/prodotti-e-servizi/agevolazioni/eureca-turismo-regione-emilia-romagna": "EuReCa Turismo Regione Emilia-Romagna",
+      "https://www.artigiancredito.it/it-it/prodotti-e-servizi/provvedimenti-alluvioni-in-toscana-di-novembre-2023/finanziamento-diretto": "FINANZIAMENTO DIRETTO",
+      "https://www.artigiancredito.it/it-it/modulistica/domande-di-contributo": "Domande di contributo",
+      "https://www.artigiancredito.it/it-it/modulistica/microcredito-e-r": "Microcredito E.R.",
+      "https://www.artigiancredito.it/it-it/modulistica/istruzioni-firma-digitale": "Istruzioni Firma digitale",
+      "https://www.artigiancredito.it/it-it/news/assemblee-separate-soci-toscana-e-emilia-romagna": "Assemblee separate soci Toscana e Emilia-Romagna",
+      "https://www.artigiancredito.it/it-it/news/convocazione-assemblea-2026-artigiancredito": "Convocazione Assemblea 2026 ARTIGIANCREDITO",
+      "https://www.artigiancredito.it/it-it/news/riapertura-fondo-energia-e-fondo-starter-it": "Riapertura Fondo Energia e Fondo Starter",
+      "https://www.artigiancredito.it/it-it/news/artigiancredito-ottiene-lo-score-b-nell’assessment-esg-di-synesgy": "Artigiancredito ottiene lo score B nell’assessment ESG di Synesgy",
+      "https://www.artigiancredito.it/it-it/news/revisione-biennale-della-cooperativa-da-parte-del-mimit": "REVISIONE BIENNALE DELLA COOPERATIVA DA PARTE DEL MIMIT",
+      "https://www.artigiancredito.it/it-it/news/riapertura-fondo-energia-e-fondo-starter": "Riapertura Fondo Energia e Fondo Starter",
+      "https://www.artigiancredito.it/it-it/news/convocazione-assemblea-2025-artigiancredito": "Convocazione Assemblea 2025 ARTIGIANCREDITO",
+      "https://www.artigiancredito.it/it-it/news/riapertura-del-fondo-energia": "Riapertura del Fondo Energia",
+      "https://www.artigiancredito.it/it-it/news/artigiancredito-sigla-un-accordo-strategico-con-cna-liguria": "Artigiancredito sigla un accordo strategico con CNA Liguria",
+      "https://www.artigiancredito.it/it-it/news/artigiancredito-e-il-partner-di-riferimento-scelto-dalla-regione-emilia-romagna-per-lanciare-il-cont": "Artigiancredito è il partner di riferimento scelto dalla regione Emilia-Romagna per lanciare il contributo di abbattimento degli oneri finanziari a sostegno delle PMI"
+    }
+  },
+  "er-startup": {
+    "nome": "EmiliaRomagnaStartUp (ART-ER) — Bandi e call",
+    "url": "https://www.emiliaromagnastartup.it/it/bandi",
+    "ultimo_check": "2026-06-15T11:30:56.337393+00:00",
+    "voci": {
+      "https://www.emiliaromagnastartup.it/it/categoria/tipologia-bando/contributo-nella-spesacofinanziamento": "Contributo nella spesa/cofinanziamento",
+      "https://www.emiliaromagnastartup.it/it/categoria/settore-bando/innovazione-sociale": "Innovazione Sociale",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/sme-fund-2026-la-tutela-della-proprieta-intellettuale-delle-pmi": "SME Fund 2026 per la tutela della proprietà intellettuale delle PMI",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/2-call-consorzio-elias-intelligenza-artificiale-e-sostenibilita": "#2 Call Consorzio Elias: Intelligenza artificiale e sostenibilità",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/4deg-call-clean-aviation-oltre-329-milioni-di-euro-linnovazione-e-la": "4° call Clean Aviation: oltre 329 milioni di euro per l'innovazione e la decarbonizzazione del trasporto aereo",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/avviso-la-presentazione-di-manifestazioni-di-interesse-partecipare-alla-community": "Adesione alla community delle startup dell’Emilia-Romagna interessate a processi di internazionalizzazione",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/devfest-modena-2026-pacchetto-startup": "DevFest Modena 2026: pacchetto startup",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-step-scale-2026-fino-30-milioni-di-euro-la-crescita-delle-imprese-deep-tech": "EIC STEP Scale Up 2026: fino a 30 milioni di euro per la crescita delle imprese deep-tech",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/invito-presentare-progetti-finalizzati-allinserimento-nellincubatore-dimpresa": "Invito a presentare progetti finalizzati all’inserimento nellʹincubatore dʹimpresa Cesenalab",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/nuovo-bando-mepa-startup-innovative": "Nuovo Bando MePA per Startup Innovative",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/servizio-linkup-matchmaking-qualificato-ifab-startup": "Servizio LinkUp: matchmaking qualificato IFAB per startup",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/italian-lifestyle-acceleration-program-5-ed": "Italian Lifestyle Acceleration Program 5 ed.",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/italian-lifestyle-accelerator-program-2026": "Italian lifestyle accelerator program 2026",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-di-euro-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione di euro per startup e PMI",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione per startup e PMI",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/terza-ed-swiss-italian-startup-award-sisa": "terza ed. Swiss Italian Startup Award (SISA)",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-nato-diana-challenge-call-2027-fondi-startup-e-pmi": "Bando NATO DIANA Challenge Call 2027: fondi per startup e PMI",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-accelerator-2026-sostegno-start-e-piccole-e-medie-imprese-innovative": "EIC Accelerator 2026: sostegno a start-up e piccole e medie imprese innovative",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-accelerator-programma-di-lavoro-2026-innovazioni-deep-tech-e-disruptive": "EIC Accelerator: programma di lavoro 2026 per Innovazioni Deep-Tech e Disruptive",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/odeon-finanziamenti-e-mentoring-la-transizione-energetica-digitale": "ODEON: finanziamenti e mentoring per la transizione energetica digitale",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/coopstartup-changemakers-2026": "Coopstartup Changemakers 2026",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/call4innovit-2026-tutte-le-scadenze-dei-bandi-laccelerazione-di-startup-e-pmi": "Call4Innovit 2026: tutte le scadenze dei bandi per l'accelerazione di Startup e PMI innovative a San Francisco",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-futurefoods-opportunita-di-finanziamento-la-ricerca-e-linnovazione-nei": "Bando FutureFoodS: opportunità di finanziamento per la ricerca e l'innovazione nei Sistemi Alimentari Sostenibili",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bandi-ngi-open-calls-fino-50000-euro-startup-e-pmi": "Bandi NGI Open Calls: fino a 50.000 euro per startup e PMI",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-nemesis-open-call-fondi-startup-agtech-emilia-romagna": "Bando NEMESIS Open Call: fondi per startup AgTech in Emilia-Romagna",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-c4b-open-call-pilot-projects-fondi-startup-nella-bioeconomia-circolare": "Bando C4B Open Call for Pilot Projects: fondi per startup nella bioeconomia circolare",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-women-techeu-open-call-finanziamenti-startup-guidate-da-donne": "Bando Women TechEU Open Call: finanziamenti per startup guidate da donne",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-transition-open-2026contributi-fino-25-milioni-di-euro-trasformare-i-risultati": "EIC Transition Open 2026:Contributi fino a 2,5 milioni di euro per trasformare i risultati della ricerca in innovazioni di mercato",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/missions-al-i-bandi-2026-di-horizon-europe": "Missions: al via i bandi 2026 di Horizon Europe",
+      "https://www.emiliaromagnastartup.it/it/FinancER": "Finanza per l'innovazione",
+      "https://www.emiliaromagnastartup.it/it/pagine/finanziare-una-startup": "Finanziare una startup",
+      "https://www.emiliaromagnastartup.it/it/pagine/StartupsGoInternational": "Startups Go International",
+      "https://www.emiliaromagnastartup.it/it/pagine/il-ministero-dello-sviluppo-economico-le-startup-innovative": "Il Ministero dello Sviluppo Economico per le StartUp",
+      "https://www.facebook.com/EmiliaRomagnaStartUp": "https://www.facebook.com/EmiliaRomagnaStartUp",
+      "https://twitter.com/erstartup": "https://twitter.com/erstartup",
+      "http://www.emiliaromagnastartup.it/pagine/feed-rss": "http://www.emiliaromagnastartup.it/pagine/feed-rss"
     }
   }
 }

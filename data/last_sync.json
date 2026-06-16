@@ -1,12 +1,12 @@
 {
-  "data": "2026-06-12",
-  "timestamp": "2026-06-12T13:25:57.252658+00:00",
-  "attivi": 52,
-  "archivio": 3,
-  "auto_archiviati": 0,
+  "data": "2026-06-16",
+  "timestamp": "2026-06-16T14:30:03.818180+00:00",
+  "attivi": 49,
+  "archivio": 6,
+  "auto_archiviati": 3,
   "warning_count": 2,
-  "link_ok": 39,
+  "link_ok": 42,
   "link_ko": 13,
-  "link_totali": 52,
+  "link_totali": 55,
   "origine": "locale"
 }

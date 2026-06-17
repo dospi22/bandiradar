@@ -12,7 +12,7 @@
 // per forzare la rigenerazione del cache.
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'bandiradar-v4'; // v4 (2026-06-12): banner fonti con stato BLOCCATO (WAF) + fix fonti
+const CACHE_VERSION = 'bandiradar-v5'; // v5 (2026-06-17): profilo V2 — progetti, ATECO secondari, dipendenti strutturati, CF, provincia
 const PRECACHE = [
   './',
   './index.html',

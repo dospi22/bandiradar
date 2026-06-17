@@ -144,6 +144,17 @@ def valida_bandi(rows):
 # VALIDAZIONE AZIENDE.JSON (profili clienti)
 # ─────────────────────────────────────────────────────────────────
 RE_PIVA = re.compile(r'^\d{11}$')
+RE_CF_SOCIETA = re.compile(r'^\d{11}$')
+RE_CF_PERSONA = re.compile(r'^[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]$', re.IGNORECASE)
+RE_ATECO_CODE = re.compile(r'^[\d.]{2,8}$')
+RE_PROVINCIA = re.compile(r'^[A-Z]{2}$')
+
+CATEGORIE_PROGETTO_VALIDE = {
+    'digitalizzazione', 'macchinari', 'edilizia', 'efficientamento',
+    'R&S', 'formazione', 'internazionalizzazione', 'assunzioni',
+    'marketing', 'certificazioni', 'brevetti', 'software', 'veicoli', 'altro'
+}
+
 
 def valida_aziende(dati):
     """
@@ -176,9 +187,19 @@ def valida_aziende(dati):
             if not (az.get(fld) or '').strip():
                 warnings.append(f"[{nome}] campo '{fld}' vuoto")
 
-        # ATECO — errore comune n.5: senza ATECO il matching è degradato
+        # ATECO principale — senza ATECO il matching è degradato
         if not (az.get('ateco') or '').strip():
             warnings.append(f"[{nome}] ATECO vuoto -> criterio settoriale 'non verificabile' nel matching")
+
+        # ATECO secondari (v2) — array di codici numerici
+        ateco_sec = az.get('atecoSecondari', [])
+        if ateco_sec and not isinstance(ateco_sec, list):
+            warnings.append(f"[{nome}] atecoSecondari deve essere un array, trovato {type(ateco_sec).__name__}")
+        elif isinstance(ateco_sec, list):
+            for idx, ac in enumerate(ateco_sec):
+                ac_clean = str(ac).replace('.', '').strip()
+                if ac_clean and not ac_clean.isdigit():
+                    warnings.append(f"[{nome}] atecoSecondari[{idx}] '{ac}' non sembra un codice ATECO valido")
 
         # P.IVA: 11 cifre
         piva = (az.get('piva') or '').strip()
@@ -187,15 +208,54 @@ def valida_aziende(dati):
         elif not piva:
             warnings.append(f"[{nome}] P.IVA mancante")
 
-        # Coerenza dimensione <-> dipendenti
-        dim  = (az.get('dimensione') or '').lower()
-        hasd = (az.get('hasDipendenti') or '').lower()
-        forza = (az.get('forzaLavoro') or '').lower()
-        if 'microimpresa' in dim and hasd.startswith('s'):
-            # micro = <10 dipendenti: se dichiara 10-49 dipendenti è incoerente
-            if '10 e 49' in hasd or '50' in hasd:
-                warnings.append(f"[{nome}] incoerenza: Microimpresa ma dipendenti dichiarati >= 10")
-        if hasd.startswith('no') and 'dipendent' in forza and 'p.iva' not in forza:
-            warnings.append(f"[{nome}] incoerenza: hasDipendenti=No ma forzaLavoro indica dipendenti")
+        # Codice Fiscale (v2) — 11 cifre (società) o 16 char alfanumerico (persona)
+        cf = (az.get('codiceFiscale') or '').strip()
+        if cf and not RE_CF_SOCIETA.match(cf) and not RE_CF_PERSONA.match(cf):
+            warnings.append(f"[{nome}] Codice Fiscale '{cf}' non valido (attesi 11 cifre o 16 alfanumerici)")
+
+        # Provincia (v2) — sigla 2 lettere maiuscole
+        prov = (az.get('provincia') or '').strip()
+        if prov and not RE_PROVINCIA.match(prov):
+            warnings.append(f"[{nome}] Provincia '{prov}' non valida (servono 2 lettere maiuscole, es. RN)")
+
+        # Dipendenti strutturati (v2) — oggetto con chiavi numeriche >= 0
+        dip = az.get('dipendenti')
+        if dip and isinstance(dip, dict):
+            for key in ('tempoIndeterminato', 'tempoDeterminato', 'apprendisti', 'collaboratoriPIVA'):
+                val = dip.get(key)
+                if val is not None and (not isinstance(val, (int, float)) or val < 0):
+                    warnings.append(f"[{nome}] dipendenti.{key} = {val} — deve essere un numero >= 0")
+            # Coerenza con dimensione UE
+            tot_dip = sum(dip.get(k, 0) for k in ('tempoIndeterminato', 'tempoDeterminato', 'apprendisti', 'collaboratoriPIVA'))
+            dim = (az.get('dimensione') or '').lower()
+            if 'microimpresa' in dim and tot_dip >= 10:
+                warnings.append(f"[{nome}] incoerenza: Microimpresa ma totale addetti = {tot_dip} (>= 10)")
+        else:
+            # Fallback: validazione legacy con vecchi campi
+            dim  = (az.get('dimensione') or '').lower()
+            hasd = (az.get('hasDipendenti') or '').lower()
+            forza = (az.get('forzaLavoro') or '').lower()
+            if 'microimpresa' in dim and hasd.startswith('s'):
+                if '10 e 49' in hasd or '50' in hasd:
+                    warnings.append(f"[{nome}] incoerenza: Microimpresa ma dipendenti dichiarati >= 10")
+            if hasd.startswith('no') and 'dipendent' in forza and 'p.iva' not in forza:
+                warnings.append(f"[{nome}] incoerenza: hasDipendenti=No ma forzaLavoro indica dipendenti")
+
+        # Progetti concreti (v2) — array di oggetti
+        progetti = az.get('progetti', [])
+        if progetti and not isinstance(progetti, list):
+            warnings.append(f"[{nome}] progetti deve essere un array, trovato {type(progetti).__name__}")
+        elif isinstance(progetti, list):
+            for idx, pr in enumerate(progetti):
+                if not isinstance(pr, dict):
+                    warnings.append(f"[{nome}] progetti[{idx}] deve essere un oggetto")
+                    continue
+                if not (pr.get('descrizione') or '').strip():
+                    warnings.append(f"[{nome}] progetti[{idx}] senza descrizione")
+                cats = pr.get('categorie', [])
+                if isinstance(cats, list):
+                    for c in cats:
+                        if c not in CATEGORIE_PROGETTO_VALIDE:
+                            warnings.append(f"[{nome}] progetti[{idx}] categoria '{c}' non riconosciuta")
 
     return critical, warnings

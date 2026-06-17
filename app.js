@@ -945,6 +945,12 @@ const OBIETTIVI = [
   'Investimenti produttivi', 'Efficienza energetica', 'Economia circolare'
 ];
 
+const CATEGORIE_PROGETTO = [
+  'digitalizzazione', 'macchinari', 'edilizia', 'efficientamento',
+  'R&S', 'formazione', 'internazionalizzazione', 'assunzioni',
+  'marketing', 'certificazioni', 'brevetti', 'software', 'veicoli', 'altro'
+];
+
 // ─────────────────────────────────────────────
 // PROFILI AZIENDE — State
 // ─────────────────────────────────────────────
@@ -1550,19 +1556,43 @@ function openProfileForm(id) {
   const title = az ? `Modifica: ${displayNomeBreveAzienda(az)}` : 'Nuovo profilo aziendale';
   document.getElementById('form-modal-title').textContent = title;
 
-  ['nomeProfilo','ragioneSociale','piva','settore','ateco','comune','regione',
+  ['nomeProfilo','ragioneSociale','piva','codiceFiscale','settore','ateco','comune','regione',
    'modelloBusiness','prodottiServizi','clientiTarget','mercati',
-   'puntiForza','sfide','addetti','fatturato',
+   'puntiForza','sfide','fatturato',
    'annoFondazione','formaSociale','deMinimisResiduo',
    'investimentiPrevisti','noteClaudeExtra','email'].forEach(f => {
     const el = document.getElementById('fp-' + f);
     if (el) el.value = az ? (az[f] || '') : '';
   });
 
-  ['tipoAzienda','fasiCrescita','hasDipendenti','forzaLavoro','dimensione'].forEach(f => {
+  ['tipoAzienda','fasiCrescita','dimensione','provincia'].forEach(f => {
     const el = document.getElementById('fp-' + f);
     if (el) el.value = az ? (az[f] || '') : '';
   });
+
+  // ATECO secondari (array → textarea, uno per riga)
+  const atecoSecEl = document.getElementById('fp-atecoSecondari');
+  if (atecoSecEl) atecoSecEl.value = az && Array.isArray(az.atecoSecondari) ? az.atecoSecondari.join('\n') : '';
+
+  // Dipendenti strutturati
+  const dip = az && az.dipendenti ? az.dipendenti : {};
+  const setDip = (elId, key) => { const el = document.getElementById(elId); if (el) el.value = dip[key] != null ? dip[key] : ''; };
+  setDip('fp-dip-ti', 'tempoIndeterminato');
+  setDip('fp-dip-td', 'tempoDeterminato');
+  setDip('fp-dip-app', 'apprendisti');
+  setDip('fp-dip-piva', 'collaboratoriPIVA');
+  aggiornaTotaleDip();
+
+  // Addetti (auto-calcolato o legacy)
+  const addettiEl = document.getElementById('fp-addetti');
+  if (addettiEl) {
+    const tot = (dip.tempoIndeterminato||0) + (dip.tempoDeterminato||0) + (dip.apprendisti||0) + (dip.collaboratoriPIVA||0);
+    addettiEl.value = tot > 0 ? String(tot) : (az ? (az.addetti || '') : '');
+  }
+
+  // Progetti concreti
+  renderProgetti(az && Array.isArray(az.progetti) ? az.progetti : []);
+
   // Email
   const emailEl = document.getElementById('fp-email');
   if (emailEl) emailEl.value = az ? (az.email || '') : '';
@@ -1625,6 +1655,94 @@ function getChecked(containerId) {
 }
 
 // ─────────────────────────────────────────────
+// DIPENDENTI — totale auto-calcolato
+// ─────────────────────────────────────────────
+function aggiornaTotaleDip() {
+  const g = id => parseInt(document.getElementById(id)?.value || '0', 10) || 0;
+  const tot = g('fp-dip-ti') + g('fp-dip-td') + g('fp-dip-app') + g('fp-dip-piva');
+  const totEl = document.getElementById('fp-dip-totale');
+  if (totEl) totEl.textContent = `Totale addetti: ${tot}`;
+  const addettiEl = document.getElementById('fp-addetti');
+  if (addettiEl) addettiEl.value = tot > 0 ? String(tot) : '';
+}
+
+// ─────────────────────────────────────────────
+// PROGETTI CONCRETI — form dinamico
+// ─────────────────────────────────────────────
+let _progettiTemp = [];
+
+function renderProgetti(progetti) {
+  _progettiTemp = progetti || [];
+  const lista = document.getElementById('fp-progetti-lista');
+  if (!lista) return;
+  if (_progettiTemp.length === 0) {
+    lista.innerHTML = '<div style="font-size:11px;color:var(--text-muted);padding:8px 0">Nessun progetto aggiunto. Clicca "Aggiungi progetto" per iniziare.</div>';
+    return;
+  }
+  lista.innerHTML = _progettiTemp.map((p, i) => {
+    const catChips = (p.categorie || []).map(c => `<span style="display:inline-block;font-size:10px;background:rgba(99,102,241,0.15);color:#a5b4fc;padding:2px 6px;border-radius:4px;margin:1px">${escHtml(c)}</span>`).join(' ');
+    return `<div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:10px 12px;position:relative">
+      <button type="button" onclick="rimuoviProgetto(${i})" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;font-size:14px;color:var(--text-muted);padding:2px 4px" title="Rimuovi progetto">✕</button>
+      <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px">${escHtml(p.descrizione || 'Progetto senza descrizione')}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:11px;color:var(--text-muted)">
+        ${catChips ? `<span>${catChips}</span>` : ''}
+        ${p.importoStimato ? `<span>💰 ${escHtml(p.importoStimato)}</span>` : ''}
+        ${p.tempistica ? `<span>📅 ${escHtml(p.tempistica)}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function aggiungiProgetto() {
+  const catOptions = CATEGORIE_PROGETTO.map(c => `<option value="${c}">${c}</option>`).join('');
+  const lista = document.getElementById('fp-progetti-lista');
+  if (!lista) return;
+  // Inserisce un form inline temporaneo
+  const formDiv = document.createElement('div');
+  formDiv.className = 'progetto-form-inline';
+  formDiv.style.cssText = 'background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:8px';
+  formDiv.innerHTML = `
+    <input class="form-control pf-desc" type="text" placeholder="Descrizione progetto (es. Ristrutturazione capannone)" style="font-size:12px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <select class="form-control pf-cat" multiple style="font-size:11px;min-height:60px;flex:1">
+        ${catOptions}
+      </select>
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1">
+        <input class="form-control pf-importo" type="text" placeholder="Importo stimato (es. 50K-100K)" style="font-size:12px">
+        <input class="form-control pf-tempo" type="text" placeholder="Tempistica (es. 2026)" style="font-size:12px">
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;justify-content:flex-end">
+      <button type="button" class="btn btn-sm" onclick="this.closest('.progetto-form-inline').remove()" style="font-size:11px">Annulla</button>
+      <button type="button" class="btn btn-sm btn-primary" onclick="salvaProgettoInline(this)" style="font-size:11px">✓ Conferma</button>
+    </div>
+  `;
+  lista.appendChild(formDiv);
+  formDiv.querySelector('.pf-desc').focus();
+}
+
+function salvaProgettoInline(btn) {
+  const form = btn.closest('.progetto-form-inline');
+  const desc = form.querySelector('.pf-desc').value.trim();
+  if (!desc) { alert('Inserisci una descrizione del progetto.'); return; }
+  const catSel = form.querySelector('.pf-cat');
+  const categorie = Array.from(catSel.selectedOptions).map(o => o.value);
+  const importo = form.querySelector('.pf-importo').value.trim();
+  const tempo = form.querySelector('.pf-tempo').value.trim();
+  _progettiTemp.push({ descrizione: desc, categorie, importoStimato: importo, tempistica: tempo });
+  renderProgetti(_progettiTemp);
+}
+
+function rimuoviProgetto(idx) {
+  _progettiTemp.splice(idx, 1);
+  renderProgetti(_progettiTemp);
+}
+
+function leggiProgetti() {
+  return _progettiTemp.filter(p => p.descrizione);
+}
+
+// ─────────────────────────────────────────────
 // SALVA PROFILO
 // ─────────────────────────────────────────────
 function saveProfile() {
@@ -1664,21 +1782,54 @@ function saveProfile() {
     codiceMnemonico = `${iniziali}-${anno}-${comune || 'IT'}`;
   }
 
+  // ATECO secondari: textarea → array
+  const atecoSecRaw = (document.getElementById('fp-atecoSecondari')?.value || '');
+  const atecoSecondari = atecoSecRaw.split('\n').map(s => s.replace(/[^0-9.]/g, '').trim()).filter(Boolean);
+
+  // Dipendenti strutturati
+  const getDip = elId => parseInt(document.getElementById(elId)?.value || '0', 10) || 0;
+  const dipendenti = {
+    tempoIndeterminato: getDip('fp-dip-ti'),
+    tempoDeterminato:   getDip('fp-dip-td'),
+    apprendisti:        getDip('fp-dip-app'),
+    collaboratoriPIVA:  getDip('fp-dip-piva'),
+  };
+  const totDip = dipendenti.tempoIndeterminato + dipendenti.tempoDeterminato + dipendenti.apprendisti + dipendenti.collaboratoriPIVA;
+
+  // Retrocompatibilità: genera i vecchi campi dai nuovi
+  const hasDipCalc = totDip === 0 ? 'No — solo titolari/soci'
+    : totDip < 10 ? 'Sì — meno di 10'
+    : totDip < 50 ? 'Sì — tra 10 e 49'
+    : totDip < 250 ? 'Sì — tra 50 e 249' : 'Sì — 250 o più';
+  const forzaCalc = dipendenti.collaboratoriPIVA > 0 && (dipendenti.tempoIndeterminato + dipendenti.tempoDeterminato) > 0
+    ? 'Misto — dipendenti + P.IVA'
+    : dipendenti.collaboratoriPIVA > 0 ? 'Collaboratori a P.IVA'
+    : dipendenti.tempoIndeterminato > 0 ? 'Dipendenti a tempo indeterminato'
+    : dipendenti.tempoDeterminato > 0 ? 'Dipendenti a tempo determinato'
+    : 'Solo titolari/soci';
+
+  // Progetti concreti
+  const progetti = leggiProgetti();
+
   const profile = {
     id:                  editingProfileId || ('az-' + Date.now()),
     codiceMnemonico:     codiceMnemonico,
     nomeProfilo:         get('nomeProfilo'),
     ragioneSociale:      get('ragioneSociale'),
     piva:                get('piva'),
+    codiceFiscale:       get('codiceFiscale'),
     settore:             get('settore'),
     ateco:               get('ateco'),
+    atecoSecondari:      atecoSecondari,
     comune:              get('comune'),
+    provincia:           get('provincia'),
     regione:             get('regione'),
     tipoAzienda:         get('tipoAzienda'),
     dimensione:          get('dimensione'),
-    hasDipendenti:       get('hasDipendenti'),
-    forzaLavoro:         get('forzaLavoro'),
-    addetti:             get('addetti'),
+    dipendenti:          dipendenti,
+    hasDipendenti:       hasDipCalc,
+    forzaLavoro:         forzaCalc,
+    addetti:             String(totDip || ''),
     fatturato:           get('fatturato'),
     annoFondazione:      get('annoFondazione'),
     formaSociale:        get('formaSociale'),
@@ -1691,6 +1842,7 @@ function saveProfile() {
     sfide:               get('sfide'),
     deMinimisResiduo:    get('deMinimisResiduo'),
     investimentiPrevisti: get('investimentiPrevisti'),
+    progetti:            progetti,
     noteClaudeExtra:     get('noteClaudeExtra'),
     email:               emailVal,
     flagSpeciali:        getChecked('fp-flags-container'),

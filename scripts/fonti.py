@@ -156,6 +156,26 @@ FONTI_RSS = [
         "frequenza": "settimanale",
         "note": "Avvisi e incentivi turismo/HORECA (clienti Livello 2). Il feed copre tutte le news: filtrare con le keywords.",
     },
+    {
+        "id": "fondo-garanzia-pmi",
+        "nome": "Fondo di Garanzia PMI (Mediocredito Centrale)",
+        "livello": "Nazionale",
+        "url_rss": "https://www.fondidigaranzia.it/feed/",
+        "url_web": "https://www.fondidigaranzia.it/",
+        "metodo": "RSS",
+        "frequenza": "settimanale",
+        "note": "Feed WordPress verificato 2026-06-20 (content-type: application/rss+xml). Pubblica circolari operative, aggiornamenti normativi e statistiche del Fondo. Strumento nazionale n.1 per garantire prestiti bancari alle PMI.",
+    },
+    {
+        "id": "inps-incentivi-assunzioni",
+        "nome": "INPS — Incentivi assunzioni e sgravi contributivi",
+        "livello": "Nazionale",
+        "url_rss": "",  # portale interamente JS, nessun feed disponibile
+        "url_web": "https://www.inps.it/it/it/imprese-e-liberi-professionisti.html",
+        "metodo": "Check manuale",
+        "frequenza": "mensile",
+        "note": "Bonus giovani, donne, ZES, decontribuzione Sud. Sito JS pesante — monitorare tramite ricerca Google: 'incentivi assunzioni' site:inps.it. Circolari 55 e 57/2026 di riferimento.",
+    },
 ]
 
 # ─────────────────────────────────────────────────────────────────
@@ -237,6 +257,33 @@ FONTI_PAGINE = [
         "frequenza": "settimanale",
         "note": "Bandi/call per startup e PMI innovative ER (ER2DIGIT, Start Cup, call internazionali) — URL verificato 2026-06-11",
     },
+    {
+        "id": "gse-transizione50",
+        "nome": "GSE — Portale Transizione 5.0 (crediti d'imposta PNRR)",
+        "livello": "Nazionale",
+        "url_web": "https://www.gse.it/servizi-per-te/attuazione-misure-pnrr/transizione-5-0",
+        "metodo": "Diff pagina",
+        "frequenza": "settimanale",
+        "note": "Portale dedicato, separato da gse-imprese già monitorato. Traccia crediti d'imposta 5.0 (beni strumentali, fotovoltaico, formazione). Può rispondere 403 (WAF anti-bot) da GitHub Actions: stato atteso BLOCCATO.",
+    },
+    {
+        "id": "fondirigenti",
+        "nome": "Fondirigenti — Avvisi formazione dirigenti",
+        "livello": "Nazionale",
+        "url_web": "https://www.fondirigenti.it/avvisi",
+        "metodo": "Diff pagina",
+        "frequenza": "mensile",
+        "note": "Fondo interprofessionale formazione dirigenti (Confindustria + Federmanager). Sito Liferay, nessun RSS. Pubblica 2-3 avvisi/anno. Completa la copertura formazione insieme a Fondimpresa.",
+    },
+    {
+        "id": "fondazione-cr-rimini",
+        "nome": "Fondazione Cassa di Risparmio di Rimini — Bandi e contributi",
+        "livello": "Regionale ER",
+        "url_web": "https://www.fondcarim.it/come-richiedere-un-contributo/",
+        "metodo": "Diff pagina",
+        "frequenza": "mensile",
+        "note": "Bandi per progetti sociali, educativi, culturali nel territorio riminese. Target: enti no-profit, cooperative, enti pubblici. Rilevante per clienti con profilo sociale/benefit. Nessun RSS.",
+    },
 ]
 
 # Parole chiave per filtrare i contenuti rilevanti (condivise)
@@ -252,6 +299,12 @@ KEYWORDS_POSITIVI = [
     "turismo", "horeca", "ristorazione", "ricettiv", "agriturismo",
     "artigian", "agroalimentare", "psr", "csr", "commercio",
     "fondo starter", "fondo energia", "eureca", "microcredito",
+    # nuove fonti 2026-06-21
+    "fondo garanzia", "mediocredito", "garanzia diretta",
+    "assunzione", "sgravio", "decontribuzione", "bonus giovani", "bonus donne",
+    "transizione 5.0", "beni strumentali", "fotovoltaico",
+    "fondirigenti", "formazione dirigenti", "conto formazione",
+    "fondazione", "terzo settore", "no-profit",
 ]
 
 KEYWORDS_NEGATIVI = [

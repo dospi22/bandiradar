@@ -1,56 +1,86 @@
 {
   "codice_cliente": "JC-1997-RI",
-  "generatedAt": "2026-06-16T14:41:34.344568Z",
+  "generatedAt": "2026-06-22T06:50:30.322529",
   "aziende": [
     {
       "idAzienda": "az-1780557651248",
-      "generatedAt": "2026-06-16T14:41:34.344568Z",
+      "generatedAt": "2026-06-22T06:50:30.322529",
       "atecoInterpretato": "",
+      "atecoSecondariInterpretati": [],
+      "profiloProgetti": "Ricostruzione capannone/concessionaria, acquisto macchinari officina, integrazione IA venditori, nuovo software gestionale",
       "deMinimisDaVerificare": true,
       "raccomandazioni": [
+        {
+          "id": "IT-2026-030",
+          "nome": "Fondo di Garanzia PMI — Garanzia pubblica per l'accesso al credito",
+          "rilevanza": "molto_alta",
+          "motivazione": "Garanzia 80% su finanziamenti investimenti, perfetta per ristrutturazione capannone e nuova concessionaria",
+          "motivazioneEstesa": "Garanzia statale gratuita fino all'80% su prestiti bancari per investimenti fino a 5M€. Match diretto con la fase di ricostruzione capannone, acquisto macchinari e rinnovamento completo della concessionaria. Misura strutturale, domanda via banca.",
+          "scadenza": "",
+          "importoMax": 5000000,
+          "tipoAgev": "Garanzia",
+          "priorita": "Alta",
+          "progettoMatch": "Ricostruzione capannone e nuova concessionaria"
+        },
         {
           "id": "IT-2026-027",
           "nome": "Nuovo Piano Transizione 5.0 — Iperammortamento beni 4.0 e green",
           "rilevanza": "molto_alta",
-          "motivazione": "Maxi-deduzione per beni 4.0 — perfetto per ricostruzione salone/officina e nuovi software",
-          "motivazioneEstesa": "L'azienda sta ricostruendo salone, officina, app e software nel nuovo capannone. La maxi-deduzione copre beni materiali e immateriali 4.0 con beneficio fiscale significativo. Ideale per macchinari officina e software gestionali.",
+          "motivazione": "Maxi-deduzione fino al 180% per macchinari 4.0 e software, ideale per officina e IA venditori",
+          "motivazioneEstesa": "Maxi-deduzione fiscale (fino al 180%) per beni strumentali 4.0 e green. Match diretto con acquisto macchinari officina, software gestionale e strumenti IA per venditori. Piattaforma GSE aperta dal 12/06/2026, investimenti ammessi fino al 30/09/2028.",
           "scadenza": "2028-09-30",
-          "importoMax": null,
+          "importoMax": 0,
           "tipoAgev": "Agevolazione fiscale",
-          "priorita": "Media"
+          "priorita": "Media",
+          "progettoMatch": "Acquisto macchinari officina + integrazione IA venditori"
+        },
+        {
+          "id": "IT-2026-028",
+          "nome": "Bonus Giovani 2026 — Esonero contributivo assunzioni under 35",
+          "rilevanza": "alta",
+          "motivazione": "Esonero contributivo 100% per assunzioni under 35 TI, ideale per ampliamento organico nuova sede",
+          "motivazioneEstesa": "Esonero contributivo 100% (max 500€/mese per 24 mesi) su nuove assunzioni TI di under 35. Perfetto per l'ampliamento organico legato alla nuova sede. L'azienda ha obiettivo Assunzioni e 16 addetti attuali. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-31",
+          "importoMax": 500,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Media",
+          "progettoMatch": "Ampliamento organico nuova sede"
         },
         {
           "id": "IT-2026-025",
           "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
           "rilevanza": "alta",
-          "motivazione": "100% formazione + obbligo assunzioni, perfetto per obiettivi formazione e crescita personale",
-          "motivazioneEstesa": "Copre il 100% dei costi formativi per disoccupati/inoccupati con obbligo assunzione al 90% a tempo indeterminato. Ideale per formare e assumere personale per il nuovo salone/officina. Verificare adesione a Fondimpresa e plafond de minimis residuo su RNA.",
+          "motivazione": "100% spese formazione con obbligo assunzione TI, perfetto per crescita organico (verificare adesione)",
+          "motivazioneEstesa": "Copre il 100% delle spese di formazione fino a 150K€ con obbligo di assunzione TI del 90% dei formati. Ideale per formare nuovi meccanici/venditori per la nuova sede. Requisito: adesione a Fondimpresa da verificare. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "2026-12-31",
           "importoMax": 150000,
           "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Media"
+          "priorita": "Media",
+          "progettoMatch": "Formazione nuovi dipendenti per nuova sede"
         },
         {
-          "id": "ER-2025-002",
-          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "id": "IT-2026-029",
+          "nome": "Bonus Donne 2026 — Esonero contributivo assunzioni lavoratrici svantaggiate",
           "rilevanza": "media",
-          "motivazione": "Fondo perduto FESR ER per investimenti produttivi e digitalizzazione in tecnologie strategiche",
-          "motivazioneEstesa": "Fondo perduto FESR per investimenti produttivi in tecnologie strategiche digitali. Compatibile con la fase di ricostruzione/digitalizzazione dell'azienda. Richiede progetto strutturato con componente R&S o investimento in tecnologie strategiche.",
-          "scadenza": "2026-09-30",
-          "importoMax": null,
-          "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Alta"
+          "motivazione": "Esonero contributivo 100% per assunzione donne svantaggiate TI, complementare al Bonus Giovani",
+          "motivazioneEstesa": "Esonero contributivo 100% (max 650€/mese per 24 mesi) su assunzioni TI di donne svantaggiate. Cumulabile con la strategia di ampliamento organico per la nuova sede. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-31",
+          "importoMax": 650,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Media",
+          "progettoMatch": null
         },
         {
-          "id": "EU-2026-005",
-          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
           "rilevanza": "media",
-          "motivazione": "Voucher 75% per deposito marchi/design UE, utile per proteggere il brand Japan Car",
-          "motivazioneEstesa": "Rimborso fino al 75% delle tasse di deposito marchi e design europei. Utile per proteggere il brand nella fase di rilancio con il nuovo salone. Include IP Scan gratuito. Verificare plafond de minimis residuo su RNA.",
-          "scadenza": "2026-12-04",
-          "importoMax": null,
-          "tipoAgev": "Voucher",
-          "priorita": "Alta"
+          "motivazione": "Premio eco-innovazione a Ecomondo Rimini, visibilità se la nuova sede integra soluzioni green",
+          "motivazioneEstesa": "Premio-riconoscimento per eco-innovazione a Ecomondo Rimini (novembre 2026). Se la nuova concessionaria integra soluzioni green (fotovoltaico, efficientamento), la candidatura potrebbe portare visibilità. Candidature entro 30/06/2026.",
+          "scadenza": "2026-06-30",
+          "importoMax": 0,
+          "tipoAgev": "Premio",
+          "priorita": "Media",
+          "progettoMatch": null
         }
       ],
       "in_arrivo": [],
@@ -59,10 +89,8 @@
           "id": "IT-2026-002",
           "nome": "Credito d'imposta Transizione 5.0",
           "rilevanza": "molto_alta",
-          "motivazione": "Credito d'imposta 35% per investimenti 4.0, perfetto per i grandi investimenti in corso",
-          "motivazioneEstesa": "Credito d'imposta strutturale per investimenti in beni 4.0 con riduzione consumi energetici. Perfetto per i macchinari officina e i software in fase di acquisto. Verifica apertura campagna 2026 su GSE. Attualmente sospeso.",
+          "motivazione": "Credito d'imposta 35% per investimenti digitali/green, molto rilevante per macchinari officina e IA",
           "scadenza": "",
-          "importoMax": null,
           "tipoAgev": "Credito d'imposta",
           "priorita": "Alta"
         },
@@ -70,10 +98,8 @@
           "id": "IT-2026-007",
           "nome": "Voucher Cloud & Cybersecurity",
           "rilevanza": "alta",
-          "motivazione": "Voucher 50% per cloud e cybersecurity, utile per la nuova infrastruttura IT",
-          "motivazioneEstesa": "Voucher fino a 20 K€ (50%) per servizi cloud e cybersecurity. Ideale per la nuova infrastruttura IT del salone/officina. Attualmente sospeso — monitorare riapertura sportello. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Voucher fino a 20K€ per cloud e cybersecurity, utile per il nuovo software gestionale e app",
           "scadenza": "",
-          "importoMax": 20000,
           "tipoAgev": "Voucher",
           "priorita": "Alta"
         },
@@ -81,38 +107,54 @@
           "id": "IT-2026-016",
           "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
           "rilevanza": "alta",
-          "motivazione": "Maxi-deduzione fino a 180% per macchinari officina e beni strumentali 4.0",
-          "motivazioneEstesa": "Maxi-deduzione fiscale fino al 180% per beni strumentali 4.0. Decreto attuativo firmato, piattaforma GSE attesa. Perfetto per i macchinari officina. Alternativa/complemento a Transizione 5.0. Attualmente sospeso.",
+          "motivazione": "Maxi-deduzione per beni 4.0, complementare a T5.0, piattaforma GSE attesa giugno 2026",
           "scadenza": "2028-09-30",
-          "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
           "priorita": "Alta"
         }
       ],
       "esclusi_per_ateco": [
         {
-          "id": "ER-2026-005",
-          "nome": "Fondo EuReCa — Investimenti offerta turistica ricettiva ER",
-          "ateco_bando": "55",
-          "motivo": "ATECO 55 (strutture ricettive) — JC è commercio/officina auto (implicito 45.x)"
-        },
-        {
           "id": "ER-2026-015",
-          "nome": "FESR ER — Sostegno innovazione commercio vicinato",
+          "nome": "FESR ER — Commercio vicinato e pubblici esercizi 2026",
           "ateco_bando": "47, 56, 93",
-          "motivo": "ATECO 47/56/93 (dettaglio/somministrazione) — JC è commercio auto (ATECO 45.x, escluso da 47)"
+          "motivo": "Commercio auto = ATECO 45, non ATECO 47 (dettaglio esclusi autoveicoli)"
         },
         {
           "id": "ER-2026-018",
-          "nome": "CSR ER — SRD03 Trasformazione prodotti agricoli",
+          "nome": "CSR ER — Trasformazione prodotti agricoli",
           "ateco_bando": "A01",
-          "motivo": "ATECO A01 (aziende agricole) — JC è commercio auto"
+          "motivo": "Concessionaria auto non è azienda agricola"
         },
         {
-          "id": "ER-2026-016",
-          "nome": "FESR ER — Bando integrativo PRECISEU deep tech salute",
-          "ateco_bando": "tutti (focus salute/deep tech)",
-          "motivo": "Settore salute/deep tech — JC è commercio auto, nessun nesso settoriale"
+          "id": "IT-2026-011",
+          "nome": "Credito d'imposta Agricoltura 4.0 2026",
+          "ateco_bando": "A01|A02|A03",
+          "motivo": "Non agricoltura (sospeso)"
+        },
+        {
+          "id": "ER-2026-013",
+          "nome": "Bando Sviluppo Audiovisivo ER 2026",
+          "ateco_bando": "59.11",
+          "motivo": "Non produzione audiovisiva (link KO)"
+        },
+        {
+          "id": "ER-2026-005",
+          "nome": "Fondo EuReCa — Turismo ricettivo ER",
+          "ateco_bando": "55",
+          "motivo": "Non turismo ricettivo (link KO)"
+        },
+        {
+          "id": "ER-2026-004",
+          "nome": "POR-FESR ER — Sostenibilità energetica imprese 2026",
+          "ateco_bando": "35|43|46|47|62",
+          "motivo": "ATECO 45 (commercio auto) non in lista ammessi (sospeso)"
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: tecnologie strategiche",
+          "ateco_bando": "tutti",
+          "motivo": "ATECO tutti ma bando per deep tech/clean tech/biotech — concessionaria auto fuori ambito strategico"
         }
       ]
     }

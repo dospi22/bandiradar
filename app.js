@@ -84,6 +84,7 @@ let linkStatus  = {};   // caricato da data/link_status.json
 let showArchive = false;
 let advOpen     = false;
 let viewMode    = 'grid';
+let currentSection = 'bandi';
 
 // Helper link status
 function getLS(id)         { return linkStatus[id] || null; }
@@ -502,6 +503,7 @@ function updateURLHash(f) {
   const map = { q:'q', livello:'livello', cat:'cat', stato:'stato', ben:'ben',
                 agev:'agev', regime:'regime', ambito:'ambito', scad:'scad', pri:'pri', sort:'sort' };
   for (const [k,v] of Object.entries(map)) if (f[k]) p.set(v, f[k]);
+  if (currentSection && currentSection !== 'bandi') p.set('sec', currentSection);
   history.replaceState(null, '', p.toString() ? '#' + p : location.pathname);
 }
 
@@ -514,6 +516,7 @@ function loadFromHash() {
     ambito:'filter-ambito', scad:'filter-tipo-scad', pri:'filter-priorita', sort:'sort-by'
   };
   for (const [k,id] of Object.entries(map)) if (p.has(k)) document.getElementById(id).value = p.get(k);
+  if (p.has('sec')) switchSection(p.get('sec'));
 }
 
 // ─────────────────────────────────────────────
@@ -1087,6 +1090,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function switchSection(name) {
   const sezioni = ['bandi', 'scadenze', 'profili', 'pratiche'];
   if (!sezioni.includes(name)) name = 'bandi';
+  currentSection = name;
   sezioni.forEach(s => {
     const sec = document.getElementById('section-' + s);
     const tab = document.getElementById('tab-' + s);
@@ -1096,6 +1100,10 @@ function switchSection(name) {
       tab.setAttribute('aria-selected', s === name ? 'true' : 'false');
     }
   });
+  // Aggiorna l'URL per persistere la sezione al refresh
+  const p = new URLSearchParams(location.hash ? location.hash.slice(1) : '');
+  if (name === 'bandi') p.delete('sec'); else p.set('sec', name);
+  history.replaceState(null, '', p.toString() ? '#' + p : location.pathname);
   if (name === 'profili')  renderProfili();
   if (name === 'scadenze') renderTimeline();
   if (name === 'pratiche') renderPratiche();

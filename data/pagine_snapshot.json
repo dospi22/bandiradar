@@ -2,7 +2,7 @@
   "cciaa-romagna": {
     "nome": "CCIAA Romagna (Forlì-Cesena e Rimini) — Finanziamenti",
     "url": "https://www.romagna.camcom.it/it/opportunita/finanziamenti-1",
-    "ultimo_check": "2026-06-15T11:30:52.597962+00:00",
+    "ultimo_check": "2026-06-22T11:15:36.431990+00:00",
     "voci": {
       "https://www.romagna.camcom.it/it/opportunita/sviluppo-imprese-innovative": "Sviluppo startup e PMI innovative",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa": "Servizi per l'avvio e lo sviluppo d'impresa",
@@ -30,7 +30,7 @@
   "fesr-er": {
     "nome": "FESR Emilia-Romagna — Bandi 2021-2027",
     "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
-    "ultimo_check": "2026-06-15T11:30:53.316340+00:00",
+    "ultimo_check": "2026-06-22T11:15:37.248403+00:00",
     "voci": {
       "https://www.regione.emilia-romagna.it": "Regione Emilia-Romagna",
       "https://fesr.regione.emilia-romagna.it/": "Programma regionale Fondo europeo di sviluppo regionale - Fesr",
@@ -45,7 +45,7 @@
   "invitalia": {
     "nome": "Invitalia — Incentivi e strumenti",
     "url": "https://www.invitalia.it/per-le-imprese/incentivi-e-strumenti",
-    "ultimo_check": "2026-06-15T11:30:51.178660+00:00",
+    "ultimo_check": "2026-06-22T11:15:35.227322+00:00",
     "voci": {
       "https://www.invitalia.it/per-chi-vuole-fare-impresa": "Vai alla pagina Per chi vuole fare impresa",
       "https://www.invitalia.it/per-chi-vuole-fare-impresa/scegli-lincentivo-te": "Scegli l'incentivo o strumento per te",
@@ -54,13 +54,14 @@
       "https://www.invitalia.it/servizi/invitalia-gli-investimenti-pubblici": "Invitalia per gli investimenti pubblici",
       "https://www.invitalia.it/incentivi-e-strumenti/voucher-il-sostegno-dei-piccoli-editori": "Leggi tutto su Voucher per il sostegno dei piccoli editori",
       "https://www.invitalia.it/incentivi-e-strumenti/sviluppo-competenze-specialistiche-delle-pmi": "Leggi tutto su Sviluppo competenze specialistiche delle Pmi",
+      "https://www.invitalia.it/incentivi-e-strumenti/beni-strumentali-nuova-sabatini": "Leggi tutto su Beni strumentali - Nuova Sabatini",
       "https://www.invitalia.it/incentivi-e-strumenti/contratto-di-sviluppo": "Contratto di sviluppo"
     }
   },
   "euipo-sme-fund": {
     "nome": "EUIPO — SME Fund (voucher marchi e brevetti)",
     "url": "https://www.euipo.europa.eu/it/sme-corner/sme-fund",
-    "ultimo_check": "2026-06-15T11:30:54.181353+00:00",
+    "ultimo_check": "2026-06-22T11:15:38.346520+00:00",
     "voci": {
       "https://euipo.europa.eu/eSearchCLW/": "Giurisprudenza su eSearch Decisioni dell’Ufficio, sentenze del Tribunale, della Corte di giustizia e dei tribunali nazionali competenti in materia di DPI",
       "https://www.euipo.europa.eu/it/search-ip": "Ricerche Effettua una ricerca nelle nostre banche dati per tutte le tue esigenze in materia di PI",
@@ -81,7 +82,7 @@
   "eber-artigianato": {
     "nome": "EBER — Ente Bilaterale Artigianato ER (sviluppo imprenditoriale)",
     "url": "https://www.eber.org/Attivita/sviluppo-imprenditoriale",
-    "ultimo_check": "2026-06-15T11:30:55.123135+00:00",
+    "ultimo_check": "2026-06-22T11:15:38.973906+00:00",
     "voci": {
       "https://www.eber.org/Attivita/sviluppo-imprenditoriale": "Sviluppo imprenditoriale",
       "https://www.eber.org/Fondartigianato": "Fondartigianato"
@@ -90,7 +91,7 @@
   "artigiancredito": {
     "nome": "Artigiancredito — News (Fondo Starter, Energia, EuReCa, Microcredito ER)",
     "url": "https://www.artigiancredito.it/it-it/news",
-    "ultimo_check": "2026-06-15T11:30:55.842850+00:00",
+    "ultimo_check": "2026-06-22T11:15:39.691950+00:00",
     "voci": {
       "https://www.artigiancredito.it/it-it/prodotti-e-servizi/agevolazioni/eureca-turismo-regione-emilia-romagna": "EuReCa Turismo Regione Emilia-Romagna",
       "https://www.artigiancredito.it/it-it/prodotti-e-servizi/provvedimenti-alluvioni-in-toscana-di-novembre-2023/finanziamento-diretto": "FINANZIAMENTO DIRETTO",
@@ -112,7 +113,7 @@
   "er-startup": {
     "nome": "EmiliaRomagnaStartUp (ART-ER) — Bandi e call",
     "url": "https://www.emiliaromagnastartup.it/it/bandi",
-    "ultimo_check": "2026-06-15T11:30:56.337393+00:00",
+    "ultimo_check": "2026-06-22T11:15:40.514021+00:00",
     "voci": {
       "https://www.emiliaromagnastartup.it/it/categoria/tipologia-bando/contributo-nella-spesacofinanziamento": "Contributo nella spesa/cofinanziamento",
       "https://www.emiliaromagnastartup.it/it/categoria/settore-bando/innovazione-sociale": "Innovazione Sociale",
@@ -125,10 +126,9 @@
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/invito-presentare-progetti-finalizzati-allinserimento-nellincubatore-dimpresa": "Invito a presentare progetti finalizzati all’inserimento nellʹincubatore dʹimpresa Cesenalab",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/nuovo-bando-mepa-startup-innovative": "Nuovo Bando MePA per Startup Innovative",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/servizio-linkup-matchmaking-qualificato-ifab-startup": "Servizio LinkUp: matchmaking qualificato IFAB per startup",
-      "https://www.emiliaromagnastartup.it/it/innovative/bandi/italian-lifestyle-acceleration-program-5-ed": "Italian Lifestyle Acceleration Program 5 ed.",
-      "https://www.emiliaromagnastartup.it/it/innovative/bandi/italian-lifestyle-accelerator-program-2026": "Italian lifestyle accelerator program 2026",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-di-euro-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione di euro per startup e PMI",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione per startup e PMI",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/premio-innovazione-sociale-2026-fondi-startup-vocazione-sociale": "Premio Innovazione Sociale 2026: fondi per startup a vocazione sociale",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/terza-ed-swiss-italian-startup-award-sisa": "terza ed. Swiss Italian Startup Award (SISA)",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-nato-diana-challenge-call-2027-fondi-startup-e-pmi": "Bando NATO DIANA Challenge Call 2027: fondi per startup e PMI",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-accelerator-2026-sostegno-start-e-piccole-e-medie-imprese-innovative": "EIC Accelerator 2026: sostegno a start-up e piccole e medie imprese innovative",
@@ -140,16 +140,48 @@
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bandi-ngi-open-calls-fino-50000-euro-startup-e-pmi": "Bandi NGI Open Calls: fino a 50.000 euro per startup e PMI",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-nemesis-open-call-fondi-startup-agtech-emilia-romagna": "Bando NEMESIS Open Call: fondi per startup AgTech in Emilia-Romagna",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-c4b-open-call-pilot-projects-fondi-startup-nella-bioeconomia-circolare": "Bando C4B Open Call for Pilot Projects: fondi per startup nella bioeconomia circolare",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-regionale-lo-sviluppo-di-video-giochi": "Bando regionale per lo sviluppo di video giochi",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-spin-rise-2026-programma-di-pre-incubazione-scienziati-deep-tech": "Bando SPIN: Rise 2026 | Programma di pre-incubazione per scienziati deep-tech",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-women-techeu-open-call-finanziamenti-startup-guidate-da-donne": "Bando Women TechEU Open Call: finanziamenti per startup guidate da donne",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-transition-open-2026contributi-fino-25-milioni-di-euro-trasformare-i-risultati": "EIC Transition Open 2026:Contributi fino a 2,5 milioni di euro per trasformare i risultati della ricerca in innovazioni di mercato",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/missions-al-i-bandi-2026-di-horizon-europe": "Missions: al via i bandi 2026 di Horizon Europe",
-      "https://www.emiliaromagnastartup.it/it/FinancER": "Finanza per l'innovazione",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/al-eic-pathfinder-2026-sostegno-alle-imprese-con-tecnologie-disruptive": "Al via EIC Pathfinder 2026: sostegno alle imprese con tecnologie disruptive",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/plai-call4startups-2026": "PLAI – Call4Startups 2026",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-eurohpc-joint-undertaking-4-call-startup-nel-settore-quantistico": "Bando EuroHPC Joint Undertaking: 4 call per startup nel settore quantistico",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/avviso-pubblico-la-concessione-di-postazioni-di-coworking-presso-lincubatore-del": "Avviso pubblico per la concessione di postazioni di coworking presso l’incubatore del Centro di Ricerca Ambiente, Energia e Mare di Marina di Ravenna",
+      "https://www.emiliaromagnastartup.it/it/pagine/finanza-linnovazione": "Finanza per l'innovazione",
       "https://www.emiliaromagnastartup.it/it/pagine/finanziare-una-startup": "Finanziare una startup",
       "https://www.emiliaromagnastartup.it/it/pagine/StartupsGoInternational": "Startups Go International",
       "https://www.emiliaromagnastartup.it/it/pagine/il-ministero-dello-sviluppo-economico-le-startup-innovative": "Il Ministero dello Sviluppo Economico per le StartUp",
       "https://www.facebook.com/EmiliaRomagnaStartUp": "https://www.facebook.com/EmiliaRomagnaStartUp",
       "https://twitter.com/erstartup": "https://twitter.com/erstartup",
       "http://www.emiliaromagnastartup.it/pagine/feed-rss": "http://www.emiliaromagnastartup.it/pagine/feed-rss"
+    }
+  },
+  "fondirigenti": {
+    "nome": "Fondirigenti — Avvisi formazione dirigenti",
+    "url": "https://www.fondirigenti.it/avvisi",
+    "ultimo_check": "2026-06-22T11:15:41.779765+00:00",
+    "voci": {
+      "https://www.fondirigenti.it/conto-formazione": "Conto Formazione",
+      "https://www.fondirigenti.it/documents/35495/0/FAQ+agg+20_21_21+e+MODULO_Iscrizione_Provvisoria.zip/acc9c80f-7e90-73a4-c592-d9c0d10af49e?t=1640009521156": "FAQ aggiornate al 20/12/21 (requisiti di partecipazione) e modulo iscrizione provvisoria"
+    }
+  },
+  "fondazione-cr-rimini": {
+    "nome": "Fondazione Cassa di Risparmio di Rimini — Bandi e contributi",
+    "url": "https://www.fondcarim.it/come-richiedere-un-contributo/",
+    "ultimo_check": "2026-06-22T11:15:42.448586+00:00",
+    "voci": {
+      "https://www.fondcarim.it/fondazione-trasparente/": "Fondazione Trasparente",
+      "https://www.fondcarim.it/territorio/": "La fondazione per il territorio",
+      "https://www.fondcarim.it/come-richiedere-un-contributo/": "Come richiedere un Contributo",
+      "https://www.fondcarim.it/30-anni-di-fondazione/": "30 Anni di Fondazione",
+      "https://www.fondcarim.it/wp-content/uploads/2025/11/Bando-Volontariato-Istruzione-Arte-e-attivita-culturali-2025-2026-per-Pubblicazione.pdf": "» Scarica il Bando",
+      "https://www.fondcarim.it/wp-content/uploads/2024/11/Bando-Volontariato-Istruzione-2024-2025-per-PUBBLICAZIONE.pdf": "» Scarica il Bando",
+      "https://www.fondcarim.it/wp-content/uploads/2023/11/BANDO-WELFARE-2023-2024-OK-DEF-2.pdf": "» Scarica il Bando",
+      "https://www.fondcarim.it/wp-content/uploads/2022/12/Bando-Volontariato-Istruzione-2022-2023.pdf": "» Scarica il Bando",
+      "https://www.fondcarim.it/wp-content/uploads/2022/06/Bando-assegnazione-contributi.pdf": "» Scarica il Bando",
+      "https://www.fondcarim.it/wp-content/uploads/2022/07/istruzioni-operative-bando-2022.pdf": "» Istruzioni operative bando"
     }
   }
 }

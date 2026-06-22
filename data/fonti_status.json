@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-06-15T11:30:50.144850+00:00",
-  "data": "2026-06-15",
-  "ok": 15,
+  "timestamp": "2026-06-22T11:15:34.054825+00:00",
+  "data": "2026-06-22",
+  "ok": 18,
   "errore": 0,
   "stantio": 0,
-  "manuale": 6,
-  "bloccato": 1,
-  "totale": 22,
+  "manuale": 7,
+  "bloccato": 2,
+  "totale": 27,
   "fonti": [
     {
       "id": "mimit",
@@ -35,7 +35,7 @@
       "tipo": "RSS",
       "url": "https://euknow.it/feed/",
       "voci": 10,
-      "ultima_voce": "2026-06-11",
+      "ultima_voce": "2026-06-15",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -46,7 +46,7 @@
       "tipo": "RSS",
       "url": "https://imprese.regione.emilia-romagna.it/RSS",
       "voci": 15,
-      "ultima_voce": "2026-06-15",
+      "ultima_voce": "2026-06-19",
       "status": "OK",
       "dettaglio": "15 voci"
     },
@@ -75,7 +75,7 @@
       "tipo": "RSS",
       "url": "https://infobandi.csvnet.it/feed",
       "voci": 10,
-      "ultima_voce": "2026-06-02",
+      "ultima_voce": "2026-06-18",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -86,7 +86,7 @@
       "tipo": "RSS",
       "url": "https://apre.it/feed/",
       "voci": 10,
-      "ultima_voce": "2026-06-15",
+      "ultima_voce": "2026-06-22",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -115,7 +115,7 @@
       "tipo": "RSS",
       "url": "https://www.simest.it/media/comunicati-stampa/feed",
       "voci": 10,
-      "ultima_voce": "2026-06-15",
+      "ultima_voce": "2026-06-16",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -135,7 +135,7 @@
       "tipo": "RSS",
       "url": "https://agricoltura.regione.emilia-romagna.it/RSS",
       "voci": 15,
-      "ultima_voce": "2026-06-28",
+      "ultima_voce": "2026-06-23",
       "status": "OK",
       "dettaglio": "15 voci"
     },
@@ -146,9 +146,29 @@
       "tipo": "RSS",
       "url": "https://www.ministeroturismo.gov.it/feed/",
       "voci": 10,
-      "ultima_voce": "2026-06-15",
+      "ultima_voce": "2026-06-22",
       "status": "OK",
       "dettaglio": "10 voci"
+    },
+    {
+      "id": "fondo-garanzia-pmi",
+      "nome": "Fondo di Garanzia PMI (Mediocredito Centrale)",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.fondidigaranzia.it/feed/",
+      "voci": 10,
+      "ultima_voce": "2026-05-12",
+      "status": "OK",
+      "dettaglio": "10 voci"
+    },
+    {
+      "id": "inps-incentivi-assunzioni",
+      "nome": "INPS — Incentivi assunzioni e sgravi contributivi",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.inps.it/it/it/imprese-e-liberi-professionisti.html",
+      "status": "MANUALE",
+      "dettaglio": "Fonte a check manuale (nessun RSS)"
     },
     {
       "id": "invitalia",
@@ -175,7 +195,7 @@
       "tipo": "Diff pagina",
       "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
       "status": "OK",
-      "dettaglio": "656 KB"
+      "dettaglio": "716 KB"
     },
     {
       "id": "gse-imprese",
@@ -220,7 +240,34 @@
       "tipo": "Diff pagina",
       "url": "https://www.emiliaromagnastartup.it/it/bandi",
       "status": "OK",
-      "dettaglio": "124 KB"
+      "dettaglio": "123 KB"
+    },
+    {
+      "id": "gse-transizione50",
+      "nome": "GSE — Portale Transizione 5.0 (crediti d'imposta PNRR)",
+      "livello": "Nazionale",
+      "tipo": "Diff pagina",
+      "url": "https://www.gse.it/servizi-per-te/attuazione-misure-pnrr/transizione-5-0",
+      "status": "BLOCCATO",
+      "dettaglio": "HTTP 403 — protezione anti-bot (WAF): la pagina è quasi certamente attiva, verificare dal browser"
+    },
+    {
+      "id": "fondirigenti",
+      "nome": "Fondirigenti — Avvisi formazione dirigenti",
+      "livello": "Nazionale",
+      "tipo": "Diff pagina",
+      "url": "https://www.fondirigenti.it/avvisi",
+      "status": "OK",
+      "dettaglio": "323 KB"
+    },
+    {
+      "id": "fondazione-cr-rimini",
+      "nome": "Fondazione Cassa di Risparmio di Rimini — Bandi e contributi",
+      "livello": "Regionale ER",
+      "tipo": "Diff pagina",
+      "url": "https://www.fondcarim.it/come-richiedere-un-contributo/",
+      "status": "OK",
+      "dettaglio": "146 KB"
     }
   ]
 }

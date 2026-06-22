@@ -1,0 +1,125 @@
+{
+  "codice_cliente": "FC-2017-RN",
+  "generatedAt": "2026-06-16T14:41:34.344568Z",
+  "aziende": [
+    {
+      "idAzienda": "az-1779394390646",
+      "generatedAt": "2026-06-16T14:41:34.344568Z",
+      "atecoInterpretato": "82.30 — Organizzazione di convegni, fiere ed eventi",
+      "deMinimisDaVerificare": true,
+      "raccomandazioni": [
+        {
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "alta",
+          "motivazione": "Impresa Benefit con obiettivo economia circolare, cerimonia a Ecomondo Rimini — visibilità ESG",
+          "motivazioneEstesa": "Impresa Benefit con economia circolare tra gli obiettivi. Il premio è consegnato a Ecomondo, Rimini — stessa città dell'azienda. Ottima opportunità di visibilità ESG e networking istituzionale. Non è contributo economico ma riconoscimento.",
+          "scadenza": "2026-06-30",
+          "importoMax": null,
+          "tipoAgev": "Premio",
+          "priorita": "Media"
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "media",
+          "motivazione": "Fondo perduto FESR ER per tecnologie digitali, compatibile con obiettivo digitalizzazione",
+          "motivazioneEstesa": "Fondo perduto FESR Emilia-Romagna per investimenti in tecnologie strategiche (digitale, clean tech). Compatibile con obiettivi di digitalizzazione e crescita. Richiede progetto R&S/investimento produttivo strutturato.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "rilevanza": "media",
+          "motivazione": "Voucher 75% per deposito marchi/design UE, utile per proteggere il brand nella fase di crescita",
+          "motivazioneEstesa": "Rimborso fino al 75% delle tasse di deposito marchi e design europei, più IP Scan gratuito. Utile per proteggere il brand nella fase di crescita accelerata. Procedura semplice, voucher diretto. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-04",
+          "importoMax": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-027",
+          "nome": "Nuovo Piano Transizione 5.0 — Iperammortamento beni 4.0 e green",
+          "rilevanza": "media",
+          "motivazione": "Maxi-deduzione fiscale per beni 4.0 e green, compatibile con obiettivo digitalizzazione",
+          "motivazioneEstesa": "Maxi-deduzione fiscale per investimenti in beni materiali e immateriali 4.0 e autoproduzione FER. Compatibile con obiettivo digitalizzazione. Piattaforma GSE aperta dal 12/06/2026, investimenti fino al 30/09/2028.",
+          "scadenza": "2028-09-30",
+          "importoMax": null,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Media"
+        },
+        {
+          "id": "EU-2026-002",
+          "nome": "LIFE Programme 2026 — Standard Action Projects (Environment & Climate)",
+          "rilevanza": "media",
+          "motivazione": "Fondo UE per economia circolare e clima, FC può partecipare in partenariato con PA/Comuni",
+          "motivazioneEstesa": "Fondo perduto UE (60%) per progetti ambientali e di economia circolare. FC lavora con Comuni e Scuole (tipici partner LIFE) e ha economia circolare tra gli obiettivi. Richiede partenariato europeo — valutare come partner, non capofila.",
+          "scadenza": "2026-09-22",
+          "importoMax": 5000000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
+        }
+      ],
+      "in_arrivo": [],
+      "da_monitorare": [
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "rilevanza": "alta",
+          "motivazione": "Voucher 50% per cloud e cybersecurity, perfetto per digitalizzazione servizi",
+          "motivazioneEstesa": "Voucher fino a 20 K€ (50%) per servizi cloud e cybersecurity. Ideale per digitalizzare l'infrastruttura IT dell'azienda. Attualmente sospeso — monitorare riapertura sportello. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "",
+          "importoMax": 20000,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-016",
+          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
+          "rilevanza": "media",
+          "motivazione": "Maxi-deduzione beni 4.0, complementare a Transizione 5.0 se più vantaggioso",
+          "motivazioneEstesa": "Maxi-deduzione fiscale fino al 180% per beni strumentali 4.0. Decreto attuativo firmato, piattaforma GSE attesa. Alternativa/complemento a Transizione 5.0. Attualmente sospeso.",
+          "scadenza": "2028-09-30",
+          "importoMax": null,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "rilevanza": "media",
+          "motivazione": "Credito d'imposta 35% per investimenti 4.0 + riduzione consumi, compatibile con digitalizzazione",
+          "motivazioneEstesa": "Credito d'imposta strutturale per investimenti in beni 4.0 con riduzione consumi energetici. Compatibile con obiettivo digitalizzazione. Verifica apertura campagna 2026 su GSE. Attualmente sospeso.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta"
+        }
+      ],
+      "esclusi_per_ateco": [
+        {
+          "id": "ER-2026-005",
+          "nome": "Fondo EuReCa — Investimenti offerta turistica ricettiva ER",
+          "ateco_bando": "55",
+          "motivo": "ATECO 55 (strutture ricettive) — FC è 82.30 (eventi)"
+        },
+        {
+          "id": "ER-2026-015",
+          "nome": "FESR ER — Sostegno innovazione commercio vicinato",
+          "ateco_bando": "47, 56, 93",
+          "motivo": "ATECO 47/56/93 (commercio dettaglio/somministrazione) — FC è 82.30 (eventi)"
+        },
+        {
+          "id": "ER-2026-018",
+          "nome": "CSR ER — SRD03 Trasformazione prodotti agricoli",
+          "ateco_bando": "A01",
+          "motivo": "ATECO A01 (aziende agricole) — FC è 82.30 (eventi)"
+        }
+      ]
+    }
+  ]
+}

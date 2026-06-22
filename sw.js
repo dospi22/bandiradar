@@ -12,7 +12,7 @@
 // per forzare la rigenerazione del cache.
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'bandiradar-v5'; // v5 (2026-06-17): profilo V2 — progetti, ATECO secondari, dipendenti strutturati, CF, provincia
+const CACHE_VERSION = 'bandiradar-v6'; // v6 (2026-06-22): persist sezione attiva nel hash URL al refresh
 const PRECACHE = [
   './',
   './index.html',

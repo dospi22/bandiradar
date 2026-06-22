@@ -1,0 +1,120 @@
+{
+  "codice_cliente": "JC-1997-RI",
+  "generatedAt": "2026-06-16T14:41:34.344568Z",
+  "aziende": [
+    {
+      "idAzienda": "az-1780557651248",
+      "generatedAt": "2026-06-16T14:41:34.344568Z",
+      "atecoInterpretato": "",
+      "deMinimisDaVerificare": true,
+      "raccomandazioni": [
+        {
+          "id": "IT-2026-027",
+          "nome": "Nuovo Piano Transizione 5.0 — Iperammortamento beni 4.0 e green",
+          "rilevanza": "molto_alta",
+          "motivazione": "Maxi-deduzione per beni 4.0 — perfetto per ricostruzione salone/officina e nuovi software",
+          "motivazioneEstesa": "L'azienda sta ricostruendo salone, officina, app e software nel nuovo capannone. La maxi-deduzione copre beni materiali e immateriali 4.0 con beneficio fiscale significativo. Ideale per macchinari officina e software gestionali.",
+          "scadenza": "2028-09-30",
+          "importoMax": null,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Media"
+        },
+        {
+          "id": "IT-2026-025",
+          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
+          "rilevanza": "alta",
+          "motivazione": "100% formazione + obbligo assunzioni, perfetto per obiettivi formazione e crescita personale",
+          "motivazioneEstesa": "Copre il 100% dei costi formativi per disoccupati/inoccupati con obbligo assunzione al 90% a tempo indeterminato. Ideale per formare e assumere personale per il nuovo salone/officina. Verificare adesione a Fondimpresa e plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-31",
+          "importoMax": 150000,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Media"
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "media",
+          "motivazione": "Fondo perduto FESR ER per investimenti produttivi e digitalizzazione in tecnologie strategiche",
+          "motivazioneEstesa": "Fondo perduto FESR per investimenti produttivi in tecnologie strategiche digitali. Compatibile con la fase di ricostruzione/digitalizzazione dell'azienda. Richiede progetto strutturato con componente R&S o investimento in tecnologie strategiche.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta"
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "rilevanza": "media",
+          "motivazione": "Voucher 75% per deposito marchi/design UE, utile per proteggere il brand Japan Car",
+          "motivazioneEstesa": "Rimborso fino al 75% delle tasse di deposito marchi e design europei. Utile per proteggere il brand nella fase di rilancio con il nuovo salone. Include IP Scan gratuito. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-04",
+          "importoMax": null,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        }
+      ],
+      "in_arrivo": [],
+      "da_monitorare": [
+        {
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "rilevanza": "molto_alta",
+          "motivazione": "Credito d'imposta 35% per investimenti 4.0, perfetto per i grandi investimenti in corso",
+          "motivazioneEstesa": "Credito d'imposta strutturale per investimenti in beni 4.0 con riduzione consumi energetici. Perfetto per i macchinari officina e i software in fase di acquisto. Verifica apertura campagna 2026 su GSE. Attualmente sospeso.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "rilevanza": "alta",
+          "motivazione": "Voucher 50% per cloud e cybersecurity, utile per la nuova infrastruttura IT",
+          "motivazioneEstesa": "Voucher fino a 20 K€ (50%) per servizi cloud e cybersecurity. Ideale per la nuova infrastruttura IT del salone/officina. Attualmente sospeso — monitorare riapertura sportello. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "",
+          "importoMax": 20000,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-016",
+          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
+          "rilevanza": "alta",
+          "motivazione": "Maxi-deduzione fino a 180% per macchinari officina e beni strumentali 4.0",
+          "motivazioneEstesa": "Maxi-deduzione fiscale fino al 180% per beni strumentali 4.0. Decreto attuativo firmato, piattaforma GSE attesa. Perfetto per i macchinari officina. Alternativa/complemento a Transizione 5.0. Attualmente sospeso.",
+          "scadenza": "2028-09-30",
+          "importoMax": null,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Alta"
+        }
+      ],
+      "esclusi_per_ateco": [
+        {
+          "id": "ER-2026-005",
+          "nome": "Fondo EuReCa — Investimenti offerta turistica ricettiva ER",
+          "ateco_bando": "55",
+          "motivo": "ATECO 55 (strutture ricettive) — JC è commercio/officina auto (implicito 45.x)"
+        },
+        {
+          "id": "ER-2026-015",
+          "nome": "FESR ER — Sostegno innovazione commercio vicinato",
+          "ateco_bando": "47, 56, 93",
+          "motivo": "ATECO 47/56/93 (dettaglio/somministrazione) — JC è commercio auto (ATECO 45.x, escluso da 47)"
+        },
+        {
+          "id": "ER-2026-018",
+          "nome": "CSR ER — SRD03 Trasformazione prodotti agricoli",
+          "ateco_bando": "A01",
+          "motivo": "ATECO A01 (aziende agricole) — JC è commercio auto"
+        },
+        {
+          "id": "ER-2026-016",
+          "nome": "FESR ER — Bando integrativo PRECISEU deep tech salute",
+          "ateco_bando": "tutti (focus salute/deep tech)",
+          "motivo": "Settore salute/deep tech — JC è commercio auto, nessun nesso settoriale"
+        }
+      ]
+    }
+  ]
+}

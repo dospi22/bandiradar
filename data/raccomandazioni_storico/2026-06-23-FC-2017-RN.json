@@ -1,0 +1,190 @@
+{
+  "codice_cliente": "FC-2017-RN",
+  "generatedAt": "2026-06-22T06:50:30.322529",
+  "aziende": [
+    {
+      "idAzienda": "az-1779394390646",
+      "generatedAt": "2026-06-22T06:50:30.322529",
+      "atecoInterpretato": "82.30.03 — Organizzazione di convegni e fiere",
+      "atecoSecondariInterpretati": [],
+      "profiloProgetti": "",
+      "deMinimisDaVerificare": true,
+      "raccomandazioni": [
+        {
+          "id": "IT-2026-030",
+          "nome": "Fondo di Garanzia PMI — Garanzia pubblica per l'accesso al credito",
+          "rilevanza": "alta",
+          "motivazione": "Garanzia pubblica fino all'80% su finanziamenti bancari, match diretto con obiettivo Accesso al credito",
+          "motivazioneEstesa": "Garanzia statale gratuita su prestiti bancari fino a 5M€ (80% investimenti). Perfetta per microimpresa Benefit in crescita accelerata che punta ad accedere al credito. Misura strutturale sempre aperta, domanda via banca o Confidi.",
+          "scadenza": "",
+          "importoMax": 5000000,
+          "tipoAgev": "Garanzia",
+          "priorita": "Alta",
+          "progettoMatch": null
+        },
+        {
+          "id": "IT-2026-019",
+          "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
+          "rilevanza": "media",
+          "motivazione": "Premio eco-innovazione a Ecomondo Rimini, visibilità ESG per Impresa Benefit con obiettivo Economia circolare",
+          "motivazioneEstesa": "Premio-riconoscimento (non contributo economico) per imprese eco-innovative, consegnato a Ecomondo Rimini. Utile per visibilità ESG e coerente con status Benefit e obiettivo Economia circolare. Candidature entro 30/06/2026.",
+          "scadenza": "2026-06-30",
+          "importoMax": 0,
+          "tipoAgev": "Premio",
+          "priorita": "Media",
+          "progettoMatch": null
+        },
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "media",
+          "motivazione": "Fondo perduto FESR ER per investimenti in tecnologie digitali, compatibile se l'azienda sviluppa software",
+          "motivazioneEstesa": "Fondo perduto FESR ER per investimenti produttivi e R&S in tecnologie strategiche (digitale, clean tech). Compatibile con settore dichiarato 'Innovazione, software' — verificare se i progetti aziendali rientrano nelle tecnologie strategiche ammesse. Scadenza 30/09/2026.",
+          "scadenza": "2026-09-30",
+          "importoMax": 0,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta",
+          "progettoMatch": null
+        },
+        {
+          "id": "EU-2026-005",
+          "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
+          "rilevanza": "media",
+          "motivazione": "Voucher UE rimborso 75% per registrare marchi e design, utile per proteggere il brand in crescita",
+          "motivazioneEstesa": "Voucher UE che rimborsa fino al 75% delle tasse di deposito marchi e design UE. Utile per proteggere il brand 'Fattor Comune' in fase di crescita. Finestra aperta fino al 04/12/2026 o esaurimento fondi. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-04",
+          "importoMax": 0,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta",
+          "progettoMatch": null
+        },
+        {
+          "id": "IT-2026-028",
+          "nome": "Bonus Giovani 2026 — Esonero contributivo assunzioni under 35",
+          "rilevanza": "media",
+          "motivazione": "Esonero contributivo 100% per assunzioni under 35 TI, utile se l'azienda decide di assumere per crescere",
+          "motivazioneEstesa": "Esonero contributivo 100% (max 500€/mese) per 24 mesi su assunzioni a tempo indeterminato di under 35. Interessante se l'azienda concretizza l'obiettivo di 'ingrandirsi come struttura' con assunzioni dirette. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-31",
+          "importoMax": 500,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Media",
+          "progettoMatch": null
+        },
+        {
+          "id": "IT-2026-029",
+          "nome": "Bonus Donne 2026 — Esonero contributivo assunzioni lavoratrici svantaggiate",
+          "rilevanza": "media",
+          "motivazione": "Esonero contributivo 100% per assunzione donne svantaggiate TI, complementare al Bonus Giovani",
+          "motivazioneEstesa": "Esonero contributivo 100% (max 650€/mese) per 24 mesi su assunzioni a tempo indeterminato di donne svantaggiate. Cumulabile con strategia di crescita organico. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "2026-12-31",
+          "importoMax": 650,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Media",
+          "progettoMatch": null
+        },
+        {
+          "id": "IT-2026-027",
+          "nome": "Nuovo Piano Transizione 5.0 — Iperammortamento beni 4.0 e green",
+          "rilevanza": "media",
+          "motivazione": "Maxi-deduzione fiscale per investimenti in beni 4.0/software, compatibile con obiettivo Digitalizzazione",
+          "motivazioneEstesa": "Maxi-deduzione fiscale (fino al 180%) per investimenti in beni strumentali 4.0 e green. Interessante se l'azienda investe in software, strumenti digitali o beni tecnologici per la gestione progetti. Piattaforma GSE aperta dal 12/06/2026.",
+          "scadenza": "2028-09-30",
+          "importoMax": 0,
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Media",
+          "progettoMatch": null
+        }
+      ],
+      "in_arrivo": [
+        {
+          "id": "IT-2026-021",
+          "nome": "Benefit Competition MIMIT 2026 — Competizione Società Benefit",
+          "rilevanza": "media",
+          "motivazione": "Competizione MIMIT per Società Benefit, tappe 4-5 in arrivo — FC è Impresa Benefit",
+          "motivazioneEstesa": "Competizione istituzionale MIMIT riservata a Società Benefit con visibilità nazionale. Tappa 3 (Ancona) già chiusa. Tappe 4 e 5 in arrivo — monitorare date candidatura. Nessun contributo economico, solo riconoscimento e visibilità.",
+          "scadenza": "2026-12-31",
+          "importoMax": 0,
+          "tipoAgev": "Premio",
+          "priorita": "Media",
+          "progettoMatch": null
+        }
+      ],
+      "da_monitorare": [
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "rilevanza": "alta",
+          "motivazione": "Voucher fino a 20K€ per cloud e cybersecurity, perfetto per digitalizzazione microimpresa",
+          "scadenza": "",
+          "tipoAgev": "Voucher",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "rilevanza": "alta",
+          "motivazione": "Credito d'imposta 35% per investimenti digitali e green, sospeso in attesa riapertura campagna",
+          "scadenza": "",
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta"
+        },
+        {
+          "id": "IT-2026-016",
+          "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
+          "rilevanza": "media",
+          "motivazione": "Maxi-deduzione per beni 4.0, piattaforma GSE attesa giugno 2026 — potrebbe riattivarsi a breve",
+          "scadenza": "2028-09-30",
+          "tipoAgev": "Agevolazione fiscale",
+          "priorita": "Alta"
+        },
+        {
+          "id": "ER-2026-007",
+          "nome": "Fondo Multiscopo ER — Sezione Starter 2026",
+          "rilevanza": "media",
+          "motivazione": "Finanziamento agevolato fino a 500K€ per startup/microimprese ER, da monitorare per eventuale riapertura",
+          "scadenza": "2026-05-29",
+          "tipoAgev": "Finanziamento agevolato",
+          "priorita": "Alta"
+        }
+      ],
+      "esclusi_per_ateco": [
+        {
+          "id": "ER-2026-015",
+          "nome": "FESR ER — Commercio vicinato e pubblici esercizi 2026",
+          "ateco_bando": "47, 56, 93",
+          "motivo": "ATECO 82.30 non in lista (47=dettaglio, 56=somministrazione, 93=intrattenimento)"
+        },
+        {
+          "id": "ER-2026-018",
+          "nome": "CSR ER — Trasformazione prodotti agricoli",
+          "ateco_bando": "A01",
+          "motivo": "ATECO 82.30 non è agricoltura (A01)"
+        },
+        {
+          "id": "ER-2026-004",
+          "nome": "POR-FESR ER — Sostenibilità energetica imprese 2026",
+          "ateco_bando": "35|43|46|47|62",
+          "motivo": "ATECO 82 non in lista, nonostante obiettivo Economia circolare (sospeso)"
+        },
+        {
+          "id": "IT-2026-011",
+          "nome": "Credito d'imposta Agricoltura 4.0 2026",
+          "ateco_bando": "A01|A02|A03",
+          "motivo": "ATECO 82.30 non è agricoltura (sospeso)"
+        },
+        {
+          "id": "ER-2026-013",
+          "nome": "Bando Sviluppo Audiovisivo ER 2026",
+          "ateco_bando": "59.11",
+          "motivo": "ATECO 82.30 non è produzione audiovisiva (link KO)"
+        },
+        {
+          "id": "ER-2026-005",
+          "nome": "Fondo EuReCa — Turismo ricettivo ER",
+          "ateco_bando": "55",
+          "motivo": "ATECO 82.30 non è turismo ricettivo (link KO)"
+        }
+      ]
+    }
+  ]
+}

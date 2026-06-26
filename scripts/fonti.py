@@ -176,6 +176,26 @@ FONTI_RSS = [
         "frequenza": "mensile",
         "note": "Bonus giovani, donne, ZES, decontribuzione Sud. Sito JS pesante — monitorare tramite ricerca Google: 'incentivi assunzioni' site:inps.it. Circolari 55 e 57/2026 di riferimento.",
     },
+    {
+        "id": "ang-giovani",
+        "nome": "ANG — Agenzia Italiana per la Gioventù (bandi e opportunità giovani)",
+        "livello": "Nazionale",
+        "url_rss": "https://agenziagioventu.gov.it/feed/",
+        "url_web": "https://agenziagioventu.gov.it/",
+        "metodo": "RSS",
+        "frequenza": "settimanale",
+        "note": "Feed WordPress verificato 2026-06-26 (6 voci, aggiornato in giornata). Bandi/avvisi per giovani: Erasmus+ gioventù, Corpo Europeo di Solidarietà, servizio civile, contest. Copre il tema 'giovani' segnalato come scoperto per FC-2017-RN. Filtrare con le keywords giovani.",
+    },
+    {
+        "id": "agenzia-entrate",
+        "nome": "Agenzia delle Entrate — Notizie (crediti d'imposta e agevolazioni fiscali)",
+        "livello": "Nazionale",
+        "url_rss": "https://www.agenziaentrate.gov.it/portale/c/portal/rss/entrate?idrss=79b071d0-a537-4a3d-86cc-7a7d5a36f2a9",
+        "url_web": "https://www.agenziaentrate.gov.it/portale/aree-tematiche/agevolazioni",
+        "metodo": "RSS",
+        "frequenza": "settimanale",
+        "note": "Feed ufficiale 'Notizie' verificato 2026-06-26 (20 voci, aggiornato in giornata). Crediti d'imposta, agevolazioni fiscali, lato fiscale di Transizione 5.0. Rilevante per clienti con investimenti in macchinari (es. JC-1997-RI). Filtrare con keywords (credito d'imposta). Può rispondere 403 (WAF) da GitHub Actions: stato atteso BLOCCATO, non rotto.",
+    },
 ]
 
 # ─────────────────────────────────────────────────────────────────
@@ -284,6 +304,24 @@ FONTI_PAGINE = [
         "frequenza": "mensile",
         "note": "Bandi per progetti sociali, educativi, culturali nel territorio riminese. Target: enti no-profit, cooperative, enti pubblici. Rilevante per clienti con profilo sociale/benefit. Nessun RSS.",
     },
+    {
+        "id": "unioncamere",
+        "nome": "Unioncamere — News e bandi del sistema camerale",
+        "livello": "Nazionale",
+        "url_web": "https://www.unioncamere.gov.it/",
+        "metodo": "Diff pagina",
+        "frequenza": "mensile",
+        "note": "Nessun RSS disponibile (verificato 2026-06-26). Voucher digitali PID, bandi formazione e internazionalizzazione del sistema camerale. Il diff filtra solo i link con keyword 'bando/contributo/voucher', quindi l'home non genera falsi positivi.",
+    },
+    {
+        "id": "eurodesk",
+        "nome": "Eurodesk Italy — Opportunità e bandi per giovani (Erasmus+, ESC)",
+        "livello": "Europeo",
+        "url_web": "https://www.eurodesk.it/",
+        "metodo": "Diff pagina",
+        "frequenza": "settimanale",
+        "note": "Nessun RSS raggiungibile (verificato 2026-06-26). Aggrega bandi/opportunità per giovani: Erasmus+, Corpo Europeo di Solidarietà, tirocini, scambi. Copre il tema 'giovani' (FC-2017-RN). Diff filtrato per keyword.",
+    },
 ]
 
 # Parole chiave per filtrare i contenuti rilevanti (condivise)
@@ -305,6 +343,10 @@ KEYWORDS_POSITIVI = [
     "transizione 5.0", "beni strumentali", "fotovoltaico",
     "fondirigenti", "formazione dirigenti", "conto formazione",
     "fondazione", "terzo settore", "no-profit",
+    # giovani / impatto sociale (fonti 2026-06-26: ANG, Eurodesk)
+    "giovani", "gioventù", "erasmus", "corpo europeo di solidarietà",
+    "servizio civile", "neet", "orientamento", "politiche giovanili",
+    "under 35", "imprenditoria giovanile", "impatto sociale",
 ]
 
 KEYWORDS_NEGATIVI = [

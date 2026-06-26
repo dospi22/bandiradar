@@ -33,6 +33,10 @@ desktop.ini
 *.swo
 *~
 
+# Report diagnostico del controllo coerenza notturno (transitorio:
+# rigenerato a ogni run e allegato all'email, non serve versionarlo)
+data/coerenza_report.json
+
 # Cache Python (per gli script in scripts/)
 __pycache__/
 *.pyc

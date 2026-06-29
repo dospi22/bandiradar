@@ -1,11 +1,11 @@
 {
   "codice_cliente": "FC-2017-RN",
-  "generatedAt": "2026-06-23T08:36:03.205393+00:00",
+  "generatedAt": "2026-06-29T06:51:16Z",
   "aziende": [
     {
       "idAzienda": "az-1779394390646",
-      "generatedAt": "2026-06-23T08:36:03.205393+00:00",
-      "atecoInterpretato": "82.30.03 — Organizzazione di convegni e fiere campionarie (Sez. N, Div. 82)",
+      "generatedAt": "2026-06-29T06:51:16Z",
+      "atecoInterpretato": "823003 → Organizzazione di convegni, fiere ed eventi (Sez. N, Div. 82, Cl. 82.30)",
       "atecoSecondariInterpretati": [],
       "profiloProgetti": "",
       "deMinimisDaVerificare": true,
@@ -13,9 +13,9 @@
         {
           "id": "IT-2026-019",
           "nome": "Premio per lo Sviluppo Sostenibile 2026 — 16a Edizione",
-          "rilevanza": "media",
-          "motivazione": "Premio ESG a Ecomondo Rimini, coerente con status Benefit e obiettivo economia circolare",
-          "motivazioneEstesa": "Premio-riconoscimento per imprese eco-innovative, consegnato a Ecomondo Rimini (la vostra citta). Non e un contributo economico ma offre visibilita ESG istituzionale, ideale per una Societa Benefit con obiettivo economia circolare. Candidature entro 30/06/2026.",
+          "rilevanza": "alta",
+          "motivazione": "Impresa Benefit eco-sostenibile: candidatura al premio Ecomondo Rimini. Scadenza imminente 30/06.",
+          "motivazioneEstesa": "FC è Impresa Benefit con obiettivo Economia circolare: match con il premio eco-innovazione. Cerimonia a Ecomondo Rimini (sede FC). Candidatura entro 30/06. Non è contributo economico ma dà visibilità ESG istituzionale.",
           "scadenza": "2026-06-30",
           "importoMax": null,
           "tipoAgev": "Premio",
@@ -26,8 +26,8 @@
           "id": "ER-2025-002",
           "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
           "rilevanza": "media",
-          "motivazione": "Fondo perduto FESR ER per investimenti in tecnologie digitali, compatibile con profilo software/innovazione",
-          "motivazioneEstesa": "Contributo a fondo perduto FESR per investimenti produttivi e R&S in tecnologie strategiche (digitale, clean tech, biotech) in Emilia-Romagna. Il profilo software e innovazione dell'azienda rientra nell'area 'digitale'. Valutare se gli investimenti previsti raggiungono la soglia minima.",
+          "motivazione": "Fondo perduto FESR ER per investimenti in tecnologie digitali. Match con obiettivo Digitalizzazione.",
+          "motivazioneEstesa": "Bando FESR Emilia-Romagna per investimenti produttivi e R&S in tecnologie strategiche (digitale, clean tech). FC opera nel software/innovazione. Scadenza 30/09/2026.",
           "scadenza": "2026-09-30",
           "importoMax": null,
           "tipoAgev": "Contributo a fondo perduto",
@@ -38,8 +38,8 @@
           "id": "EU-2026-005",
           "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
           "rilevanza": "media",
-          "motivazione": "Voucher UE per deposito marchi e design, utile per proteggere il brand Fattor Comune",
-          "motivazioneEstesa": "Voucher UE che rimborsa fino al 75% delle tasse di deposito di marchi e design, piu IP Scan diagnostico. Utile per proteggere il marchio 'Fattor Comune' a livello europeo. Finestra 2026 fino al 04/12. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Voucher UE per registrare marchi e design: rimborso fino al 75%. Protegge brand e IP aziendale.",
+          "motivazioneEstesa": "Voucher EUIPO che rimborsa fino al 75% delle tasse di deposito di marchi e design UE. Utile per proteggere il brand aziendale. Procedura semplice, basso impegno burocratico. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "2026-12-04",
           "importoMax": null,
           "tipoAgev": "Voucher",
@@ -50,8 +50,8 @@
           "id": "IT-2026-028",
           "nome": "Bonus Giovani 2026 — Esonero contributivo assunzioni under 35",
           "rilevanza": "media",
-          "motivazione": "Esonero contributivo 100% per assunzioni under 35, utile per la crescita strutturale desiderata",
-          "motivazioneEstesa": "Esonero contributivo INPS 100% (max 500 EUR/mese) per 24 mesi su assunzioni a tempo indeterminato di under 35. L'azienda vuole ingrandirsi: questo incentivo riduce il costo del lavoro per nuovi inserimenti. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Esonero 100% contributi per assunzioni under 35 a TI. Utile se FC decide di strutturarsi.",
+          "motivazioneEstesa": "Esonero contributivo totale (max 500€/mese) per 24 mesi su nuove assunzioni a tempo indeterminato di under 35. FC vuole ingrandirsi: occasione per il primo dipendente. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "2026-12-31",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
@@ -62,8 +62,8 @@
           "id": "IT-2026-029",
           "nome": "Bonus Donne 2026 — Esonero contributivo assunzioni lavoratrici svantaggiate",
           "rilevanza": "media",
-          "motivazione": "Esonero contributivo 100% per assunzioni donne svantaggiate, complementare al Bonus Giovani",
-          "motivazioneEstesa": "Esonero contributivo INPS 100% (max 650 EUR/mese) per 24 mesi per assunzioni a TI di donne svantaggiate (disoccupate 6+ mesi). Opportunita aggiuntiva per ampliare l'organico con incentivi. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Esonero 100% contributi per assunzioni donne svantaggiate a TI, 24 mesi.",
+          "motivazioneEstesa": "Esonero contributivo totale (max 650€/mese) per assunzione a TI di donne svantaggiate (disoccupate da 6+ mesi). Se FC decide di strutturarsi, ulteriore incentivo all'assunzione. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "2026-12-31",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
@@ -74,8 +74,8 @@
           "id": "IT-2026-027",
           "nome": "Nuovo Piano Transizione 5.0 — Iperammortamento beni 4.0 e green (sportello GSE 2026)",
           "rilevanza": "media",
-          "motivazione": "Maxi-deduzione fiscale per investimenti in beni 4.0 e green, coerente con obiettivo digitalizzazione",
-          "motivazioneEstesa": "Maggiorazione del costo di acquisizione di beni 4.0 (fino al 180% per investimenti fino a 2,5M EUR). Utile per acquisto di software, hardware e beni digitali per l'attivita. Piattaforma GSE aperta dal 12/06/2026, investimenti ammessi fino al 30/09/2028.",
+          "motivazione": "Maxi-deduzione fiscale per investimenti in beni 4.0. Utile se FC investe in strumenti digitali.",
+          "motivazioneEstesa": "Maxi-deduzione (fino al 180% del costo) per acquisto beni strumentali 4.0 e impianti FER. Piattaforma GSE attiva dal 12/06/2026. Non aiuto di Stato, cumulabile. Investimenti fino al 30/09/2028.",
           "scadenza": "2028-09-30",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
@@ -83,23 +83,11 @@
           "progettoMatch": null
         },
         {
-          "id": "IT-2026-030",
-          "nome": "Fondo di Garanzia PMI — Garanzia pubblica per l'accesso al credito",
-          "rilevanza": "alta",
-          "motivazione": "Garanzia pubblica per accesso al credito, match diretto con obiettivo aziendale. Sezione speciale ER.",
-          "motivazioneEstesa": "Garanzia pubblica gratuita fino all'80% su finanziamenti bancari per investimenti e liquidita. Match diretto con l'obiettivo 'Accesso al credito'. Sezione speciale ER disponibile con condizioni dedicate per le PMI emiliano-romagnole. Misura strutturale, sempre disponibile.",
-          "scadenza": "",
-          "importoMax": 5000000,
-          "tipoAgev": "Garanzia",
-          "priorita": "Alta",
-          "progettoMatch": null
-        },
-        {
           "id": "IT-2026-001",
           "nome": "Nuova Sabatini — Beni strumentali 4.0",
           "rilevanza": "alta",
-          "motivazione": "Finanziamento agevolato per beni strumentali e 4.0, in linea con obiettivi digitalizzazione e credito",
-          "motivazioneEstesa": "Finanziamento agevolato + contributo MIMIT per acquisto di beni strumentali e 4.0. Ideale per investimenti in attrezzature digitali, software e hardware. Copre fino a 4M EUR. Misura strutturale sempre aperta. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Finanziamento agevolato MIMIT per acquisto beni strumentali e 4.0. Misura strutturale, sempre aperta.",
+          "motivazioneEstesa": "Finanziamento agevolato + contributo MIMIT per beni strumentali e tecnologici 4.0, fino a 4 M€. Match con obiettivo Digitalizzazione. Misura strutturale. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "",
           "importoMax": 4000000,
           "tipoAgev": "Finanziamento agevolato",
@@ -107,15 +95,27 @@
           "progettoMatch": null
         },
         {
-          "id": "IT-2026-004",
-          "nome": "Voucher 3I — Brevetti+ (Investire in Innovazione)",
-          "rilevanza": "media",
-          "motivazione": "Voucher brevetti fino a 8.000 EUR, utile se l'azienda ha innovazioni da proteggere nel software",
-          "motivazioneEstesa": "Voucher fino a 8.000 EUR (80%) per brevettare un'invenzione: ricerca anteriorita, deposito e consulenza. Per un'azienda che opera nell'innovazione e nel software, potrebbe esserci IP da tutelare. Sportello aperto. Verificare plafond de minimis residuo su RNA.",
+          "id": "IT-2026-030",
+          "nome": "Fondo di Garanzia PMI — Garanzia pubblica per l'accesso al credito",
+          "rilevanza": "alta",
+          "motivazione": "Garanzia pubblica fino all'80% per accesso al credito bancario. Match diretto con obiettivo FC.",
+          "motivazioneEstesa": "Garanzia pubblica gratuita su finanziamenti bancari, fino a 5 M€. Match diretto con obiettivo Accesso al credito. Sezione speciale ER disponibile. Misura strutturale.",
           "scadenza": "",
-          "importoMax": 8000,
-          "tipoAgev": "Voucher",
+          "importoMax": 5000000,
+          "tipoAgev": "Garanzia",
           "priorita": "Alta",
+          "progettoMatch": null
+        },
+        {
+          "id": "IT-2026-006",
+          "nome": "Credito d'imposta Ricerca Sviluppo e Innovazione",
+          "rilevanza": "media",
+          "motivazione": "Credito d'imposta 10% su spese di R&S e innovazione. Utilizzabile se FC sviluppa software innovativo.",
+          "motivazioneEstesa": "Credito d'imposta 10% su spese di ricerca, sviluppo e innovazione tecnologica. Non richiede domanda, si usa in compensazione F24. Se FC sviluppa software con componente innovativa, le spese potrebbero qualificarsi.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Media",
           "progettoMatch": null
         }
       ],
@@ -125,51 +125,61 @@
           "id": "ER-2026-001",
           "nome": "POR-FESR ER — Digitalizzazione e innovazione PMI 2026",
           "rilevanza": "alta",
-          "motivazione": "Fondo perduto 50% per digitalizzazione PMI in ER, match eccellente con profilo e obiettivi",
+          "motivazione": "Fondo perduto FESR ER per digitalizzazione PMI. Match perfetto con obiettivo e regione.",
+          "motivazioneEstesa": "Contributo a fondo perduto fino a 200 K€ (50%) per digitalizzazione e innovazione PMI in Emilia-Romagna. Match perfetto con profilo FC. Edizione 2026 non ancora pubblicata — monitorare apertura.",
           "scadenza": "2026-06-30",
           "importoMax": 200000,
           "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Alta"
+          "priorita": "Alta",
+          "progettoMatch": null
         },
         {
           "id": "IT-2026-002",
           "nome": "Credito d'imposta Transizione 5.0",
           "rilevanza": "alta",
-          "motivazione": "Credito d'imposta per investimenti digitali e green, in attesa di riapertura campagna 2026",
+          "motivazione": "Credito d'imposta fino al 35% per investimenti digitali e green. Sospeso, verificare riapertura.",
+          "motivazioneEstesa": "Credito d'imposta strutturale per investimenti in digitalizzazione e sostenibilità energetica. Match con obiettivo Digitalizzazione. Verificare apertura campagna 2026 su GSE.",
           "scadenza": "",
           "importoMax": null,
           "tipoAgev": "Credito d'imposta",
-          "priorita": "Alta"
+          "priorita": "Alta",
+          "progettoMatch": null
         },
         {
           "id": "IT-2026-007",
           "nome": "Voucher Cloud & Cybersecurity",
           "rilevanza": "alta",
-          "motivazione": "Voucher fino a 20.000 EUR per cloud e cybersecurity, coerente con digitalizzazione aziendale",
+          "motivazione": "Voucher fino a 20 K€ (50%) per cloud e cybersecurity. Match diretto con Digitalizzazione.",
+          "motivazioneEstesa": "Voucher MIMIT fino a 20 K€ (50%) per servizi cloud e cybersecurity. Match diretto con obiettivo Digitalizzazione. Sospeso — monitorare riapertura sportello. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "",
           "importoMax": 20000,
           "tipoAgev": "Voucher",
-          "priorita": "Alta"
+          "priorita": "Alta",
+          "progettoMatch": null
         },
         {
           "id": "IT-2026-016",
           "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
           "rilevanza": "media",
-          "motivazione": "Maxi-deduzione per beni 4.0, in attesa piattaforma GSE (ora coperto da IT-2026-027)",
+          "motivazione": "Maxi-deduzione beni 4.0. Sospeso: decreto firmato, piattaforma GSE attesa.",
+          "motivazioneEstesa": "Maxi-deduzione fiscale per beni 4.0 (180% fino a 2,5M). Decreto attuativo firmato maggio 2026. Piattaforma GSE in arrivo. Non aiuto di Stato.",
           "scadenza": "2028-09-30",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
-          "priorita": "Alta"
+          "priorita": "Alta",
+          "progettoMatch": null
         },
         {
           "id": "ER-2026-012",
           "nome": "FESR ER — STEP 2026: investimenti produttivi e R&S in tecnologie strategiche (II Bando)",
           "rilevanza": "media",
-          "motivazione": "Fondo perduto per R&S e investimenti in tecnologie strategiche digitali in ER",
+          "motivazione": "Fondo perduto FESR ER per tech strategiche (deep tech, digitale). Sospeso, finestre periodiche.",
+          "motivazioneEstesa": "II bando FESR ER STEP per investimenti in tecnologie strategiche. Finestra settembre 2026 (1-30 set). Match parziale su digitale — verificare requisiti specifici deep tech.",
           "scadenza": "2026-09-30",
           "importoMax": null,
           "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Alta"
+          "priorita": "Alta",
+          "progettoMatch": null
         }
       ],
       "esclusi_per_ateco": [
@@ -177,19 +187,19 @@
           "id": "ER-2026-005",
           "nome": "Fondo EuReCa — Investimenti offerta turistica ricettiva ER",
           "ateco_bando": "55",
-          "motivo": "ATECO 55 (alloggi turistici) — FC ha 82.30 (organizzazione eventi/convegni)"
+          "motivo": "FC ATECO 823003 (eventi) ≠ 55 (strutture ricettive)"
         },
         {
           "id": "ER-2026-015",
-          "nome": "FESR ER — Sostegno innovazione commercio vicinato 2026",
+          "nome": "FESR ER — Sostegno innovazione commercio vicinato",
           "ateco_bando": "47, 56, 93",
-          "motivo": "ATECO 47/56/93 (dettaglio, somministrazione, intrattenimento) — FC ha 82.30"
+          "motivo": "FC ATECO 823003 (eventi) ≠ commercio dettaglio/somministrazione"
         },
         {
           "id": "ER-2026-018",
           "nome": "CSR ER — SRD03 Trasformazione prodotti agricoli",
           "ateco_bando": "A01",
-          "motivo": "ATECO A01 (aziende agricole) — FC ha 82.30, non e azienda agricola"
+          "motivo": "FC ATECO 823003 (eventi) ≠ A01 (aziende agricole)"
         }
       ]
     }

@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-06-22T11:15:34.054825+00:00",
-  "data": "2026-06-22",
-  "ok": 18,
-  "errore": 0,
+  "timestamp": "2026-06-29T10:10:02.800197+00:00",
+  "data": "2026-06-29",
+  "ok": 20,
+  "errore": 2,
   "stantio": 0,
   "manuale": 7,
   "bloccato": 2,
-  "totale": 27,
+  "totale": 31,
   "fonti": [
     {
       "id": "mimit",
@@ -15,7 +15,7 @@
       "tipo": "RSS",
       "url": "https://www.mimit.gov.it/index.php/it/incentivi-aggiornamenti?format=feed&type=rss",
       "voci": 10,
-      "ultima_voce": "2026-06-10",
+      "ultima_voce": "2026-06-26",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -35,7 +35,7 @@
       "tipo": "RSS",
       "url": "https://euknow.it/feed/",
       "voci": 10,
-      "ultima_voce": "2026-06-15",
+      "ultima_voce": "2026-06-23",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -46,7 +46,7 @@
       "tipo": "RSS",
       "url": "https://imprese.regione.emilia-romagna.it/RSS",
       "voci": 15,
-      "ultima_voce": "2026-06-19",
+      "ultima_voce": "2026-06-26",
       "status": "OK",
       "dettaglio": "15 voci"
     },
@@ -75,7 +75,7 @@
       "tipo": "RSS",
       "url": "https://infobandi.csvnet.it/feed",
       "voci": 10,
-      "ultima_voce": "2026-06-18",
+      "ultima_voce": "2026-06-22",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -85,10 +85,8 @@
       "livello": "Europeo",
       "tipo": "RSS",
       "url": "https://apre.it/feed/",
-      "voci": 10,
-      "ultima_voce": "2026-06-22",
-      "status": "OK",
-      "dettaglio": "10 voci"
+      "status": "ERRORE",
+      "dettaglio": "HTTP 202"
     },
     {
       "id": "fondimpresa",
@@ -135,7 +133,7 @@
       "tipo": "RSS",
       "url": "https://agricoltura.regione.emilia-romagna.it/RSS",
       "voci": 15,
-      "ultima_voce": "2026-06-23",
+      "ultima_voce": "2026-06-29",
       "status": "OK",
       "dettaglio": "15 voci"
     },
@@ -146,7 +144,7 @@
       "tipo": "RSS",
       "url": "https://www.ministeroturismo.gov.it/feed/",
       "voci": 10,
-      "ultima_voce": "2026-06-22",
+      "ultima_voce": "2026-06-26",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -157,7 +155,7 @@
       "tipo": "RSS",
       "url": "https://www.fondidigaranzia.it/feed/",
       "voci": 10,
-      "ultima_voce": "2026-05-12",
+      "ultima_voce": "2026-06-23",
       "status": "OK",
       "dettaglio": "10 voci"
     },
@@ -171,13 +169,33 @@
       "dettaglio": "Fonte a check manuale (nessun RSS)"
     },
     {
+      "id": "ang-giovani",
+      "nome": "ANG — Agenzia Italiana per la Gioventù (bandi e opportunità giovani)",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://agenziagioventu.gov.it/feed/",
+      "status": "ERRORE",
+      "dettaglio": "HTTPSConnectionPool(host='agenziagioventu.gov.it', port=443): Max retries exceeded with url: /feed/ (Caused by ConnectTimeoutError(<HTTPSConnection(ho"
+    },
+    {
+      "id": "agenzia-entrate",
+      "nome": "Agenzia delle Entrate — Notizie (crediti d'imposta e agevolazioni fiscali)",
+      "livello": "Nazionale",
+      "tipo": "RSS",
+      "url": "https://www.agenziaentrate.gov.it/portale/c/portal/rss/entrate?idrss=79b071d0-a537-4a3d-86cc-7a7d5a36f2a9",
+      "voci": 20,
+      "ultima_voce": "2026-06-26",
+      "status": "OK",
+      "dettaglio": "20 voci"
+    },
+    {
       "id": "invitalia",
       "nome": "Invitalia — Incentivi e strumenti",
       "livello": "Nazionale",
       "tipo": "Diff pagina",
       "url": "https://www.invitalia.it/per-le-imprese/incentivi-e-strumenti",
       "status": "OK",
-      "dettaglio": "596 KB"
+      "dettaglio": "601 KB"
     },
     {
       "id": "cciaa-romagna",
@@ -186,7 +204,7 @@
       "tipo": "Diff pagina",
       "url": "https://www.romagna.camcom.it/it/opportunita/finanziamenti-1",
       "status": "OK",
-      "dettaglio": "104 KB"
+      "dettaglio": "107 KB"
     },
     {
       "id": "fesr-er",
@@ -195,7 +213,7 @@
       "tipo": "Diff pagina",
       "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
       "status": "OK",
-      "dettaglio": "716 KB"
+      "dettaglio": "718 KB"
     },
     {
       "id": "gse-imprese",
@@ -213,7 +231,7 @@
       "tipo": "Diff pagina",
       "url": "https://www.euipo.europa.eu/it/sme-corner/sme-fund",
       "status": "OK",
-      "dettaglio": "365 KB"
+      "dettaglio": "366 KB"
     },
     {
       "id": "eber-artigianato",
@@ -240,7 +258,7 @@
       "tipo": "Diff pagina",
       "url": "https://www.emiliaromagnastartup.it/it/bandi",
       "status": "OK",
-      "dettaglio": "123 KB"
+      "dettaglio": "127 KB"
     },
     {
       "id": "gse-transizione50",
@@ -268,6 +286,24 @@
       "url": "https://www.fondcarim.it/come-richiedere-un-contributo/",
       "status": "OK",
       "dettaglio": "146 KB"
+    },
+    {
+      "id": "unioncamere",
+      "nome": "Unioncamere — News e bandi del sistema camerale",
+      "livello": "Nazionale",
+      "tipo": "Diff pagina",
+      "url": "https://www.unioncamere.gov.it/",
+      "status": "OK",
+      "dettaglio": "131 KB"
+    },
+    {
+      "id": "eurodesk",
+      "nome": "Eurodesk Italy — Opportunità e bandi per giovani (Erasmus+, ESC)",
+      "livello": "Europeo",
+      "tipo": "Diff pagina",
+      "url": "https://www.eurodesk.it/",
+      "status": "OK",
+      "dettaglio": "54 KB"
     }
   ]
 }

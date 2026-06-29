@@ -2,12 +2,13 @@
   "cciaa-romagna": {
     "nome": "CCIAA Romagna (Forlì-Cesena e Rimini) — Finanziamenti",
     "url": "https://www.romagna.camcom.it/it/opportunita/finanziamenti-1",
-    "ultimo_check": "2026-06-22T11:15:36.431990+00:00",
+    "ultimo_check": "2026-06-29T10:10:05.142430+00:00",
     "voci": {
       "https://www.romagna.camcom.it/it/opportunita/sviluppo-imprese-innovative": "Sviluppo startup e PMI innovative",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa": "Servizi per l'avvio e lo sviluppo d'impresa",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa/sportello-microcredito": "Sportello Microcredito",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-lavvio-e-lo-sviluppo-dimpresa/sostegno-allimprenditoria-reti-di-supporto-dellavvio-dimpresa": "Sostegno all’imprenditoria. Reti di supporto dell’avvio d’impresa",
+      "https://www.romagna.camcom.it/it/opportunita/accesso-al-credito/intervento-straordinario-fondo-energia-imprese": "Intervento straordinario Fondo Energia Imprese",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-supportare-le-imprese-in-situazioni-di-crisi": "Servizi per supportare le imprese in situazioni di crisi",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-supportare-le-imprese-in-situazioni-di-crisi/composizione-negoziata-della-crisi-dimpresa": "Composizione negoziata della crisi d'impresa",
       "https://www.romagna.camcom.it/it/opportunita/servizi-per-supportare-le-imprese-in-situazioni-di-crisi/ocri-organismo-di-composizione-della-crisi-dimpresa": "OCRI - Organismo di composizione della crisi d’impresa",
@@ -23,6 +24,8 @@
       "https://www.romagna.camcom.it/it/opportunita/strumenti-per-limpresa-digitale/il-cassetto-digitale-dellimprenditore-nuove-funzionalita": "Impresa.Italia.it | Cassetto digitale dell’Imprenditore",
       "https://www.romagna.camcom.it/it/opportunita/responsabilita-sociale-dimpresa": "Responsabilità sociale d'impresa",
       "https://www.romagna.camcom.it/it/opportunita/progetti-e-iniziative-per-lo-sviluppo-del-territorio": "Progetti e iniziative per lo sviluppo del territorio",
+      "https://www.romagna.camcom.it/it/opportunita/scuola-lavoro-orientamento": "Scuola Lavoro Orientamento",
+      "https://www.romagna.camcom.it/it/opportunita/scuola-lavoro-orientamento/mission-scuola-lavoro-orientamento": "Mission | Scuola Lavoro Orientamento",
       "https://www.ciseonweb.it": "CISE - Centro per l'innovazione e lo sviluppo economico",
       "https://www.romagna.camcom.it/it/transizione-digitale": "Transizione digitale"
     }
@@ -30,7 +33,7 @@
   "fesr-er": {
     "nome": "FESR Emilia-Romagna — Bandi 2021-2027",
     "url": "https://fesr.regione.emilia-romagna.it/opportunita/opportunita-di-finanziamento/bandi-21-27",
-    "ultimo_check": "2026-06-22T11:15:37.248403+00:00",
+    "ultimo_check": "2026-06-29T10:10:06.018861+00:00",
     "voci": {
       "https://www.regione.emilia-romagna.it": "Regione Emilia-Romagna",
       "https://fesr.regione.emilia-romagna.it/": "Programma regionale Fondo europeo di sviluppo regionale - Fesr",
@@ -45,15 +48,13 @@
   "invitalia": {
     "nome": "Invitalia — Incentivi e strumenti",
     "url": "https://www.invitalia.it/per-le-imprese/incentivi-e-strumenti",
-    "ultimo_check": "2026-06-22T11:15:35.227322+00:00",
+    "ultimo_check": "2026-06-29T10:10:04.007092+00:00",
     "voci": {
       "https://www.invitalia.it/per-chi-vuole-fare-impresa": "Vai alla pagina Per chi vuole fare impresa",
       "https://www.invitalia.it/per-chi-vuole-fare-impresa/scegli-lincentivo-te": "Scegli l'incentivo o strumento per te",
       "https://www.invitalia.it/per-chi-vuole-fare-impresa/servizi": "Servizi per chi vuole fare impresa",
       "https://www.invitalia.it/per-le-imprese/scegli-lincentivostrumento-te": "Scegli l'incentivo o strumento per te",
       "https://www.invitalia.it/servizi/invitalia-gli-investimenti-pubblici": "Invitalia per gli investimenti pubblici",
-      "https://www.invitalia.it/incentivi-e-strumenti/voucher-il-sostegno-dei-piccoli-editori": "Leggi tutto su Voucher per il sostegno dei piccoli editori",
-      "https://www.invitalia.it/incentivi-e-strumenti/sviluppo-competenze-specialistiche-delle-pmi": "Leggi tutto su Sviluppo competenze specialistiche delle Pmi",
       "https://www.invitalia.it/incentivi-e-strumenti/beni-strumentali-nuova-sabatini": "Leggi tutto su Beni strumentali - Nuova Sabatini",
       "https://www.invitalia.it/incentivi-e-strumenti/contratto-di-sviluppo": "Contratto di sviluppo"
     }
@@ -61,7 +62,7 @@
   "euipo-sme-fund": {
     "nome": "EUIPO — SME Fund (voucher marchi e brevetti)",
     "url": "https://www.euipo.europa.eu/it/sme-corner/sme-fund",
-    "ultimo_check": "2026-06-22T11:15:38.346520+00:00",
+    "ultimo_check": "2026-06-29T10:10:06.632146+00:00",
     "voci": {
       "https://euipo.europa.eu/eSearchCLW/": "Giurisprudenza su eSearch Decisioni dell’Ufficio, sentenze del Tribunale, della Corte di giustizia e dei tribunali nazionali competenti in materia di DPI",
       "https://www.euipo.europa.eu/it/search-ip": "Ricerche Effettua una ricerca nelle nostre banche dati per tutte le tue esigenze in materia di PI",
@@ -82,7 +83,7 @@
   "eber-artigianato": {
     "nome": "EBER — Ente Bilaterale Artigianato ER (sviluppo imprenditoriale)",
     "url": "https://www.eber.org/Attivita/sviluppo-imprenditoriale",
-    "ultimo_check": "2026-06-22T11:15:38.973906+00:00",
+    "ultimo_check": "2026-06-29T10:10:07.449468+00:00",
     "voci": {
       "https://www.eber.org/Attivita/sviluppo-imprenditoriale": "Sviluppo imprenditoriale",
       "https://www.eber.org/Fondartigianato": "Fondartigianato"
@@ -91,7 +92,7 @@
   "artigiancredito": {
     "nome": "Artigiancredito — News (Fondo Starter, Energia, EuReCa, Microcredito ER)",
     "url": "https://www.artigiancredito.it/it-it/news",
-    "ultimo_check": "2026-06-22T11:15:39.691950+00:00",
+    "ultimo_check": "2026-06-29T10:10:08.429675+00:00",
     "voci": {
       "https://www.artigiancredito.it/it-it/prodotti-e-servizi/agevolazioni/eureca-turismo-regione-emilia-romagna": "EuReCa Turismo Regione Emilia-Romagna",
       "https://www.artigiancredito.it/it-it/prodotti-e-servizi/provvedimenti-alluvioni-in-toscana-di-novembre-2023/finanziamento-diretto": "FINANZIAMENTO DIRETTO",
@@ -113,21 +114,19 @@
   "er-startup": {
     "nome": "EmiliaRomagnaStartUp (ART-ER) — Bandi e call",
     "url": "https://www.emiliaromagnastartup.it/it/bandi",
-    "ultimo_check": "2026-06-22T11:15:40.514021+00:00",
+    "ultimo_check": "2026-06-29T10:10:09.236052+00:00",
     "voci": {
       "https://www.emiliaromagnastartup.it/it/categoria/tipologia-bando/contributo-nella-spesacofinanziamento": "Contributo nella spesa/cofinanziamento",
       "https://www.emiliaromagnastartup.it/it/categoria/settore-bando/innovazione-sociale": "Innovazione Sociale",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/sme-fund-2026-la-tutela-della-proprieta-intellettuale-delle-pmi": "SME Fund 2026 per la tutela della proprietà intellettuale delle PMI",
-      "https://www.emiliaromagnastartup.it/it/innovative/bandi/2-call-consorzio-elias-intelligenza-artificiale-e-sostenibilita": "#2 Call Consorzio Elias: Intelligenza artificiale e sostenibilità",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/premio-apply-ai-startup-award-startup-con-soluzioni-ai-strategiche": "Premio Apply AI Startup Award per startup con soluzioni AI strategiche",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/4deg-call-clean-aviation-oltre-329-milioni-di-euro-linnovazione-e-la": "4° call Clean Aviation: oltre 329 milioni di euro per l'innovazione e la decarbonizzazione del trasporto aereo",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/avviso-la-presentazione-di-manifestazioni-di-interesse-partecipare-alla-community": "Adesione alla community delle startup dell’Emilia-Romagna interessate a processi di internazionalizzazione",
-      "https://www.emiliaromagnastartup.it/it/innovative/bandi/devfest-modena-2026-pacchetto-startup": "DevFest Modena 2026: pacchetto startup",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-step-scale-2026-fino-30-milioni-di-euro-la-crescita-delle-imprese-deep-tech": "EIC STEP Scale Up 2026: fino a 30 milioni di euro per la crescita delle imprese deep-tech",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/invito-presentare-progetti-finalizzati-allinserimento-nellincubatore-dimpresa": "Invito a presentare progetti finalizzati all’inserimento nellʹincubatore dʹimpresa Cesenalab",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/nuovo-bando-mepa-startup-innovative": "Nuovo Bando MePA per Startup Innovative",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/nuove-imprese-tasso-zero-incentivi-giovani-e-donne": "ON - Nuove imprese a tasso zero: incentivi per giovani e donne",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/servizio-linkup-matchmaking-qualificato-ifab-startup": "Servizio LinkUp: matchmaking qualificato IFAB per startup",
-      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-di-euro-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione di euro per startup e PMI",
-      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione per startup e PMI",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/premio-innovazione-sociale-2026-fondi-startup-vocazione-sociale": "Premio Innovazione Sociale 2026: fondi per startup a vocazione sociale",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/terza-ed-swiss-italian-startup-award-sisa": "terza ed. Swiss Italian Startup Award (SISA)",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-nato-diana-challenge-call-2027-fondi-startup-e-pmi": "Bando NATO DIANA Challenge Call 2027: fondi per startup e PMI",
@@ -135,21 +134,25 @@
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-accelerator-programma-di-lavoro-2026-innovazioni-deep-tech-e-disruptive": "EIC Accelerator: programma di lavoro 2026 per Innovazioni Deep-Tech e Disruptive",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/odeon-finanziamenti-e-mentoring-la-transizione-energetica-digitale": "ODEON: finanziamenti e mentoring per la transizione energetica digitale",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/coopstartup-changemakers-2026": "Coopstartup Changemakers 2026",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/iveco-group-advanced-ai-computer-vision-smart-manufacturing": "Iveco Group: Advanced AI & Computer Vision for Smart Manufacturing",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/call4innovit-2026-tutte-le-scadenze-dei-bandi-laccelerazione-di-startup-e-pmi": "Call4Innovit 2026: tutte le scadenze dei bandi per l'accelerazione di Startup e PMI innovative a San Francisco",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-futurefoods-opportunita-di-finanziamento-la-ricerca-e-linnovazione-nei": "Bando FutureFoodS: opportunità di finanziamento per la ricerca e l'innovazione nei Sistemi Alimentari Sostenibili",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bandi-ngi-open-calls-fino-50000-euro-startup-e-pmi": "Bandi NGI Open Calls: fino a 50.000 euro per startup e PMI",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-nemesis-open-call-fondi-startup-agtech-emilia-romagna": "Bando NEMESIS Open Call: fondi per startup AgTech in Emilia-Romagna",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-c4b-open-call-pilot-projects-fondi-startup-nella-bioeconomia-circolare": "Bando C4B Open Call for Pilot Projects: fondi per startup nella bioeconomia circolare",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/area-startup-e-pmi-innovative-ibe-intermobility-future-ways-2026": "Area Startup e PMI innovative a IBE Intermobility Future Ways 2026",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-regionale-lo-sviluppo-di-video-giochi": "Bando regionale per lo sviluppo di video giochi",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-spin-rise-2026-programma-di-pre-incubazione-scienziati-deep-tech": "Bando SPIN: Rise 2026 | Programma di pre-incubazione per scienziati deep-tech",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/devfest-modena-2026-pacchetto-startup": "DevFest Modena 2026: pacchetto startup",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-women-techeu-open-call-finanziamenti-startup-guidate-da-donne": "Bando Women TechEU Open Call: finanziamenti per startup guidate da donne",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/eic-transition-open-2026contributi-fino-25-milioni-di-euro-trasformare-i-risultati": "EIC Transition Open 2026:Contributi fino a 2,5 milioni di euro per trasformare i risultati della ricerca in innovazioni di mercato",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/missions-al-i-bandi-2026-di-horizon-europe": "Missions: al via i bandi 2026 di Horizon Europe",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-di-euro-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione di euro per startup e PMI",
+      "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-kava-14-ris-innovation-1-milione-startup-e-pmi": "Bando KAVA 14 RIS Innovation: 1 milione per startup e PMI",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/al-eic-pathfinder-2026-sostegno-alle-imprese-con-tecnologie-disruptive": "Al via EIC Pathfinder 2026: sostegno alle imprese con tecnologie disruptive",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/plai-call4startups-2026": "PLAI – Call4Startups 2026",
       "https://www.emiliaromagnastartup.it/it/innovative/bandi/bando-eurohpc-joint-undertaking-4-call-startup-nel-settore-quantistico": "Bando EuroHPC Joint Undertaking: 4 call per startup nel settore quantistico",
-      "https://www.emiliaromagnastartup.it/it/innovative/bandi/avviso-pubblico-la-concessione-di-postazioni-di-coworking-presso-lincubatore-del": "Avviso pubblico per la concessione di postazioni di coworking presso l’incubatore del Centro di Ricerca Ambiente, Energia e Mare di Marina di Ravenna",
-      "https://www.emiliaromagnastartup.it/it/pagine/finanza-linnovazione": "Finanza per l'innovazione",
+      "https://www.emiliaromagnastartup.it/it/FinancER": "Finanza per l'innovazione",
       "https://www.emiliaromagnastartup.it/it/pagine/finanziare-una-startup": "Finanziare una startup",
       "https://www.emiliaromagnastartup.it/it/pagine/StartupsGoInternational": "Startups Go International",
       "https://www.emiliaromagnastartup.it/it/pagine/il-ministero-dello-sviluppo-economico-le-startup-innovative": "Il Ministero dello Sviluppo Economico per le StartUp",
@@ -161,7 +164,7 @@
   "fondirigenti": {
     "nome": "Fondirigenti — Avvisi formazione dirigenti",
     "url": "https://www.fondirigenti.it/avvisi",
-    "ultimo_check": "2026-06-22T11:15:41.779765+00:00",
+    "ultimo_check": "2026-06-29T10:10:10.416224+00:00",
     "voci": {
       "https://www.fondirigenti.it/conto-formazione": "Conto Formazione",
       "https://www.fondirigenti.it/documents/35495/0/FAQ+agg+20_21_21+e+MODULO_Iscrizione_Provvisoria.zip/acc9c80f-7e90-73a4-c592-d9c0d10af49e?t=1640009521156": "FAQ aggiornate al 20/12/21 (requisiti di partecipazione) e modulo iscrizione provvisoria"
@@ -170,7 +173,7 @@
   "fondazione-cr-rimini": {
     "nome": "Fondazione Cassa di Risparmio di Rimini — Bandi e contributi",
     "url": "https://www.fondcarim.it/come-richiedere-un-contributo/",
-    "ultimo_check": "2026-06-22T11:15:42.448586+00:00",
+    "ultimo_check": "2026-06-29T10:10:11.122309+00:00",
     "voci": {
       "https://www.fondcarim.it/fondazione-trasparente/": "Fondazione Trasparente",
       "https://www.fondcarim.it/territorio/": "La fondazione per il territorio",
@@ -182,6 +185,65 @@
       "https://www.fondcarim.it/wp-content/uploads/2022/12/Bando-Volontariato-Istruzione-2022-2023.pdf": "» Scarica il Bando",
       "https://www.fondcarim.it/wp-content/uploads/2022/06/Bando-assegnazione-contributi.pdf": "» Scarica il Bando",
       "https://www.fondcarim.it/wp-content/uploads/2022/07/istruzioni-operative-bando-2022.pdf": "» Istruzioni operative bando"
+    }
+  },
+  "unioncamere": {
+    "nome": "Unioncamere — News e bandi del sistema camerale",
+    "url": "https://www.unioncamere.gov.it/",
+    "ultimo_check": "2026-06-29T10:10:12.446210+00:00",
+    "voci": {
+      "https://www.unioncamere.gov.it/digitalizzazione-e-impresa-50/punto-impresa-digitale": "Punto Impresa Digitale",
+      "https://www.unioncamere.gov.it/digitalizzazione-e-impresa-50/elenco-dei-manager-dellinnovazione": "Elenco dei manager dell'innovazione",
+      "https://www.unioncamere.gov.it/digitalizzazione-e-impresa-50/eccellenze-digitale": "Eccellenze in Digitale",
+      "https://www.unioncamere.gov.it/digitalizzazione-e-impresa-50/crescere-digitale-progetto-concluso": "Crescere in digitale (progetto concluso)",
+      "https://www.unioncamere.gov.it/registro-imprese-e-semplificazione/suap-e-fascicolo-elettronico-dimpresa": "Suap e fascicolo elettronico d'impresa",
+      "https://www.unioncamere.gov.it/registro-imprese-e-semplificazione/sportello-unico-digitale-le-zes": "Sportello Unico Digitale per le ZES",
+      "https://www.unioncamere.gov.it/lavoro-e-formazione/percorsi-le-competenze-trasversali-e-lorientamento-e-formazione-il-lavoro": "Percorsi per le competenze trasversali e per l'orientamento e formazione per il lavoro",
+      "https://www.unioncamere.gov.it/innovazione-e-proprieta-industriale/innovazione-e-trasferimento-tecnologico": "Innovazione e trasferimento tecnologico",
+      "https://www.unioncamere.gov.it/internazionalizzazione/documenti-il-commercio-internazionale": "Documenti per il commercio internazionale",
+      "https://www.unioncamere.gov.it/promozione-e-assistenza-alle-imprese/csr-responsabilita-sociale-delle-imprese": "CSR - Responsabilità Sociale delle Imprese",
+      "https://www.unioncamere.gov.it/promozione-e-assistenza-alle-imprese/sviluppo-delle-risorse-umane": "Sviluppo delle Risorse Umane",
+      "https://www.unioncamere.gov.it/crisi-di-impresa/osservatorio-crisi-dimpresa": "Osservatorio crisi d'impresa",
+      "https://www.unioncamere.gov.it/crisi-di-impresa/composizione-negoziata-la-soluzione-della-crisi-dimpresa-0": "Composizione negoziata per la soluzione della crisi d'impresa",
+      "https://www.unioncamere.gov.it/sistema-camerale/la-riforma-delle-camere-di-commercio": "La riforma delle Camere di commercio",
+      "https://www.unioncamere.gov.it/sistema-camerale/elenco-delle-camere-di-commercio-italiane": "Elenco delle Camere di commercio italiane",
+      "https://www.unioncamere.gov.it/csr/buone-pratiche-di-csr": "Buone pratiche di CSR",
+      "https://www.unioncamere.gov.it/csr/tesi-di-laurea-su-csr": "Tesi di laurea su Csr",
+      "https://www.unioncamere.gov.it/chi-siamo/consulta-regionale-delle-camere-di-commercio": "Consulta regionale delle Camere di commercio",
+      "https://www.unioncamere.gov.it/comunicazione/cameredicommercioflash": "#cameredicommercioflash",
+      "https://www.unioncamere.gov.it/pnrr-credito-e-incentivi-alle-imprese/pnrr": "PNRR, SISTEMA CAMERALE E IMPRESE fondi, iniziative ed eventi dedicati al Piano nazionale di ripresa e resilienza",
+      "https://certificazioneparitadigenere.unioncamere.gov.it/": "AVVISI CERTIFICAZIONE PARITÀ DI GENERE informazioni per PMI, organismi di certificazione ed esperti",
+      "https://bandisismapnc.unioncamere.gov.it/": "BANDI SISMA B2 turismo cultura sport e inclusione",
+      "https://www.unioncamere.gov.it/comunicazione/primo-piano/presentato-mantova-il-rapporto-coesione-e-competizione-2026-di-fondazione-symbola-intesa-sanpaolo-e-unioncamere": "Presentato a Mantova il rapporto “Coesione è competizione” 2026 di Fondazione Symbola, Intesa Sanpaolo e Unioncamere",
+      "https://www.unioncamere.gov.it/digitalizzazione-e-impresa-50": "Digitalizzazione e impresa 5.0",
+      "https://www.unioncamere.gov.it/innovazione-e-proprieta-industriale": "Innovazione e proprietà industriale",
+      "https://www.unioncamere.gov.it/internazionalizzazione": "Internazionalizzazione",
+      "https://www.unioncamere.gov.it/ambiente": "Ambiente e sostenibilità",
+      "https://www.unioncamere.gov.it/cultura-e-turismo": "Cultura e Turismo",
+      "https://www.unioncamere.gov.it/crisi-di-impresa": "Crisi di impresa",
+      "https://www.unioncamere.gov.it/incentivi-impresa": "PNRR, credito e incentivi alle imprese",
+      "https://www.unioncamere.gov.it/sites/default/files/diconodinoi/2026/giugno2026/20260613sole.pdf": "13/06/2026 - IL SOLE 24 ORE - Più sinergie per battere la crisi: progetti in una impresa su due",
+      "https://www.unioncamere.gov.it/sites/default/files/diconodinoi/2026/giugno2026/20260608stampa.pdf": "08/06/2026 - LA STAMPA - Unioncamere, nelle imprese con giovani produttività a+7,2%",
+      "https://www.unioncamere.gov.it/sites/default/files/diconodinoi/2026/giugno2026/20260607mattino.pdf": "07/06/2026 - IL MATTINO - La creatività del Mezzogiorno spinge le startup innovative",
+      "https://www.unioncamere.gov.it/comunicazione/comunicati-stampa/tripoli-280-miliardi-di-export-generati-dalle-pmi-potenziale-enorme-nel-mezzogiorno": "16/06/2026 Tripoli: “280 miliardi di export generati dalle Pmi. Potenziale enorme nel Mezzogiorno”",
+      "https://www.unioncamere.gov.it/comunicazione/comunicati-stampa/unioncamere-la-produttivita-cresce-con-i-giovani-72-nelle-imprese-che-attraggono-talenti": "06/06/2026 Unioncamere, la produttività cresce con i giovani: +7,2% nelle imprese che attraggono talenti",
+      "https://www.unioncamere.gov.it/comunicazione/comunicati-stampa/inps-unioncamere-siglata-la-nuova-convenzione-dati-interoperabilita-e-governance-digitale-al-servizio-della-competitivita-del-paese": "28/05/2026 INPS-Unioncamere, siglata la nuova Convenzione. Dati, interoperabilità e governance digitale al servizio della competitività del Paese",
+      "https://www.unioncamere.gov.it/agenda/giro-ditalia-delle-donne-che-fanno-impresa-tappa-bolzano": "Giro d'Italia delle donne che fanno impresa: tappa a Bolzano"
+    }
+  },
+  "eurodesk": {
+    "nome": "Eurodesk Italy — Opportunità e bandi per giovani (Erasmus+, ESC)",
+    "url": "https://www.eurodesk.it/",
+    "ultimo_check": "2026-06-29T10:10:13.169675+00:00",
+    "voci": {
+      "https://youth.europa.eu/_it": "Portale europeo dei giovani",
+      "https://www.cartagiovanisardegna.it/": "Carta Giovani Sardegna",
+      "https://www.portaledeigiovani.it/": "Portale italiano dei giovani",
+      "https://www.eurodesk.it/esc": "Corpo europeo di solidarietà",
+      "https://www.eurodesk.it/sono-un-giovane": "L'Europa e le opportunità di mobilità transnazionale rivolte ai giovani",
+      "https://www.eurodesk.it/lavoro-con-i-giovani": "Le opportunità per chi opera per/con i giovani",
+      "https://www.eurodesk.it/notizie/youth-start-challenge-2026-giovani-imprenditori": "Youth Start-Up Challenge 2026 per giovani…",
+      "https://www.eurodesk.it/notizie/salute-mentale-dei-giovani-disponibile-italiano-la-guida-yiminds-dedicata-agli-operatori": "Salute mentale dei giovani: disponibile in…"
     }
   }
 }

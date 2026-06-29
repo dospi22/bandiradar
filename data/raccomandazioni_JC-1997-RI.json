@@ -1,21 +1,33 @@
 {
   "codice_cliente": "JC-1997-RI",
-  "generatedAt": "2026-06-23T08:36:03.205393+00:00",
+  "generatedAt": "2026-06-29T06:51:16Z",
   "aziende": [
     {
       "idAzienda": "az-1780557651248",
-      "generatedAt": "2026-06-23T08:36:03.205393+00:00",
+      "generatedAt": "2026-06-29T06:51:16Z",
       "atecoInterpretato": "",
       "atecoSecondariInterpretati": [],
-      "profiloProgetti": "Acquisto macchinari officina, IA per venditori, ristrutturazione capannone/salone/officina, nuovi software e app",
+      "profiloProgetti": "Macchinari officina, IA per venditori, ristrutturazione capannone/salone/officina, rifare app e software",
       "deMinimisDaVerificare": true,
       "raccomandazioni": [
+        {
+          "id": "ER-2025-002",
+          "nome": "FESR ER — STEP 2025: investimenti produttivi e R&S in tecnologie strategiche",
+          "rilevanza": "media",
+          "motivazione": "Fondo perduto FESR ER per investimenti in tecnologie strategiche. Match parziale su digitale.",
+          "motivazioneEstesa": "Bando FESR ER per investimenti produttivi e R&S in tecnologie strategiche (digitale, clean tech). JC sta integrando IA nei venditori: potenziale match sul digitale. Scadenza 30/09/2026.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta",
+          "progettoMatch": "Integrare IA nell'operatività dei venditori"
+        },
         {
           "id": "EU-2026-005",
           "nome": "EUIPO SME Fund 2026 — Fondo per le PMI",
           "rilevanza": "media",
-          "motivazione": "Voucher UE rimborso 75% deposito marchi e design, utile per proteggere il brand Japan Car",
-          "motivazioneEstesa": "Rimborso fino al 75% delle tasse di deposito di marchi e design UE piu IP Scan. Con la nuova sede e l'espansione, proteggere il brand Japan Car a livello europeo puo essere strategico. Finestra 2026 fino al 04/12. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Voucher UE per protezione marchi: rimborso fino al 75% delle tasse di deposito.",
+          "motivazioneEstesa": "Voucher EUIPO per registrare marchi e design UE: rimborso fino al 75%. JC potrebbe proteggere il marchio 'Japan Car'. Procedura semplice. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "2026-12-04",
           "importoMax": null,
           "tipoAgev": "Voucher",
@@ -26,8 +38,8 @@
           "id": "IT-2026-028",
           "nome": "Bonus Giovani 2026 — Esonero contributivo assunzioni under 35",
           "rilevanza": "alta",
-          "motivazione": "Esonero contributivo 100% assunzioni under 35, coerente con espansione nuova sede",
-          "motivazioneEstesa": "Esonero contributivo INPS 100% (max 500 EUR/mese) per 24 mesi su ogni nuova assunzione a tempo indeterminato di under 35. Ideale per ampliare l'organico nella nuova concessionaria. Domande aperte su portale INPS. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Esonero 100% contributi per assunzioni under 35 a TI. Match diretto con obiettivo Assunzioni.",
+          "motivazioneEstesa": "Esonero contributivo totale (max 500€/mese per 24 mesi) su nuove assunzioni a TI di under 35. Match con obiettivo Assunzioni/Lavoro. JC sta crescendo e ristrutturando: ideale per potenziare l'organico. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "2026-12-31",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
@@ -38,23 +50,11 @@
           "id": "IT-2026-029",
           "nome": "Bonus Donne 2026 — Esonero contributivo assunzioni lavoratrici svantaggiate",
           "rilevanza": "media",
-          "motivazione": "Esonero contributivo 100% assunzioni donne svantaggiate, complementare al Bonus Giovani",
-          "motivazioneEstesa": "Esonero contributivo INPS 100% (max 650 EUR/mese) per 24 mesi per assunzioni a TI di donne svantaggiate (disoccupate 6+ mesi). Opportunita aggiuntiva di risparmio per ampliamento organico nella nuova sede. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Esonero 100% contributi per assunzione donne svantaggiate a TI, fino a 650€/mese per 24 mesi.",
+          "motivazioneEstesa": "Esonero contributivo totale per assunzione a TI di donne svantaggiate (disoccupate 6+ mesi). JC ha obiettivo Assunzioni e sta crescendo: ulteriore incentivo per nuove assunzioni. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "2026-12-31",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
-          "priorita": "Media",
-          "progettoMatch": null
-        },
-        {
-          "id": "IT-2026-025",
-          "nome": "Fondimpresa — Avviso 1/2026 Politiche Attive (formazione e assunzione)",
-          "rilevanza": "media",
-          "motivazione": "100% spese formative pre-assuntive con obbligo assunzione 90% TI, se aderenti Fondimpresa",
-          "motivazioneEstesa": "Finanzia al 100% piani formativi per disoccupati con obbligo di assunzione a TI di almeno il 90% dei partecipanti. Fino a 150 K EUR. Ideale per formare e inserire nuove figure professionali per la nuova sede. Requisito: adesione a Fondimpresa. Verificare plafond de minimis residuo su RNA.",
-          "scadenza": "2026-12-31",
-          "importoMax": 150000,
-          "tipoAgev": "Contributo a fondo perduto",
           "priorita": "Media",
           "progettoMatch": null
         },
@@ -62,37 +62,49 @@
           "id": "IT-2026-027",
           "nome": "Nuovo Piano Transizione 5.0 — Iperammortamento beni 4.0 e green (sportello GSE 2026)",
           "rilevanza": "alta",
-          "motivazione": "Maxi-deduzione per beni 4.0 e green, ideale per software IA, macchinari e impianti nuova sede",
-          "motivazioneEstesa": "Maggiorazione del costo di acquisizione fino al 180% per beni 4.0 (software IA venditori, macchinari officina interconnessi, impianti efficienti per il nuovo capannone). Piattaforma GSE aperta dal 12/06/2026, investimenti ammessi fino al 30/09/2028.",
+          "motivazione": "Maxi-deduzione per beni 4.0: match con acquisto macchinari officina e software/app.",
+          "motivazioneEstesa": "Maxi-deduzione fiscale (fino al 180%) per beni strumentali 4.0. Match con investimenti previsti: macchinari officina + rifare app/software. Piattaforma GSE attiva dal 12/06/2026, investimenti fino al 30/09/2028. Non aiuto di Stato.",
           "scadenza": "2028-09-30",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
           "priorita": "Media",
-          "progettoMatch": "Digitalizzazione IA venditori e nuovi software/app"
+          "progettoMatch": "Acquisto macchinari officina + digitalizzazione app/software"
         },
         {
           "id": "IT-2026-001",
           "nome": "Nuova Sabatini — Beni strumentali 4.0",
           "rilevanza": "molto_alta",
-          "motivazione": "Match perfetto: finanziamento beni strumentali e 4.0 per macchinari officina e software nuova sede",
-          "motivazioneEstesa": "Finanziamento agevolato MIMIT+CDP per acquisto macchinari officina e software 4.0 per la nuova concessionaria. Copre sia componentistica meccanica che investimenti digitali (app, IA venditori). Fino a 4M EUR. Misura strutturale. Verificare plafond de minimis residuo su RNA.",
+          "motivazione": "Finanziamento agevolato per beni strumentali 4.0: match diretto con macchinari officina e digitale.",
+          "motivazioneEstesa": "Match diretto con investimenti previsti: macchinari officina + digitalizzazione. JC sta ricostruendo concessionaria e officina — finanziamento fino a 4 M€. Verificare plafond de minimis residuo su RNA.",
           "scadenza": "",
           "importoMax": 4000000,
           "tipoAgev": "Finanziamento agevolato",
           "priorita": "Alta",
-          "progettoMatch": "Acquisto macchinari officina e nuovi software/app"
+          "progettoMatch": "Acquisto macchinari officina"
         },
         {
           "id": "IT-2026-030",
           "nome": "Fondo di Garanzia PMI — Garanzia pubblica per l'accesso al credito",
           "rilevanza": "molto_alta",
-          "motivazione": "Garanzia pubblica per investimenti pesanti: capannone, ristrutturazione concessionaria e officina",
-          "motivazioneEstesa": "Garanzia pubblica gratuita fino all'80% su finanziamenti bancari. Fondamentale per coprire gli investimenti in corso: acquisto capannone, ristrutturazione salone e officina, nuovi macchinari. Sezione speciale ER disponibile. Misura strutturale, sempre attiva.",
+          "motivazione": "Garanzia pubblica per credito bancario, fino all'80%. Essenziale per finanziare la ristrutturazione.",
+          "motivazioneEstesa": "Garanzia pubblica gratuita fino a 5 M€ su finanziamenti bancari. Indispensabile per JC che sta ricostruendo capannone/salone/officina e ha bisogno di accesso al credito. Sezione speciale ER disponibile.",
           "scadenza": "",
           "importoMax": 5000000,
           "tipoAgev": "Garanzia",
           "priorita": "Alta",
           "progettoMatch": "Ristrutturazione capannone/salone/officina"
+        },
+        {
+          "id": "IT-2026-006",
+          "nome": "Credito d'imposta Ricerca Sviluppo e Innovazione",
+          "rilevanza": "media",
+          "motivazione": "Credito d'imposta 10% su spese di innovazione. Match con integrazione IA nei venditori.",
+          "motivazioneEstesa": "Credito d'imposta 10% su spese di innovazione tecnologica. JC sta integrando IA nell'operatività dei venditori: le spese potrebbero qualificarsi. Non richiede domanda, si usa in F24.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Media",
+          "progettoMatch": "Integrare IA nell'operatività dei venditori"
         }
       ],
       "in_arrivo": [],
@@ -101,41 +113,61 @@
           "id": "ER-2026-001",
           "nome": "POR-FESR ER — Digitalizzazione e innovazione PMI 2026",
           "rilevanza": "alta",
-          "motivazione": "Fondo perduto 50% per digitalizzazione e innovazione PMI in ER, molto pertinente",
+          "motivazione": "Fondo perduto FESR ER per digitalizzazione PMI. Match con obiettivo e investimenti digitali.",
+          "motivazioneEstesa": "Contributo a fondo perduto fino a 200 K€ (50%) per digitalizzazione e innovazione PMI in ER. Match con investimenti previsti (IA venditori, software). Edizione 2026 non ancora pubblicata.",
           "scadenza": "2026-06-30",
           "importoMax": 200000,
           "tipoAgev": "Contributo a fondo perduto",
-          "priorita": "Alta"
-        },
-        {
-          "id": "IT-2026-002",
-          "nome": "Credito d'imposta Transizione 5.0",
-          "rilevanza": "alta",
-          "motivazione": "Credito d'imposta per investimenti digitali e green, in attesa riapertura campagna 2026",
-          "scadenza": "",
-          "importoMax": null,
-          "tipoAgev": "Credito d'imposta",
-          "priorita": "Alta"
-        },
-        {
-          "id": "IT-2026-007",
-          "nome": "Voucher Cloud & Cybersecurity",
-          "rilevanza": "alta",
-          "motivazione": "Voucher fino a 20.000 EUR per cloud e cybersecurity, utile per nuova infrastruttura IT",
-          "scadenza": "",
-          "importoMax": 20000,
-          "tipoAgev": "Voucher",
-          "priorita": "Alta"
+          "priorita": "Alta",
+          "progettoMatch": "Integrare IA e rifare software"
         },
         {
           "id": "IT-2026-016",
           "nome": "Iperammortamento 2026-2028 — Maxi-deduzione beni strumentali 4.0",
           "rilevanza": "alta",
-          "motivazione": "Maxi-deduzione per beni 4.0, in attesa piattaforma GSE (ora coperto da IT-2026-027)",
+          "motivazione": "Maxi-deduzione beni 4.0. Match con macchinari officina. Decreto firmato, GSE in arrivo.",
+          "motivazioneEstesa": "Maxi-deduzione fiscale (180% fino a 2,5M) per beni 4.0. Match diretto con acquisto macchinari officina. Decreto attuativo firmato maggio 2026, piattaforma GSE attesa. Non aiuto di Stato.",
           "scadenza": "2028-09-30",
           "importoMax": null,
           "tipoAgev": "Agevolazione fiscale",
-          "priorita": "Alta"
+          "priorita": "Alta",
+          "progettoMatch": "Acquisto macchinari officina"
+        },
+        {
+          "id": "IT-2026-002",
+          "nome": "Credito d'imposta Transizione 5.0",
+          "rilevanza": "alta",
+          "motivazione": "Credito d'imposta fino al 35% per investimenti digitali e green. Sospeso, monitorare GSE.",
+          "motivazioneEstesa": "Credito d'imposta strutturale per investimenti in digitalizzazione e sostenibilità energetica. Match con obiettivi Digitalizzazione e Green. Verificare apertura campagna 2026 su GSE.",
+          "scadenza": "",
+          "importoMax": null,
+          "tipoAgev": "Credito d'imposta",
+          "priorita": "Alta",
+          "progettoMatch": null
+        },
+        {
+          "id": "IT-2026-007",
+          "nome": "Voucher Cloud & Cybersecurity",
+          "rilevanza": "alta",
+          "motivazione": "Voucher fino a 20 K€ (50%) per cloud e cybersecurity. Match con digitalizzazione.",
+          "motivazioneEstesa": "Voucher MIMIT fino a 20 K€ (50%) per servizi cloud e cybersecurity. JC sta rifacendo tutti i sistemi (app, software). Sospeso — monitorare riapertura. Verificare plafond de minimis residuo su RNA.",
+          "scadenza": "",
+          "importoMax": 20000,
+          "tipoAgev": "Voucher",
+          "priorita": "Alta",
+          "progettoMatch": "Rifare app e software"
+        },
+        {
+          "id": "ER-2026-012",
+          "nome": "FESR ER — STEP 2026: investimenti produttivi e R&S in tecnologie strategiche (II Bando)",
+          "rilevanza": "media",
+          "motivazione": "Fondo perduto FESR ER per tech strategiche. Sospeso, finestra set 2026.",
+          "motivazioneEstesa": "II bando FESR ER STEP per investimenti in tecnologie strategiche. Finestra settembre 2026. Match parziale su digitale (integrazione IA). Verificare requisiti specifici deep tech.",
+          "scadenza": "2026-09-30",
+          "importoMax": null,
+          "tipoAgev": "Contributo a fondo perduto",
+          "priorita": "Alta",
+          "progettoMatch": "Integrare IA nell'operatività dei venditori"
         }
       ],
       "esclusi_per_ateco": [
@@ -143,19 +175,25 @@
           "id": "ER-2026-005",
           "nome": "Fondo EuReCa — Investimenti offerta turistica ricettiva ER",
           "ateco_bando": "55",
-          "motivo": "ATECO 55 (alloggi turistici) — JC e commercio auto, non turismo ricettivo"
+          "motivo": "JC è commercio auto (ATECO 45), non ricettività turistica (55)"
         },
         {
           "id": "ER-2026-015",
-          "nome": "FESR ER — Sostegno innovazione commercio vicinato 2026",
+          "nome": "FESR ER — Sostegno innovazione commercio vicinato",
           "ateco_bando": "47, 56, 93",
-          "motivo": "ATECO 47/56/93 (dettaglio, somministrazione) — JC e commercio auto (div. 45, non 47)"
+          "motivo": "JC è commercio auto (45), non commercio al dettaglio vicinato (47) o somministrazione (56)"
         },
         {
           "id": "ER-2026-018",
           "nome": "CSR ER — SRD03 Trasformazione prodotti agricoli",
           "ateco_bando": "A01",
-          "motivo": "ATECO A01 (aziende agricole) — JC non e azienda agricola"
+          "motivo": "JC è commercio auto, non azienda agricola"
+        },
+        {
+          "id": "IT-2026-026",
+          "nome": "SIMEST — Misura Energia per la Competitività Internazionale 2026",
+          "ateco_bando": "tutti (escluse attività non esportatrici)",
+          "motivo": "JC non è esportatrice (mercato 100% prov. Rimini)"
         }
       ]
     }

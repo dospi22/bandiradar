@@ -1,35 +1,35 @@
 {
-  "generatedAt": "2026-06-22T10:48:31Z",
+  "generatedAt": "2026-06-29T06:31:24Z",
   "bandi": {
     "EU-2026-001": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "EU-2026-002": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "EU-2025-001": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-002": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-004": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-005": {
       "status": "OK",
@@ -41,49 +41,49 @@
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-002": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-003": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-004": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "EU-2026-004": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-007": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-006": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 3/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-007": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 3/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-008": {
       "status": "OK",
@@ -101,31 +101,31 @@
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 4/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "EU-2026-005": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-009": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-010": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-011": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-010": {
       "status": "OK",
@@ -137,67 +137,67 @@
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-011": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 5/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-014": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-015": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-012": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 4/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-016": {
       "status": "OK",
       "codice": 200,
-      "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "nota": "Segnali bando rilevati: 1/7",
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-018": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-019": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-021": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-022": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-023": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-014": {
       "status": "OK",
@@ -215,55 +215,55 @@
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-025": {
-      "status": "OK",
-      "codice": 200,
-      "nota": "Segnali bando rilevati: 2/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "status": "ERRORE",
+      "codice": null,
+      "nota": "Timeout dopo 12s",
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "EU-2026-003": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-005": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-013": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-001": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-003": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-006": {
-      "status": "404",
-      "codice": 404,
-      "nota": "Pagina non trovata (HTTP 404)",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "status": "OK",
+      "codice": 200,
+      "nota": "Segnali bando rilevati: 0/7",
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-001": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2025-001": {
       "status": "404",
@@ -281,13 +281,13 @@
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-017": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-020": {
       "status": "404",
@@ -298,56 +298,56 @@
     "IT-2026-008": {
       "status": "ERRORE",
       "codice": null,
-      "nota": "Connessione fallita: HTTPSConnectionPool(host='www.inail.it', port=443): Max retries exceeded with url: /cs/internet/attivita/prevenzione-e-sicurezza/agevolazioni/bando-isi.html (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1006)')))",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "nota": "Connessione fallita: HTTPSConnectionPool(host='www.inail.it', port=443): Max retries exceeded with url: /portale/prevenzione-e-sicurezza/it/prevenzione-e-sicurezza/finanziamenti-per-la-sicurezza/incentivi-alle-imprese/bando-isi-2025.html (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] sslv3 alert handshake failure (_ssl.c:1006)')))",
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-015": {
       "status": "OK",
       "codice": 200,
-      "nota": "Segnali bando rilevati: 4/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "nota": "Segnali bando rilevati: 3/7",
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-026": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-016": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 5/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "ER-2026-018": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 3/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-027": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 0/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-028": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-029": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     },
     "IT-2026-030": {
       "status": "OK",
       "codice": 200,
       "nota": "Segnali bando rilevati: 1/7",
-      "checkedAt": "2026-06-22T10:48:31Z"
+      "checkedAt": "2026-06-29T06:31:24Z"
     }
   }
 }
